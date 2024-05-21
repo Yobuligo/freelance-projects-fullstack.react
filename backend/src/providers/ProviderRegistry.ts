@@ -1,6 +1,4 @@
 import { FreelancerMap } from "./FreelancerMap";
-import { ProviderConstructor } from "./core/ProviderConstructor";
+import { ProviderClassType } from "./types/ProviderClassType";
 
-export const Providers: ProviderConstructor[] = [
-  FreelancerMap,
-];
+export const ProviderRegistry: ProviderClassType[] = [FreelancerMap];

@@ -1,7 +1,7 @@
-import { Constructor } from "../../shared/types/Constructor";
+import { ClassType } from "../../shared/types/ClassType";
 import { Decorator } from "../../shared/types/Decorator";
 
 export interface IDecoratorInfo {
-  find<T>(type: Constructor<any>, decorator: Decorator): T | undefined;
-  introduce<T>(type: Constructor<any>, decorator: Decorator, value: T): void;
+  find<T>(classType: ClassType<any>, decorator: Decorator): T | undefined;
+  introduce<T>(classType: ClassType<any>, decorator: Decorator, value: T): void;
 }

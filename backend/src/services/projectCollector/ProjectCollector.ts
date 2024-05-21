@@ -8,12 +8,10 @@ export class ProjectCollector implements IProjectCollector {
     return new Promise(async (resolve, reject) => {
       const projects: IProject[] = [];
       providerRequests.forEach((providerRequest) => {
-        const provider = ProviderInfo.findByType(
-          providerRequest.provider
-        );
+        const provider = ProviderInfo.findByType(providerRequest.providerType);
 
         providerRequest.urls.forEach((url) => {
-          provider?.request(url);
+          const projects = provider?.request(url);
         });
       });
     });

@@ -1,19 +1,23 @@
-import { Constructor } from "../../shared/types/Constructor";
+import { ClassType } from "../../shared/types/ClassType";
 import { Decorator } from "../../shared/types/Decorator";
 import { IDecoratorInfo } from "./IDecoratorInfo";
 
 class DecoratorInfoDefault implements IDecoratorInfo {
-  private cache: Map<Constructor<any>, Map<Decorator, any>> = new Map();
+  private cache: Map<ClassType<any>, Map<Decorator, any>> = new Map();
 
-  find<T>(type: Constructor<any>, decorator: Decorator): T | undefined {
-    const row = this.cache.get(type);
+  find<T>(classType: ClassType<any>, decorator: Decorator): T | undefined {
+    const row = this.cache.get(classType);
     return row?.get(decorator);
   }
 
-  introduce<T>(type: Constructor<any>, decorator: Decorator, value: T): void {
-    const row = this.cache.get(type) ?? new Map<Decorator, any>();
+  introduce<T>(
+    classType: ClassType<any>,
+    decorator: Decorator,
+    value: T
+  ): void {
+    const row = this.cache.get(classType) ?? new Map<Decorator, any>();
     row.set(decorator, value);
-    this.cache.set(type, row);
+    this.cache.set(classType, row);
   }
 }
 

@@ -5,5 +5,5 @@ import { IProvider } from "./IProvider";
  * The ProviderInfo gives specific information about the available providers.
  */
 export interface IProviderInfo {
-  findByType(type: ProviderType): IProvider | undefined;
+  findByType(providerType: ProviderType): IProvider | undefined;
 }

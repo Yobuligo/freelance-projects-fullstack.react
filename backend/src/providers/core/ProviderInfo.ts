@@ -1,10 +1,22 @@
+import { Provider } from "../../decorators/Provider";
+import { DecoratorInfo } from "../../services/decoratorInfo/DecoratorInfo";
 import { ProviderType } from "../../shared/types/ProviderType";
+import { ProviderRegistry } from "../ProviderRegistry";
 import { IProvider } from "./IProvider";
 import { IProviderInfo } from "./IProviderInfo";
 
 class ProviderInfoDefault implements IProviderInfo {
-  findByType(provider: ProviderType): IProvider | undefined {
-    throw new Error("Method not implemented.");
+  findByType(providerType: ProviderType): IProvider | undefined {
+    for (let i = 0; i < ProviderRegistry.length; i++) {
+      const providerConstructor = ProviderRegistry[i];
+      const registryProviderType = DecoratorInfo.find(
+        providerConstructor,
+        Provider
+      );
+      if (registryProviderType === providerType) {
+        return new providerConstructor();
+      }
+    }
   }
 }
 
