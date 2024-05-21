@@ -1,12 +1,13 @@
 import { Provider } from "../../decorators/Provider";
 import { DecoratorInfo } from "../../services/decoratorInfo/DecoratorInfo";
+import { NotSupportedError } from "../../shared/errors/NotSupportedError";
 import { ProviderType } from "../../shared/types/ProviderType";
 import { ProviderRegistry } from "../ProviderRegistry";
 import { IProvider } from "./IProvider";
-import { IProviderInfo } from "./IProviderInfo";
+import { IProviderFactory } from "./IProviderFactory";
 
-class ProviderInfoDefault implements IProviderInfo {
-  findByType(providerType: ProviderType): IProvider | undefined {
+class ProviderFactoryDefault implements IProviderFactory {
+  createByType(providerType: ProviderType): IProvider {
     for (let i = 0; i < ProviderRegistry.length; i++) {
       const providerConstructor = ProviderRegistry[i];
       const registryProviderType = DecoratorInfo.find(
@@ -17,7 +18,11 @@ class ProviderInfoDefault implements IProviderInfo {
         return new providerConstructor();
       }
     }
+
+    throw new NotSupportedError(
+      `Error while creating Provider '${providerType}'. No provider for for this type.`
+    );
   }
 }
 
-export const ProviderInfo = new ProviderInfoDefault();
+export const ProviderFactory = new ProviderFactoryDefault();
