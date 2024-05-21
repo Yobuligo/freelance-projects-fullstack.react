@@ -5,7 +5,7 @@ import { ProviderType } from "../shared/types/ProviderType";
 export const Provider = <T extends ProviderClassType>(
   providerType: ProviderType
 ) => {
-  return (target: T, prop: any) => {
+  return (target: T, _: any) => {
     DecoratorInfo.introduce(target, Provider, providerType);
   };
 };
