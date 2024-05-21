@@ -1,9 +1,12 @@
 import { IProject } from "../../shared/model/IProject";
+import { Provider } from "../../shared/types/Provider";
 import { HTMLInfo } from "../HTMLInfo/HTMLInfo";
 import { IHTMLInfo } from "../HTMLInfo/IHTMLInfo";
-import { IProjectRequestor } from "../IProjectRequestor";
+import { IProvider } from "../provider/IProvider";
 
-export class FreelancerMapProjectRequestor implements IProjectRequestor {
+export class FreelancerMap implements IProvider {
+  readonly provider: Provider = Provider.FreelancerMap;
+
   request(url: string): Promise<IProject[]> {
     return new Promise(async (resolve, reject) => {
       const response = await fetch(url);
