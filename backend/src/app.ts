@@ -1,20 +1,16 @@
-import { ProjectCollector } from "./services/projectCollector/ProjectCollector";
-import { ProviderType } from "./shared/types/ProviderType";
+import express from "express";
+import { Collector } from "./controller/Collector";
 
-const collect = async () => {
-  const projectCollector = new ProjectCollector();
-  const projects = await projectCollector.collect([
-    {
-      providerType: ProviderType.FreelancerMap,
-      urls: [
-        "https://www.freelancermap.de/projektboerse.html?categories%5B0%5D=1&created=1&projectContractTypes%5B0%5D=contracting&remoteInPercent%5B0%5D=100&remoteInPercent%5B1%5D=1&query=Java&countries%5B%5D=1&sort=1&pagenr=1",
-      ],
-    },
-  ]);
-
-  projects.forEach((project) =>
-    console.log(`Project: ${project.title} from ${project.company}`)
+const server = express();
+server.use(express.json());
+server.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, PATCH, DELETE"
   );
-};
-
-collect();
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+server.use(new Collector().router);
+server.listen(5000);
