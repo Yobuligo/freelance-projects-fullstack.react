@@ -1,9 +1,9 @@
-import { Provider } from "../../shared/types/Provider";
+import { ProviderType } from "../../shared/types/ProviderType";
 import { IProvider } from "./IProvider";
 import { IProviderInfo } from "./IProviderInfo";
 
 class ProviderInfoDefault implements IProviderInfo {
-  findByType(provider: Provider): IProvider | undefined {
+  findByType(provider: ProviderType): IProvider | undefined {
     throw new Error("Method not implemented.");
   }
 }

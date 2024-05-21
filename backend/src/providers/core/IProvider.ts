@@ -1,10 +1,10 @@
 import { IProject } from "../../shared/model/IProject";
-import { Provider } from "../../shared/types/Provider";
+import { ProviderType } from "../../shared/types/ProviderType";
 
 /**
  * Represents a Provider to request projects from (e.g. FreelancerMap)
  */
 export interface IProvider {
-  readonly provider: Provider;
+  readonly type: ProviderType;
   request(url: string): Promise<IProject[]>;
 }

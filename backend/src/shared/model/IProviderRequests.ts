@@ -1,6 +1,6 @@
-import { Provider } from "../types/Provider";
+import { ProviderType } from "../types/ProviderType";
 
 export interface IProviderRequests {
-  provider: Provider;
+  provider: ProviderType;
   urls: string[];
 }

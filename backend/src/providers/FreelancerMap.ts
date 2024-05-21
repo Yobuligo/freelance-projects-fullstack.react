@@ -1,11 +1,11 @@
-import { IProject } from "../../shared/model/IProject";
-import { Provider } from "../../shared/types/Provider";
-import { HTMLInfo } from "../HTMLInfo/HTMLInfo";
-import { IHTMLInfo } from "../HTMLInfo/IHTMLInfo";
-import { IProvider } from "../provider/IProvider";
+import { IProject } from "../shared/model/IProject";
+import { ProviderType } from "../shared/types/ProviderType";
+import { HTMLInfo } from "../services/HTMLInfo/HTMLInfo";
+import { IHTMLInfo } from "../services/HTMLInfo/IHTMLInfo";
+import { IProvider } from "./core/IProvider";
 
 export class FreelancerMap implements IProvider {
-  readonly provider: Provider = Provider.FreelancerMap;
+  readonly type: ProviderType = ProviderType.FreelancerMap;
 
   request(url: string): Promise<IProject[]> {
     return new Promise(async (resolve, reject) => {

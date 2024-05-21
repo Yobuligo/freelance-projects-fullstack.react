@@ -1,4 +1,4 @@
-export enum Provider {
+export enum ProviderType {
   Freelance,
   FreelancerMap,
 }
