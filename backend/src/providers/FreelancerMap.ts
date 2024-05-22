@@ -26,12 +26,9 @@ export class FreelancerMap implements IProvider {
     for (let i = 0; i < count; i++) {
       const element = htmlInfo.findElementByClassName(PROJECT_CARD_NAME, i);
       const company = htmlInfo.findValueByClassName(element, "company", i);
-      const createdAt = htmlInfo.findValueByClassName(
-        element,
-        "created-date",
-        i
-      );
-      const location = htmlInfo.findValueByClassName(element, "city", i)
+      const createdAt = this.findCreatedAt(htmlInfo, element, i);
+
+      const location = htmlInfo.findValueByClassName(element, "city", i);
       const title = htmlInfo.findValueByClassName(element, "project-title", i);
       const url = `${host}${htmlInfo.findValueByClassNameAndProp(
         "project-title",
@@ -49,5 +46,25 @@ export class FreelancerMap implements IProvider {
       projects.push(project);
     }
     return projects;
+  }
+
+  private findCreatedAt(
+    htmlInfo: IHTMLInfo,
+    element: Element,
+    index: number
+  ): Date {
+    let createdAt = htmlInfo.findValueByClassName(
+      element,
+      "created-date",
+      index
+    );
+
+    createdAt = createdAt.replaceAll(" ", "");
+    createdAt = createdAt.replace("eingetragenam:", "");
+    let [date, time] = createdAt.split("/");
+    const [day, month, year] = date.split(".");
+    time = time += ":00";
+
+    return new Date(`${year}-${month}-${day}T${time}`);
   }
 }

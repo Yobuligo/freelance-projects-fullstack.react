@@ -1,5 +1,5 @@
 export interface IProject {
-  createdAt: string;
+  createdAt: Date;
   company: string;
   location: string;
   title: string;
