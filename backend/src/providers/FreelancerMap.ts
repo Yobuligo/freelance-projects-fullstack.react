@@ -1,4 +1,5 @@
 import { Provider } from "../decorators/Provider";
+import { html } from "../html";
 import { HTMLInfo } from "../services/HTMLInfo/HTMLInfo";
 import { IHTMLInfo } from "../services/HTMLInfo/IHTMLInfo";
 import { IProject } from "../shared/model/IProject";
@@ -9,8 +10,8 @@ import { IProvider } from "./core/IProvider";
 export class FreelancerMap implements IProvider {
   request(url: string): Promise<IProject[]> {
     return new Promise(async (resolve, reject) => {
-      const response = await fetch(url);
-      const html = await response.text();
+      // const response = await fetch(url);
+      // const html = await response.text();
       const htmlInfo = new HTMLInfo(html);
       const projects = this.extractProjects(htmlInfo);
       resolve(projects);
@@ -18,13 +19,20 @@ export class FreelancerMap implements IProvider {
   }
 
   private extractProjects(htmlInfo: IHTMLInfo): IProject[] {
+    const PROJECT_CARD_NAME = "project-container project card box";
     const projects: IProject[] = [];
-    const count = htmlInfo.getNumberElementsByClassName("project-title");
+    const count = htmlInfo.getNumberElementsByClassName(PROJECT_CARD_NAME);
     const host = "www.freelancermap.de";
     for (let i = 0; i < count; i++) {
-      const company = htmlInfo.findValueByClassName("company", i);
-      const createdAt = htmlInfo.findValueByClassName("created-date", i);
-      const title = htmlInfo.findValueByClassName("project-title", i);
+      const element = htmlInfo.findElementByClassName(PROJECT_CARD_NAME, i);
+      const company = htmlInfo.findValueByClassName(element, "company", i);
+      const createdAt = htmlInfo.findValueByClassName(
+        element,
+        "created-date",
+        i
+      );
+      const location = htmlInfo.findValueByClassName(element, "city", i)
+      const title = htmlInfo.findValueByClassName(element, "project-title", i);
       const url = `${host}${htmlInfo.findValueByClassNameAndProp(
         "project-title",
         "href",
@@ -34,7 +42,7 @@ export class FreelancerMap implements IProvider {
       const project: IProject = {
         company,
         createdAt,
-        location: "",
+        location,
         title,
         url,
       };

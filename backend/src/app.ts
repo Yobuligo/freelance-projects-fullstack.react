@@ -3,7 +3,7 @@ import { Collector } from "./controller/Collector";
 
 const server = express();
 server.use(express.json());
-server.use((req, res, next) => {
+server.use((_, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",
