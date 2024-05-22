@@ -19,7 +19,7 @@ export class FreelancerMap implements IProvider {
 
   private extractProjects(htmlInfo: IHTMLInfo): IProject[] {
     const projects: IProject[] = [];
-    const count = htmlInfo.getNumberElementsByClassName("company");
+    const count = htmlInfo.getNumberElementsByClassName("project-title");
     const host = "www.freelancermap.de";
     for (let i = 0; i < count; i++) {
       const company = htmlInfo.findValueByClassName("company", i);

@@ -1,5 +1,4 @@
 import { DOMParser } from "xmldom";
-import { error } from "../../shared/utils/error";
 import { IHTMLInfo } from "./IHTMLInfo";
 
 export class HTMLInfo implements IHTMLInfo {
@@ -14,11 +13,8 @@ export class HTMLInfo implements IHTMLInfo {
     return (
       (
         this.document.getElementsByClassName(className)[index]
-          .childNodes[0] as any
-      ).data ??
-      error(
-        `Error while getting value of className '${className}'. Element not found.`
-      )
+          ?.childNodes[0] as any
+      )?.data ?? ""
     );
   }
 
@@ -30,15 +26,12 @@ export class HTMLInfo implements IHTMLInfo {
     return (
       this.document
         .getElementsByClassName(className)
-        [index].getAttribute(propName) ??
-      error(
-        `Error while getting value of className '${className}' and property '${propName}'. Element not found.`
-      )
+        [index]?.getAttribute(propName) ?? ""
     );
   }
 
   getNumberElementsByClassName(className: string): number {
-    return this.document.getElementsByClassName(className).length;
+    return this.document.getElementsByClassName(className)?.length ?? 0;
   }
 
   private get document(): Document {
