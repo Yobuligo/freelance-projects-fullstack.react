@@ -1,3 +1,4 @@
+import hash from "hash.js";
 import { Provider } from "../decorators/Provider";
 import { html } from "../html";
 import { HTMLInfo } from "../services/HTMLInfo/HTMLInfo";
@@ -39,6 +40,7 @@ export class FreelancerMap implements IProvider {
       const project: IProject = {
         company,
         createdAt,
+        id: hash.sha256().update(url).digest("hex"),
         location,
         title,
         url,

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { ProjectApi } from "./api/ProjectApi";
 import { IProject } from "./shared/model/IProject";
 import { request } from "./utils/request";
+import { ProjectList } from "./features/projectList/ProjectList";
+import styles from "./App.module.scss";
 
 export const App: React.FC = () => {
   const [projects, setProjects] = useState<IProject[]>([]);
@@ -13,7 +15,9 @@ export const App: React.FC = () => {
     });
   }, []);
 
-  const items = projects.map((project) => <div>{project.title}</div>);
-
-  return <>{items}</>;
+  return (
+    <div className={styles.app}>
+      <ProjectList projects={projects} />
+    </div>
+  );
 };
