@@ -1,6 +1,6 @@
 import hash from "hash.js";
 import { Provider } from "../decorators/Provider";
-import { html } from "../html";
+import { htmlFreelancerMap } from "../htmlFreelancerMap";
 import { HTMLInfo } from "../services/HTMLInfo/HTMLInfo";
 import { IHTMLInfo } from "../services/HTMLInfo/IHTMLInfo";
 import { IProject } from "../shared/model/IProject";
@@ -13,7 +13,7 @@ export class FreelancerMap implements IProvider {
     return new Promise(async (resolve, reject) => {
       // const response = await fetch(url);
       // const html = await response.text();
-      const htmlInfo = new HTMLInfo(html);
+      const htmlInfo = new HTMLInfo(htmlFreelancerMap);
       const projects = this.extractProjects(htmlInfo);
       resolve(projects);
     });
