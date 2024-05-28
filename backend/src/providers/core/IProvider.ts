@@ -1,4 +1,4 @@
-import { IProject } from "../../shared/model/IProject copy";
+import { IProject } from "../../shared/model/IProject";
 
 /**
  * Represents a Provider to request projects from (e.g. FreelancerMap)

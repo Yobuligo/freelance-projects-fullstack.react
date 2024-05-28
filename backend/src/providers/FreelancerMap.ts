@@ -1,8 +1,11 @@
 import hash from "hash.js";
+import { DOMParser } from "xmldom";
 import { Provider } from "../decorators/Provider";
 import { htmlFreelancerMap } from "../htmlFreelancerMap";
 import { HTMLInfo } from "../services/HTML/HTMLInfo";
 import { IHTMLInfo } from "../services/HTML/IHTMLInfo";
+import { htmlSearch } from "../services/HTML/utils/htmlSearch";
+import { HTMLSearch } from "../services/htmlSearch/HTMLSearch";
 import { IProject } from "../shared/model/IProject";
 import { ProviderType } from "../shared/types/ProviderType";
 import { IProvider } from "./core/IProvider";
@@ -15,8 +18,34 @@ export class FreelancerMap implements IProvider {
       // const html = await response.text();
       const htmlInfo = new HTMLInfo(htmlFreelancerMap);
       const projects = this.extractProjects(htmlInfo);
+      this.extractSecond();
       resolve(projects);
     });
+  }
+
+  private extractSecond(): IProject[] {
+    const parser = new DOMParser();
+    const document = parser.parseFromString(htmlFreelancerMap, "text/html");
+    const rootElement = document.getElementsByClassName("project-list")[0];
+    const projects: IProject[] = [];
+    const host = "https://www.freelancermap.de";
+
+    const elements = htmlSearch(rootElement)
+      .className("project-container project card box")
+      .find();
+
+    elements.forEach((htmlElement) => {
+      const htmlSearch = new HTMLSearch(htmlElement.origin);
+      const company = htmlSearch.className("company").findFirstValue();
+      const createdDate = htmlSearch.className("created-date").findFirstValue();
+      const location = htmlSearch.className("city").findFirstValue();
+      const title = htmlSearch.className("project-title").findFirstValue();
+      const url = htmlSearch
+        .className("project-title")
+        .findFirstAttrValue("href");
+    });
+
+    return [];
   }
 
   private extractProjects(htmlInfo: IHTMLInfo): IProject[] {

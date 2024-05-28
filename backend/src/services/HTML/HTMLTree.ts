@@ -1,24 +1,37 @@
-import { IHTMLTree } from "./IHTMLTree";
-import { IHTMLVisitor } from "./IHTMLVisitor";
+import { HTMLVisitor } from "./types/HTMLVisitor";
 
-export class HTMLTree implements IHTMLTree {
-  constructor(private readonly visitor: IHTMLVisitor) {}
+export class HTMLTree {
+  constructor(private readonly visitor: HTMLVisitor) {}
 
-  visit(element: Element): boolean {
-    this.visitor.visit(element);
+  /**
+   * Visits {@link element}.
+   * Return true to continue visiting otherwise false.
+   */
+  visit(element: Element): boolean | undefined {
+    const resume = this.visitor(element);
+    if (resume === false) {
+      return false;
+    }
 
+    return this.visitInternal(element);
+  }
+
+  private visitInternal(element: Element): boolean | undefined {
     if (!element.childNodes) {
       return true;
     }
 
     for (let i = 0; i < element.childNodes.length; i++) {
       const childElement = element.childNodes[i] as Element;
-      const needsContinue = this.visitor.visit(childElement);
-      if (!needsContinue) {
+      let resume = this.visitor(childElement);
+      if (resume === false) {
         return false;
       }
 
-      return this.visit(childElement);
+      resume = this.visitInternal(childElement);
+      if (resume === false) {
+        return false;
+      }
     }
 
     return true;
