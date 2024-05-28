@@ -14,6 +14,8 @@ export class FreelancerMap implements IProvider {
       const response = await fetch(url);
       const html = await response.text();
 
+      console.log(`Request freelancerMap projects from freelancerMap server.`);
+
       const parser = new DOMParser();
       const document = parser.parseFromString(html, "text/html");
       const rootElement = document.getElementsByClassName("project-list")[0];

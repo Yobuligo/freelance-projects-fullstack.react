@@ -16,6 +16,8 @@ export class Freelance implements IProvider {
       const response = await fetch(url);
       const html = await response.text();
 
+      console.log(`Request freelance.de projects from freelance.de server.`);
+
       const document = this.createDocument(html);
       const rootElement = this.getRootElement(document);
       const countPages = this.getCountPages(document);

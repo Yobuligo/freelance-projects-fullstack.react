@@ -6,7 +6,11 @@ import styles from "./Project.module.scss";
 export const Project: React.FC<IProjectProps> = (props) => {
   return (
     <Card className={styles.project}>
-      <div className={styles.company}>{props.project.company}</div>
+      <div className={styles.company}>
+        {props.project.company.length > 0
+          ? props.project.company
+          : "Company not provided"}
+      </div>
       <a href={props.project.url}>
         <h3 className={styles.title}>{props.project.title}</h3>
       </a>
