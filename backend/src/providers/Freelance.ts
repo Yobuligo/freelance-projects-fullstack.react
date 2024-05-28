@@ -1,7 +1,6 @@
 import hash from "hash.js";
 import { DOMParser } from "xmldom";
 import { Provider } from "../decorators/Provider";
-import { htmlFreelance } from "../htmlFreelance";
 import { HTMLSearch } from "../services/htmlSearch/HTMLSearch";
 import { IHTMLSearch } from "../services/htmlSearch/IHTMLSearch";
 import { IProject } from "../shared/model/IProject";
@@ -14,13 +13,55 @@ import { IProvider } from "./core/IProvider";
 export class Freelance implements IProvider {
   request(url: string): Promise<IProject[]> {
     return new Promise(async (resolve, reject) => {
-      // const response = await fetch(url);
-      // const html = await response.text();
+      const response = await fetch(url);
+      const html = await response.text();
 
-      const parser = new DOMParser();
-      const document = parser.parseFromString(htmlFreelance, "text/html");
-      const rootElement = document.getElementsByClassName("project-list")[0];
+      const document = this.createDocument(html);
+      const rootElement = this.getRootElement(document);
+      const countPages = this.getCountPages(document);
       const projects = this.extractProjects(rootElement);
+
+      const projectsOffsetPage = await this.fetchOffsetPages(url, countPages);
+      projects.push(...projectsOffsetPage);
+
+      resolve(projects);
+    });
+  }
+
+  private createDocument(html: string): Document {
+    const parser = new DOMParser();
+    return parser.parseFromString(html, "text/html");
+  }
+
+  private getRootElement(document: Document): Element {
+    return document.getElementsByClassName("project-list")[0];
+  }
+
+  private getCountPages(document: Document): number {
+    return document.getElementsByClassName("nav-pagination-link").length - 1;
+  }
+
+  private async fetchOffsetPages(
+    url: string,
+    countPages: number
+  ): Promise<IProject[]> {
+    if (countPages < 2) {
+      return [];
+    }
+
+    return new Promise(async (resolve, reject) => {
+      const projects: IProject[] = [];
+      for (let i = 1; i < countPages; i++) {
+        const offset = i * 20;
+        const offsetUrl = `${url}&_offset=${offset}`;
+        const response = await fetch(offsetUrl);
+        const html = await response.text();
+
+        const document = this.createDocument(html);
+        const rootElement = this.getRootElement(document);
+        const extractedProjects = this.extractProjects(rootElement);
+        projects.push(...extractedProjects);
+      }
       resolve(projects);
     });
   }
