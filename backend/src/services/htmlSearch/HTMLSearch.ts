@@ -36,16 +36,16 @@ export class HTMLSearch implements IHTMLSearch {
     return elements;
   }
 
-  findFirstAttrValue(name: string): string | undefined {
-    return this.findFirst()?.origin.getAttribute(name) ?? undefined;
+  findFirstAttrValue(name: string): string {
+    return this.findFirst()?.origin.getAttribute(name) ?? "";
   }
 
   findFirst(): IHTMLElement | undefined {
     return this.find()[0];
   }
 
-  findFirstValue(): string | undefined {
-    return this.findFirst()?.value;
+  findFirstValue(): string {
+    return this.findFirst()?.value ?? "";
   }
 
   private reset() {
@@ -60,7 +60,7 @@ export class HTMLSearch implements IHTMLSearch {
       if (this.matches(element)) {
         this.elements.push({
           origin: element,
-          value: (element.childNodes[0] as any)?.data,
+          value: (element.childNodes[0] as any)?.data ?? "",
         });
       }
     };

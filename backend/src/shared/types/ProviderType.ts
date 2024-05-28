@@ -1,4 +1,4 @@
 export enum ProviderType {
-  Freelance,
-  FreelancerMap,
+  Freelance = "FREELANCE",
+  FreelancerMap = "FREELANCE_MAP",
 }
