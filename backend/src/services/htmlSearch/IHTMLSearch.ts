@@ -35,4 +35,9 @@ export interface IHTMLSearch {
    * Returns the value of the first element, which matches the restrictions.
    */
   findFirstValue(): string;
+
+  /**
+   * Restrict search result by specific {@link tagName}.
+   */
+  tagName(tagName: string): IHTMLSearch;
 }

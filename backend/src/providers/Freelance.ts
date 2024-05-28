@@ -1,3 +1,4 @@
+import { DOMParser } from "xmldom";
 import { Provider } from "../decorators/Provider";
 import { htmlFreelance } from "../htmlFreelance";
 import { HTMLSearch } from "../services/htmlSearch/HTMLSearch";
@@ -24,6 +25,16 @@ export class Freelance implements IProvider {
     const projects: IProject[] = [];
 
     const htmlSearch = new HTMLSearch(rootElement);
+    const elements = htmlSearch
+      .className("list-item-content")
+      .find();
+
+    elements.forEach((element) => {
+      const htmlSearch = new HTMLSearch(element.origin);
+
+      // const createdAt = htmlSearch.className("far fa-history fa-fw").findFirstValue()
+      const title = htmlSearch.className("action-icons-overlap").findFirst();
+    });
 
     return [];
   }

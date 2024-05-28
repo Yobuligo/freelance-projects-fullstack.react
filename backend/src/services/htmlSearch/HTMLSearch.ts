@@ -1,5 +1,6 @@
 import { Pair } from "../../shared/utils/Pair";
 import { isNull } from "../../shared/utils/isNull";
+import { HTMLElement } from "../HTML/HTMLElement";
 import { HTMLTree } from "../HTML/HTMLTree";
 import { IHTMLElement } from "../HTML/IHTMLElement";
 import { HTMLVisitor } from "../HTML/types/HTMLVisitor";
@@ -10,6 +11,7 @@ export class HTMLSearch implements IHTMLSearch {
   private counter: number = 0;
   private elements: IHTMLElement[] = [];
   private _index: number | undefined = undefined;
+  private _tagName: string | undefined = undefined;
 
   constructor(private readonly root: Element) {}
 
@@ -48,6 +50,11 @@ export class HTMLSearch implements IHTMLSearch {
     return this.findFirst()?.value ?? "";
   }
 
+  tagName(tagName: string): IHTMLSearch {
+    this._tagName = tagName;
+    return this;
+  }
+
   private reset() {
     this.attributes = [];
     this.counter = 0;
@@ -58,10 +65,9 @@ export class HTMLSearch implements IHTMLSearch {
   private createVisitor(): HTMLVisitor {
     return (element) => {
       if (this.matches(element)) {
-        this.elements.push({
-          origin: element,
-          value: (element.childNodes[0] as any)?.data ?? "",
-        });
+        this.elements.push(
+          new HTMLElement(element, (element.childNodes[0] as any)?.data ?? "")
+        );
       }
     };
   }
@@ -71,9 +77,25 @@ export class HTMLSearch implements IHTMLSearch {
       return false;
     }
 
+    if (!this.fullfilTagName(element)) {
+      return false;
+    }
+
     const fullfilIndex = this.fullfilIndex(this.counter);
     this.counter++;
     return fullfilIndex;
+  }
+
+  private fullfilTagName(element: Element): boolean {
+    if (!this._tagName) {
+      return true;
+    }
+
+    if (!element.tagName) {
+      return false;
+    }
+
+    return element.tagName === this._tagName;
   }
 
   private fullfilAttributes(element: Element): boolean {
