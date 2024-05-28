@@ -1,8 +1,8 @@
 import hash from "hash.js";
 import { Provider } from "../decorators/Provider";
 import { htmlFreelancerMap } from "../htmlFreelancerMap";
-import { HTMLInfo } from "../services/HTMLInfo/HTMLInfo";
-import { IHTMLInfo } from "../services/HTMLInfo/IHTMLInfo";
+import { HTMLInfo } from "../services/HTML/HTMLInfo";
+import { IHTMLInfo } from "../services/HTML/IHTMLInfo";
 import { IProject } from "../shared/model/IProject";
 import { ProviderType } from "../shared/types/ProviderType";
 import { IProvider } from "./core/IProvider";
