@@ -25,7 +25,7 @@ export class HTMLSearch implements IHTMLSearch {
     return this;
   }
 
-  index(index: number): IHTMLSearch {
+  indexFinding(index: number): IHTMLSearch {
     this._index = index;
     return this;
   }
@@ -38,16 +38,29 @@ export class HTMLSearch implements IHTMLSearch {
     return elements;
   }
 
-  findFirstAttrValue(name: string): string {
-    return this.findFirst()?.origin.getAttribute(name) ?? "";
+  findAt(index: number): IHTMLElement | undefined {
+    return this.find()[index];
   }
 
-  findFirst(): IHTMLElement | undefined {
-    return this.find()[0];
+  firstAttrValue(name: string): string {
+    return this.first()?.origin.getAttribute(name) ?? "";
   }
 
-  findFirstValue(): string {
-    return this.findFirst()?.value ?? "";
+  first(): IHTMLElement | undefined {
+    return this.findAt(0);
+  }
+
+  firstValue(): string {
+    return this.first()?.value ?? "";
+  }
+
+  last(): IHTMLElement | undefined {
+    const elements = this.find();
+    return elements[elements.length - 1];
+  }
+
+  lastValue(): string {
+    return this.last()?.value ?? "";
   }
 
   tagName(tagName: string): IHTMLSearch {
@@ -65,9 +78,7 @@ export class HTMLSearch implements IHTMLSearch {
   private createVisitor(): HTMLVisitor {
     return (element) => {
       if (this.matches(element)) {
-        this.elements.push(
-          new HTMLElement(element, (element.childNodes[0] as any)?.data ?? "")
-        );
+        this.elements.push(new HTMLElement(element));
       }
     };
   }

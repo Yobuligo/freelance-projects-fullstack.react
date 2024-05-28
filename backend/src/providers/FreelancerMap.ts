@@ -5,6 +5,7 @@ import { htmlFreelancerMap } from "../htmlFreelancerMap";
 import { HTMLSearch } from "../services/htmlSearch/HTMLSearch";
 import { IProject } from "../shared/model/IProject";
 import { ProviderType } from "../shared/types/ProviderType";
+import { toDate } from "../utils/toDate";
 import { IProvider } from "./core/IProvider";
 
 @Provider(ProviderType.FreelancerMap)
@@ -31,13 +32,11 @@ export class FreelancerMap implements IProvider {
 
     elements.forEach((htmlElement) => {
       const htmlSearch = new HTMLSearch(htmlElement.origin);
-      const company = htmlSearch.className("company").findFirstValue();
-      const createdDate = htmlSearch.className("created-date").findFirstValue();
-      const location = htmlSearch.className("city").findFirstValue();
-      const title = htmlSearch.className("project-title").findFirstValue();
-      const url = htmlSearch
-        .className("project-title")
-        .findFirstAttrValue("href");
+      const company = htmlSearch.className("company").firstValue();
+      const createdDate = htmlSearch.className("created-date").firstValue();
+      const location = htmlSearch.className("city").firstValue();
+      const title = htmlSearch.className("project-title").firstValue();
+      const url = htmlSearch.className("project-title").firstAttrValue("href");
 
       const project: IProject = {
         company,
@@ -62,9 +61,6 @@ export class FreelancerMap implements IProvider {
     createDate = createDate.replaceAll(" ", "");
     createDate = createDate.replace("eingetragenam:", "");
     let [date, time] = createDate.split("/");
-    const [day, month, year] = date.split(".");
-    time = time += ":00";
-
-    return new Date(`${year}-${month}-${day}T${time}`);
+    return toDate(date, time);
   }
 }

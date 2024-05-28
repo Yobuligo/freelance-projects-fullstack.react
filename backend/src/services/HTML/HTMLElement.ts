@@ -5,7 +5,7 @@ import { IHTMLElement } from "./IHTMLElement";
 export class HTMLElement implements IHTMLElement {
   private _htmlSearch: IHTMLSearch | undefined;
 
-  constructor(readonly origin: Element, readonly value: string) {}
+  constructor(readonly origin: Element) {}
 
   attribute(name: string, value: any): IHTMLSearch {
     this.htmlSearch.attribute(name, value);
@@ -17,8 +17,8 @@ export class HTMLElement implements IHTMLElement {
     return this.htmlSearch;
   }
 
-  index(index: number): IHTMLSearch {
-    this.htmlSearch.index(index);
+  indexFinding(index: number): IHTMLSearch {
+    this.htmlSearch.indexFinding(index);
     return this.htmlSearch;
   }
 
@@ -26,20 +26,40 @@ export class HTMLElement implements IHTMLElement {
     return this.htmlSearch.find();
   }
 
-  findFirst(): IHTMLElement | undefined {
-    return this.htmlSearch.findFirst();
+  findAt(index: number): IHTMLElement | undefined {
+    return this.htmlSearch.findAt(index);
   }
 
-  findFirstAttrValue(name: string): string {
-    return this.htmlSearch.findFirstAttrValue(name);
+  first(): IHTMLElement | undefined {
+    return this.htmlSearch.first();
   }
 
-  findFirstValue(): string {
-    return this.htmlSearch.findFirstValue();
+  firstAttrValue(name: string): string {
+    return this.htmlSearch.firstAttrValue(name);
+  }
+
+  firstValue(): string {
+    return this.htmlSearch.firstValue();
+  }
+
+  last(): IHTMLElement | undefined {
+    return this.htmlSearch.last();
+  }
+
+  lastValue(): string {
+    return this.htmlSearch.lastValue();
   }
 
   tagName(tagName: string): IHTMLSearch {
     return this.htmlSearch.tagName(tagName);
+  }
+
+  get value(): string {
+    return (
+      (this.origin?.childNodes?.[0] as any)?.data ??
+      (this.origin as any)?.data ??
+      ""
+    );
   }
 
   private get htmlSearch(): IHTMLSearch {

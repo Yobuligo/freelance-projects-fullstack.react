@@ -12,9 +12,10 @@ export interface IHTMLSearch {
   className(className: string): IHTMLSearch;
 
   /**
-   * Restrict search result by specific index of finding. E.g. only return the third result.
+   * Restrict search result by specific index of finding.
+   * E.g. restrict to className "test" and index 3 means to return the third element with className "test"
    */
-  index(index: number): IHTMLSearch;
+  indexFinding(index: number): IHTMLSearch;
 
   /**
    * Returns all elements, which matches the restrictions.
@@ -22,19 +23,34 @@ export interface IHTMLSearch {
   find(): IHTMLElement[];
 
   /**
-   * Returns the first element, which matches the restrictions.
+   * Returns the element at {@link index}, which matches the restrictions or null
    */
-  findFirst(): IHTMLElement | undefined;
+  findAt(index: number): IHTMLElement | undefined;
+
+  /**
+   * Returns the first element, which matches the restrictions or null.
+   */
+  first(): IHTMLElement | undefined;
 
   /**
    * Returns attribute value with {@link name} of the first element, which matches the restrictions.
    */
-  findFirstAttrValue(name: string): string;
+  firstAttrValue(name: string): string;
 
   /**
    * Returns the value of the first element, which matches the restrictions.
    */
-  findFirstValue(): string;
+  firstValue(): string;
+
+  /**
+   * Returns the last element, which matches the restrictions or null.
+   */
+  last(): IHTMLElement | undefined;
+
+  /**
+   * Returns the value of the last element, which matches the restrictions.
+   */
+  lastValue(): string;
 
   /**
    * Restrict search result by specific {@link tagName}.
