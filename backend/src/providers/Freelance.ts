@@ -3,8 +3,10 @@ import { DOMParser } from "xmldom";
 import { Provider } from "../decorators/Provider";
 import { htmlFreelance } from "../htmlFreelance";
 import { HTMLSearch } from "../services/htmlSearch/HTMLSearch";
+import { IHTMLSearch } from "../services/htmlSearch/IHTMLSearch";
 import { IProject } from "../shared/model/IProject";
 import { ProviderType } from "../shared/types/ProviderType";
+import { error } from "../shared/utils/error";
 import { toDate } from "../utils/toDate";
 import { IProvider } from "./core/IProvider";
 
@@ -30,47 +32,70 @@ export class Freelance implements IProvider {
     const elements = htmlSearch.className("list-item-content").find();
 
     elements.forEach((element) => {
-      const htmlSearch = new HTMLSearch(element.origin);
+      const htmlSearch: IHTMLSearch = new HTMLSearch(element.origin);
 
-      const createDate =
-        htmlSearch
-          .className("icon-list")
-          .first()
-          ?.tagName("li")
-          .last()
-          ?.lastValue() ?? "";
-      const location = htmlSearch
-        .className("icon-list")
-        .first()
-        ?.tagName("li")
-        .indexFinding(1)
-        .first()
-        ?.lastValue();
-      const title =
-        htmlSearch
-          .className("action-icons-overlap")
-          .first()
-          ?.tagName("a")
-          .firstValue() ?? "";
-
-      const url = htmlSearch
-        .className("action-icons-overlap")
-        .first()
-        ?.tagName("a")
-        .firstAttrValue("href");
+      const createdAt = this.getCreatedAt(htmlSearch);
+      const location = this.getLocation(htmlSearch);
+      const title = this.getTitle(htmlSearch);
+      const url = this.getUrl(htmlSearch);
 
       const project: IProject = {
         company: "", // not available for freelance.de
-        createdAt: this.parseDate(createDate),
+        createdAt,
         id: hash.sha256().update(url).digest("hex"),
-        location: location ?? "",
-        title: this.harmonizeTitle(title),
-        url: url ? this.createUrl(url) : "",
+        location,
+        title,
+        url,
       };
       projects.push(project);
     });
 
     return projects;
+  }
+
+  private getUrl(htmlSearch: IHTMLSearch) {
+    const url = htmlSearch
+      .className("action-icons-overlap")
+      .first()
+      ?.tagName("a")
+      .firstAttrValue("href");
+    return url
+      ? this.createUrl(url)
+      : error("Error while getting Url. Url not found");
+  }
+
+  private getTitle(htmlSearch: IHTMLSearch) {
+    const title =
+      htmlSearch
+        .className("action-icons-overlap")
+        .first()
+        ?.tagName("a")
+        .firstValue() ?? "";
+    return this.harmonizeTitle(title);
+  }
+
+  private getLocation(htmlSearch: IHTMLSearch) {
+    const location =
+      htmlSearch
+        .className("icon-list")
+        .first()
+        ?.tagName("li")
+        .indexFinding(1)
+        .first()
+        ?.lastValue() ?? "";
+    return location;
+  }
+
+  private getCreatedAt(htmlSearch: IHTMLSearch) {
+    const createDate =
+      htmlSearch
+        .className("icon-list")
+        .first()
+        ?.tagName("li")
+        .last()
+        ?.lastValue() ?? "";
+
+    return this.parseDate(createDate);
   }
 
   private createUrl(url: string): string {
