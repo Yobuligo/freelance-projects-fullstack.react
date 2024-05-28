@@ -84,6 +84,7 @@ export class Freelance implements IProvider {
         createdAt,
         id: hash.sha256().update(url).digest("hex"),
         location,
+        provider: ProviderType.Freelance,
         title,
         url,
       };

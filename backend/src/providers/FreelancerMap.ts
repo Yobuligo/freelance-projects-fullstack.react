@@ -43,6 +43,7 @@ export class FreelancerMap implements IProvider {
         createdAt: this.parseDate(createdDate),
         id: hash.sha256().update(url).digest("hex"),
         location,
+        provider: ProviderType.FreelancerMap,
         title,
         url: this.createUrl(url),
       };
