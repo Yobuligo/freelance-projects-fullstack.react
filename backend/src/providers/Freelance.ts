@@ -19,8 +19,8 @@ export class Freelance implements IProvider {
       const document = this.createDocument(html);
       const rootElement = this.getRootElement(document);
       const countPages = this.getCountPages(document);
-      const projects = this.extractProjects(rootElement);
 
+      const projects = this.extractProjects(rootElement);
       const projectsOffsetPage = await this.fetchOffsetPages(url, countPages);
       projects.push(...projectsOffsetPage);
 
@@ -68,7 +68,6 @@ export class Freelance implements IProvider {
 
   private extractProjects(rootElement: Element): IProject[] {
     const projects: IProject[] = [];
-
     const htmlSearch = new HTMLSearch(rootElement);
     const elements = htmlSearch.className("list-item-content").find();
 

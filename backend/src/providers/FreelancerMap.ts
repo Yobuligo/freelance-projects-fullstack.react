@@ -1,7 +1,6 @@
 import hash from "hash.js";
 import { DOMParser } from "xmldom";
 import { Provider } from "../decorators/Provider";
-import { htmlFreelancerMap } from "../htmlFreelancerMap";
 import { HTMLSearch } from "../services/htmlSearch/HTMLSearch";
 import { IProject } from "../shared/model/IProject";
 import { ProviderType } from "../shared/types/ProviderType";
@@ -12,21 +11,22 @@ import { IProvider } from "./core/IProvider";
 export class FreelancerMap implements IProvider {
   request(url: string): Promise<IProject[]> {
     return new Promise(async (resolve, reject) => {
-      // const response = await fetch(url);
-      // const html = await response.text();
-      // const projects = this.extractProjects(htmlInfo);
-      const projects = this.extractProjects();
+      const response = await fetch(url);
+      const html = await response.text();
+
+      const parser = new DOMParser();
+      const document = parser.parseFromString(html, "text/html");
+      const rootElement = document.getElementsByClassName("project-list")[0];
+
+      const projects = this.extractProjects(rootElement);
       resolve(projects);
     });
   }
 
-  private extractProjects(): IProject[] {
-    const parser = new DOMParser();
-    const document = parser.parseFromString(htmlFreelancerMap, "text/html");
-    const rootElement = document.getElementsByClassName("project-list")[0];
+  private extractProjects(rootElement: Element): IProject[] {
     const projects: IProject[] = [];
-
-    const elements = new HTMLSearch(rootElement)
+    const htmlSearch = new HTMLSearch(rootElement);
+    const elements = htmlSearch
       .className("project-container project card box")
       .find();
 
