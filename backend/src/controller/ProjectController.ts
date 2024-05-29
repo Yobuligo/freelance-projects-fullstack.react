@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ProjectCollector } from "../services/projectCollector/ProjectCollector";
 import { ProjectMeta } from "../shared/model/IProject";
 import { IProviderRequests } from "../shared/model/IProviderRequests";
+import { sortProjects } from "../utils/sortProjects";
 
 export class ProjectController {
   readonly router = Router();
@@ -15,7 +16,7 @@ export class ProjectController {
       const providerRequests: IProviderRequests[] = req.body;
       const projectCollector = new ProjectCollector();
       const projects = await projectCollector.collect(providerRequests);
-      res.status(200).send(projects);
+      res.status(200).send(sortProjects(projects));
     });
   }
 }
