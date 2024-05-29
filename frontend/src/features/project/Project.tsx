@@ -7,9 +7,18 @@ import { IProjectProps } from "./IProjectProps";
 import styles from "./Project.module.scss";
 
 export const Project: React.FC<IProjectProps> = (props) => {
-  const [checked, setChecked] = useState(props.checked);
+  const [checked, setChecked] = useState(props.project.completed);
 
-  const onToggleChecked = () => setChecked((previous) => !previous);
+  const onToggleChecked = () =>
+    setChecked((previous) => {
+      previous = !previous;
+      if (previous === true) {
+        props.onChecked?.(props.project);
+      } else {
+        props.onUnchecked?.(props.project);
+      }
+      return previous;
+    });
 
   return (
     <Card className={styles.project}>

@@ -1,6 +1,5 @@
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
-import { CompletedCard } from "../completedCard/CompletedCard";
 import { Project } from "../project/Project";
 import styles from "./ProjectList.module.scss";
 import { IProjectListProps } from "./ProjectListProps";
@@ -11,8 +10,8 @@ export const ProjectList: React.FC<IProjectListProps> = (props) => {
   const items = props.projects.map((project) => (
     <Project
       key={project.id}
-      checked={false}
-      onChecked={() => {}}
+      onChecked={props.onChecked}
+      onUnchecked={props.onUnchecked}
       project={project}
     />
   ));
@@ -20,7 +19,6 @@ export const ProjectList: React.FC<IProjectListProps> = (props) => {
   return (
     <div className={styles.projectList}>
       {items.length === 0 ? <>{t(texts.projectList.noProjects)}</> : items}
-      <CompletedCard />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 {
     "completeCard": {
-        "completed": "Completed"
+        "completed": "Completed ({{numberProjects}})"
     },
     "projectList": {
         "noProjects": "No suitable projects found"

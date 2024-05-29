@@ -83,6 +83,7 @@ export class Freelance implements IProvider {
 
       const project: IProject = {
         company: "", // not available for freelance.de
+        completed: false,
         createdAt,
         id: hash.sha256().update(url).digest("hex"),
         location,

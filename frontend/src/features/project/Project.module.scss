@@ -13,6 +13,9 @@
   flex-direction: row;
   margin: 1rem;
   align-items: center;
+  :hover{
+    fill: lightgray;
+  }
 }
 
 .company {

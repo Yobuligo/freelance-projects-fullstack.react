@@ -4,6 +4,7 @@ import { ProviderType } from "../types/ProviderType";
 export interface IProject {
   createdAt: Date;
   company: string;
+  completed: boolean;
   id: string;
   location: string;
   provider: ProviderType;
