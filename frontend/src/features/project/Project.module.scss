@@ -1,6 +1,18 @@
 .project {
   display: flex;
+  flex-direction: row;
+}
+
+.projectDetails {
+  display: flex;
   flex-direction: column;
+}
+
+.projectIcon {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem;
+  align-items: center;
 }
 
 .company {

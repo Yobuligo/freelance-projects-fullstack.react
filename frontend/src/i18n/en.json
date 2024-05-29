@@ -1,4 +1,7 @@
 {
+    "completeCard": {
+        "completed": "Completed"
+    },
     "projectList": {
         "noProjects": "No suitable projects found"
     }
