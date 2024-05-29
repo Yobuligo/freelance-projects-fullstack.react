@@ -16,7 +16,8 @@ export class ProjectController {
       const providerRequests: IProviderRequests[] = req.body;
       const projectCollector = new ProjectCollector();
       const projects = await projectCollector.collect(providerRequests);
-      res.status(200).send(sortProjects(projects));
+      const sortedProjects = sortProjects(projects)
+      res.status(200).send(sortedProjects);
     });
   }
 }

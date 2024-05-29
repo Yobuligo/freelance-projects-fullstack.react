@@ -9,7 +9,7 @@ export const sortProjects = (projects: IProject[]): IProject[] => {
       return 0;
     }
 
-    if (leftTime < rightTime) {
+    if (leftTime > rightTime) {
       return -1;
     }
 
