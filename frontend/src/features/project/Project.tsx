@@ -3,7 +3,7 @@ import { ReactComponent as CheckedIcon } from "../../assets/checked.svg";
 import { ReactComponent as UncheckedIcon } from "../../assets/unchecked.svg";
 
 import { Card } from "../../components/card/Card";
-import { renderDate } from "../../utils/renderDate";
+import { renderDate } from "../../shared/utils/renderDate";
 import { IProjectProps } from "./IProjectProps";
 import styles from "./Project.module.scss";
 

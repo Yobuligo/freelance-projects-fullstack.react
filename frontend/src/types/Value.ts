@@ -1,1 +1,4 @@
-export type Value<T> = [value: T, setValue: (newValue: T) => void];
+export type Value<T> = [
+  value: T,
+  setValue: React.Dispatch<React.SetStateAction<T>>
+];

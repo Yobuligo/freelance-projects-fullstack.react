@@ -3,6 +3,7 @@ import { DOMParser } from "xmldom";
 import { Provider } from "../decorators/Provider";
 import { HTMLSearch } from "../services/htmlSearch/HTMLSearch";
 import { IHTMLSearch } from "../services/htmlSearch/IHTMLSearch";
+import { Log } from "../services/logging/Log";
 import { IProject } from "../shared/model/IProject";
 import { ProviderType } from "../shared/types/ProviderType";
 import { error } from "../shared/utils/error";
@@ -16,7 +17,7 @@ export class Freelance implements IProvider {
       const response = await fetch(url);
       const html = await response.text();
 
-      console.log(`Request freelance.de projects from freelance.de server.`);
+      Log.info(`Request freelance.de projects from freelance.de server.`);
 
       const document = this.createDocument(html);
       const rootElement = this.getRootElement(document);

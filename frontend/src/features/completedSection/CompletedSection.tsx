@@ -4,15 +4,25 @@ import { ReactComponent as ExpandedIcon } from "../../assets/expanded.svg";
 import { Card } from "../../components/card/Card";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
+import { useUserConfig } from "../../hooks/useUserConfig";
 import { ProjectList } from "../projectList/ProjectList";
 import styles from "./CompleteSection.module.scss";
 import { ICompletedSectionProps } from "./ICompletedSectionProps";
 
 export const CompletedSection: React.FC<ICompletedSectionProps> = (props) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [userConfig, setUserConfig] = useUserConfig();
+  const [collapsed, setCollapsed] = useState(userConfig.collapseCompleted);
   const { t } = useTranslation();
 
-  const onToggleCollapsed = () => setCollapsed((previous) => !previous);
+  const onToggleCollapsed = () =>
+    setCollapsed((previous) => {
+      previous = !previous;
+      setUserConfig((userConfig) => {
+        userConfig.collapseCompleted = previous;
+        return { ...userConfig };
+      });
+      return previous;
+    });
 
   return (
     <>
