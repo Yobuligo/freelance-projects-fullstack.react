@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { ProjectApi } from "../../../api/ProjectApi";
 import { useProjectIdStorage } from "../../../hooks/useProjectIdStorage";
+import { useToggle } from "../../../hooks/useToggle";
 import { IProject } from "../../../shared/model/IProject";
 
 export const useProjectSectionViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState<IProject[]>([]);
+  const [displaySettings, toggleDisplaySettings] = useToggle(false);
   const projectIdStorage = useProjectIdStorage();
 
   const openProjects = projects.filter((project) => !project.completed);
@@ -45,13 +47,17 @@ export const useProjectSectionViewModel = () => {
 
   const onReload = () => loadProjects();
 
+  const onToggleDisplaySettings = () => toggleDisplaySettings();
+
   return {
     completedProjects,
+    displaySettings,
     isLoading,
     loadProjects,
     onProjectChecked,
     onProjectUnchecked,
     onReload,
+    onToggleDisplaySettings,
     openProjects,
   };
 };

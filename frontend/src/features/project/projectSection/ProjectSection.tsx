@@ -1,9 +1,10 @@
+import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
 import { Button } from "../../../components/button/Button";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
-import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
 import { CompletedSection } from "../../completedSection/CompletedSection";
+import { SettingsSection } from "../../settings/settingsSection/SettingsSection";
 import { ProjectList } from "../projectList/ProjectList";
 import styles from "./ProjectSection.module.scss";
 import { useProjectSectionViewModel } from "./useProjectSectionViewModel";
@@ -22,11 +23,16 @@ export const ProjectSection: React.FC = () => {
           onClick={viewModel.onReload}
         />
         <Button>
-          <SettingsIcon />
+          <SettingsIcon onClick={viewModel.onToggleDisplaySettings} />
         </Button>
       </div>
 
       <>
+        {viewModel.displaySettings && (
+          <div className={styles.settingsSection}>
+            <SettingsSection />
+          </div>
+        )}
         <ProjectList
           isLoading={viewModel.isLoading}
           onChecked={viewModel.onProjectChecked}
