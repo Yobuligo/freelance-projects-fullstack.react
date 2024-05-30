@@ -18,7 +18,13 @@ export const ProjectList: React.FC<IProjectListProps> = (props) => {
 
   return (
     <div className={styles.projectList}>
-      {items.length === 0 ? <>{t(texts.projectList.noProjects)}</> : items}
+      {items.length === 0 ? (
+        <div className={styles.noProjectsMessage}>
+          <h3>{t(texts.projectList.noProjects)}</h3>
+        </div>
+      ) : (
+        items
+      )}
     </div>
   );
 };
