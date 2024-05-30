@@ -1,11 +1,9 @@
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
 import { IUserConfig } from "../model/IUserConfig";
 import { Value } from "../types/Value";
-import { useLocalStorage } from "./useLocalStorage";
 
 export const useUserConfig = (): Value<IUserConfig> => {
-  const [userConfig, setUserConfig] = useLocalStorage<IUserConfig>(
-    "freelance.user-config",
-    { collapseCompleted: true, displaySettings: false }
-  );
-  return [userConfig, setUserConfig];
+  const context = useContext(AppContext);
+  return [context.userConfig[0], context.userConfig[1]];
 };

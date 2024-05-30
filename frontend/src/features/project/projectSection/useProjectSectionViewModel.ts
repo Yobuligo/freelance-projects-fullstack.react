@@ -54,8 +54,7 @@ export const useProjectSectionViewModel = () => {
     setDisplaySettings((previous) => {
       previous = !previous;
       setUserConfig((userConfig) => {
-        userConfig.displaySettings = previous;
-        return { ...userConfig };
+        return { ...userConfig, displaySettings: previous };
       });
       return previous;
     });

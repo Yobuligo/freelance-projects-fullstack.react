@@ -18,8 +18,7 @@ export const CompletedSection: React.FC<ICompletedSectionProps> = (props) => {
     setCollapsed((previous) => {
       previous = !previous;
       setUserConfig((userConfig) => {
-        userConfig.collapseCompleted = previous;
-        return { ...userConfig };
+        return { ...userConfig, collapseCompleted: previous };
       });
       return previous;
     });
