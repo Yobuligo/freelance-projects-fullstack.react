@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ProjectApi } from "../../api/ProjectApi";
 import { Spinner } from "../../components/spinner/Spinner";
+import { useProjectStorage } from "../../hooks/useProjectStorage";
 import { IProject } from "../../shared/model/IProject";
 import { request } from "../../utils/request";
 import { CompletedSection } from "../completedSection/CompletedSection";
@@ -11,6 +12,7 @@ import styles from "./ProjectSection.module.scss";
 export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState<IProject[]>([]);
+  const projectStorage = useProjectStorage();
 
   useEffect(() => {
     request(async () => {
@@ -25,17 +27,21 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
 
   const completedProjects = projects.filter((project) => project.completed);
 
-  const onProjectChecked = (project: IProject) =>
+  const onProjectChecked = (project: IProject) => {
     setProjects((previous) => {
       project.completed = true;
       return [...previous];
     });
+    projectStorage.setChecked(project);
+  };
 
-  const onProjectUnchecked = (project: IProject) =>
+  const onProjectUnchecked = (project: IProject) => {
     setProjects((previous) => {
       project.completed = false;
       return [...previous];
     });
+    projectStorage.setUnchecked(project);
+  };
 
   return (
     <div className={styles.projectSection}>
