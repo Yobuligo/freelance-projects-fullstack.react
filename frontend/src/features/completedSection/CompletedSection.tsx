@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ReactComponent as CollapsedIcon } from "../../assets/collapsed.svg";
 import { ReactComponent as ExpandedIcon } from "../../assets/expanded.svg";
-import { Card } from "../../components/Card";
+import { Card } from "../../components/card/Card";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { ProjectList } from "../projectList/ProjectList";

@@ -1,6 +1,6 @@
-import { style } from "../utils/style";
-import { ICardProps } from "./ICardProps";
+import { style } from "../../utils/style";
 import styles from "./Card.module.scss";
+import { ICardProps } from "./ICardProps";
 
 export const Card: React.FC<ICardProps> = (props) => {
   return (
