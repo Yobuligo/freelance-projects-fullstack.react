@@ -5,7 +5,7 @@
     "projectList": {
         "noProjects": "No suitable projects found"
     },
-    "reloadButton": {
-        "caption": "Reload"
+    "projectSection": {
+        "captionReloadButton": "Reload"
     }
 }

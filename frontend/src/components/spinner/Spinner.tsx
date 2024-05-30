@@ -27,7 +27,7 @@ export const Spinner: React.FC<ISpinnerProps> = (props) => {
       default:
         return "5px";
     }
-  };  
+  };
 
   const style = {
     "--spinnerColor": `${props.color ?? "#fff"}`,

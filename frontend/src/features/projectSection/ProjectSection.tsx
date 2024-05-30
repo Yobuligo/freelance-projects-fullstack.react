@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { ProjectApi } from "../../api/ProjectApi";
+import { ReactComponent as SettingsIcon } from "../../assets/settings.svg";
+import { Button } from "../../components/button/Button";
+import { Card } from "../../components/card/Card";
 import { useInitialize } from "../../hooks/useInitialize";
 import { useProjectIdStorage } from "../../hooks/useProjectIdStorage";
+import { texts } from "../../hooks/useTranslation/texts";
+import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { IProject } from "../../shared/model/IProject";
 import { CompletedSection } from "../completedSection/CompletedSection";
 import { ProjectList } from "../projectList/ProjectList";
-import { ReloadButton } from "../reloadButton/ReloadButton";
 import { IProjectSectionProps } from "./IProjectSectionProps";
 import styles from "./ProjectSection.module.scss";
 
 export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState<IProject[]>([]);
   const projectIdStorage = useProjectIdStorage();
@@ -57,7 +62,13 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
   return (
     <div className={styles.projectSection}>
       <div className={styles.reloadButton}>
-        <ReloadButton onClick={onReload} />
+        <Button
+          caption={t(texts.projectSection.captionReloadButton)}
+          onClick={onReload}
+        />
+        <Card>
+          <SettingsIcon />
+        </Card>
       </div>
 
       <>
