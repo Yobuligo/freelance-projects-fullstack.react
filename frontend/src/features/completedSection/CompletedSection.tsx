@@ -5,7 +5,7 @@ import { Card } from "../../components/card/Card";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { useUserConfig } from "../../hooks/useUserConfig";
-import { ProjectList } from "../projectList/ProjectList";
+import { ProjectList } from "../project/projectList/ProjectList";
 import styles from "./CompleteSection.module.scss";
 import { ICompletedSectionProps } from "./ICompletedSectionProps";
 

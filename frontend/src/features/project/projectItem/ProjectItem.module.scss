@@ -1,14 +1,14 @@
-.project {
+.projectItem {
   display: flex;
   flex-direction: row;
 }
 
-.projectDetails {
+.projectItemDetails {
   display: flex;
   flex-direction: column;
 }
 
-.projectIcon {
+.projectItemIcon {
   display: flex;
   flex-direction: row;
   margin: 1rem;

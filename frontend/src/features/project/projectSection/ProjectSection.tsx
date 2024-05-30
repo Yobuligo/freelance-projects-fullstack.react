@@ -1,9 +1,9 @@
-import { ReactComponent as SettingsIcon } from "../../assets/settings.svg";
-import { Button } from "../../components/button/Button";
-import { useInitialize } from "../../hooks/useInitialize";
-import { texts } from "../../hooks/useTranslation/texts";
-import { useTranslation } from "../../hooks/useTranslation/useTranslation";
-import { CompletedSection } from "../completedSection/CompletedSection";
+import { Button } from "../../../components/button/Button";
+import { useInitialize } from "../../../hooks/useInitialize";
+import { texts } from "../../../hooks/useTranslation/texts";
+import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
+import { CompletedSection } from "../../completedSection/CompletedSection";
 import { ProjectList } from "../projectList/ProjectList";
 import styles from "./ProjectSection.module.scss";
 import { useProjectSectionViewModel } from "./useProjectSectionViewModel";

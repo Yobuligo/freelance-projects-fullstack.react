@@ -1,4 +1,4 @@
-import { IProject } from "../../shared/model/IProject";
+import { IProject } from "../../../shared/model/IProject";
 
 export interface IProjectListProps {
   isLoading?: boolean

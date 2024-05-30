@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useProjectIdStorage } from "../../hooks/useProjectIdStorage";
-import { IProject } from "../../shared/model/IProject";
-import { ProjectApi } from "../../api/ProjectApi";
+import { ProjectApi } from "../../../api/ProjectApi";
+import { useProjectIdStorage } from "../../../hooks/useProjectIdStorage";
+import { IProject } from "../../../shared/model/IProject";
 
 export const useProjectSectionViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +41,7 @@ export const useProjectSectionViewModel = () => {
       return [...previous];
     });
     projectIdStorage.setUnchecked(project);
-  };  
+  };
 
   const onReload = () => loadProjects();
 

@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { ReactComponent as CheckedIcon } from "../../assets/checked.svg";
-import { ReactComponent as UncheckedIcon } from "../../assets/unchecked.svg";
+import { ReactComponent as CheckedIcon } from "../../../assets/checked.svg";
+import { ReactComponent as UncheckedIcon } from "../../../assets/unchecked.svg";
+import { Card } from "../../../components/card/Card";
+import { renderDate } from "../../../shared/utils/renderDate";
+import { IProjectItemProps } from "./IProjectItemProps";
+import styles from "./ProjectItem.module.scss";
 
-import { Card } from "../../components/card/Card";
-import { renderDate } from "../../shared/utils/renderDate";
-import { IProjectProps } from "./IProjectProps";
-import styles from "./Project.module.scss";
-
-export const Project: React.FC<IProjectProps> = (props) => {
+export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
   const [checked, setChecked] = useState(props.project.completed);
 
   const onToggleChecked = () =>
@@ -22,15 +21,15 @@ export const Project: React.FC<IProjectProps> = (props) => {
     });
 
   return (
-    <Card className={styles.project}>
-      <div className={styles.projectIcon}>
+    <Card className={styles.projectItem}>
+      <div className={styles.projectItemIcon}>
         {checked ? (
           <CheckedIcon onClick={onToggleChecked} />
         ) : (
           <UncheckedIcon onClick={onToggleChecked} />
         )}
       </div>
-      <div className={styles.projectDetails}>
+      <div className={styles.projectItemDetails}>
         <div className={styles.company}>
           {props.project.company.length > 0
             ? props.project.company
