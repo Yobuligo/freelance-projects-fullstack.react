@@ -8,8 +8,8 @@ export const ReloadButton: React.FC<IReloadButtonProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <Card className={styles.reloadButton}>
-      <div onClick={props.onClick}>{t(texts.reloadButton.caption)}</div>
+    <Card className={styles.reloadButton} onClick={props.onClick}>
+      {t(texts.reloadButton.caption)}
     </Card>
   );
 };
