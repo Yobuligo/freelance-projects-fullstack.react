@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ProjectApi } from "../../api/ProjectApi";
 import { ReactComponent as SettingsIcon } from "../../assets/settings.svg";
 import { Button } from "../../components/button/Button";
-import { Card } from "../../components/card/Card";
 import { useInitialize } from "../../hooks/useInitialize";
 import { useProjectIdStorage } from "../../hooks/useProjectIdStorage";
 import { texts } from "../../hooks/useTranslation/texts";
@@ -66,9 +65,9 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
           caption={t(texts.projectSection.captionReloadButton)}
           onClick={onReload}
         />
-        <Card>
+        <Button>
           <SettingsIcon />
-        </Card>
+        </Button>
       </div>
 
       <>

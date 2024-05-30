@@ -6,6 +6,7 @@ export const Button: React.FC<IButtonProps> = (props) => {
   return (
     <Card className={styles.button} onClick={props.onClick}>
       {props.caption}
+      {props.children}
     </Card>
   );
 };
