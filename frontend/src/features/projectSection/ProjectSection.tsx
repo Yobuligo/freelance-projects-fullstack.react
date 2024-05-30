@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ProjectApi } from "../../api/ProjectApi";
 import { Spinner } from "../../components/spinner/Spinner";
-import { useProjectStorage } from "../../hooks/useProjectStorage";
+import { useInitialize } from "../../hooks/useInitialize";
+import { useProjectIdStorage } from "../../hooks/useProjectIdStorage";
 import { IProject } from "../../shared/model/IProject";
-import { request } from "../../utils/request";
 import { CompletedSection } from "../completedSection/CompletedSection";
 import { ProjectList } from "../projectList/ProjectList";
 import { IProjectSectionProps } from "./IProjectSectionProps";
@@ -12,16 +12,23 @@ import styles from "./ProjectSection.module.scss";
 export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState<IProject[]>([]);
-  const projectStorage = useProjectStorage();
+  const projectIdStorage = useProjectIdStorage();
 
-  useEffect(() => {
-    request(async () => {
-      setIsLoading(true);
-      const projects = await ProjectApi.findAll();
-      setProjects(projects);
-      setIsLoading(false);
+  useInitialize(async () => {
+    setIsLoading(true);
+    const projects = await ProjectApi.findAll();
+    projects.forEach((project) => {
+      const index = projectIdStorage.checkedProjectIds.findIndex(
+        (projectId) => projectId === project.id
+      );
+      if (index !== -1) {
+        project.completed = true;
+      }
     });
-  }, []);
+
+    setProjects(projects);
+    setIsLoading(false);
+  });
 
   const openProjects = projects.filter((project) => !project.completed);
 
@@ -32,7 +39,7 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
       project.completed = true;
       return [...previous];
     });
-    projectStorage.setChecked(project);
+    projectIdStorage.setChecked(project);
   };
 
   const onProjectUnchecked = (project: IProject) => {
@@ -40,7 +47,7 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
       project.completed = false;
       return [...previous];
     });
-    projectStorage.setUnchecked(project);
+    projectIdStorage.setUnchecked(project);
   };
 
   return (
