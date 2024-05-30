@@ -20,13 +20,20 @@ export const ProjectList: React.FC<IProjectListProps> = (props) => {
 
   return (
     <div className={styles.projectList}>
-      {items.length === 0 ? (
-        <div className={styles.noProjectsMessage}>
-          <h3>{t(texts.projectList.noProjects)}</h3>
-          {props.isLoading && <Spinner color="black" size={SpinnerSize.SMALL}/>}
+      {props.isLoading ? (
+        <div className={styles.message}>
+          <Spinner color="black" size={SpinnerSize.MEDIUM} />
         </div>
       ) : (
-        items
+        <>
+          {items.length === 0 ? (
+            <div className={styles.message}>
+              <h3>{t(texts.projectList.noProjects)}</h3>
+            </div>
+          ) : (
+            items
+          )}
+        </>
       )}
     </div>
   );
