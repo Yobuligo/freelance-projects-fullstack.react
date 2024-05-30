@@ -5,7 +5,7 @@ import { useLocalStorage } from "./useLocalStorage";
 export const useUserConfig = (): Value<IUserConfig> => {
   const [userConfig, setUserConfig] = useLocalStorage<IUserConfig>(
     "freelance.user-config",
-    { collapseCompleted: true }
+    { collapseCompleted: true, displaySettings: false }
   );
   return [userConfig, setUserConfig];
 };

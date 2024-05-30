@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { ProjectApi } from "../../../api/ProjectApi";
 import { useProjectIdStorage } from "../../../hooks/useProjectIdStorage";
-import { useToggle } from "../../../hooks/useToggle";
+import { useUserConfig } from "../../../hooks/useUserConfig";
 import { IProject } from "../../../shared/model/IProject";
 
 export const useProjectSectionViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState<IProject[]>([]);
-  const [displaySettings, toggleDisplaySettings] = useToggle(false);
+  const [userConfig, setUserConfig] = useUserConfig();
+  const [displaySettings, setDisplaySettings] = useState(
+    userConfig.displaySettings
+  );
   const projectIdStorage = useProjectIdStorage();
 
   const openProjects = projects.filter((project) => !project.completed);
@@ -47,7 +50,15 @@ export const useProjectSectionViewModel = () => {
 
   const onReload = () => loadProjects();
 
-  const onToggleDisplaySettings = () => toggleDisplaySettings();
+  const onToggleDisplaySettings = () =>
+    setDisplaySettings((previous) => {
+      previous = !previous;
+      setUserConfig((userConfig) => {
+        userConfig.displaySettings = previous;
+        return { ...userConfig };
+      });
+      return previous;
+    });
 
   return {
     completedProjects,

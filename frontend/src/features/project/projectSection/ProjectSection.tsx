@@ -22,8 +22,8 @@ export const ProjectSection: React.FC = () => {
           caption={t(texts.projectSection.captionReloadButton)}
           onClick={viewModel.onReload}
         />
-        <Button>
-          <SettingsIcon onClick={viewModel.onToggleDisplaySettings} />
+        <Button onClick={viewModel.onToggleDisplaySettings}>
+          <SettingsIcon />
         </Button>
       </div>
 
