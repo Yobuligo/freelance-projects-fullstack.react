@@ -6,6 +6,7 @@ import { useProjectIdStorage } from "../../hooks/useProjectIdStorage";
 import { IProject } from "../../shared/model/IProject";
 import { CompletedSection } from "../completedSection/CompletedSection";
 import { ProjectList } from "../projectList/ProjectList";
+import { ReloadButton } from "../reloadButton/ReloadButton";
 import { IProjectSectionProps } from "./IProjectSectionProps";
 import styles from "./ProjectSection.module.scss";
 
@@ -14,7 +15,7 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
   const [projects, setProjects] = useState<IProject[]>([]);
   const projectIdStorage = useProjectIdStorage();
 
-  useInitialize(async () => {
+  const loadProjects = async () => {
     setIsLoading(true);
     const projects = await ProjectApi.findAll();
     projects.forEach((project) => {
@@ -28,7 +29,9 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
 
     setProjects(projects);
     setIsLoading(false);
-  });
+  };
+
+  useInitialize(loadProjects);
 
   const openProjects = projects.filter((project) => !project.completed);
 
@@ -50,10 +53,18 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
     projectIdStorage.setUnchecked(project);
   };
 
+  const onReload = () => loadProjects();
+
   return (
     <div className={styles.projectSection}>
+      <div className={styles.reloadButton}>
+        <ReloadButton onClick={onReload} />
+      </div>
+
       {isLoading ? (
-        <Spinner color="black" />
+        <div className={styles.spinner}>
+          <Spinner color="black" />
+        </div>
       ) : (
         <>
           <ProjectList

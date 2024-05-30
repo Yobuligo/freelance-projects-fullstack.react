@@ -6,3 +6,13 @@
 .completedSection {
   margin-top: 0.5rem;
 }
+
+.reloadButton {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0.5rem;
+}
+
+.spinner {
+  text-align: center;
+}
