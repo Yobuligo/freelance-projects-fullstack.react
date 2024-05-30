@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ProjectApi } from "../../api/ProjectApi";
-import { Spinner } from "../../components/spinner/Spinner";
 import { useInitialize } from "../../hooks/useInitialize";
 import { useProjectIdStorage } from "../../hooks/useProjectIdStorage";
 import { IProject } from "../../shared/model/IProject";
@@ -61,26 +60,21 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
         <ReloadButton onClick={onReload} />
       </div>
 
-      {isLoading ? (
-        <div className={styles.spinner}>
-          <Spinner color="black" />
-        </div>
-      ) : (
-        <>
-          <ProjectList
+      <>
+        <ProjectList
+          isLoading={isLoading}
+          onChecked={onProjectChecked}
+          onUnchecked={onProjectUnchecked}
+          projects={openProjects}
+        />
+        <div className={styles.completedSection}>
+          <CompletedSection
             onChecked={onProjectChecked}
             onUnchecked={onProjectUnchecked}
-            projects={openProjects}
+            projects={completedProjects}
           />
-          <div className={styles.completedSection}>
-            <CompletedSection
-              onChecked={onProjectChecked}
-              onUnchecked={onProjectUnchecked}
-              projects={completedProjects}
-            />
-          </div>
-        </>
-      )}
+        </div>
+      </>
     </div>
   );
 };

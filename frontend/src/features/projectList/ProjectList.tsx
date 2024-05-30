@@ -1,3 +1,5 @@
+import { Spinner } from "../../components/spinner/Spinner";
+import { SpinnerSize } from "../../components/spinner/SpinnerSize";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { Project } from "../project/Project";
@@ -21,6 +23,7 @@ export const ProjectList: React.FC<IProjectListProps> = (props) => {
       {items.length === 0 ? (
         <div className={styles.noProjectsMessage}>
           <h3>{t(texts.projectList.noProjects)}</h3>
+          {props.isLoading && <Spinner color="black" size={SpinnerSize.SMALL}/>}
         </div>
       ) : (
         items
