@@ -34,6 +34,12 @@ export const useProjectSectionViewModel = () => {
     setIsLoading(false);
   };
 
+  const onCheckAll = () =>
+    setProjects((projects) => {
+      projects.forEach((project) => (project.completed = true));
+      return [...projects];
+    });
+
   const onProjectChecked = (project: IProject) => {
     setProjects((previous) => {
       project.completed = true;
@@ -66,6 +72,7 @@ export const useProjectSectionViewModel = () => {
     displaySettings,
     isLoading,
     loadProjects,
+    onCheckAll,
     onProjectChecked,
     onProjectUnchecked,
     onReload,

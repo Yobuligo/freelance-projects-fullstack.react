@@ -1,3 +1,4 @@
+import { ReactComponent as CheckIcon } from "../../../assets/check.svg";
 import { ReactComponent as ReloadIcon } from "../../../assets/reload.svg";
 import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
 import { Button } from "../../../components/button/Button";
@@ -16,9 +17,14 @@ export const ProjectSection: React.FC = () => {
   return (
     <div className={styles.projectSection}>
       <div className={styles.reloadButton}>
-        <Button onClick={viewModel.onReload}>
-          <ReloadIcon />
-        </Button>
+        <div className={styles.leftButtons}>
+          <Button onClick={viewModel.onReload}>
+            <ReloadIcon />
+          </Button>
+          <Button onClick={viewModel.onCheckAll}>
+            <CheckIcon />
+          </Button>
+        </div>
         <Button onClick={viewModel.onToggleDisplaySettings}>
           <SettingsIcon />
         </Button>
