@@ -1,29 +1,18 @@
 import { Card } from "../../../components/card/Card";
-import { useSettings } from "../../../hooks/useSettings";
-import { ProviderType } from "../../../shared/types/ProviderType";
 import { ProviderRequestInput } from "../../providerRequest/providerRequestInput/ProviderRequestInput";
 import { ProviderRequestList } from "../../providerRequest/providerRequestList/ProviderRequestList";
+import { useSettingsSectionViewModel } from "./useSettingsSectionViewModel";
 
 export const SettingsSection: React.FC = () => {
-  const [settings, setSettings] = useSettings();
-
-  const onAddProviderRequest = (
-    providerType: ProviderType,
-    providerUrl: string
-  ) => {
-    setSettings((previous) => {
-      previous.providerRequests.push({
-        providerType: providerType,
-        providerUrl: providerUrl,
-      });
-      return { ...previous };
-    });
-  };
+  const viewModel = useSettingsSectionViewModel();
 
   return (
     <Card>
-      <ProviderRequestInput onAdd={onAddProviderRequest} />
-      <ProviderRequestList providerRequests={settings.providerRequests} />
+      <ProviderRequestInput onAdd={viewModel.onAddProviderRequest} />
+      <ProviderRequestList
+        providerRequests={viewModel.settings.providerRequests}
+        onDelete={viewModel.onDeleteProviderRequest}
+      />
     </Card>
   );
 };
