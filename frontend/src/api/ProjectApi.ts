@@ -4,13 +4,17 @@ import { IProviderRequests } from "./../shared/model/IProviderRequests";
 import { RESTApi } from "./RESTApi";
 
 class ProjectApiDefault extends RESTApi {
-  findAll(providerRequests: IProviderRequest[]): Promise<IProject[]> {
-    const requests = this.convertToBackendFormat(providerRequests);
+  findAll(
+    providerRequests: IProviderRequest[],
+    force?: boolean
+  ): Promise<IProject[]> {
+    const requests = this.convertToBackendFormat(providerRequests, force);
     return this.post(`http://localhost:5000/api${ProjectMeta.path}`, requests);
   }
 
   private convertToBackendFormat(
-    providerRequests: IProviderRequest[]
+    providerRequests: IProviderRequest[],
+    force?: boolean
   ): IProviderRequests[] {
     const requests: IProviderRequests[] = [];
 
@@ -23,6 +27,7 @@ class ProjectApiDefault extends RESTApi {
         request.urls.push(providerRequest.providerUrl);
       } else {
         requests.push({
+          force: force,
           providerType: providerRequest.providerType,
           urls: [providerRequest.providerUrl],
         });

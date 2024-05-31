@@ -17,7 +17,7 @@ export class ProjectCollector implements IProjectCollector {
         const providerProjects = await this.requestProjects(providerRequest);
         projects.push(...providerProjects);
       }
-      
+
       resolve(projects);
     });
   }
@@ -30,7 +30,7 @@ export class ProjectCollector implements IProjectCollector {
 
     for (let k = 0; k < providerRequest.urls.length; k++) {
       const url = providerRequest.urls[k];
-      if (!this.needsReload(url)) {
+      if (!this.needsReload(url) && providerRequest.force !== true) {
         projects.push(...(ProjectRequestRepo.find(url)?.projects ?? []));
         continue;
       }

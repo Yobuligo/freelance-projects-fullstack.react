@@ -1,6 +1,6 @@
-import { useSettings } from "../../../hooks/useSettings";
-import { IProviderRequest } from "../../../model/IProviderRequest";
-import { ProviderType } from "../../../shared/types/ProviderType";
+import { useSettings } from "../../hooks/useSettings";
+import { IProviderRequest } from "../../model/IProviderRequest";
+import { ProviderType } from "../../shared/types/ProviderType";
 import { v4 as uuid } from "uuid";
 
 export const useSettingsSectionViewModel = () => {

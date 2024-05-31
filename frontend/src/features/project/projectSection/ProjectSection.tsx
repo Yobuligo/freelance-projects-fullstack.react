@@ -1,16 +1,14 @@
-import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
 import { ReactComponent as ReloadIcon } from "../../../assets/reload.svg";
+import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
 import { Button } from "../../../components/button/Button";
 import { useInitialize } from "../../../hooks/useInitialize";
-import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { CompletedSection } from "../../completedSection/CompletedSection";
-import { SettingsSection } from "../../settings/settingsSection/SettingsSection";
+import { SettingsSection } from "../../settings/SettingsSection";
 import { ProjectList } from "../projectList/ProjectList";
 import styles from "./ProjectSection.module.scss";
 import { useProjectSectionViewModel } from "./useProjectSectionViewModel";
 
 export const ProjectSection: React.FC = () => {
-  const { t } = useTranslation();
   const viewModel = useProjectSectionViewModel();
 
   useInitialize(viewModel.loadProjects);

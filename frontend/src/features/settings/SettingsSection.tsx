@@ -1,6 +1,6 @@
-import { Card } from "../../../components/card/Card";
-import { ProviderRequestInput } from "../../providerRequest/providerRequestInput/ProviderRequestInput";
-import { ProviderRequestList } from "../../providerRequest/providerRequestList/ProviderRequestList";
+import { Card } from "../../components/card/Card";
+import { ProviderRequestInput } from "../providerRequest/providerRequestInput/ProviderRequestInput";
+import { ProviderRequestList } from "../providerRequest/providerRequestList/ProviderRequestList";
 import styles from "./SettingsSection.module.scss";
 import { useSettingsSectionViewModel } from "./useSettingsSectionViewModel";
 

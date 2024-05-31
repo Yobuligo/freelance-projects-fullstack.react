@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ProjectApi } from "../../../api/ProjectApi";
 import { useProjectIdStorage } from "../../../hooks/useProjectIdStorage";
+import { useSettings } from "../../../hooks/useSettings";
 import { useUserConfig } from "../../../hooks/useUserConfig";
 import { IProject } from "../../../shared/model/IProject";
-import { useSettings } from "../../../hooks/useSettings";
 
 export const useProjectSectionViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,14 +13,14 @@ export const useProjectSectionViewModel = () => {
     userConfig.displaySettings
   );
   const projectIdStorage = useProjectIdStorage();
-  const [settings] = useSettings()
+  const [settings] = useSettings();
 
   const openProjects = projects.filter((project) => !project.completed);
   const completedProjects = projects.filter((project) => project.completed);
 
-  const loadProjects = async () => {
+  const loadProjects = async (force?: boolean) => {
     setIsLoading(true);
-    const projects = await ProjectApi.findAll(settings.providerRequests);
+    const projects = await ProjectApi.findAll(settings.providerRequests, force);
     projects.forEach((project) => {
       const index = projectIdStorage.checkedProjectIds.findIndex(
         (projectId) => projectId === project.id
@@ -50,7 +50,7 @@ export const useProjectSectionViewModel = () => {
     projectIdStorage.setUnchecked(project);
   };
 
-  const onReload = () => loadProjects();
+  const onReload = () => loadProjects(true);
 
   const onToggleDisplaySettings = () =>
     setDisplaySettings((previous) => {
