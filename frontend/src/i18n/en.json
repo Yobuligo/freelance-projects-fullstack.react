@@ -8,6 +8,11 @@
     "projectSection": {
         "captionReloadButton": "Reload"
     },
+    "providerRequestInput": {
+        "providerType": "Provider Type",
+        "providerUrl": "Provider Url",
+        "captionAdd": "Add"
+    },
     "providerRequestList": {
         "noProviderRequests": "No provider requests available."
     }
