@@ -1,19 +1,21 @@
+@import '../../../Variables.scss';
+
 .projectSection {
   display: flex;
   flex-direction: column;
 }
 
 .completedSection {
-  margin-top: 0.5rem;
+  margin-top: $negative-space;
 }
 
 .reloadButton {
   display: flex;
   flex-direction: row;
-  margin-bottom: 0.5rem;
+  margin-bottom: $negative-space;
   justify-content: space-between;
 }
 
 .settingsSection {
-  margin-bottom: 0.5rem;
+  margin-bottom: $negative-space;
 }
