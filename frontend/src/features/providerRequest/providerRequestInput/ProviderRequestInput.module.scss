@@ -13,10 +13,14 @@
   column-gap: $negative-space;
 }
 
-.iconEnabled{
+.providerUrlInput {
+  width: 20rem;
+}
+
+.iconEnabled {
   fill: $color-enabled;
 }
 
-.iconDisabled{
+.iconDisabled {
   fill: $color-disabled;
 }

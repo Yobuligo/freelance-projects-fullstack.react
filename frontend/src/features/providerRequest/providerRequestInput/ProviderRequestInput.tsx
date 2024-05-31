@@ -34,6 +34,7 @@ export const ProviderRequestInput: React.FC<IProviderRequestInputProps> = (
           {t(texts.providerRequestInput.providerUrl)}
         </label>
         <input
+          className={styles.providerUrlInput}
           id="providerUrl"
           onChange={viewModel.onChangeProviderUrl}
           type="text"
