@@ -2,11 +2,12 @@ import { Button } from "../../../components/button/Button";
 import { Select } from "../../../components/select/Select";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { IProviderRequestInputProps } from "./IProviderRequestInputProps";
 import styles from "./ProviderRequestInput.module.scss";
 import { useProviderRequestInputViewModel } from "./useProviderRequestInputViewModel";
 
-export const ProviderRequestInput: React.FC = () => {
-  const viewModel = useProviderRequestInputViewModel();
+export const ProviderRequestInput: React.FC<IProviderRequestInputProps> = (props) => {
+  const viewModel = useProviderRequestInputViewModel(props);
   const { t } = useTranslation();
 
   return (
@@ -40,6 +41,7 @@ export const ProviderRequestInput: React.FC = () => {
       <Button
         caption={t(texts.providerRequestInput.captionAdd)}
         disabled={!viewModel.isInputValid()}
+        onClick={viewModel.onAdd}
       />
     </form>
   );

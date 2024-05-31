@@ -7,7 +7,7 @@ export const ProviderRequestItem: React.FC<IProviderRequestItemProps> = (
   return (
     <div className={styles.providerRequestItem}>
       <div>{props.providerRequest.providerType}</div>
-      <div>{props.providerRequest.url}</div>
+      <div>{props.providerRequest.providerUrl}</div>
     </div>
   );
 };

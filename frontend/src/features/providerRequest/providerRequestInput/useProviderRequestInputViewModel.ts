@@ -1,8 +1,11 @@
 import { useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
 import { ProviderType } from "../../../shared/types/ProviderType";
+import { IProviderRequestInputProps } from "./IProviderRequestInputProps";
 
-export const useProviderRequestInputViewModel = () => {
+export const useProviderRequestInputViewModel = (
+  props: IProviderRequestInputProps
+) => {
   const [providerType, setProviderType] = useState(ProviderType.Freelance);
   const [providerUrl, setProviderUrl] = useState("");
 
@@ -18,6 +21,8 @@ export const useProviderRequestInputViewModel = () => {
   const isInputValid = () => {
     return providerType.length > 0 && providerUrl.length > 0 ? true : false;
   };
+
+  const onAdd = () => props.onAdd?.(providerType, providerUrl);
 
   const onChangeForm = (event: React.FormEvent<HTMLFormElement>) =>
     event.preventDefault();
@@ -37,6 +42,7 @@ export const useProviderRequestInputViewModel = () => {
 
   return {
     isInputValid,
+    onAdd,
     onChangeForm,
     onChangeProviderType,
     onChangeProviderUrl,
