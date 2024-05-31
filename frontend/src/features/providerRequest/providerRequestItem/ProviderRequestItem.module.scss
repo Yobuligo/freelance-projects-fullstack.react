@@ -1,4 +1,9 @@
 .providerRequestItem {
   display: flex;
   flex-direction: row;
+  column-gap: 1rem;
+}
+
+.providerType {
+  width: 10rem;
 }
