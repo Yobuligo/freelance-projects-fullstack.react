@@ -7,5 +7,8 @@
     },
     "projectSection": {
         "captionReloadButton": "Reload"
+    },
+    "providerRequestList": {
+        "noProviderRequests": "No provider requests available."
     }
 }
