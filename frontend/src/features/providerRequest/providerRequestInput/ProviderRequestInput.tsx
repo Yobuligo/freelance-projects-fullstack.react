@@ -1,44 +1,27 @@
-import { useState } from "react";
 import { Button } from "../../../components/button/Button";
-import { ISelectOption } from "../../../components/select/ISelectOption";
 import { Select } from "../../../components/select/Select";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
-import { ProviderType } from "../../../shared/types/ProviderType";
 import styles from "./ProviderRequestInput.module.scss";
+import { useProviderRequestInputViewModel } from "./useProviderRequestInputViewModel";
 
 export const ProviderRequestInput: React.FC = () => {
-  const [providerType, setProviderType] = useState(ProviderType.Freelance);
+  const viewModel = useProviderRequestInputViewModel();
   const { t } = useTranslation();
 
-  const onChangeForm = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
-
-  const selectOptions = (): ISelectOption[] => {
-    const selectOptions: ISelectOption[] = [];
-    for (const propName in ProviderType) {
-      const propValue: string = (ProviderType as any)[propName];
-      selectOptions.push({ key: propValue, text: propValue });
-    }
-    return selectOptions;
-  };
-
   return (
-    <form className={styles.providerRequestInput} onChange={onChangeForm}>
+    <form
+      className={styles.providerRequestInput}
+      onChange={viewModel.onChangeForm}
+    >
       <div className={styles.input}>
         <label htmlFor="providerType">
           {t(texts.providerRequestInput.providerType)}
         </label>
         <Select
-          onSelect={(selectOption) => {
-            setProviderType(selectOption.key as ProviderType);
-          }}
-          selected={{
-            key: providerType,
-            text: (ProviderType as any)[providerType],
-          }}
-          options={selectOptions()}
+          onSelect={viewModel.onChangeProviderType}
+          selected={viewModel.selectedProviderType}
+          options={viewModel.selectOptions}
         />
       </div>
 
@@ -46,10 +29,18 @@ export const ProviderRequestInput: React.FC = () => {
         <label htmlFor="providerUrl">
           {t(texts.providerRequestInput.providerUrl)}
         </label>
-        <input id="providerUrl" type="text" />
+        <input
+          id="providerUrl"
+          onChange={viewModel.onChangeProviderUrl}
+          type="text"
+          value={viewModel.providerUrl}
+        />
       </div>
 
-      <Button caption={t(texts.providerRequestInput.captionAdd)} />
+      <Button
+        caption={t(texts.providerRequestInput.captionAdd)}
+        disabled={!viewModel.isInputValid()}
+      />
     </form>
   );
 };
