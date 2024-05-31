@@ -26,9 +26,7 @@ export abstract class RESTApi {
       });
       if (response.ok) {
         const data = await response.json();
-        setTimeout(() => {
-          resolve(data);
-        }, 2000);
+        resolve(data);
       } else {
         reject(`Error while fetching data from '${url}'`);
       }

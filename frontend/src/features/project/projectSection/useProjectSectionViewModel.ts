@@ -3,6 +3,7 @@ import { ProjectApi } from "../../../api/ProjectApi";
 import { useProjectIdStorage } from "../../../hooks/useProjectIdStorage";
 import { useUserConfig } from "../../../hooks/useUserConfig";
 import { IProject } from "../../../shared/model/IProject";
+import { useSettings } from "../../../hooks/useSettings";
 
 export const useProjectSectionViewModel = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,13 +13,14 @@ export const useProjectSectionViewModel = () => {
     userConfig.displaySettings
   );
   const projectIdStorage = useProjectIdStorage();
+  const [settings] = useSettings()
 
   const openProjects = projects.filter((project) => !project.completed);
   const completedProjects = projects.filter((project) => project.completed);
 
   const loadProjects = async () => {
     setIsLoading(true);
-    const projects = await ProjectApi.findAll();
+    const projects = await ProjectApi.findAll(settings.providerRequests);
     projects.forEach((project) => {
       const index = projectIdStorage.checkedProjectIds.findIndex(
         (projectId) => projectId === project.id
