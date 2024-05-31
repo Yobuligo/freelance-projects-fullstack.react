@@ -22,7 +22,10 @@ export const useProviderRequestInputViewModel = (
     return providerType.length > 0 && providerUrl.length > 0 ? true : false;
   };
 
-  const onAdd = () => props.onAdd?.(providerType, providerUrl);
+  const onAdd = () => {
+    props.onAdd?.(providerType, providerUrl);
+    setProviderUrl("");
+  };
 
   const onChangeForm = (event: React.FormEvent<HTMLFormElement>) =>
     event.preventDefault();

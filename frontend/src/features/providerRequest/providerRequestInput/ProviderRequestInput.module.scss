@@ -12,3 +12,11 @@
   flex-direction: row;
   column-gap: $negative-space;
 }
+
+.iconEnabled{
+  fill: $color-enabled;
+}
+
+.iconDisabled{
+  fill: $color-disabled;
+}

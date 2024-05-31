@@ -1,7 +1,7 @@
 import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
+import { ReactComponent as ReloadIcon } from "../../../assets/reload.svg";
 import { Button } from "../../../components/button/Button";
 import { useInitialize } from "../../../hooks/useInitialize";
-import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { CompletedSection } from "../../completedSection/CompletedSection";
 import { SettingsSection } from "../../settings/settingsSection/SettingsSection";
@@ -18,10 +18,9 @@ export const ProjectSection: React.FC = () => {
   return (
     <div className={styles.projectSection}>
       <div className={styles.reloadButton}>
-        <Button
-          caption={t(texts.projectSection.captionReloadButton)}
-          onClick={viewModel.onReload}
-        />
+        <Button onClick={viewModel.onReload}>
+          <ReloadIcon />
+        </Button>
         <Button onClick={viewModel.onToggleDisplaySettings}>
           <SettingsIcon />
         </Button>

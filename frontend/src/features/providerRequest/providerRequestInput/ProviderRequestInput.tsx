@@ -1,3 +1,4 @@
+import { ReactComponent as AddIcon } from "../../../assets/add.svg";
 import { Button } from "../../../components/button/Button";
 import { Select } from "../../../components/select/Select";
 import { texts } from "../../../hooks/useTranslation/texts";
@@ -6,7 +7,9 @@ import { IProviderRequestInputProps } from "./IProviderRequestInputProps";
 import styles from "./ProviderRequestInput.module.scss";
 import { useProviderRequestInputViewModel } from "./useProviderRequestInputViewModel";
 
-export const ProviderRequestInput: React.FC<IProviderRequestInputProps> = (props) => {
+export const ProviderRequestInput: React.FC<IProviderRequestInputProps> = (
+  props
+) => {
   const viewModel = useProviderRequestInputViewModel(props);
   const { t } = useTranslation();
 
@@ -38,11 +41,13 @@ export const ProviderRequestInput: React.FC<IProviderRequestInputProps> = (props
         />
       </div>
 
-      <Button
-        caption={t(texts.providerRequestInput.captionAdd)}
-        disabled={!viewModel.isInputValid()}
-        onClick={viewModel.onAdd}
-      />
+      <Button disabled={!viewModel.isInputValid()} onClick={viewModel.onAdd}>
+        <AddIcon
+          className={
+            viewModel.isInputValid() ? styles.iconEnabled : styles.iconDisabled
+          }
+        />
+      </Button>
     </form>
   );
 };
