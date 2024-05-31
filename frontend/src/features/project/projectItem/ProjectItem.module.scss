@@ -1,3 +1,5 @@
+@import "../../../Mixins.scss";
+
 .projectItem {
   display: flex;
   flex-direction: row;
@@ -13,9 +15,10 @@
   flex-direction: row;
   margin: 1rem;
   align-items: center;
-  :hover{
-    fill: lightgray;
-  }
+}
+
+.icon {
+  @include hover;
 }
 
 .company {

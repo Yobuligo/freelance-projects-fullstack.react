@@ -27,9 +27,9 @@ export const CompletedSection: React.FC<ICompletedSectionProps> = (props) => {
     <>
       <Card className={styles.collapseIcon}>
         {collapsed ? (
-          <ExpandedIcon onClick={onToggleCollapsed} />
+          <ExpandedIcon className={styles.icon} onClick={onToggleCollapsed} />
         ) : (
-          <CollapsedIcon onClick={onToggleCollapsed} />
+          <CollapsedIcon className={styles.icon} onClick={onToggleCollapsed} />
         )}
         {t(texts.completeCard.completed, {
           numberProjects: props.projects.length.toString(),

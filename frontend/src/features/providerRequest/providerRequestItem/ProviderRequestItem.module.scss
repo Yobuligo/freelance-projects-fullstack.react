@@ -1,3 +1,5 @@
+@import "../../../Mixins.scss";
+
 .providerRequestItem {
   display: flex;
   flex-direction: row;
@@ -6,4 +8,8 @@
 
 .providerType {
   width: 10rem;
+}
+
+.deleteIcon {
+  @include hover;
 }

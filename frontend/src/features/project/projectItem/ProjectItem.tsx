@@ -24,9 +24,9 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
     <Card className={styles.projectItem}>
       <div className={styles.projectItemIcon}>
         {checked ? (
-          <CheckedIcon onClick={onToggleChecked} />
+          <CheckedIcon className={styles.icon} onClick={onToggleChecked} />
         ) : (
-          <UncheckedIcon onClick={onToggleChecked} />
+          <UncheckedIcon className={styles.icon} onClick={onToggleChecked} />
         )}
       </div>
       <div className={styles.projectItemDetails}>

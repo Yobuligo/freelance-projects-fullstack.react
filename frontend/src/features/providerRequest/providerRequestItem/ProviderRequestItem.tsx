@@ -9,7 +9,7 @@ export const ProviderRequestItem: React.FC<IProviderRequestItemProps> = (
 
   return (
     <div className={styles.providerRequestItem}>
-      <DeleteIcon onClick={onDelete} />
+      <DeleteIcon className={styles.deleteIcon} onClick={onDelete} />
       <div className={styles.providerType}>
         {props.providerRequest.providerType}
       </div>

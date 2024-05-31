@@ -1,7 +1,12 @@
 @import "../../Variables.scss";
+@import "../../Mixins.scss";
 
 .collapseIcon {
   display: flex;
   flex-direction: row;
   margin-bottom: $negative-space;
+}
+
+.icon {
+  @include hover;
 }

@@ -10,7 +10,10 @@ export const ProviderRequestList: React.FC<IProviderRequestListProps> = (
   const { t } = useTranslation();
   const items = props.providerRequests.map((providerRequest, index) => (
     <div key={index}>
-      <ProviderRequestItem providerRequest={providerRequest} />
+      <ProviderRequestItem
+        providerRequest={providerRequest}
+        onDelete={props.onDelete}
+      />
     </div>
   ));
 
@@ -21,7 +24,7 @@ export const ProviderRequestList: React.FC<IProviderRequestListProps> = (
           {t(texts.providerRequestList.noProviderRequests)}
         </h3>
       ) : (
-        items
+        <div className={styles.providerRequestList}>{items}</div>
       )}
     </>
   );

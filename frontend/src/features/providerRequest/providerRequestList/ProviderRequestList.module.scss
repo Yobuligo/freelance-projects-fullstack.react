@@ -1,5 +1,11 @@
 @import "../../../Variables.scss";
 
+.providerRequestList {
+  display: flex;
+  flex-direction: column;
+  row-gap: $negative-space;
+}
+
 .noProviderRequestsMessage {
   margin: $list-no-entries-message;
 }
