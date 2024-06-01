@@ -11,6 +11,11 @@
   width: 10rem;
 }
 
+.providerUrl {
+  width: 20rem;
+  font-size: 1rem
+}
+
 .deleteIcon {
   @include hover;
 }
