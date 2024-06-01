@@ -30,6 +30,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
         )}
       </div>
       <div className={styles.projectItemDetails}>
+        <div>{props.project.provider}</div>
         <div className={styles.company}>
           {props.project.company.length > 0
             ? props.project.company
