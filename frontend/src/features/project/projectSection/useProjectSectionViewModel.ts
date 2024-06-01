@@ -36,7 +36,10 @@ export const useProjectSectionViewModel = () => {
 
   const onCheckAll = () =>
     setProjects((projects) => {
-      projects.forEach((project) => (project.completed = true));
+      projects.forEach((project) => {
+        project.completed = true;
+        projectIdStorage.setChecked(project);
+      });
       return [...projects];
     });
 
