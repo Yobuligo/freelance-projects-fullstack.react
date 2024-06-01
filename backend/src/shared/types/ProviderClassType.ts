@@ -1,3 +1,3 @@
-import { IProvider } from "../core/IProvider";
+import { IProvider } from "./IProvider";
 
 export type ProviderClassType = new () => IProvider;

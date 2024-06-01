@@ -1,5 +1,5 @@
 import { AppConfig } from "../../AppConfig";
-import { IProvider } from "../../providers/core/IProvider";
+import { IProvider } from "../../shared/types/IProvider";
 import { ProviderFactory } from "../../providers/core/ProviderFactory";
 import { ProjectRequestRepo } from "../../repository/ProjectRequestRepo";
 import { IProject } from "../../shared/model/IProject";

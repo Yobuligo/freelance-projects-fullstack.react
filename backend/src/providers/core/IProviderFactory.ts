@@ -1,5 +1,5 @@
 import { ProviderType } from "../../shared/types/ProviderType";
-import { IProvider } from "./IProvider";
+import { IProvider } from "../../shared/types/IProvider";
 
 /**
  * The ProviderFactory creates {@link IProvider}.

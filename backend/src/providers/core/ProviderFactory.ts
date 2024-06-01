@@ -1,22 +1,14 @@
-import { Provider } from "../../decorators/Provider";
-import { DecoratorInfo } from "../../services/decoratorInfo/DecoratorInfo";
 import { NotSupportedError } from "../../shared/errors/NotSupportedError";
 import { ProviderType } from "../../shared/types/ProviderType";
-import { ProviderRegistry } from "../ProviderRegistry";
-import { IProvider } from "./IProvider";
+import { IProvider } from "../../shared/types/IProvider";
 import { IProviderFactory } from "./IProviderFactory";
+import { ProviderRegistryInfo } from "./ProviderRegistryInfo";
 
 class ProviderFactoryDefault implements IProviderFactory {
   createByType(providerType: ProviderType): IProvider {
-    for (let i = 0; i < ProviderRegistry.length; i++) {
-      const providerConstructor = ProviderRegistry[i];
-      const registryProviderType = DecoratorInfo.find(
-        providerConstructor,
-        Provider
-      );
-      if (registryProviderType === providerType) {
-        return new providerConstructor();
-      }
+    const providerInfo = ProviderRegistryInfo.findByType(providerType);
+    if (providerInfo) {
+      return new providerInfo.classType();
     }
 
     throw new NotSupportedError(

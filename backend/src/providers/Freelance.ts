@@ -8,9 +8,9 @@ import { IProject } from "../shared/model/IProject";
 import { ProviderType } from "../shared/types/ProviderType";
 import { error } from "../shared/utils/error";
 import { toDate } from "../utils/toDate";
-import { IProvider } from "./core/IProvider";
+import { IProvider } from "../shared/types/IProvider";
 
-@Provider(ProviderType.Freelance)
+@Provider(ProviderType.Freelance, "freelance.de")
 export class Freelance implements IProvider {
   request(url: string): Promise<IProject[]> {
     return new Promise(async (resolve, reject) => {
