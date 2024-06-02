@@ -12,11 +12,11 @@ export class ProjectCollector implements IProjectCollector {
     return new Promise(async (resolve, reject) => {
       const projects: IProject[] = [];
 
-      for (let i = 0; i < providerRequests.length; i++) {
-        const providerRequest = providerRequests[i];
-        const providerProjects = await this.requestProjects(providerRequest);
-        projects.push(...providerProjects);
-      }
+      // for (let i = 0; i < providerRequests.length; i++) {
+      //   const providerRequest = providerRequests[i];
+      //   const providerProjects = await this.requestProjects(providerRequest);
+      //   projects.push(...providerProjects);
+      // }
 
       resolve(projects);
     });

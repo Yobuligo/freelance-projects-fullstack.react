@@ -1,11 +1,13 @@
 import { useMemo, useState } from "react";
 import { ISelectOption } from "../../../components/select/ISelectOption";
+import { useProviderDetails } from "../../../hooks/useProviderDetails";
 import { ProviderType } from "../../../shared/types/ProviderType";
 import { IProviderRequestInputProps } from "./IProviderRequestInputProps";
 
 export const useProviderRequestInputViewModel = (
   props: IProviderRequestInputProps
 ) => {
+  const [providerDetails] = useProviderDetails();
   const [providerType, setProviderType] = useState(ProviderType.Freelance);
   const [providerUrl, setProviderUrl] = useState("");
 
@@ -13,10 +15,16 @@ export const useProviderRequestInputViewModel = (
     const selectOptions: ISelectOption[] = [];
     for (const propName in ProviderType) {
       const propValue: string = (ProviderType as any)[propName];
-      selectOptions.push({ key: propValue, text: propValue });
+      const providerDetail = providerDetails.find(
+        (item) => item.type === propValue
+      );
+      selectOptions.push({
+        key: propValue,
+        text: providerDetail?.title ?? propValue,
+      });
     }
     return selectOptions;
-  }, []);
+  }, [providerDetails]);
 
   const isInputValid = () => {
     return providerType.length > 0 && providerUrl.length > 0 ? true : false;

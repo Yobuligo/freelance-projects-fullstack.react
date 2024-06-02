@@ -13,7 +13,7 @@ export class ProviderDetailsController {
   }
 
   private findAll() {
-    this.router.get(ProviderDetailsMeta.path, (req, res) => {
+    this.router.get(ProviderDetailsMeta.path, (_, res) => {
       const providerDetails: IProviderDetails[] = [];
       const providerMetas = ProviderRegistryInfo.findAll();
       providerMetas.forEach((providerMeta) => {
