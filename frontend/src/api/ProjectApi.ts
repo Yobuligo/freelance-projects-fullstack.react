@@ -9,7 +9,7 @@ class ProjectApiDefault extends RESTApi {
     force?: boolean
   ): Promise<IProject[]> {
     const requests = this.convertToBackendFormat(providerRequests, force);
-    return this.post(`http://localhost:5000/api${ProjectMeta.path}`, requests);
+    return this.post(`${this.host}${ProjectMeta.path}`, requests);
   }
 
   private convertToBackendFormat(

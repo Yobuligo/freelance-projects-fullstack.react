@@ -1,3 +1,5 @@
+import { AppConfig } from "../AppConfig";
+
 export abstract class RESTApi {
   protected get<T>(url: string): Promise<T> {
     return new Promise(async (resolve, reject) => {
@@ -31,5 +33,9 @@ export abstract class RESTApi {
         reject(`Error while fetching data from '${url}'`);
       }
     });
+  }
+
+  protected get host(): string {
+    return AppConfig.HOST;
   }
 }
