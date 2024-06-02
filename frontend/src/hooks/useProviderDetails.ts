@@ -1,9 +1,18 @@
 import { useContext } from "react";
 import { ProviderDetailsContext } from "../context/ProviderDetailsContext";
-import { IProviderDetails } from "../shared/model/IProviderDetails";
-import { Value } from "../types/Value";
+import { ProviderType } from "../shared/types/ProviderType";
 
-export const useProviderDetails = (): Value<IProviderDetails[]> => {
+export const useProviderDetails = (): {
+  findByType: (type: ProviderType) => string;
+} => {
   const context = useContext(ProviderDetailsContext);
-  return [context.providerDetails[0], context.providerDetails[1]];
+
+  const findByType = (type: ProviderType): string => {
+    const providerDetail = context.providerDetails[0].find(
+      (item) => item.type === type
+    );
+    return providerDetail?.title ?? type;
+  };
+
+  return { findByType };
 };

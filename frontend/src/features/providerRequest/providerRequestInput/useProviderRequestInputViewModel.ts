@@ -7,7 +7,7 @@ import { IProviderRequestInputProps } from "./IProviderRequestInputProps";
 export const useProviderRequestInputViewModel = (
   props: IProviderRequestInputProps
 ) => {
-  const [providerDetails] = useProviderDetails();
+  const providerDetails = useProviderDetails();
   const [providerType, setProviderType] = useState(ProviderType.Freelance);
   const [providerUrl, setProviderUrl] = useState("");
 
@@ -15,12 +15,10 @@ export const useProviderRequestInputViewModel = (
     const selectOptions: ISelectOption[] = [];
     for (const propName in ProviderType) {
       const propValue: string = (ProviderType as any)[propName];
-      const providerDetail = providerDetails.find(
-        (item) => item.type === propValue
-      );
+      const title = providerDetails.findByType(propValue as ProviderType);
       selectOptions.push({
         key: propValue,
-        text: providerDetail?.title ?? propValue,
+        text: title,
       });
     }
     return selectOptions;
