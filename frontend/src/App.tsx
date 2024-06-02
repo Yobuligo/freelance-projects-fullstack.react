@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./App.module.scss";
 import { AppContext } from "./context/AppContext";
 import { ProjectSection } from "./features/project/projectSection/ProjectSection";
+import { ProviderDetailsContextProvider } from "./features/providerDetailsContextProvider/ProviderDetailsContextProvider";
 import { useSettingsStorage } from "./hooks/useSettingsStorage";
 import { useUserConfigStorage } from "./hooks/useUserConfigStorage";
 
@@ -15,7 +16,9 @@ export const App: React.FC = () => {
       }}
     >
       <div className={styles.app}>
-        <ProjectSection />
+        <ProviderDetailsContextProvider>
+          <ProjectSection />
+        </ProviderDetailsContextProvider>
       </div>
     </AppContext.Provider>
   );
