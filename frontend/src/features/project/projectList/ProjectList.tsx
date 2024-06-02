@@ -1,5 +1,6 @@
 import { Spinner } from "../../../components/spinner/Spinner";
 import { SpinnerSize } from "../../../components/spinner/SpinnerSize";
+import { useSettings } from "../../../hooks/useSettings";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { ProjectItem } from "../projectItem/ProjectItem";
@@ -8,6 +9,7 @@ import { IProjectListProps } from "./ProjectListProps";
 
 export const ProjectList: React.FC<IProjectListProps> = (props) => {
   const { t } = useTranslation();
+  const [settings] = useSettings();
 
   const items = props.projects.map((project) => (
     <ProjectItem
@@ -28,7 +30,11 @@ export const ProjectList: React.FC<IProjectListProps> = (props) => {
         <>
           {items.length === 0 ? (
             <div className={styles.message}>
-              <h3>{t(texts.projectList.noProjects)}</h3>
+              {settings.providerRequests.length === 0 ? (
+                <h3>{t(texts.projectList.noProjectsExtended)}</h3>
+              ) : (
+                <h3>{t(texts.projectList.noProjects)}</h3>
+              )}
             </div>
           ) : (
             items
