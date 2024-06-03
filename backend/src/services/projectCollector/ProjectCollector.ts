@@ -1,5 +1,5 @@
 import { AppConfig } from "../../AppConfig";
-import { IProvider } from "../../shared/types/IProvider";
+import { IProvider } from "../../providers/core/IProvider";
 import { ProviderFactory } from "../../providers/core/ProviderFactory";
 import { ProjectRequestRepo } from "../../repository/ProjectRequestRepo";
 import { IProject } from "../../shared/model/IProject";
@@ -12,11 +12,11 @@ export class ProjectCollector implements IProjectCollector {
     return new Promise(async (resolve, reject) => {
       const projects: IProject[] = [];
 
-      // for (let i = 0; i < providerRequests.length; i++) {
-      //   const providerRequest = providerRequests[i];
-      //   const providerProjects = await this.requestProjects(providerRequest);
-      //   projects.push(...providerProjects);
-      // }
+      for (let i = 0; i < providerRequests.length; i++) {
+        const providerRequest = providerRequests[i];
+        const providerProjects = await this.requestProjects(providerRequest);
+        projects.push(...providerProjects);
+      }
 
       resolve(projects);
     });

@@ -1,5 +1,5 @@
 import { Freelance } from "./Freelance";
 import { FreelancerMap } from "./FreelancerMap";
-import { ProviderClassType } from "../shared/types/ProviderClassType";
+import { ProviderClassType } from "./core/ProviderClassType";
 
 export const ProviderRegistry: ProviderClassType[] = [FreelancerMap, Freelance];

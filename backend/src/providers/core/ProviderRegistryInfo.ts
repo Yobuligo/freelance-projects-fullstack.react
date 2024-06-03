@@ -1,6 +1,6 @@
 import { Provider } from "../../decorators/Provider";
 import { DecoratorInfo } from "../../services/decoratorInfo/DecoratorInfo";
-import { IProviderMeta } from "../../shared/model/IProviderMeta";
+import { IProviderMeta } from "./IProviderMeta";
 import { ProviderType } from "../../shared/types/ProviderType";
 import { ProviderRegistry } from "../ProviderRegistry";
 

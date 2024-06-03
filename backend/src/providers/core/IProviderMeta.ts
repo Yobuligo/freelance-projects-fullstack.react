@@ -1,6 +1,6 @@
-import { ProviderClassType } from "../types/ProviderClassType";
-import { IHavePath } from "../types/IHavePath";
-import { ProviderType } from "../types/ProviderType";
+import { ProviderClassType } from "./ProviderClassType";
+import { IHavePath } from "../../shared/types/IHavePath";
+import { ProviderType } from "../../shared/types/ProviderType";
 
 export interface IProviderMeta {
   classType: ProviderClassType;

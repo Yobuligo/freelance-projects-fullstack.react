@@ -1,5 +1,5 @@
-import { IProviderMeta } from "../shared/model/IProviderMeta";
-import { ProviderClassType } from "../shared/types/ProviderClassType";
+import { IProviderMeta } from "../providers/core/IProviderMeta";
+import { ProviderClassType } from "../providers/core/ProviderClassType";
 import { DecoratorInfo } from "../services/decoratorInfo/DecoratorInfo";
 import { ProviderType } from "../shared/types/ProviderType";
 

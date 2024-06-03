@@ -8,7 +8,7 @@ import { IProject } from "../shared/model/IProject";
 import { ProviderType } from "../shared/types/ProviderType";
 import { error } from "../shared/utils/error";
 import { toDate } from "../utils/toDate";
-import { IProvider } from "../shared/types/IProvider";
+import { IProvider } from "./core/IProvider";
 
 @Provider(ProviderType.Freelance, "freelance.de")
 export class Freelance implements IProvider {

@@ -6,7 +6,7 @@ import { Log } from "../services/logging/Log";
 import { IProject } from "../shared/model/IProject";
 import { ProviderType } from "../shared/types/ProviderType";
 import { toDate } from "../utils/toDate";
-import { IProvider } from "../shared/types/IProvider";
+import { IProvider } from "./core/IProvider";
 
 @Provider(ProviderType.FreelancerMap, "freelancermap.de")
 export class FreelancerMap implements IProvider {

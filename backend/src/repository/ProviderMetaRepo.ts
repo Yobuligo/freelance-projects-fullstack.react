@@ -1,4 +1,4 @@
-import { IProviderMeta } from "../shared/model/IProviderMeta";
+import { IProviderMeta } from "../providers/core/IProviderMeta";
 
 class ProviderMetaRepoDefault{
     findAll(): IProviderMeta[]{

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ProviderRegistryInfo } from "../providers/core/ProviderRegistryInfo";
-import { ProviderMetaMeta } from "../shared/model/IProviderMeta";
+import { ProviderMetaMeta } from "../providers/core/IProviderMeta";
 
 export class ProviderMetaController {
   readonly router = Router();

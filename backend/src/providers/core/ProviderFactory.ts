@@ -1,6 +1,6 @@
 import { NotSupportedError } from "../../shared/errors/NotSupportedError";
 import { ProviderType } from "../../shared/types/ProviderType";
-import { IProvider } from "../../shared/types/IProvider";
+import { IProvider } from "./IProvider";
 import { IProviderFactory } from "./IProviderFactory";
 import { ProviderRegistryInfo } from "./ProviderRegistryInfo";
 
