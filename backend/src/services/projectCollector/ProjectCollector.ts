@@ -18,8 +18,22 @@ export class ProjectCollector implements IProjectCollector {
         projects.push(...providerProjects);
       }
 
-      resolve(projects);
+      const harmonizedProjects = this.removeDuplicates(projects);
+      resolve(harmonizedProjects);
     });
+  }
+
+  private removeDuplicates(projects: IProject[]): IProject[] {
+    const harmonizedProjects: IProject[] = [];
+    projects.forEach((project) => {
+      const index = harmonizedProjects.findIndex(
+        (item) => item.id === project.id
+      );
+      if (index === -1) {
+        harmonizedProjects.push(project);
+      }
+    });
+    return harmonizedProjects;
   }
 
   private async requestProjects(
