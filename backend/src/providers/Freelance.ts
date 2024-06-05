@@ -143,7 +143,18 @@ export class Freelance implements IProvider {
     return this.parseDate(createDate);
   }
 
+  private removeHighlightArgument(url: string): string {
+    const index = url.indexOf("/highlight=");
+    if (index === -1) {
+      return url;
+    }
+
+    const substring = url.substring(0, index);
+    return substring;
+  }
+
   private createUrl(url: string): string {
+    url = this.removeHighlightArgument(url);
     const host = "https://www.freelance.de";
     return `${host}${url}`;
   }
