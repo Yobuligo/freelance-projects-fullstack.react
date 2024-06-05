@@ -1,12 +1,11 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { ReactComponent as CheckedIcon } from "../../../assets/checked.svg";
 import { ReactComponent as UncheckedIcon } from "../../../assets/unchecked.svg";
 import { Card } from "../../../components/card/Card";
-import { ProviderDetailsContext } from "../../../context/ProviderDetailsContext";
+import { useProviderDetails } from "../../../hooks/useProviderDetails";
 import { renderDate } from "../../../shared/utils/renderDate";
 import { IProjectItemProps } from "./IProjectItemProps";
 import styles from "./ProjectItem.module.scss";
-import { useProviderDetails } from "../../../hooks/useProviderDetails";
 
 export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
   const [checked, setChecked] = useState(props.project.completed);
