@@ -22,6 +22,7 @@ export class ProviderDetailsController {
           type: providerMeta.type,
         });
       });
+            
       res.status(200).send(providerDetails);
     });
   }

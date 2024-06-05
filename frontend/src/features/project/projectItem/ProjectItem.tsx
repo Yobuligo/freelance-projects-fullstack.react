@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ReactComponent as CheckedIcon } from "../../../assets/checked.svg";
 import { ReactComponent as UncheckedIcon } from "../../../assets/unchecked.svg";
 import { Card } from "../../../components/card/Card";
+import { ProviderDetailsContext } from "../../../context/ProviderDetailsContext";
 import { renderDate } from "../../../shared/utils/renderDate";
 import { IProjectItemProps } from "./IProjectItemProps";
 import styles from "./ProjectItem.module.scss";
+import { useProviderDetails } from "../../../hooks/useProviderDetails";
 
 export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
   const [checked, setChecked] = useState(props.project.completed);
+  const providerDetails = useProviderDetails();
 
   const onToggleChecked = () =>
     setChecked((previous) => {
@@ -30,7 +33,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
         )}
       </div>
       <div className={styles.projectItemDetails}>
-        <div>{props.project.provider}</div>
+        <div>{providerDetails.findByType(props.project.provider)}</div>
         <div className={styles.company}>
           {props.project.company.length > 0
             ? props.project.company

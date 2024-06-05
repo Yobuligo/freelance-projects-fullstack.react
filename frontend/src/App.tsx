@@ -15,11 +15,11 @@ export const App: React.FC = () => {
         userConfig: useUserConfigStorage(),
       }}
     >
-      <div className={styles.app}>
-        <ProviderDetailsContextProvider>
+      <ProviderDetailsContextProvider>
+        <div className={styles.app}>
           <ProjectSection />
-        </ProviderDetailsContextProvider>
-      </div>
+        </div>
+      </ProviderDetailsContextProvider>
     </AppContext.Provider>
   );
 };

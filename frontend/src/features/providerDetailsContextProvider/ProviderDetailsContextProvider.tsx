@@ -9,7 +9,7 @@ import { IProviderDetailsContextProvider } from "./IProviderDetailsContextProvid
 export const ProviderDetailsContextProvider: React.FC<
   IProviderDetailsContextProvider
 > = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [providerDetails, setProviderDetails] = useState<IProviderDetails[]>(
     []
   );
