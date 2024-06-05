@@ -9,7 +9,11 @@ export const useProjectIdStorage = () => {
 
   const setChecked = (project: IProject) =>
     setCheckedProjectIds((previous) => {
-      previous.push(project.id);
+      // only add project, if is is not already marked as checked
+      const index = previous.findIndex((projectId) => projectId === project.id);
+      if (index === -1) {
+        previous.push(project.id);
+      }
       return [...previous];
     });
 
