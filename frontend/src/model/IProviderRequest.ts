@@ -4,4 +4,5 @@ export interface IProviderRequest {
   id: string;
   providerType: ProviderType;
   providerUrl: string;
+  requestTitle: string;
 }

@@ -1,20 +1,22 @@
+import { v4 as uuid } from "uuid";
 import { useSettings } from "../../hooks/useSettings";
 import { IProviderRequest } from "../../model/IProviderRequest";
 import { ProviderType } from "../../shared/types/ProviderType";
-import { v4 as uuid } from "uuid";
 
 export const useSettingsSectionViewModel = () => {
   const [settings, setSettings] = useSettings();
 
   const onAddProviderRequest = (
     providerType: ProviderType,
-    providerUrl: string
+    providerUrl: string,
+    requestTitle: string
   ) => {
     setSettings((previous) => {
       previous.providerRequests.push({
         id: uuid(),
-        providerType: providerType,
-        providerUrl: providerUrl,
+        providerType,
+        providerUrl,
+        requestTitle,
       });
       return { ...previous };
     });

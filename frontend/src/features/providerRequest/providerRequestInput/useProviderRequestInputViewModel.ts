@@ -34,7 +34,7 @@ export const useProviderRequestInputViewModel = (
   };
 
   const onAdd = () => {
-    props.onAdd?.(providerType, providerUrl);
+    props.onAdd?.(providerType, providerUrl, requestTitle);
     setProviderUrl("");
     setRequestTitle("");
   };

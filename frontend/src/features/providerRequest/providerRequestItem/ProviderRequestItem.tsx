@@ -23,6 +23,12 @@ export const ProviderRequestItem: React.FC<IProviderRequestItemProps> = (
         type="text"
         value={props.providerRequest.providerUrl}
       />
+      <input
+        className={styles.providerUrl}
+        disabled={true}
+        type="text"
+        value={props.providerRequest.requestTitle ?? ""}
+      />
     </div>
   );
 };
