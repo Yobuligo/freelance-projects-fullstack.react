@@ -45,11 +45,10 @@ export const useProviderRequestInputViewModel = (
   const onChangeProviderType = (selectOption: ISelectOption) =>
     setProviderType(selectOption.key as ProviderType);
 
-  const onChangeProviderUrl = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setProviderUrl(event.target.value);
+  const onChangeProviderUrl = (providerUrl: string) =>
+    setProviderUrl(providerUrl);
 
-  const onChangeRequestTitle = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setRequestTitle(event.target.value);
+  const onChangeRequestTitle = (title: string) => setRequestTitle(title);
 
   const selectedProviderType = {
     key: providerType,
