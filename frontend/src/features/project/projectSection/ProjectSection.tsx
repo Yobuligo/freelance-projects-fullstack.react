@@ -2,6 +2,7 @@ import { ReactComponent as CheckAllIcon } from "../../../assets/check-all.svg";
 import { ReactComponent as ReloadIcon } from "../../../assets/reload.svg";
 import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
 import { Button } from "../../../components/button/Button";
+import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { CompletedSection } from "../../completedSection/CompletedSection";
 import { SettingsSection } from "../../settings/SettingsSection";
@@ -16,19 +17,20 @@ export const ProjectSection: React.FC = () => {
 
   return (
     <div className={styles.projectSection}>
-      <div className={styles.reloadButton}>
-        <div className={styles.leftButtons}>
-          <Button onClick={viewModel.onReload}>
-            <ReloadIcon />
+      <Toolbar
+        rightChildren={
+          <Button onClick={viewModel.onToggleDisplaySettings}>
+            <SettingsIcon />
           </Button>
-          <Button onClick={viewModel.onCheckAll}>
-            <CheckAllIcon />
-          </Button>
-        </div>
-        <Button onClick={viewModel.onToggleDisplaySettings}>
-          <SettingsIcon />
+        }
+      >
+        <Button onClick={viewModel.onReload}>
+          <ReloadIcon />
         </Button>
-      </div>
+        <Button onClick={viewModel.onCheckAll}>
+          <CheckAllIcon />
+        </Button>
+      </Toolbar>
 
       <>
         {viewModel.displaySettings && (
