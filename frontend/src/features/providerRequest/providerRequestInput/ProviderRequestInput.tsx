@@ -1,7 +1,7 @@
 import { ReactComponent as AddIcon } from "../../../assets/add.svg";
 import { Button } from "../../../components/button/Button";
 import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
-import { Select } from "../../../components/select/Select";
+import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { IProviderRequestInputProps } from "./IProviderRequestInputProps";
@@ -19,27 +19,23 @@ export const ProviderRequestInput: React.FC<IProviderRequestInputProps> = (
       className={styles.providerRequestInput}
       onChange={viewModel.onChangeForm}
     >
-      <div className={styles.input}>
-        <label htmlFor="providerType">
-          {t(texts.providerRequestInput.providerType)}
-        </label>
-        <Select
-          onSelect={viewModel.onChangeProviderType}
-          selected={viewModel.selectedProviderType}
-          options={viewModel.selectOptions}
-        />
-      </div>
+      <LabeledSelect
+        label={t(texts.providerRequestInput.providerType)}
+        onSelect={viewModel.onChangeProviderType}
+        options={viewModel.selectOptions}
+        selected={viewModel.selectedProviderType}
+      />
 
       <LabeledInput
         classNameInput={styles.providerUrlInput}
-        initialValue={viewModel.providerUrl}
+        value={viewModel.providerUrl}
         label={t(texts.providerRequestInput.providerUrl)}
         onChange={viewModel.onChangeProviderUrl}
       />
 
       <LabeledInput
         classNameInput={styles.requestTitleInput}
-        initialValue={viewModel.requestTitle}
+        value={viewModel.requestTitle}
         label={t(texts.providerRequestInput.requestTitle)}
         onChange={viewModel.onChangeRequestTitle}
       />
