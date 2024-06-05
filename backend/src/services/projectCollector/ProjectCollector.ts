@@ -5,6 +5,7 @@ import { ProjectRequestRepo } from "../../repository/ProjectRequestRepo";
 import { IProject } from "../../shared/model/IProject";
 import { IProviderRequests } from "../../shared/model/IProviderRequests";
 import { ProviderType } from "../../shared/types/ProviderType";
+import { wait } from "../../utils/wait";
 import { IProjectCollector } from "./IProjectCollector";
 
 export class ProjectCollector implements IProjectCollector {
@@ -42,13 +43,16 @@ export class ProjectCollector implements IProjectCollector {
     const projects: IProject[] = [];
     const provider = this.createProvider(providerRequest);
 
-    for (let k = 0; k < providerRequest.urls.length; k++) {
-      const url = providerRequest.urls[k];
+    for (let i = 0; i < providerRequest.urls.length; i++) {
+      const url = providerRequest.urls[i];
       if (!this.needsReload(url) && providerRequest.force !== true) {
         projects.push(...(ProjectRequestRepo.find(url)?.projects ?? []));
         continue;
       }
 
+      if (i > 0) {
+        await wait(1000);
+      }
       const providerProjects = await provider.request(url);
       projects.push(...providerProjects);
       this.cacheProjects(providerRequest.providerType, url, providerProjects);
