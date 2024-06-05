@@ -12,6 +12,7 @@
     "providerRequestInput": {
         "providerType": "Provider Type",
         "providerUrl": "Provider Url",
+        "requestTitle": "Request title",
         "captionAdd": "Add"
     },
     "providerRequestList": {

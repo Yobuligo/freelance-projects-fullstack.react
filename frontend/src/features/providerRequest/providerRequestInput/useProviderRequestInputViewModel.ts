@@ -10,6 +10,7 @@ export const useProviderRequestInputViewModel = (
   const providerDetails = useProviderDetails();
   const [providerType, setProviderType] = useState(ProviderType.Freelance);
   const [providerUrl, setProviderUrl] = useState("");
+  const [requestTitle, setRequestTitle] = useState("");
 
   const selectOptions: ISelectOption[] = useMemo(() => {
     const selectOptions: ISelectOption[] = [];
@@ -25,24 +26,30 @@ export const useProviderRequestInputViewModel = (
   }, [providerDetails]);
 
   const isInputValid = () => {
-    return providerType.length > 0 && providerUrl.length > 0 ? true : false;
+    return providerType.length > 0 &&
+      providerUrl.length > 0 &&
+      requestTitle.length > 0
+      ? true
+      : false;
   };
 
   const onAdd = () => {
     props.onAdd?.(providerType, providerUrl);
     setProviderUrl("");
+    setRequestTitle("");
   };
 
   const onChangeForm = (event: React.FormEvent<HTMLFormElement>) =>
     event.preventDefault();
 
-  const onChangeProviderType = (selectOption: ISelectOption) => {
+  const onChangeProviderType = (selectOption: ISelectOption) =>
     setProviderType(selectOption.key as ProviderType);
-  };
 
-  const onChangeProviderUrl = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeProviderUrl = (event: React.ChangeEvent<HTMLInputElement>) =>
     setProviderUrl(event.target.value);
-  };
+
+  const onChangeRequestTitle = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setRequestTitle(event.target.value);
 
   const selectedProviderType = {
     key: providerType,
@@ -55,8 +62,10 @@ export const useProviderRequestInputViewModel = (
     onChangeForm,
     onChangeProviderType,
     onChangeProviderUrl,
+    onChangeRequestTitle,
     selectedProviderType,
     selectOptions,
     providerUrl,
+    requestTitle,
   };
 };

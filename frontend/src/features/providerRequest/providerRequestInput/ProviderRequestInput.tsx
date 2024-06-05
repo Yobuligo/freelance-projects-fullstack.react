@@ -42,6 +42,19 @@ export const ProviderRequestInput: React.FC<IProviderRequestInputProps> = (
         />
       </div>
 
+      <div className={styles.input}>
+        <label htmlFor="requestTitle">
+          {t(texts.providerRequestInput.requestTitle)}
+        </label>
+        <input
+          className={styles.requestTitleInput}
+          id="requestTitle"
+          onChange={viewModel.onChangeRequestTitle}
+          type="text"
+          value={viewModel.requestTitle}
+        />
+      </div>
+
       <Button disabled={!viewModel.isInputValid()} onClick={viewModel.onAdd}>
         <AddIcon
           className={
