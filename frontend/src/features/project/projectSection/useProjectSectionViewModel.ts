@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ProjectApi } from "../../../api/ProjectApi";
+import { useErrorMessage } from "../../../hooks/useErrorMessage";
 import { useProjectIdStorage } from "../../../hooks/useProjectIdStorage";
 import { useSettings } from "../../../hooks/useSettings";
 import { useUserConfig } from "../../../hooks/useUserConfig";
@@ -14,23 +15,31 @@ export const useProjectSectionViewModel = () => {
   );
   const projectIdStorage = useProjectIdStorage();
   const [settings] = useSettings();
+  const [, setErrorMessage] = useErrorMessage();
 
   const openProjects = projects.filter((project) => !project.completed);
   const completedProjects = projects.filter((project) => project.completed);
 
   const loadProjects = async (force?: boolean) => {
-    setIsLoading(true);
-    const projects = await ProjectApi.findAll(settings.providerRequests, force);
-    projects.forEach((project) => {
-      const index = projectIdStorage.checkedProjectIds.findIndex(
-        (projectId) => projectId === project.id
+    try {
+      setIsLoading(true);
+      const projects = await ProjectApi.findAll(
+        settings.providerRequests,
+        force
       );
-      if (index !== -1) {
-        project.completed = true;
-      }
-    });
+      projects.forEach((project) => {
+        const index = projectIdStorage.checkedProjectIds.findIndex(
+          (projectId) => projectId === project.id
+        );
+        if (index !== -1) {
+          project.completed = true;
+        }
+      });
 
-    setProjects(projects);
+      setProjects(projects);
+    } catch (error) {
+      setErrorMessage(error as string);
+    }
     setIsLoading(false);
   };
 

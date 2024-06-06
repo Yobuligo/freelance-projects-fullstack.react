@@ -27,7 +27,7 @@ export const ProviderDetailsContextProvider: React.FC<
       }
       setIsLoading(false);
     });
-  }, []);
+  }, [setErrorMessage]);
 
   return (
     <ProviderDetailsContext.Provider
