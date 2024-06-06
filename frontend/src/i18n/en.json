@@ -2,6 +2,9 @@
     "completeCard": {
         "completed": "Completed ({{numberProjects}})"
     },
+    "general": {
+        "unknownError": "An unknown error occurred"
+    },
     "projectList": {
         "noProjects": "No suitable projects found",
         "noProjectsExtended": "No suitable projects found. Please open the settings and add provider from which the projects should be fetch."
