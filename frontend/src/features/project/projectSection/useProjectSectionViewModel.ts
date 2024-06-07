@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { ProjectApi } from "../../../api/ProjectApi";
-import { useErrorMessage } from "../../../hooks/useErrorMessage";
 import { useProjectIdStorage } from "../../../hooks/useProjectIdStorage";
+import { useRequest } from "../../../hooks/useRequest";
 import { useSettings } from "../../../hooks/useSettings";
 import { useUserConfig } from "../../../hooks/useUserConfig";
 import { IProject } from "../../../shared/model/IProject";
 
 export const useProjectSectionViewModel = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const request = useRequest();
   const [projects, setProjects] = useState<IProject[]>([]);
   const [userConfig, setUserConfig] = useUserConfig();
   const [displaySettings, setDisplaySettings] = useState(
@@ -15,14 +15,12 @@ export const useProjectSectionViewModel = () => {
   );
   const projectIdStorage = useProjectIdStorage();
   const [settings] = useSettings();
-  const [, setErrorMessage] = useErrorMessage();
 
   const openProjects = projects.filter((project) => !project.completed);
   const completedProjects = projects.filter((project) => project.completed);
 
   const loadProjects = async (force?: boolean) => {
-    try {
-      setIsLoading(true);
+    await request.send(async () => {
       const projects = await ProjectApi.findAll(
         settings.providerRequests,
         force
@@ -35,12 +33,7 @@ export const useProjectSectionViewModel = () => {
           project.completed = true;
         }
       });
-
-      setProjects(projects);
-    } catch (error) {
-      setErrorMessage(error as string);
-    }
-    setIsLoading(false);
+    });
   };
 
   const onCheckAll = () =>
@@ -82,7 +75,7 @@ export const useProjectSectionViewModel = () => {
   return {
     completedProjects,
     displaySettings,
-    isLoading,
+    isLoading: request.isLoading,
     loadProjects,
     onCheckAll,
     onProjectChecked,
