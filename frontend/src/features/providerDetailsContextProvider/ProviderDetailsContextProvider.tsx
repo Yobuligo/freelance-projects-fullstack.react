@@ -1,39 +1,32 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ProviderDetailsApi } from "../../api/ProviderDetailsApi";
 import { Spinner } from "../../components/spinner/Spinner";
 import { ProviderDetailsContext } from "../../context/ProviderDetailsContext";
-import { useErrorMessage } from "../../hooks/useErrorMessage";
+import { useInitialize } from "../../hooks/useInitialize";
+import { useRequest } from "../../hooks/useRequest";
 import { IProviderDetails } from "../../shared/model/IProviderDetails";
-import { request } from "../../utils/request";
 import { IProviderDetailsContextProvider } from "./IProviderDetailsContextProviderProps";
 
 export const ProviderDetailsContextProvider: React.FC<
   IProviderDetailsContextProvider
 > = (props) => {
-  const [, setErrorMessage] = useErrorMessage();
-  const [isLoading, setIsLoading] = useState(true);
+  const request = useRequest();
   const [providerDetails, setProviderDetails] = useState<IProviderDetails[]>(
     []
   );
 
-  useEffect(() => {
-    request(async () => {
-      setIsLoading(true);
-      try {
-        const providerDetails = await ProviderDetailsApi.findAll();
-        setProviderDetails(providerDetails);
-      } catch (error) {
-        setErrorMessage(error as string);
-      }
-      setIsLoading(false);
+  useInitialize(() => {
+    request.send(async () => {
+      const providerDetails = await ProviderDetailsApi.findAll();
+      setProviderDetails(providerDetails);
     });
-  }, [setErrorMessage]);
+  });
 
   return (
     <ProviderDetailsContext.Provider
       value={{ providerDetails: [providerDetails, setProviderDetails] }}
     >
-      {isLoading ? <Spinner /> : <>{props.children}</>}
+      {request.isLoading ? <Spinner color="black" /> : <>{props.children}</>}
     </ProviderDetailsContext.Provider>
   );
 };
