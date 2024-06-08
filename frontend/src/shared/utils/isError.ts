@@ -1,3 +1,5 @@
-export const isError = (value: any): value is Error => {
-  return "message" in value && "stack" in value && "name" in value;
+import { IError } from "../model/IError";
+
+export const isError = (value: any): value is IError => {
+  return "message" in value;
 };
