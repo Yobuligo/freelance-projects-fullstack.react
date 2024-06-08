@@ -44,7 +44,12 @@ export abstract class RESTApi {
           const data = await response.json();
           resolve(data);
         } else {
-          reject(this.createFetchError(url));
+          const data = await response.json();
+          if (isError(data)) {
+            reject(data);
+          } else {
+            reject(this.createFetchError(url));
+          }
         }
       } catch (error) {
         if (isError(error)) {
