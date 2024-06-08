@@ -33,6 +33,7 @@ export const useProjectSectionViewModel = () => {
           project.completed = true;
         }
       });
+      setProjects(projects);
     });
   };
 
