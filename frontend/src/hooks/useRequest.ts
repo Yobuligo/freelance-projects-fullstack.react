@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { isError } from "../shared/utils/isError";
 import { useErrorMessage } from "./useErrorMessage";
 
 export const useRequest = () => {
@@ -11,7 +12,11 @@ export const useRequest = () => {
       try {
         await block();
       } catch (error) {
-        setErrorMessage(error as string);
+        if (isError(error)) {
+          setErrorMessage(error.message);
+        } else {
+          setErrorMessage("Unknown error while sending REST request.");
+        }
       }
       setIsLoading(false);
     },
