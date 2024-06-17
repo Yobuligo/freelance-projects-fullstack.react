@@ -15,6 +15,8 @@ export const SettingsSection: React.FC = () => {
       <ProviderRequestList
         providerRequests={viewModel.settings.providerRequests}
         onDelete={viewModel.onDeleteProviderRequest}
+        onDisable={viewModel.onDisableProviderRequest}
+        onEnable={viewModel.onEnableProviderRequest}
       />
     </Card>
   );

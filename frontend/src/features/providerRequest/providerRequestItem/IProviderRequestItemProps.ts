@@ -1,6 +1,6 @@
 import { IProviderRequest } from "../../../model/IProviderRequest";
+import { IProviderRequestEvents } from "./IProviderRequestEvents";
 
-export interface IProviderRequestItemProps {
+export interface IProviderRequestItemProps extends IProviderRequestEvents {
   providerRequest: IProviderRequest;
-  onDelete?: (providerRequest: IProviderRequest) => void;
 }

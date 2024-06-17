@@ -14,6 +14,7 @@ export const useSettingsSectionViewModel = () => {
     setSettings((previous) => {
       previous.providerRequests.push({
         id: uuid(),
+        enabled: true,
         providerType,
         providerUrl,
         requestTitle,
@@ -34,5 +35,23 @@ export const useSettingsSectionViewModel = () => {
     });
   };
 
-  return { onAddProviderRequest, onDeleteProviderRequest, settings };
+  const onUpdateProviderRequest = (providerRequest: IProviderRequest) => {
+    setSettings((previous) => {
+      const index = previous.providerRequests.findIndex(
+        (item) => item.id === providerRequest.id
+      );
+      if (index !== -1) {
+        previous.providerRequests.splice(index, 1, providerRequest);
+      }
+      return { ...previous };
+    });
+  };
+
+  return {
+    onAddProviderRequest,
+    onDeleteProviderRequest,
+    onDisableProviderRequest: onUpdateProviderRequest,
+    onEnableProviderRequest: onUpdateProviderRequest,
+    settings,
+  };
 };
