@@ -31,9 +31,9 @@ export const ProjectList: React.FC<IProjectListProps> = (props) => {
           {items.length === 0 ? (
             <div className={styles.message}>
               {settings.providerRequests.length === 0 ? (
-                <h3>{t(texts.projectList.noProjectsExtended)}</h3>
+                <>{t(texts.projectList.noProjectsExtended)}</>
               ) : (
-                <h3>{t(texts.projectList.noProjects)}</h3>
+                <>{t(texts.projectList.noProjects)}</>
               )}
             </div>
           ) : (
