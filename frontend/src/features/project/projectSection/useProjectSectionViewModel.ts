@@ -21,10 +21,10 @@ export const useProjectSectionViewModel = () => {
 
   const loadProjects = async (force?: boolean) => {
     await request.send(async () => {
-      const projects = await ProjectApi.findAll(
-        settings.providerRequests,
-        force
+      const enabledProviderRequests = settings.providerRequests.filter(
+        (item) => item.enabled === true
       );
+      const projects = await ProjectApi.findAll(enabledProviderRequests, force);
       projects.forEach((project) => {
         const index = projectIdStorage.checkedProjectIds.findIndex(
           (projectId) => projectId === project.id
