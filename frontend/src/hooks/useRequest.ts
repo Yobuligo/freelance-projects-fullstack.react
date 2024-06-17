@@ -9,6 +9,7 @@ export const useRequest = () => {
   const send = useCallback(
     async (block: () => Promise<void>) => {
       setIsLoading(true);
+      setErrorMessage("");
       try {
         await block();
       } catch (error) {
