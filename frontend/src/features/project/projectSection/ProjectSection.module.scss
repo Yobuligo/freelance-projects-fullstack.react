@@ -5,6 +5,17 @@
   flex-direction: column;
 }
 
+.listsSection {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: $negative-space;
+}
+
+.readingSection {
+  width: 99%;
+  height: 80vh;
+}
+
 .completedSection {
   margin-top: $negative-space;
 }

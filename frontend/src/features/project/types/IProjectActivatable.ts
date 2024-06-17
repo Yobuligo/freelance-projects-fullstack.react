@@ -1,6 +1,6 @@
 import { IProject } from "../../../shared/model/IProject";
 
 export interface IProjectActivatable {
-  activeProjectId: string | undefined;
+  activeProject: IProject | undefined;
   onActivateProject: (project: IProject) => void;
 }
