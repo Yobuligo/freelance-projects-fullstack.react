@@ -38,7 +38,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
             ? props.project.company
             : "Company not provided"}
         </div>
-        <a href={props.project.url}>
+        <a target="_blank" rel="noopener noreferrer" href={props.project.url}>
           <h3 className={styles.title}>{props.project.title}</h3>
         </a>
         <div className={styles.location}>{props.project.location}</div>
