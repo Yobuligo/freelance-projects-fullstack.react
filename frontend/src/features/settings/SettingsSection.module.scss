@@ -1,9 +1,42 @@
+@import "../../Colors.scss";
+
 .settingsSection {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
 }
 
+.title {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.5rem;
+  align-items: center;
+  background-color: $primary;
+  padding: 0.5rem;
+}
+
+.icon {
+  fill: $color-copy;
+}
+
+.title>h1 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.settingsContent {
+  margin-left: 1rem;
+}
+
+.settingsSectionHeaders {
+  margin: 0;
+  font-size: 1rem;
+}
+
 .providerRequestInput {
   margin-left: 1rem;
+}
+
+.providerRequestList {
+  margin-top: 0.8rem;
 }

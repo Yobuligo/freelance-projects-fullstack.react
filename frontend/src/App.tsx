@@ -6,6 +6,7 @@ import { ProjectSection } from "./features/project/projectSection/ProjectSection
 import { ProviderDetailsContextProvider } from "./features/providerDetailsContextProvider/ProviderDetailsContextProvider";
 import { useSettingsStorage } from "./hooks/useSettingsStorage";
 import { useUserConfigStorage } from "./hooks/useUserConfigStorage";
+import "./index.scss";
 
 export const App: React.FC = () => {
   return (
