@@ -1,13 +1,23 @@
 @import "../../../Mixins.scss";
+@import "../../../Colors.scss";
 
 .projectItem {
   display: flex;
   flex-direction: row;
 }
 
+.projectItemActivated {
+  background-color: $color-hover;
+}
+
+.projectItemDeactivated {
+  // background-color: white;
+}
+
 .projectItemDetails {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .projectItemIcon {
@@ -18,7 +28,7 @@
 }
 
 .icon {
-  @include hover;
+  @include hoverIcon;
 }
 
 .company {
@@ -27,7 +37,11 @@
 
 .title {
   margin: 0;
-  color: black;
+  color: $primaryDark;
+}
+
+.titleLink {
+  text-decoration: none;
 }
 
 .location {

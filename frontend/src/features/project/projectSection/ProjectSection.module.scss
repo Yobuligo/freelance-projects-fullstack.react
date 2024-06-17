@@ -1,8 +1,20 @@
 @import "../../../Variables.scss";
+@import "../../../Colors.scss";
 
 .projectSection {
   display: flex;
   flex-direction: column;
+}
+
+.listsSection {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: $negative-space;
+}
+
+.readingSection {
+  width: 99%;
+  height: 80vh;
 }
 
 .completedSection {
@@ -24,4 +36,8 @@
   display: flex;
   flex-direction: row;
   column-gap: $negative-space;
+}
+
+.icon {
+  fill: $primaryDark;
 }

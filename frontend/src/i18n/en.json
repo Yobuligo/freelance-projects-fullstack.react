@@ -7,7 +7,7 @@
     },
     "projectList": {
         "noProjects": "No suitable projects found",
-        "noProjectsExtended": "No suitable projects found. Please open the settings and add provider from which the projects should be fetch."
+        "noProjectsExtended": "No suitable projects found. Please open the settings and add provider from which the projects should be fetched."
     },
     "projectSection": {
         "captionReloadButton": "Reload"
@@ -20,5 +20,10 @@
     },
     "providerRequestList": {
         "noProviderRequests": "No provider requests available"
+    },
+    "settingsSection": {
+        "title": "Settings",
+        "addNewSearchUrl": "New search url",
+        "savedSearches": "Saved searches"
     }
 }

@@ -17,9 +17,9 @@ export const ProviderRequestList: React.FC<IProviderRequestListProps> = (
   return (
     <>
       {items.length === 0 ? (
-        <h4 className={styles.noProviderRequestsMessage}>
+        <p className={styles.noProviderRequestsMessage}>
           {t(texts.providerRequestList.noProviderRequests)}
-        </h4>
+        </p>
       ) : (
         <div className={styles.providerRequestList}>{items}</div>
       )}

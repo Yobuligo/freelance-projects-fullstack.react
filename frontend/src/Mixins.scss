@@ -1,5 +1,14 @@
-@mixin hover {
+@import "./Colors.scss";
+
+@mixin hoverIcon {
   &:hover {
-    fill: lightgray;
+    fill: $color-hover;
+  }
+}
+
+@mixin hoverButton {
+  &:hover {
+    background-color: $color-hover;
+    @content;
   }
 }

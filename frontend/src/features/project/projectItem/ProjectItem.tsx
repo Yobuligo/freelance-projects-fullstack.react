@@ -4,6 +4,7 @@ import { ReactComponent as UncheckedIcon } from "../../../assets/unchecked.svg";
 import { Card } from "../../../components/card/Card";
 import { useProviderDetails } from "../../../hooks/useProviderDetails";
 import { renderDate } from "../../../shared/utils/renderDate";
+import { style } from "../../../utils/style";
 import { IProjectItemProps } from "./IProjectItemProps";
 import styles from "./ProjectItem.module.scss";
 
@@ -22,8 +23,17 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
       return previous;
     });
 
+  const onActivate = () => props.onActivate?.(props.project);
+
   return (
-    <Card className={styles.projectItem}>
+    <Card
+      className={style(
+        styles.projectItem,
+        props.isActive
+          ? styles.projectItemActivated
+          : styles.projectItemDeactivated
+      )}
+    >
       <div className={styles.projectItemIcon}>
         {checked ? (
           <CheckedIcon className={styles.icon} onClick={onToggleChecked} />
@@ -31,14 +41,14 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
           <UncheckedIcon className={styles.icon} onClick={onToggleChecked} />
         )}
       </div>
-      <div className={styles.projectItemDetails}>
+      <div className={styles.projectItemDetails} onClick={onActivate}>
         <div>{providerDetails.findByType(props.project.provider)}</div>
         <div className={styles.company}>
           {props.project.company.length > 0
             ? props.project.company
             : "Company not provided"}
         </div>
-        <a target="_blank" rel="noopener noreferrer" href={props.project.url}>
+        <a target="_blank" rel="noopener noreferrer" href={props.project.url} className={styles.titleLink}>
           <h3 className={styles.title}>{props.project.title}</h3>
         </a>
         <div className={styles.location}>{props.project.location}</div>

@@ -3,7 +3,7 @@
 .settingsSection {
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap: 0.4rem;
 }
 
 .title {
@@ -11,12 +11,12 @@
   flex-direction: row;
   column-gap: 0.5rem;
   align-items: center;
-  background-color: $primary;
   padding: 0.5rem;
+  color: $primaryDark;
 }
 
 .icon {
-  fill: $color-copy;
+  fill: $primaryDark;
 }
 
 .title>h1 {
@@ -26,11 +26,16 @@
 
 .settingsContent {
   margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
 }
 
 .settingsSectionHeaders {
   margin: 0;
   font-size: 1rem;
+  font-weight: 500;
+  color: $primaryDark;
 }
 
 .providerRequestInput {
