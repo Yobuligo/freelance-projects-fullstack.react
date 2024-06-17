@@ -4,13 +4,12 @@ import { ReactComponent as UncheckedIcon } from "../../../assets/unchecked.svg";
 import { Card } from "../../../components/card/Card";
 import { useProviderDetails } from "../../../hooks/useProviderDetails";
 import { renderDate } from "../../../shared/utils/renderDate";
+import { style } from "../../../utils/style";
 import { IProjectItemProps } from "./IProjectItemProps";
 import styles from "./ProjectItem.module.scss";
-import { style } from "../../../utils/style";
 
 export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
   const [checked, setChecked] = useState(props.project.completed);
-  const [active, setActive] = useState(false);
   const providerDetails = useProviderDetails();
 
   const onToggleChecked = () =>
@@ -24,21 +23,15 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
       return previous;
     });
 
-  const onToggleActivate = () => {
-    setActive((previous) => {
-      previous = !previous;
-      previous
-        ? props.onActivate?.(props.project)
-        : props.onDeactivate?.(props.project);
-      return previous;
-    });
-  };
+  const onActivate = () => props.onActivate?.(props.project);
 
   return (
     <Card
       className={style(
         styles.projectItem,
-        active ? styles.projectItemActivated : styles.projectItemDeactivated
+        props.isActive
+          ? styles.projectItemActivated
+          : styles.projectItemDeactivated
       )}
     >
       <div className={styles.projectItemIcon}>
@@ -48,7 +41,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
           <UncheckedIcon className={styles.icon} onClick={onToggleChecked} />
         )}
       </div>
-      <div className={styles.projectItemDetails} onClick={onToggleActivate}>
+      <div className={styles.projectItemDetails} onClick={onActivate}>
         <div>{providerDetails.findByType(props.project.provider)}</div>
         <div className={styles.company}>
           {props.project.company.length > 0

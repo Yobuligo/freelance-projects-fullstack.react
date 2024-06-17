@@ -15,6 +15,9 @@ export const useProjectSectionViewModel = () => {
   );
   const projectIdStorage = useProjectIdStorage();
   const [settings] = useSettings();
+  const [activeProjectId, setActivateProjectId] = useState<string | undefined>(
+    undefined
+  );
 
   const openProjects = projects.filter((project) => !project.completed);
   const completedProjects = projects.filter((project) => project.completed);
@@ -73,11 +76,22 @@ export const useProjectSectionViewModel = () => {
       return previous;
     });
 
+  const onActivateProject = (project: IProject) =>
+    setActivateProjectId((previous) => {
+      // same project was clicked. Deactivate all projects.
+      if (previous === project.id) {
+        return undefined;
+      }
+      return project.id;
+    });
+
   return {
+    activeProjectId,
     completedProjects,
     displaySettings,
     isLoading: request.isLoading,
     loadProjects,
+    onActivateProject,
     onCheckAll,
     onProjectChecked,
     onProjectUnchecked,
