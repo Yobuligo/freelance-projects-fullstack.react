@@ -10,10 +10,6 @@
   background-color: $color-hover;
 }
 
-.projectItemDeactivated {
-  // background-color: white;
-}
-
 .projectItemDetails {
   display: flex;
   flex-direction: column;
@@ -29,6 +25,7 @@
 
 .icon {
   @include hoverIcon;
+  fill: $primaryDark;
 }
 
 .company {

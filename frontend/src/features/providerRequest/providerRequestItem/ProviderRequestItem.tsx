@@ -15,6 +15,8 @@ export const ProviderRequestItem: React.FC<IProviderRequestItemProps> = (
       <Switch
         checked={props.providerRequest.enabled ?? true}
         onChange={viewModel.onSwitchChanged}
+        sliderColor="#0A3D6D"
+        colorOnState="#4A7FAC"
       />
       <div className={styles.providerType}>{viewModel.providerTitle}</div>
       <input

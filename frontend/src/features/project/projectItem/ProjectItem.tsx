@@ -29,9 +29,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
     <Card
       className={style(
         styles.projectItem,
-        props.isActive
-          ? styles.projectItemActivated
-          : styles.projectItemDeactivated
+        props.isActive ? styles.projectItemActivated : ""
       )}
     >
       <div className={styles.projectItemIcon}>
@@ -48,7 +46,12 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
             ? props.project.company
             : "Company not provided"}
         </div>
-        <a target="_blank" rel="noopener noreferrer" href={props.project.url} className={styles.titleLink}>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={props.project.url}
+          className={styles.titleLink}
+        >
           <h3 className={styles.title}>{props.project.title}</h3>
         </a>
         <div className={styles.location}>{props.project.location}</div>
