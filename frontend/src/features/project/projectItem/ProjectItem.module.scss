@@ -5,9 +5,18 @@
   flex-direction: row;
 }
 
+.projectItemActivated {
+  background-color: rgba(211, 211, 211, 0.37);
+}
+
+.projectItemDeactivated {
+  background-color: white;
+}
+
 .projectItemDetails {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .projectItemIcon {
@@ -18,7 +27,7 @@
 }
 
 .icon {
-  @include hover;
+  @include hoverIcon;
 }
 
 .company {

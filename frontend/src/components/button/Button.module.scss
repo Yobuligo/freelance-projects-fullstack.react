@@ -1,4 +1,5 @@
-@import '../../Variables.scss';
+@import "../../Colors.scss";
+@import "../../Mixins.scss";
 
 .button {
   display: flex;
@@ -8,8 +9,7 @@
 
 .buttonEnabled {
   color: black;
-  &:hover {
-    background-color: lightgray;
+  @include hoverButton {
     cursor: pointer;
   }
 }
