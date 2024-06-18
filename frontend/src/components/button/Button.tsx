@@ -14,7 +14,8 @@ export const Button: React.FC<IButtonProps> = (props) => {
     <Card
       className={style(
         styles.button,
-        props.disabled === true ? styles.buttonDisabled : styles.buttonEnabled
+        props.disabled === true ? styles.buttonDisabled : styles.buttonEnabled,
+        props.className
       )}
       onClick={onClick}
     >
