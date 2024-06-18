@@ -1,0 +1,13 @@
+$color-primary: #4A7FAC;
+$color-primary-dark: #0A3F6D;
+$color-secondary: #81B8B9;
+$color-copy: white;
+$color-error: rgba(255, 0, 0, 0.493);
+$color-hover: lighten(#4A7FAC, 0.5);
+$color-enabled: black;
+$color-disabled: lightgray;
+
+:export {
+    colorPrimary: $color-primary;
+    colorPrimaryDark: $color-primary-dark;
+}

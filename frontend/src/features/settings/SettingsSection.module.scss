@@ -1,4 +1,4 @@
-@import "../../Colors.scss";
+@import "../../styles/core/colors.module.scss";
 
 .settingsSection {
   display: flex;
@@ -12,11 +12,11 @@
   column-gap: 0.5rem;
   align-items: center;
   padding: 0.5rem;
-  color: $primaryDark;
+  color: $color-primary-dark;
 }
 
 .icon {
-  fill: $primaryDark;
+  fill: $color-primary-dark;
 }
 
 .title>h1 {
@@ -35,7 +35,7 @@
   margin: 0;
   font-size: 1rem;
   font-weight: 500;
-  color: $primaryDark;
+  color: $color-primary-dark;
 }
 
 .providerRequestInput {

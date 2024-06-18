@@ -1,4 +1,4 @@
-@import "../../../Mixins.scss";
+@import '../../../Mixins.scss';
 
 .providerRequestItem {
   display: flex;
@@ -18,5 +18,5 @@
 
 .deleteIcon {
   @include hoverIcon;
-  fill: $primaryDark
+  fill: $color-primary-dark
 }

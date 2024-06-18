@@ -1,5 +1,5 @@
 @import "../../../Variables.scss";
-@import "../../../Colors.scss";
+@import "../../../styles/core/colors.module.scss";
 
 .projectSection {
   display: flex;
@@ -39,5 +39,5 @@
 }
 
 .icon {
-  fill: $primaryDark;
+  fill: $color-primary-dark;
 }

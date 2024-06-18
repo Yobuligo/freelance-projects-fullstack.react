@@ -3,6 +3,7 @@ import { Switch } from "../../../components/switch/Switch";
 import { IProviderRequestItemProps } from "./IProviderRequestItemProps";
 import styles from "./ProviderRequestItem.module.scss";
 import { useProviderRequestItemViewModel } from "./useProviderRequestItemViewModel";
+import colors from "../../../styles/core/colors.module.scss";
 
 export const ProviderRequestItem: React.FC<IProviderRequestItemProps> = (
   props
@@ -15,8 +16,8 @@ export const ProviderRequestItem: React.FC<IProviderRequestItemProps> = (
       <Switch
         checked={props.providerRequest.enabled ?? true}
         onChange={viewModel.onSwitchChanged}
-        sliderColor="#0A3D6D"
-        colorOnState="#4A7FAC"
+        sliderColor={colors.colorPrimaryDark}
+        colorOnState={colors.colorPrimary}
       />
       <div className={styles.providerType}>{viewModel.providerTitle}</div>
       <input
