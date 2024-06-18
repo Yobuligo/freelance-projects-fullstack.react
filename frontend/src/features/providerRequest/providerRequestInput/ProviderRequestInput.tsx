@@ -38,6 +38,11 @@ export const ProviderRequestInput: React.FC<IProviderRequestInputProps> = (
         value={viewModel.requestTitle}
         label={t(texts.providerRequestInput.requestTitle)}
         onChange={viewModel.onChangeRequestTitle}
+        onEnter={() => {
+          if (viewModel.isInputValid()) {
+            viewModel.onAdd();
+          }
+        }}
       />
 
       <Button disabled={!viewModel.isInputValid()} onClick={viewModel.onAdd}>

@@ -8,6 +8,12 @@ export const LabeledInput: React.FC<ILabeledInputProps> = (props) => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     props.onChange?.(event.target.value);
 
+  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      props.onEnter?.();
+    }
+  };
+
   return (
     <LabeledElement elementId={id} label={props.label}>
       <input
@@ -16,6 +22,7 @@ export const LabeledInput: React.FC<ILabeledInputProps> = (props) => {
         onChange={onChange}
         type="text"
         value={props.value}
+        onKeyDown={onKeyDown}
       />
     </LabeledElement>
   );
