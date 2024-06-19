@@ -1,7 +1,7 @@
 import { CSSProperties, useEffect, useState } from "react";
+import colors from "../../styles/core/colors.module.scss";
 import { ISwitchProps } from "./ISwitchProps";
 import styles from "./Switch.module.scss";
-import colors from "../../styles/core/colors.module.scss";
 
 export const Switch: React.FC<ISwitchProps> = (props) => {
   const [isChecked, setIsChecked] = useState(props.checked ?? false);
@@ -13,31 +13,20 @@ export const Switch: React.FC<ISwitchProps> = (props) => {
     }
   }, [props.checked]);
 
-  const addCSSProperties = (cssProperties: CSSProperties) => {
+  const addCSSProperty = (cssProperties: object) => {
     style = { ...style, ...cssProperties } as CSSProperties;
   };
 
-  props.width &&
-    addCSSProperties({ "--switchWidth": props.width } as CSSProperties);
+  props.width && addCSSProperty({ "--switchWidth": props.width });
   props.sliderColor
-    ? addCSSProperties({ "--sliderColor": props.sliderColor } as CSSProperties)
-    : addCSSProperties({
-        "--sliderColor": colors.colorPrimaryDark,
-      } as CSSProperties);
+    ? addCSSProperty({ "--sliderColor": props.sliderColor })
+    : addCSSProperty({ "--sliderColor": colors.colorPrimaryDark });
   props.colorOffState
-    ? addCSSProperties({
-        "--colorOffState": props.colorOffState,
-      } as CSSProperties)
-    : addCSSProperties({
-        "--colorOffState": colors.colorDisabled,
-      } as CSSProperties);
+    ? addCSSProperty({ "--colorOffState": props.colorOffState })
+    : addCSSProperty({ "--colorOffState": colors.colorDisabled });
   props.colorOnState
-    ? addCSSProperties({
-        "--colorOnState": props.colorOnState,
-      } as CSSProperties)
-    : addCSSProperties({
-        "--colorOnState": colors.colorPrimary,
-      } as CSSProperties);
+    ? addCSSProperty({ "--colorOnState": props.colorOnState })
+    : addCSSProperty({ "--colorOnState": colors.colorPrimary });
 
   return (
     <label style={style} className={`${props.className} ${styles.switch}`}>
