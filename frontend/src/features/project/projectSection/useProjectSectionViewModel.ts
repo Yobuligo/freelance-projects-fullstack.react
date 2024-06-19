@@ -85,12 +85,16 @@ export const useProjectSectionViewModel = () => {
       return project;
     });
 
+  const needsDisplayActiveProject =
+    activeProject && userConfig.openLinkInline === true;
+
   return {
     activeProject,
     completedProjects,
     displaySettings,
     isLoading: request.isLoading,
     loadProjects,
+    needsDisplayActiveProject,
     onActivateProject,
     onCheckAll,
     onProjectChecked,

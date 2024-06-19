@@ -40,7 +40,11 @@ export const ProjectSection: React.FC = () => {
             <SettingsSection />
           </div>
         )}
-        <div className={viewModel.activeProject && styles.listsSection}>
+        <div
+          className={
+            viewModel.needsDisplayActiveProject ? styles.listsSection : ""
+          }
+        >
           <div>
             <ProjectList
               activeProject={viewModel.activeProject}
@@ -61,7 +65,7 @@ export const ProjectSection: React.FC = () => {
             </div>
           </div>
 
-          {viewModel.activeProject && (
+          {viewModel.needsDisplayActiveProject && viewModel.activeProject && (
             <Card className={styles.readingSection}>
               <ProjectIFrame
                 project={viewModel.activeProject}
