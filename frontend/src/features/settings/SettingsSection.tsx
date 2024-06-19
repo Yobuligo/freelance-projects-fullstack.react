@@ -5,7 +5,7 @@ import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { ProviderRequestInput } from "../providerRequest/providerRequestInput/ProviderRequestInput";
 import { ProviderRequestList } from "../providerRequest/providerRequestList/ProviderRequestList";
 import styles from "./SettingsSection.module.scss";
-import { AppSettings } from "./appSettings/AppSettings";
+import { SettingsList } from "./settingsList/SettingsList";
 import { useSettingsSectionViewModel } from "./useSettingsSectionViewModel";
 
 export const SettingsSection: React.FC = () => {
@@ -42,10 +42,10 @@ export const SettingsSection: React.FC = () => {
         </div>
         <div>
           <h2 className={styles.settingsSectionHeaders}>
-            {t(texts.settingsSection.appSettings.caption)}
+            {t(texts.settingsSection.generalSettings.caption)}
           </h2>
-          <div className={styles.appSettings}>
-            <AppSettings />
+          <div className={styles.settingsList}>
+            <SettingsList />
           </div>
         </div>
       </div>

@@ -25,9 +25,9 @@
         "title": "Settings",
         "addNewSearchUrl": "New search url",
         "savedSearches": "Saved searches",
-        "appSettings": {
-            "caption": "App settings",
-            "openLinkInline": "Open link inline"
+        "generalSettings": {
+            "caption": "General settings",
+            "openLinkInline": "Open link on click inline"
         }
     }
 }
