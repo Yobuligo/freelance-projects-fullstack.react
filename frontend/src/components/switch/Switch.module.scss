@@ -1,8 +1,10 @@
+@import "../../styles/core/colors.module.scss";
+
 label {
   --switchWidth: 2rem;
-  --colorOffState: #ccc;
-  --colorOnState: #2196f3;
-  --sliderColor: white;
+  --colorOffState: $color-disabled;
+  --colorOnState: $color-primary;
+  --sliderColor: $color-primary-dark;
 }
 
 .switch {

@@ -24,6 +24,10 @@
     "settingsSection": {
         "title": "Settings",
         "addNewSearchUrl": "New search url",
-        "savedSearches": "Saved searches"
+        "savedSearches": "Saved searches",
+        "appSettings": {
+            "caption": "App settings",
+            "openLinkInline": "Open link inline"
+        }
     }
 }
