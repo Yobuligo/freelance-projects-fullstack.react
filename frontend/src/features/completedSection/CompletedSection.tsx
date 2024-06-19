@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card } from "../../components/card/Card";
 import { Collapse } from "../../components/collapse/Collapse";
 import { texts } from "../../hooks/useTranslation/texts";
@@ -9,13 +10,15 @@ import { ICompletedSectionProps } from "./ICompletedSectionProps";
 
 export const CompletedSection: React.FC<ICompletedSectionProps> = (props) => {
   const [userConfig, setUserConfig] = useUserConfig();
+  const [collapsed, setCollapsed] = useState(userConfig.collapseCompleted);
   const { t } = useTranslation();
 
   return (
     <>
       <Card className={styles.collapseIcon}>
         <Collapse
-          collapsed={userConfig.collapseCompleted}
+          collapsed={collapsed}
+          setCollapsed={setCollapsed}
           onToggle={(collapsed) =>
             setUserConfig((userConfig) => {
               return { ...userConfig, collapseCompleted: collapsed };
@@ -26,7 +29,7 @@ export const CompletedSection: React.FC<ICompletedSectionProps> = (props) => {
           numberProjects: props.projects.length.toString(),
         })}
       </Card>
-      {!userConfig.collapseCompleted && (
+      {!collapsed && (
         <ProjectList
           activeProject={props.activeProject}
           onActivateProject={props.onActivateProject}

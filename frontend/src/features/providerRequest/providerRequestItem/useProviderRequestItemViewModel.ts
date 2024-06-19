@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { useProviderDetails } from "../../../hooks/useProviderDetails";
 import { IProviderRequestItemProps } from "./IProviderRequestItemProps";
 
 export const useProviderRequestItemViewModel = (
   props: IProviderRequestItemProps
 ) => {
+  const [collapsed, setCollapsed] = useState(true);
+
   const onDelete = () => props.onDelete?.(props.providerRequest);
 
   const onSwitchChanged = (checked: boolean) => {
@@ -20,8 +23,10 @@ export const useProviderRequestItemViewModel = (
   );
 
   return {
+    collapsed,
     onDelete,
     onSwitchChanged,
     providerTitle,
+    setCollapsed,
   };
 };

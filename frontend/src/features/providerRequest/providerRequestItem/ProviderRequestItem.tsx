@@ -1,9 +1,10 @@
 import { ReactComponent as DeleteIcon } from "../../../assets/delete.svg";
+import { Collapse } from "../../../components/collapse/Collapse";
 import { Switch } from "../../../components/switch/Switch";
+import colors from "../../../styles/core/colors.module.scss";
 import { IProviderRequestItemProps } from "./IProviderRequestItemProps";
 import styles from "./ProviderRequestItem.module.scss";
 import { useProviderRequestItemViewModel } from "./useProviderRequestItemViewModel";
-import colors from "../../../styles/core/colors.module.scss";
 
 export const ProviderRequestItem: React.FC<IProviderRequestItemProps> = (
   props
@@ -11,24 +12,32 @@ export const ProviderRequestItem: React.FC<IProviderRequestItemProps> = (
   const viewModel = useProviderRequestItemViewModel(props);
 
   return (
-    <div className={styles.providerRequestItem}>
-      <DeleteIcon className={styles.deleteIcon} onClick={viewModel.onDelete} />
-      <Switch
-        checked={props.providerRequest.enabled ?? true}
-        onChange={viewModel.onSwitchChanged}
-        sliderColor={colors.colorPrimaryDark}
-        colorOnState={colors.colorPrimary}
-      />
-      <div className={styles.providerType}>{viewModel.providerTitle}</div>
-      <div className={styles.providerTitle}>
-        {props.providerRequest.requestTitle ?? ""}
+    <div>
+      <div className={styles.providerRequestItem}>
+        <Collapse
+          collapsed={viewModel.collapsed}
+          setCollapsed={viewModel.setCollapsed}
+        />
+        <DeleteIcon
+          className={styles.deleteIcon}
+          onClick={viewModel.onDelete}
+        />
+        <Switch
+          checked={props.providerRequest.enabled ?? true}
+          onChange={viewModel.onSwitchChanged}
+          sliderColor={colors.colorPrimaryDark}
+          colorOnState={colors.colorPrimary}
+        />
+        <div className={styles.providerType}>{viewModel.providerTitle}</div>
+        <div className={styles.providerTitle}>
+          {props.providerRequest.requestTitle ?? ""}
+        </div>
       </div>
-      <input
-        className={styles.providerUrl}
-        disabled={true}
-        type="text"
-        value={props.providerRequest.providerUrl}
-      />
+      {!viewModel.collapsed && (
+        <div className={styles.providerUrl}>
+          {props.providerRequest.providerUrl}
+        </div>
+      )}
     </div>
   );
 };

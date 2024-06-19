@@ -1,4 +1,4 @@
-@import '../../../Mixins.scss';
+@import "../../../Mixins.scss";
 
 .providerRequestItem {
   display: flex;
@@ -11,16 +11,17 @@
   width: 10rem;
 }
 
-.providerTitle{
-  font-size: 1rem
+.providerTitle {
+  font-size: 1rem;
 }
 
 .providerUrl {
-  width: 20rem;
-  font-size: 1rem
+  font-size: 1rem;
+  margin-left: 8rem;
+
 }
 
 .deleteIcon {
   @include hoverIcon;
-  fill: $color-primary-dark
+  fill: $color-primary-dark;
 }
