@@ -8,6 +8,7 @@ import { useUserConfig } from "../../hooks/useUserConfig";
 import { ProjectList } from "../project/projectList/ProjectList";
 import styles from "./CompleteSection.module.scss";
 import { ICompletedSectionProps } from "./ICompletedSectionProps";
+import { Collapse } from "../../components/collapse/Collapse";
 
 export const CompletedSection: React.FC<ICompletedSectionProps> = (props) => {
   const [userConfig, setUserConfig] = useUserConfig();
@@ -31,6 +32,7 @@ export const CompletedSection: React.FC<ICompletedSectionProps> = (props) => {
         ) : (
           <CollapsedIcon className={styles.icon} onClick={onToggleCollapsed} />
         )}
+        <Collapse collapsed={userConfig.collapseCompleted}/>
         {t(texts.completeCard.completed, {
           numberProjects: props.projects.length.toString(),
         })}

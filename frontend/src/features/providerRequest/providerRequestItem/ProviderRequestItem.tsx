@@ -20,17 +20,14 @@ export const ProviderRequestItem: React.FC<IProviderRequestItemProps> = (
         colorOnState={colors.colorPrimary}
       />
       <div className={styles.providerType}>{viewModel.providerTitle}</div>
+      <div className={styles.providerTitle}>
+        {props.providerRequest.requestTitle ?? ""}
+      </div>
       <input
         className={styles.providerUrl}
         disabled={true}
         type="text"
         value={props.providerRequest.providerUrl}
-      />
-      <input
-        className={styles.providerUrl}
-        disabled={true}
-        type="text"
-        value={props.providerRequest.requestTitle ?? ""}
       />
     </div>
   );
