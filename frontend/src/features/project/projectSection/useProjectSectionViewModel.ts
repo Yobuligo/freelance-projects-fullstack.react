@@ -76,14 +76,20 @@ export const useProjectSectionViewModel = () => {
       return previous;
     });
 
-  const onActivateProject = (project: IProject) =>
+  const onActivateProject = (project: IProject) => {
     setActiveProject((previous) => {
-      // same project was clicked. Deactivate all projects.
+      // if selected project shouldn't be displayed, set it to undefined
+      if (userConfig.openLinkInline === false) {
+        return undefined;
+      }
+
+      // same project was clicked. Deactivate all projects
       if (previous?.id === project.id) {
         return undefined;
       }
       return project;
     });
+  };
 
   const needsDisplayActiveProject =
     activeProject && userConfig.openLinkInline === true;
