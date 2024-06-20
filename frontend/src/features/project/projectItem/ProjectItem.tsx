@@ -23,13 +23,13 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
       return previous;
     });
 
-  const onActivate = () => props.onActivate?.(props.project);
+  const onSelect = () => props.onSelect?.(props.project);
 
   return (
     <Card
       className={style(
         styles.projectItem,
-        props.isActive ? styles.projectItemActivated : ""
+        props.isSelected ? styles.projectItemSelected : ""
       )}
     >
       <div className={styles.projectItemIcon}>
@@ -39,7 +39,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
           <UncheckedIcon className={styles.icon} onClick={onToggleChecked} />
         )}
       </div>
-      <div className={styles.projectItemDetails} onClick={onActivate}>
+      <div className={styles.projectItemDetails} onClick={onSelect}>
         <div>{providerDetails.findByType(props.project.provider)}</div>
         <div className={styles.company}>
           {props.project.company.length > 0

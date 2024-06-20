@@ -15,7 +15,7 @@ export const useProjectSectionViewModel = () => {
   );
   const projectIdStorage = useProjectIdStorage();
   const [settings] = useSettings();
-  const [activeProject, setActiveProject] = useState<IProject | undefined>(
+  const [selectedProject, setSelectedProject] = useState<IProject | undefined>(
     undefined
   );
 
@@ -76,14 +76,14 @@ export const useProjectSectionViewModel = () => {
       return previous;
     });
 
-  const onActivateProject = (project: IProject) => {
-    setActiveProject((previous) => {
+  const onSelectProject = (project: IProject) => {
+    setSelectedProject((previous) => {
       // if selected project shouldn't be displayed, set it to undefined
       if (userConfig.openLinkInline === false) {
         return undefined;
       }
 
-      // same project was clicked. Deactivate all projects
+      // same project was clicked. Unselect all projects
       if (previous?.id === project.id) {
         return undefined;
       }
@@ -91,17 +91,17 @@ export const useProjectSectionViewModel = () => {
     });
   };
 
-  const needsDisplayActiveProject =
-    activeProject && userConfig.openLinkInline === true;
+  const needsDisplaySelectedProject =
+    selectedProject && userConfig.openLinkInline === true;
 
   return {
-    activeProject,
+    selectedProject,
     completedProjects,
     displaySettings,
     isLoading: request.isLoading,
     loadProjects,
-    needsDisplayActiveProject,
-    onActivateProject,
+    needsDisplaySelectedProject,
+    onSelectProject,
     onCheckAll,
     onProjectChecked,
     onProjectUnchecked,

@@ -42,38 +42,39 @@ export const ProjectSection: React.FC = () => {
         )}
         <div
           className={
-            viewModel.needsDisplayActiveProject ? styles.listsSection : ""
+            viewModel.needsDisplaySelectedProject ? styles.listsSection : ""
           }
         >
           <div>
             <ProjectList
-              activeProject={viewModel.activeProject}
               isLoading={viewModel.isLoading}
-              onActivateProject={viewModel.onActivateProject}
               onChecked={viewModel.onProjectChecked}
+              onSelectProject={viewModel.onSelectProject}
               onUnchecked={viewModel.onProjectUnchecked}
               projects={viewModel.openProjects}
+              selectedProject={viewModel.selectedProject}
             />
             <div className={styles.completedSection}>
               <CompletedSection
-                activeProject={viewModel.activeProject}
-                onActivateProject={viewModel.onActivateProject}
                 onChecked={viewModel.onProjectChecked}
+                onSelectProject={viewModel.onSelectProject}
                 onUnchecked={viewModel.onProjectUnchecked}
                 projects={viewModel.completedProjects}
+                selectedProject={viewModel.selectedProject}
               />
             </div>
           </div>
 
-          {viewModel.needsDisplayActiveProject && viewModel.activeProject && (
-            <Card className={styles.readingSection}>
-              <ProjectIFrame
-                project={viewModel.activeProject}
-                height="100%"
-                width="100%"
-              />
-            </Card>
-          )}
+          {viewModel.needsDisplaySelectedProject &&
+            viewModel.selectedProject && (
+              <Card className={styles.readingSection}>
+                <ProjectIFrame
+                  project={viewModel.selectedProject}
+                  height="100%"
+                  width="100%"
+                />
+              </Card>
+            )}
         </div>
       </>
     </div>

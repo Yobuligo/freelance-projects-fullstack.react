@@ -1,7 +1,7 @@
 import { IProject } from "../../shared/model/IProject";
-import { IProjectActivatable } from "../project/types/IProjectActivatable";
+import { IProjectSelectable } from "../project/types/IProjectSelectable";
 
-export interface ICompletedSectionProps extends IProjectActivatable {
+export interface ICompletedSectionProps extends IProjectSelectable {
   onChecked: (project: IProject) => void;
   onUnchecked: (project: IProject) => void;
   projects: IProject[];

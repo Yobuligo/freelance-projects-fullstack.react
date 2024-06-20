@@ -1,9 +1,9 @@
 import { IProject } from "../../../shared/model/IProject";
 
 export interface IProjectItemProps {
-  isActive: boolean;
+  isSelected: boolean;
   onChecked?: (project: IProject) => void;
+  onSelect?: (project: IProject) => void;
   onUnchecked?: (project: IProject) => void;
-  onActivate?: (project: IProject) => void;
   project: IProject;
 }

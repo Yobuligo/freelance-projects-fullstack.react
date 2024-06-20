@@ -13,9 +13,9 @@ export const ProjectList: React.FC<IProjectListProps> = (props) => {
 
   const items = props.projects.map((project) => (
     <ProjectItem
-      isActive={props.activeProject?.id === project.id}
+      isSelected={props.selectedProject?.id === project.id}
       key={project.id}
-      onActivate={props.onActivateProject}
+      onSelect={props.onSelectProject}
       onChecked={props.onChecked}
       onUnchecked={props.onUnchecked}
       project={project}
