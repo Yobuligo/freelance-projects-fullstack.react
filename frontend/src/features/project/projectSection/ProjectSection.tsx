@@ -1,4 +1,5 @@
 import { ReactComponent as CheckAllIcon } from "../../../assets/check-all.svg";
+import { ReactComponent as CheckOldIcon } from "../../../assets/check-old.svg";
 import { ReactComponent as ReloadIcon } from "../../../assets/reload.svg";
 import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
 import { Button } from "../../../components/button/Button";
@@ -31,6 +32,9 @@ export const ProjectSection: React.FC = () => {
         </Button>
         <Button onClick={viewModel.onCheckAll}>
           <CheckAllIcon className={styles.icon} />
+        </Button>
+        <Button onClick={viewModel.onCheckOld}>
+          <CheckOldIcon className={styles.icon} />
         </Button>
       </Toolbar>
 

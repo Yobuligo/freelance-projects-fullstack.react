@@ -5,6 +5,7 @@ import { useRequest } from "../../../hooks/useRequest";
 import { useSettings } from "../../../hooks/useSettings";
 import { useUserConfig } from "../../../hooks/useUserConfig";
 import { IProject } from "../../../shared/model/IProject";
+import { isOlderThanHours } from "../../../utils/isOlderThan";
 
 export const useProjectSectionViewModel = () => {
   const request = useRequest();
@@ -43,8 +44,21 @@ export const useProjectSectionViewModel = () => {
   const onCheckAll = () =>
     setProjects((projects) => {
       projects.forEach((project) => {
-        project.completed = true;
-        projectIdStorage.setChecked(project);
+        if (!project.completed) {
+          project.completed = true;
+          projectIdStorage.setChecked(project);
+        }
+      });
+      return [...projects];
+    });
+
+  const onCheckOld = () =>
+    setProjects((projects) => {
+      projects.forEach((project) => {
+        if (!project.completed && isOlderThanHours(project.createdAt, 24)) {
+          project.completed = true;
+          projectIdStorage.setChecked(project);
+        }
       });
       return [...projects];
     });
@@ -103,6 +117,7 @@ export const useProjectSectionViewModel = () => {
     needsDisplaySelectedProject,
     onSelectProject,
     onCheckAll,
+    onCheckOld,
     onProjectChecked,
     onProjectUnchecked,
     onReload,
