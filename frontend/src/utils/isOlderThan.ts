@@ -4,6 +4,8 @@
 export const isOlderThanHours = (timestamp: Date, hours: number): boolean => {
   const now = new Date();
   const timestampCopy = new Date(timestamp);
-  timestampCopy.setHours(timestampCopy.getHours() + hours);
+  // Calculate new timestamp
+  // For some reason the timestamp is moved for 2 hours to the future, so subtract it (instead of calculating 24 hours, calculate with 22 hours)
+  timestampCopy.setHours(timestampCopy.getHours() + (hours - 2));
   return timestampCopy.getTime() < now.getTime();
 };
