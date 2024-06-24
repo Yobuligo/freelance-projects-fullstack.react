@@ -7,7 +7,7 @@ import { Card } from "../../../components/card/Card";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { CompletedSection } from "../../completedSection/CompletedSection";
-import { Settings } from "../../settings/Settings";
+import { Settings } from "../../settings/settings/Settings";
 import { ProjectIFrame } from "../projectIFrame/ProjectIFrame";
 import { ProjectList } from "../projectList/ProjectList";
 import styles from "./ProjectSection.module.scss";
