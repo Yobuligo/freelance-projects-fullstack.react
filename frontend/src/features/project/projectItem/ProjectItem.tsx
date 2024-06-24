@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ReactComponent as CheckedIcon } from "../../../assets/checked.svg";
-import { ReactComponent as UncheckedIcon } from "../../../assets/unchecked.svg";
 import { Card } from "../../../components/card/Card";
 import { useProviderDetails } from "../../../hooks/useProviderDetails";
+import { CheckedIcon } from "../../../icons/CheckedIcon";
+import { UncheckedIcon } from "../../../icons/UncheckedIcon";
 import { renderDate } from "../../../shared/utils/renderDate";
 import { style } from "../../../utils/style";
 import { IProjectItemProps } from "./IProjectItemProps";
@@ -34,9 +34,9 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
     >
       <div className={styles.projectItemIcon}>
         {checked ? (
-          <CheckedIcon className={styles.icon} onClick={onToggleChecked} />
+          <CheckedIcon onClick={onToggleChecked} />
         ) : (
-          <UncheckedIcon className={styles.icon} onClick={onToggleChecked} />
+          <UncheckedIcon onClick={onToggleChecked} />
         )}
       </div>
       <div className={styles.projectItemDetails} onClick={onSelect}>

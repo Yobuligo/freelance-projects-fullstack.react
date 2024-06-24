@@ -1,4 +1,3 @@
-@import "../../../Mixins.scss";
 @import "../../../styles/core/colors.module.scss";
 
 .projectItem {
@@ -21,11 +20,6 @@
   flex-direction: row;
   margin: 1rem;
   align-items: center;
-}
-
-.icon {
-  @include hoverIcon;
-  fill: $color-primary-dark;
 }
 
 .company {

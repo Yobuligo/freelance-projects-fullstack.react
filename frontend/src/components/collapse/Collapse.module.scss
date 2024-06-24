@@ -1,7 +1,0 @@
-@import "../../Mixins.scss";
-@import "../../styles/core/colors.module.scss";
-
-.icon {
-  @include hoverIcon;
-  fill: $color-primary-dark;
-}

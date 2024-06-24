@@ -1,6 +1,5 @@
-import { ReactComponent as CollapsedIcon } from "../../assets/collapsed.svg";
-import { ReactComponent as ExpandedIcon } from "../../assets/expanded.svg";
-import styles from "./Collapse.module.scss";
+import { CollapsedIcon } from "../../icons/CollapsedIcon";
+import { ExpandedIcon } from "../../icons/ExpandedIcon";
 import { ICollapseProps } from "./ICollapseProps";
 
 export const Collapse: React.FC<ICollapseProps> = (props) => {
@@ -14,9 +13,9 @@ export const Collapse: React.FC<ICollapseProps> = (props) => {
   return (
     <>
       {props.collapsed ? (
-        <ExpandedIcon className={styles.icon} onClick={onToggleCollapsed} />
+        <ExpandedIcon onClick={onToggleCollapsed} />
       ) : (
-        <CollapsedIcon className={styles.icon} onClick={onToggleCollapsed} />
+        <CollapsedIcon onClick={onToggleCollapsed} />
       )}
     </>
   );
