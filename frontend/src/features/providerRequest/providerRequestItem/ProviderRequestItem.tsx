@@ -1,6 +1,6 @@
-import { ReactComponent as DeleteIcon } from "../../../assets/delete.svg";
 import { Collapse } from "../../../components/collapse/Collapse";
 import { Switch } from "../../../components/switch/Switch";
+import { DeleteIcon } from "../../../icons/DeleteIcon";
 import colors from "../../../styles/core/colors.module.scss";
 import { IProviderRequestItemProps } from "./IProviderRequestItemProps";
 import styles from "./ProviderRequestItem.module.scss";
@@ -18,10 +18,7 @@ export const ProviderRequestItem: React.FC<IProviderRequestItemProps> = (
           collapsed={viewModel.collapsed}
           setCollapsed={viewModel.setCollapsed}
         />
-        <DeleteIcon
-          className={styles.deleteIcon}
-          onClick={viewModel.onDelete}
-        />
+        <DeleteIcon onClick={viewModel.onDelete} />
         <Switch
           checked={props.providerRequest.enabled ?? true}
           onChange={viewModel.onSwitchChanged}
