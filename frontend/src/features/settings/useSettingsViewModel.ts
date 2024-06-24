@@ -3,7 +3,7 @@ import { useSettings } from "../../hooks/useSettings";
 import { IProviderRequest } from "../../model/IProviderRequest";
 import { ProviderType } from "../../shared/types/ProviderType";
 
-export const useSettingsSectionViewModel = () => {
+export const useSettingsViewModel = () => {
   const [settings, setSettings] = useSettings();
 
   const onAddProviderRequest = (

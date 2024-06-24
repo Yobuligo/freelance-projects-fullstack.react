@@ -1,7 +1,7 @@
 @import "../../styles/core/colors.module.scss";
 @import "../../Variables.scss";
 
-.settingsSection {
+.settings {
   display: flex;
   flex-direction: column;
   row-gap: 0.4rem;
@@ -32,7 +32,7 @@
   row-gap: 1rem;
 }
 
-.settingsSectionHeaders {
+.settingsHeaders {
   margin: 0;
   font-size: 1rem;
   font-weight: 500;

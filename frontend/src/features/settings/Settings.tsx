@@ -4,23 +4,23 @@ import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { ProviderRequestInput } from "../providerRequest/providerRequestInput/ProviderRequestInput";
 import { ProviderRequestList } from "../providerRequest/providerRequestList/ProviderRequestList";
-import styles from "./SettingsSection.module.scss";
+import styles from "./Settings.module.scss";
 import { SettingsList } from "./settingsList/SettingsList";
-import { useSettingsSectionViewModel } from "./useSettingsSectionViewModel";
+import { useSettingsViewModel } from "./useSettingsViewModel";
 
-export const SettingsSection: React.FC = () => {
-  const viewModel = useSettingsSectionViewModel();
+export const Settings: React.FC = () => {
+  const viewModel = useSettingsViewModel();
   const { t } = useTranslation();
 
   return (
-    <Card className={styles.settingsSection}>
+    <Card className={styles.settings}>
       <div className={styles.title}>
         <SettingsIcon className={styles.icon} />
         <h1>{t(texts.settingsSection.title)}</h1>
       </div>
       <div className={styles.settingsContent}>
         <div>
-          <h2 className={styles.settingsSectionHeaders}>
+          <h2 className={styles.settingsHeaders}>
             {t(texts.settingsSection.addNewSearchUrl)}
           </h2>
           <div className={styles.providerRequestInput}>
@@ -28,7 +28,7 @@ export const SettingsSection: React.FC = () => {
           </div>
         </div>
         <div>
-          <h2 className={styles.settingsSectionHeaders}>
+          <h2 className={styles.settingsHeaders}>
             {t(texts.settingsSection.savedSearches)}
           </h2>
           <div className={styles.providerRequestList}>
@@ -41,7 +41,7 @@ export const SettingsSection: React.FC = () => {
           </div>
         </div>
         <div>
-          <h2 className={styles.settingsSectionHeaders}>
+          <h2 className={styles.settingsHeaders}>
             {t(texts.settingsSection.generalSettings.caption)}
           </h2>
           <div className={styles.settingsList}>

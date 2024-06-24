@@ -7,7 +7,7 @@ import { Card } from "../../../components/card/Card";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { CompletedSection } from "../../completedSection/CompletedSection";
-import { SettingsSection } from "../../settings/SettingsSection";
+import { Settings } from "../../settings/Settings";
 import { ProjectIFrame } from "../projectIFrame/ProjectIFrame";
 import { ProjectList } from "../projectList/ProjectList";
 import styles from "./ProjectSection.module.scss";
@@ -41,7 +41,7 @@ export const ProjectSection: React.FC = () => {
       <>
         {viewModel.displaySettings && (
           <div className={styles.settingsSection}>
-            <SettingsSection />
+            <Settings />
           </div>
         )}
         <div
