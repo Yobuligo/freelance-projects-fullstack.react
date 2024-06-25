@@ -1,6 +1,6 @@
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
-import { SettingsItem } from "../settingsItem/SettingsItem";
+import { SettingsConfigItem } from "../settingsConfigItem/SettingsConfigItem";
 import styles from "./SettingsList.module.scss";
 
 export const SettingsList: React.FC = () => {
@@ -8,7 +8,7 @@ export const SettingsList: React.FC = () => {
 
   return (
     <div className={styles.settingsList}>
-      <SettingsItem
+      <SettingsConfigItem
         property="openLinkInline"
         title={t(texts.settingsSection.generalSettings.openLinkInline)}
       />

@@ -1,6 +1,6 @@
-import { IUserConfig } from "../../../model/IUserConfig";
+import { ReactNode } from "react";
 
 export interface ISettingsItemProps {
-  property: keyof IUserConfig;
+  children: ReactNode;
   title: string;
 }

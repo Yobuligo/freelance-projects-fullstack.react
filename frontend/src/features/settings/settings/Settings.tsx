@@ -20,23 +20,23 @@ export const Settings: React.FC = () => {
         <h1>{t(texts.settingsSection.title)}</h1>
       </div>
       <div className={styles.settingsContent}>
-        <div>
+        <>
           <h2 className={styles.settingsHeaders}>
             {t(texts.settingsSection.dataTransfer)}
           </h2>
           <div className={styles.dataTransfer}>
             <SettingsTransfer />
           </div>
-        </div>
-        <div>
+        </>
+        <>
           <h2 className={styles.settingsHeaders}>
             {t(texts.settingsSection.addNewSearchUrl)}
           </h2>
           <div className={styles.providerRequestInput}>
             <ProviderRequestInput onAdd={viewModel.onAddProviderRequest} />
           </div>
-        </div>
-        <div>
+        </>
+        <>
           <h2 className={styles.settingsHeaders}>
             {t(texts.settingsSection.savedSearches)}
           </h2>
@@ -48,7 +48,7 @@ export const Settings: React.FC = () => {
               onEnable={viewModel.onEnableProviderRequest}
             />
           </div>
-        </div>
+        </>
         <div>
           <h2 className={styles.settingsHeaders}>
             {t(texts.settingsSection.generalSettings.caption)}

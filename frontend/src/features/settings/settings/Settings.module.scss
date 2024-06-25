@@ -50,7 +50,7 @@
 
 .providerRequestList {
   @include settingsSection;
-  margin-top: 0.8rem;
+  margin-top: $negative-space;
 }
 
 .settingsList {
