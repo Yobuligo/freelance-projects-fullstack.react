@@ -23,6 +23,7 @@
     },
     "settingsSection": {
         "title": "Settings",
+        "dataTransfer": "Data transfer",
         "addNewSearchUrl": "New search url",
         "savedSearches": "Saved searches",
         "generalSettings": {

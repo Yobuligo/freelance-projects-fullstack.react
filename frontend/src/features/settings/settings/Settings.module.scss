@@ -1,6 +1,10 @@
 @import "../../../styles/core/colors.module.scss";
 @import "../../../Variables.scss";
 
+@mixin settingsSection {
+  margin-left: 1rem;
+}
+
 .settings {
   display: flex;
   flex-direction: column;
@@ -40,16 +44,21 @@
 }
 
 .providerRequestInput {
-  margin-left: 1rem;
+  @include settingsSection;
   margin-top: $negative-space;
 }
 
 .providerRequestList {
+  @include settingsSection;
   margin-top: 0.8rem;
 }
 
 .settingsList {
-  margin-left: 1rem;
+  @include settingsSection;
   margin-top: $negative-space;
   margin-bottom: $negative-space;
+}
+
+.dataTransfer {
+  @include settingsSection;
 }

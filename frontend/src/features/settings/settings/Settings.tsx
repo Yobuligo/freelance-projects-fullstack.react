@@ -20,7 +20,14 @@ export const Settings: React.FC = () => {
         <h1>{t(texts.settingsSection.title)}</h1>
       </div>
       <div className={styles.settingsContent}>
-        <SettingsTransfer />
+        <div>
+          <h2 className={styles.settingsHeaders}>
+            {t(texts.settingsSection.dataTransfer)}
+          </h2>
+          <div className={styles.dataTransfer}>
+            <SettingsTransfer />
+          </div>
+        </div>
         <div>
           <h2 className={styles.settingsHeaders}>
             {t(texts.settingsSection.addNewSearchUrl)}
