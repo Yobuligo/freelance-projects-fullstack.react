@@ -8,7 +8,7 @@ export const useProviderRequestInputViewModel = (
   props: IProviderRequestInputProps
 ) => {
   const providerDetails = useProviderDetails();
-  const [providerType, setProviderType] = useState(ProviderType.Freelance);
+  const [providerType, setProviderType] = useState(ProviderType.ComputerFutures);
   const [providerUrl, setProviderUrl] = useState("");
   const [requestTitle, setRequestTitle] = useState("");
 

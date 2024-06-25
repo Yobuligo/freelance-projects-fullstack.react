@@ -3,5 +3,5 @@
 .labeledElement {
   display: flex;
   flex-direction: column;
-  column-gap: $negative-space;
+  row-gap: $negative-space;
 }
