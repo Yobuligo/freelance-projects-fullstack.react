@@ -5,6 +5,7 @@ import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { ProviderRequestInput } from "../../providerRequest/providerRequestInput/ProviderRequestInput";
 import { ProviderRequestList } from "../../providerRequest/providerRequestList/ProviderRequestList";
 import { SettingsList } from "../settingsList/SettingsList";
+import { SettingsSection } from "../settingsSection/SettingsSection";
 import { SettingsTransfer } from "../settingsTransfer/SettingsTransfer";
 import styles from "./Settings.module.scss";
 import { useSettingsViewModel } from "./useSettingsViewModel";
@@ -20,43 +21,25 @@ export const Settings: React.FC = () => {
         <h1>{t(texts.settingsSection.title)}</h1>
       </div>
       <div className={styles.settingsContent}>
-        <>
-          <h2 className={styles.settingsHeaders}>
-            {t(texts.settingsSection.dataTransfer)}
-          </h2>
-          <div className={styles.dataTransfer}>
-            <SettingsTransfer />
-          </div>
-        </>
-        <>
-          <h2 className={styles.settingsHeaders}>
-            {t(texts.settingsSection.addNewSearchUrl)}
-          </h2>
-          <div className={styles.providerRequestInput}>
-            <ProviderRequestInput onAdd={viewModel.onAddProviderRequest} />
-          </div>
-        </>
-        <>
-          <h2 className={styles.settingsHeaders}>
-            {t(texts.settingsSection.savedSearches)}
-          </h2>
-          <div className={styles.providerRequestList}>
-            <ProviderRequestList
-              providerRequests={viewModel.settings.providerRequests}
-              onDelete={viewModel.onDeleteProviderRequest}
-              onDisable={viewModel.onDisableProviderRequest}
-              onEnable={viewModel.onEnableProviderRequest}
-            />
-          </div>
-        </>
-        <div>
-          <h2 className={styles.settingsHeaders}>
-            {t(texts.settingsSection.generalSettings.caption)}
-          </h2>
-          <div className={styles.settingsList}>
-            <SettingsList />
-          </div>
-        </div>
+        <SettingsSection title={t(texts.settingsSection.dataTransfer)}>
+          <SettingsTransfer />
+        </SettingsSection>
+        <SettingsSection title={t(texts.settingsSection.addNewSearchUrl)}>
+          <ProviderRequestInput onAdd={viewModel.onAddProviderRequest} />
+        </SettingsSection>
+        <SettingsSection title={t(texts.settingsSection.savedSearches)}>
+          <ProviderRequestList
+            providerRequests={viewModel.settings.providerRequests}
+            onDelete={viewModel.onDeleteProviderRequest}
+            onDisable={viewModel.onDisableProviderRequest}
+            onEnable={viewModel.onEnableProviderRequest}
+          />
+        </SettingsSection>
+        <SettingsSection
+          title={t(texts.settingsSection.generalSettings.caption)}
+        >
+          <SettingsList />
+        </SettingsSection>
       </div>
     </Card>
   );

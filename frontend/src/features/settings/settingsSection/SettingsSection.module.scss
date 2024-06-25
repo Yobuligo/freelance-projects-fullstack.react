@@ -1,0 +1,14 @@
+@import "../../../styles/core/colors.module.scss";
+@import "../../../Variables.scss";
+
+.title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $color-primary-dark;
+}
+
+.children {
+  margin-left: 1rem;
+  margin-top: $negative-space;
+}
