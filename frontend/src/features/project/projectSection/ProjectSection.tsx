@@ -13,6 +13,9 @@ import { ProjectList } from "../projectList/ProjectList";
 import styles from "./ProjectSection.module.scss";
 import { useProjectSectionViewModel } from "./useProjectSectionViewModel";
 
+/**
+ * This component is responsible for creating a project section
+ */
 export const ProjectSection: React.FC = () => {
   const viewModel = useProjectSectionViewModel();
 
