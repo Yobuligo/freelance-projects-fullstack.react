@@ -1,9 +1,9 @@
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { SettingsConfigItem } from "../settingsConfigItem/SettingsConfigItem";
-import styles from "./SettingsList.module.scss";
+import styles from "./SettingsConfigList.module.scss";
 
-export const SettingsList: React.FC = () => {
+export const SettingsConfigList: React.FC = () => {
   const { t } = useTranslation();
 
   return (

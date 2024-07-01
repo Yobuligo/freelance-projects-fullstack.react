@@ -4,7 +4,7 @@ import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { ProviderRequestInput } from "../../providerRequest/providerRequestInput/ProviderRequestInput";
 import { ProviderRequestList } from "../../providerRequest/providerRequestList/ProviderRequestList";
-import { SettingsList } from "../settingsList/SettingsList";
+import { SettingsConfigList } from "../settingsConfigList/SettingsConfigList";
 import { SettingsSection } from "../settingsSection/SettingsSection";
 import { SettingsTransfer } from "../settingsTransfer/SettingsTransfer";
 import styles from "./Settings.module.scss";
@@ -38,7 +38,7 @@ export const Settings: React.FC = () => {
         <SettingsSection
           title={t(texts.settingsSection.generalSettings.caption)}
         >
-          <SettingsList />
+          <SettingsConfigList />
         </SettingsSection>
       </div>
     </Card>

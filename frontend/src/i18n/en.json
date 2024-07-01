@@ -30,5 +30,9 @@
             "caption": "General settings",
             "openLinkInline": "Open link on click inline"
         }
+    },
+    "settingsTransfer": {
+        "downloadConfig": "Download config",
+        "uploadConfig": "Upload config"
     }
 }
