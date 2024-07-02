@@ -22,8 +22,13 @@ export const SettingsUpload: React.FC<ISettingsUploadProps> = (props) => {
   const onResetJson = () => setJson("");
 
   const onUpload = () => {
+    if (json.length === 0) {
+      return;
+    }
+    
     confirmUpload.triggerConfirm();
     const download: IDownload = JSON.parse(json);
+
     setSettings(download.settings);
     setUserConfig(download.userConfig);
     onResetJson();
@@ -33,7 +38,7 @@ export const SettingsUpload: React.FC<ISettingsUploadProps> = (props) => {
     <div className={styles.upload}>
       <input onChange={onChangeJson} type="text" value={json} />
       {!confirmUpload.isConfirming ? (
-        <UploadIcon onClick={onUpload} />
+        <UploadIcon disabled={json.length === 0} onClick={onUpload} />
       ) : (
         <>{confirmUpload.content(t(texts.settingsUpload.uploaded))}</>
       )}

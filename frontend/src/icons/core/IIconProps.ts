@@ -1,1 +1,3 @@
-export interface IIconProps extends React.SVGProps<SVGSVGElement> {}
+export interface IIconProps extends React.SVGProps<SVGSVGElement> {
+  disabled?: boolean;
+}

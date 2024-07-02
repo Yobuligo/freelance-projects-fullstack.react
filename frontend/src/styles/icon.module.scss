@@ -5,3 +5,7 @@
   @include hoverIcon;
   fill: $color-primary-dark;
 }
+
+.disabledIcon {
+  fill: $color-disabled;
+}
