@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useConfirmIcon } from "../../../hooks/useConfirmIcon";
 import { useSettings } from "../../../hooks/useSettings";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { useUserConfig } from "../../../hooks/useUserConfig";
-import { CheckIcon } from "../../../icons/CheckIcon";
 import { DownloadIcon } from "../../../icons/DownloadIcon";
 import { UploadIcon } from "../../../icons/UploadIcon";
 import { IDownload } from "../model/IDownload";
@@ -14,32 +13,44 @@ export const SettingsTransfer: React.FC = () => {
   const { t } = useTranslation();
   const [userConfig] = useUserConfig();
   const [settings] = useSettings();
-  const [isDownloading, setIsDownloading] = useState(false);
+  const confirmDownload = useConfirmIcon();
+  const confirmUpload = useConfirmIcon();
 
   const onDownload = () => {
-    setIsDownloading(true);
+    confirmDownload.onConfirm();
     const download: IDownload = {
       settings,
       userConfig,
     };
     navigator.clipboard.writeText(JSON.stringify(download));
-    setTimeout(() => setIsDownloading(false), 700);
+  };
+
+  const onUpload = () => {
+    confirmUpload.onConfirm();
   };
 
   return (
     <>
       <SettingsItem title={t(texts.settingsTransfer.downloadConfig)}>
-        {!isDownloading ? (
+        {!confirmDownload.isConfirming ? (
           <DownloadIcon onClick={onDownload} />
         ) : (
-          <div className={styles.copied}>
-            <CheckIcon />
-            {t(texts.settingsTransfer.copiedToClipboard)}
-          </div>
+          <>
+            {confirmDownload.content(
+              t(texts.settingsTransfer.copiedToClipboard)
+            )}
+          </>
         )}
       </SettingsItem>
       <SettingsItem title={t(texts.settingsTransfer.uploadConfig)}>
-        <UploadIcon />
+        <div className={styles.upload}>
+          <input type="text" />
+          {!confirmUpload.isConfirming ? (
+            <UploadIcon onClick={onUpload} />
+          ) : (
+            <>{confirmUpload.content(t(texts.settingsTransfer.uploaded))}</>
+          )}
+        </div>
       </SettingsItem>
     </>
   );
