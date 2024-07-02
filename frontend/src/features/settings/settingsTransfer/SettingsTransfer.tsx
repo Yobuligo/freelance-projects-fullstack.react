@@ -23,7 +23,7 @@ export const SettingsTransfer: React.FC = () => {
       userConfig,
     };
     navigator.clipboard.writeText(JSON.stringify(download));
-    setTimeout(() => setIsDownloading(false), 5000);
+    setTimeout(() => setIsDownloading(false), 700);
   };
 
   return (
@@ -34,7 +34,7 @@ export const SettingsTransfer: React.FC = () => {
         ) : (
           <div className={styles.copied}>
             <CheckIcon />
-            Copied
+            {t(texts.settingsTransfer.copiedToClipboard)}
           </div>
         )}
       </SettingsItem>

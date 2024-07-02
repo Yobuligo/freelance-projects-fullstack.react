@@ -32,6 +32,7 @@
         }
     },
     "settingsTransfer": {
+        "copiedToClipboard": "Copied to clipboard",
         "downloadConfig": "Download config",
         "uploadConfig": "Upload config"
     }
