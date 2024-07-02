@@ -34,7 +34,9 @@
     "settingsTransfer": {
         "copiedToClipboard": "Copied to clipboard",
         "downloadConfig": "Download config",
-        "uploadConfig": "Upload config",
+        "uploadConfig": "Upload config"
+    },
+    "settingsUpload": {
         "uploaded": "Uploaded"
     }
 }
