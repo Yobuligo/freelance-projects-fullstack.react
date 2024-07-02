@@ -6,7 +6,7 @@ export const useConfirmIcon = () => {
 
   const content = (text: string) => <ConfirmIcon text={text} />;
 
-  const onConfirm = () => {
+  const triggerConfirm = () => {
     setIsConfirming(true);
     setTimeout(() => setIsConfirming(false), 700);
   };
@@ -14,6 +14,6 @@ export const useConfirmIcon = () => {
   return {
     content,
     isConfirming,
-    onConfirm,
+    triggerConfirm,
   };
 };

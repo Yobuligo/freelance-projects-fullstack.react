@@ -15,7 +15,7 @@ export const SettingsTransfer: React.FC = () => {
   const confirmDownload = useConfirmIcon();
 
   const onDownload = () => {
-    confirmDownload.onConfirm();
+    confirmDownload.triggerConfirm();
     const download: IDownload = {
       settings,
       userConfig,
