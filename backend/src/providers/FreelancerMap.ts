@@ -12,17 +12,21 @@ import { IProvider } from "./core/IProvider";
 export class FreelancerMap implements IProvider {
   request(url: string): Promise<IProject[]> {
     return new Promise(async (resolve, reject) => {
-      const response = await fetch(url);
-      const html = await response.text();
+      try {
+        const response = await fetch(url);
+        const html = await response.text();
 
-      Log.info(`Request freelancerMap projects from freelancerMap server.`);
+        Log.info(`Request freelancerMap projects from freelancerMap server.`);
 
-      const parser = new DOMParser();
-      const document = parser.parseFromString(html, "text/html");
-      const rootElement = document.getElementsByClassName("project-list")[0];
+        const parser = new DOMParser();
+        const document = parser.parseFromString(html, "text/html");
+        const rootElement = document.getElementsByClassName("project-list")[0];
 
-      const projects = this.extractProjects(rootElement);
-      resolve(projects);
+        const projects = this.extractProjects(rootElement);
+        resolve(projects);
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 

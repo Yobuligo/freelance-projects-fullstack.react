@@ -14,20 +14,24 @@ import { IProvider } from "./core/IProvider";
 export class Freelance implements IProvider {
   request(url: string): Promise<IProject[]> {
     return new Promise(async (resolve, reject) => {
-      const response = await fetch(url);
-      const html = await response.text();
+      try {
+        const response = await fetch(url);
+        const html = await response.text();
 
-      Log.info(`Request freelance.de projects from freelance.de server.`);
+        Log.info(`Request freelance.de projects from freelance.de server.`);
 
-      const document = this.createDocument(html);
-      const rootElement = this.getRootElement(document);
-      const countPages = this.getCountPages(document);
+        const document = this.createDocument(html);
+        const rootElement = this.getRootElement(document);
+        const countPages = this.getCountPages(document);
 
-      const projects = this.extractProjects(rootElement);
-      const projectsOffsetPage = await this.fetchOffsetPages(url, countPages);
-      projects.push(...projectsOffsetPage);
+        const projects = this.extractProjects(rootElement);
+        const projectsOffsetPage = await this.fetchOffsetPages(url, countPages);
+        projects.push(...projectsOffsetPage);
 
-      resolve(projects);
+        resolve(projects);
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 

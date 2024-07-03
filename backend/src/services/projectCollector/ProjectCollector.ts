@@ -5,6 +5,7 @@ import { ProjectRequestRepo } from "../../repository/ProjectRequestRepo";
 import { IProject } from "../../shared/model/IProject";
 import { IProviderRequests } from "../../shared/model/IProviderRequests";
 import { ProviderType } from "../../shared/types/ProviderType";
+import { createError } from "../../shared/utils/createError";
 import { wait } from "../../utils/wait";
 import { IProjectCollector } from "./IProjectCollector";
 
@@ -13,10 +14,14 @@ export class ProjectCollector implements IProjectCollector {
     return new Promise(async (resolve, reject) => {
       const projects: IProject[] = [];
 
-      for (let i = 0; i < providerRequests.length; i++) {
-        const providerRequest = providerRequests[i];
-        const providerProjects = await this.requestProjects(providerRequest);
-        projects.push(...providerProjects);
+      try {
+        for (let i = 0; i < providerRequests.length; i++) {
+          const providerRequest = providerRequests[i];
+          const providerProjects = await this.requestProjects(providerRequest);
+          projects.push(...providerProjects);
+        }
+      } catch (error) {
+        reject(error);
       }
 
       const harmonizedProjects = this.removeDuplicates(projects);
@@ -40,25 +45,40 @@ export class ProjectCollector implements IProjectCollector {
   private async requestProjects(
     providerRequest: IProviderRequests
   ): Promise<IProject[]> {
-    const projects: IProject[] = [];
-    const provider = this.createProvider(providerRequest);
+    return new Promise(async (resolve, reject) => {
+      const projects: IProject[] = [];
+      const provider = this.createProvider(providerRequest);
 
-    for (let i = 0; i < providerRequest.urls.length; i++) {
-      const url = providerRequest.urls[i];
-      if (!this.needsReload(url) && providerRequest.force !== true) {
-        projects.push(...(ProjectRequestRepo.find(url)?.projects ?? []));
-        continue;
+      for (let i = 0; i < providerRequest.urls.length; i++) {
+        const url = providerRequest.urls[i];
+        if (!this.needsReload(url) && providerRequest.force !== true) {
+          projects.push(...(ProjectRequestRepo.find(url)?.projects ?? []));
+          continue;
+        }
+
+        if (i > 0) {
+          await wait(1000);
+        }
+
+        try {
+          const providerProjects = await provider.request(url);
+          projects.push(...providerProjects);
+          this.cacheProjects(
+            providerRequest.providerType,
+            url,
+            providerProjects
+          );
+        } catch (error) {
+          reject(
+            createError(
+              `Error while loading projects of provider ${providerRequest.providerType}.`
+            )
+          );
+        }
       }
 
-      if (i > 0) {
-        await wait(1000);
-      }
-      const providerProjects = await provider.request(url);
-      projects.push(...providerProjects);
-      this.cacheProjects(providerRequest.providerType, url, providerProjects);
-    }
-
-    return projects;
+      resolve(projects);
+    });
   }
 
   private cacheProjects(
