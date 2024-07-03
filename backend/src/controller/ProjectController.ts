@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ProjectCollector } from "../services/projectCollector/ProjectCollector";
 import { ProjectMeta } from "../shared/model/IProject";
 import { IProviderRequests } from "../shared/model/IProviderRequests";
+import { NetworkInfo } from "../shared/services/NetworkInfo";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
 import { sortProjects } from "../utils/sortProjects";
@@ -15,6 +16,10 @@ export class ProjectController {
 
   private findAll() {
     this.router.post(ProjectMeta.path, async (req, res) => {
+      if (!await NetworkInfo.isConnected()) {
+        return res.status(502).send(createError("Missing internet connection"));
+      }
+
       const providerRequests: IProviderRequests[] = req.body;
 
       try {
