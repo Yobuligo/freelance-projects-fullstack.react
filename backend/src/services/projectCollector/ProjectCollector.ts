@@ -21,12 +21,6 @@ export class ProjectCollector implements IProjectCollector {
         );
         const requestedProjects = await Promise.all(requests);
         requestedProjects.forEach((items) => projects.push(...items));
-
-        // for (let i = 0; i < providerRequests.length; i++) {
-        //   const providerRequest = providerRequests[i];
-        //   const providerProjects = await this.requestProjects(providerRequest);
-        //   projects.push(...providerProjects);
-        // }
       } catch (error) {
         reject(error);
       }
