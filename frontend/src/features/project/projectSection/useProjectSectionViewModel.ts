@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ProjectApi } from "../../../api/ProjectApi";
-import { useProjectIdStorage } from "../../../hooks/useProjectIdStorage";
 import { useProjects } from "../../../hooks/useProjects";
 import { useRequest } from "../../../hooks/useRequest";
 import { useSettings } from "../../../hooks/useSettings";
@@ -15,7 +14,6 @@ export const useProjectSectionViewModel = () => {
   const [displaySettings, setDisplaySettings] = useState(
     userConfig.displaySettings
   );
-  const projectIdStorage = useProjectIdStorage();
   const [settings] = useSettings();
   const [selectedProject, setSelectedProject] = useState<IProject | undefined>(
     undefined
@@ -24,21 +22,35 @@ export const useProjectSectionViewModel = () => {
   const openProjects = projects.filter((project) => !project.completed);
   const completedProjects = projects.filter((project) => project.completed);
 
+  /**
+   * Loads projects from providers and merges it with the data from the local storage
+   * If projects are already available take these projects, otherwise create new instances
+   */
   const loadProjects = async (force?: boolean) => {
     await request.send(async () => {
       const enabledProviderRequests = settings.providerRequests.filter(
         (item) => item.enabled === true
       );
-      const projects = await ProjectApi.findAll(enabledProviderRequests, force);
-      projects.forEach((project) => {
-        const index = projectIdStorage.checkedProjectIds.findIndex(
-          (projectId) => projectId === project.id
+      const fetchedProjects = await ProjectApi.findAll(
+        enabledProviderRequests,
+        force
+      );
+
+      // find new projects, which are currently unknown
+      const newProjects = fetchedProjects.filter((fetchedProject) => {
+        const index = projects.findIndex(
+          (project) => project.id === fetchedProject.id
         );
-        if (index !== -1) {
-          project.completed = true;
-        }
+        return index === -1;
       });
-      setProjects(projects);
+
+      // add new projects to the project list
+      if (newProjects.length > 0) {
+        setProjects((previous) => {
+          previous.push(...newProjects);
+          return [...previous];
+        });
+      }
     });
   };
 
@@ -50,7 +62,6 @@ export const useProjectSectionViewModel = () => {
       projects.forEach((project) => {
         if (!project.completed) {
           project.completed = true;
-          projectIdStorage.setChecked(project);
         }
       });
       return [...projects];
@@ -64,29 +75,24 @@ export const useProjectSectionViewModel = () => {
       projects.forEach((project) => {
         if (!project.completed && isOlderThanHours(project.createdAt, 24)) {
           project.completed = true;
-          projectIdStorage.setChecked(project);
         }
       });
       return [...projects];
     });
 
-  const onProjectChecked = (project: IProject) => {
+  const onProjectChecked = (project: IProject) =>
     setProjects((previous) => {
       project.completed = true;
       project.completedAt = new Date();
       return [...previous];
     });
-    projectIdStorage.setChecked(project);
-  };
 
-  const onProjectUnchecked = (project: IProject) => {
+  const onProjectUnchecked = (project: IProject) =>
     setProjects((previous) => {
       project.completed = false;
       project.completedAt = undefined;
       return [...previous];
     });
-    projectIdStorage.setUnchecked(project);
-  };
 
   const onReload = () => loadProjects(true);
 
