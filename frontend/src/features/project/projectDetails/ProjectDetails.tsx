@@ -87,6 +87,7 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
       <div className={styles.item}>
         <div className={styles.title}>{t(texts.projectDetails.contact)}</div>
         <input
+          className={styles.contact}
           type="text"
           value={props.project.contact}
           onChange={onContactChange}
