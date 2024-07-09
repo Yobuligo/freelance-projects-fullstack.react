@@ -4,6 +4,7 @@ import { ToggleButtonGroup } from "../../../components/toggleButtonGroup/ToggleB
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { ApplicationType } from "../../../shared/types/ApplicationType";
+import { formatDate } from "../../../utils/formatDate";
 import { IApplicationTypeOption } from "./IApplicationTypeOption";
 import { IProjectDetailsProps } from "./IProjectDetailsProps";
 import styles from "./ProjectDetails.module.scss";
@@ -15,6 +16,12 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
 
   const onApplyChanged = (checked: boolean) => {
     props.project.applied = checked;
+    if (checked === true) {
+      props.project.appliedAt = new Date().toISOString() as unknown as Date;
+    } else {
+      props.project.appliedAt = undefined;
+    }
+
     if (checked === true && props.project.applicationType === undefined) {
       props.project.applicationType = ApplicationType.Portal;
     }
@@ -73,6 +80,7 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
       <div className={styles.item}>
         <div className={styles.title}>{t(texts.projectDetails.applied)}</div>
         <Switch checked={props.project.applied} onChange={onApplyChanged} />
+        <>{props.project.appliedAt && formatDate(props.project.appliedAt)}</>
       </div>
       <div className={styles.item}>
         <div className={styles.title}>
