@@ -1,0 +1,11 @@
+@import "../../styles/core/colors.module.scss";
+
+.selected {
+  border: none;
+  background-color: $color-primary;  
+}
+
+.unSelected {
+  border: none;
+  background-color: $color-disabled;
+}
