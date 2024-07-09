@@ -1,8 +1,16 @@
 @import "../../../Variables.scss";
 
+.projectDetails {
+  height: 100%;
+}
+
 .item {
   display: flex;
   flex-direction: row;
   column-gap: $negative-space;
   align-items: center;
+}
+
+.title {
+  width: 10rem;
 }

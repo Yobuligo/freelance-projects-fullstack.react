@@ -69,13 +69,15 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
   };
 
   return (
-    <div>
+    <div className={styles.projectDetails}>
       <div className={styles.item}>
-        {t(texts.projectDetails.applied)}
+        <div className={styles.title}>{t(texts.projectDetails.applied)}</div>
         <Switch checked={props.project.applied} onChange={onApplyChanged} />
       </div>
       <div className={styles.item}>
-        {t(texts.projectDetails.applicationType)}
+        <div className={styles.title}>
+          {t(texts.projectDetails.applicationType)}
+        </div>
         <ToggleButtonGroup
           items={applicationTypeItems}
           onSelect={onApplicationTypeSelected}
@@ -83,7 +85,7 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
         />
       </div>
       <div className={styles.item}>
-        {t(texts.projectDetails.contact)}
+        <div className={styles.title}>{t(texts.projectDetails.contact)}</div>
         <input
           type="text"
           value={props.project.contact}
