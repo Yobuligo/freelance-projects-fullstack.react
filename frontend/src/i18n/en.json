@@ -1,6 +1,9 @@
 {
-    "completeCard": {
-        "completed": "Completed ({{numberProjects}})"
+    "appliedCard": {
+        "applied": "Applied ({{numberProjects}})"
+    },
+    "trashCard": {
+        "trash": "Trash ({{numberProjects}})"
     },
     "general": {
         "unknownError": "An unknown error occurred"

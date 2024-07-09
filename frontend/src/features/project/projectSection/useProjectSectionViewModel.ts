@@ -6,6 +6,7 @@ import { useSettings } from "../../../hooks/useSettings";
 import { useUserConfig } from "../../../hooks/useUserConfig";
 import { IProject } from "../../../shared/model/IProject";
 import { isOlderThanHours } from "../../../utils/isOlderThan";
+import { sortProjects } from "../../../utils/sortProjects";
 
 export const useProjectSectionViewModel = () => {
   const request = useRequest();
@@ -18,34 +19,31 @@ export const useProjectSectionViewModel = () => {
   const [selectedProject, setSelectedProject] = useState<IProject | undefined>(
     undefined
   );
+  const [appliedProjectsCollapsed, setAppliedProjectsCollapsed] = useState(
+    userConfig.collapseApplied ?? true
+  );
+  const [trashProjectsCollapsed, setTrashProjectsCollapsed] = useState(
+    userConfig.collapseTrash ?? true
+  );
 
   const openProjects = useMemo(
     () => projects.filter((project) => !project.completed),
     [projects]
   );
-  const completedProjects = useMemo(
+
+  const appliedProjects = useMemo(
     () =>
       projects
-        .filter((project) => project.completed)
-        .sort((left, right) => {
-          if (!left.completedAt) {
-            return 1;
-          }
+        .filter((project) => project.completed && project.applied)
+        .sort(sortProjects),
+    [projects]
+  );
 
-          if (!right.completedAt) {
-            return -1;
-          }
-
-          if (left.completedAt < right.completedAt) {
-            return 1;
-          }
-
-          if (left.completedAt > right.completedAt) {
-            return -1;
-          }
-
-          return 0;
-        }),
+  const trashProjects = useMemo(
+    () =>
+      projects
+        .filter((project) => project.completed && !project.applied)
+        .sort(sortProjects),
     [projects]
   );
 
@@ -157,12 +155,32 @@ export const useProjectSectionViewModel = () => {
     });
   };
 
+  const onSetAppliedProjectsCollapsed = () =>
+    setAppliedProjectsCollapsed((previous) => {
+      previous = !previous;
+      setUserConfig((userConfig) => {
+        userConfig.collapseApplied = previous;
+        return { ...userConfig };
+      });
+      return previous;
+    });
+
+  const onSetTrashProjectsCollapsed = () =>
+    setTrashProjectsCollapsed((previous) => {
+      previous = !previous;
+      setUserConfig((userConfig) => {
+        userConfig.collapseTrash = previous;
+        return { ...userConfig };
+      });
+      return previous;
+    });
+
   const needsDisplaySelectedProject =
     selectedProject && userConfig.openLinkInline === true;
 
   return {
-    selectedProject,
-    completedProjects,
+    appliedProjects,
+    appliedProjectsCollapsed,
     displaySettings,
     isLoading: request.isLoading,
     loadProjects,
@@ -174,7 +192,12 @@ export const useProjectSectionViewModel = () => {
     onProjectChecked,
     onProjectUnchecked,
     onReload,
+    onSetAppliedProjectsCollapsed,
+    onSetTrashProjectsCollapsed,
     onToggleDisplaySettings,
     openProjects,
+    selectedProject,
+    trashProjects,
+    trashProjectsCollapsed,
   };
 };

@@ -1,5 +1,6 @@
 export interface IUserConfig {
-  collapseCompleted: boolean;
+  collapseApplied: boolean;
+  collapseTrash: boolean;
   displaySettings: boolean;
   openLinkInline: boolean;
 }

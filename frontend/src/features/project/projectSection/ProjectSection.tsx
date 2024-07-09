@@ -6,10 +6,12 @@ import { Button } from "../../../components/button/Button";
 import { Card } from "../../../components/card/Card";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { useInitialize } from "../../../hooks/useInitialize";
-import { CompletedSection } from "../../completedSection/CompletedSection";
+import { texts } from "../../../hooks/useTranslation/texts";
+import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { Settings } from "../../settings/settings/Settings";
 import { ProjectIFrame } from "../projectIFrame/ProjectIFrame";
 import { ProjectList } from "../projectList/ProjectList";
+import { ProjectSubList } from "../projectSubList/ProjectSubList";
 import styles from "./ProjectSection.module.scss";
 import { useProjectSectionViewModel } from "./useProjectSectionViewModel";
 
@@ -17,6 +19,7 @@ import { useProjectSectionViewModel } from "./useProjectSectionViewModel";
  * This component is responsible for creating a project section
  */
 export const ProjectSection: React.FC = () => {
+  const { t } = useTranslation();
   const viewModel = useProjectSectionViewModel();
 
   useInitialize(viewModel.loadProjects);
@@ -62,14 +65,34 @@ export const ProjectSection: React.FC = () => {
               projects={viewModel.openProjects}
               selectedProject={viewModel.selectedProject}
             />
-            <div className={styles.completedSection}>
-              <CompletedSection
+            <div className={styles.projectSubSection}>
+              <ProjectSubList
+                collapsed={viewModel.appliedProjectsCollapsed}
                 onChange={viewModel.onProjectChanged}
                 onChecked={viewModel.onProjectChecked}
                 onSelectProject={viewModel.onSelectProject}
                 onUnchecked={viewModel.onProjectUnchecked}
-                projects={viewModel.completedProjects}
+                projects={viewModel.appliedProjects}
                 selectedProject={viewModel.selectedProject}
+                setCollapsed={viewModel.onSetAppliedProjectsCollapsed}
+                title={t(texts.appliedCard.applied, {
+                  numberProjects: viewModel.appliedProjects.length.toString(),
+                })}
+              />
+            </div>
+            <div className={styles.projectSubSection}>
+              <ProjectSubList
+                collapsed={viewModel.trashProjectsCollapsed}
+                onChange={viewModel.onProjectChanged}
+                onChecked={viewModel.onProjectChecked}
+                onSelectProject={viewModel.onSelectProject}
+                onUnchecked={viewModel.onProjectUnchecked}
+                projects={viewModel.trashProjects}
+                selectedProject={viewModel.selectedProject}
+                setCollapsed={viewModel.onSetTrashProjectsCollapsed}
+                title={t(texts.trashCard.trash, {
+                  numberProjects: viewModel.trashProjects.length.toString(),
+                })}
               />
             </div>
           </div>
