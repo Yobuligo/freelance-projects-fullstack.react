@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ProjectApi } from "../../../api/ProjectApi";
 import { useProjects } from "../../../hooks/useProjects";
 import { useRequest } from "../../../hooks/useRequest";
@@ -19,8 +19,35 @@ export const useProjectSectionViewModel = () => {
     undefined
   );
 
-  const openProjects = projects.filter((project) => !project.completed);
-  const completedProjects = projects.filter((project) => project.completed);
+  const openProjects = useMemo(
+    () => projects.filter((project) => !project.completed),
+    [projects]
+  );
+  const completedProjects = useMemo(
+    () =>
+      projects
+        .filter((project) => project.completed)
+        .sort((left, right) => {
+          if (!left.completedAt) {
+            return 1;
+          }
+
+          if (!right.completedAt) {
+            return -1;
+          }
+
+          if (left.completedAt < right.completedAt) {
+            return 1;
+          }
+
+          if (left.completedAt > right.completedAt) {
+            return -1;
+          }
+
+          return 0;
+        }),
+    [projects]
+  );
 
   /**
    * Loads projects from providers and merges it with the data from the local storage
@@ -83,7 +110,7 @@ export const useProjectSectionViewModel = () => {
   const onProjectChecked = (project: IProject) =>
     setProjects((previous) => {
       project.completed = true;
-      project.completedAt = new Date();
+      project.completedAt = new Date().toISOString() as unknown as Date;
       return [...previous];
     });
 
