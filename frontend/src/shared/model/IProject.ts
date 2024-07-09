@@ -5,6 +5,7 @@ export interface IProject {
   createdAt: Date;
   company: string;
   completed: boolean;
+  completedAt?: Date;
   id: string;
   location: string;
   provider: ProviderType;

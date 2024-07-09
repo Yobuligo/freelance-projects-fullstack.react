@@ -66,6 +66,7 @@ export const useProjectSectionViewModel = () => {
   const onProjectChecked = (project: IProject) => {
     setProjects((previous) => {
       project.completed = true;
+      project.completedAt = new Date();
       return [...previous];
     });
     projectIdStorage.setChecked(project);
@@ -74,6 +75,7 @@ export const useProjectSectionViewModel = () => {
   const onProjectUnchecked = (project: IProject) => {
     setProjects((previous) => {
       project.completed = false;
+      project.completedAt = undefined;
       return [...previous];
     });
     projectIdStorage.setUnchecked(project);
