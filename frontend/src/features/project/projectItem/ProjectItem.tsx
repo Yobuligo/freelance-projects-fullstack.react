@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card } from "../../../components/card/Card";
+import { Collapse } from "../../../components/collapse/Collapse";
 import { useProviderDetails } from "../../../hooks/useProviderDetails";
 import { CheckedIcon } from "../../../icons/CheckedIcon";
 import { UncheckedIcon } from "../../../icons/UncheckedIcon";
@@ -10,6 +11,7 @@ import styles from "./ProjectItem.module.scss";
 
 export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
   const [checked, setChecked] = useState(props.project.completed);
+  const [displayDetails, setDisplayDetails] = useState(false);
   const providerDetails = useProviderDetails();
 
   const onToggleChecked = () =>
@@ -56,6 +58,10 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
         </a>
         <div className={styles.location}>{props.project.location}</div>
         <div>{renderDate(props.project.createdAt)}</div>
+      </div>
+      <div className={styles.projectDetails}>
+        {displayDetails && <>Hello World</>}
+        <Collapse collapsed={displayDetails} setCollapsed={setDisplayDetails} />
       </div>
     </Card>
   );
