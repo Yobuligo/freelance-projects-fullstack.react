@@ -4,7 +4,7 @@ import { ErrorDisplay } from "./components/errorDisplay/ErrorDisplay";
 import { AppContext } from "./context/AppContext";
 import { ProjectSection } from "./features/project/projectSection/ProjectSection";
 import { ProviderDetailsContextProvider } from "./features/providerDetailsContextProvider/ProviderDetailsContextProvider";
-import { useProjectStorage } from "./hooks/useProjectStorage";
+import { useProjectsStorage } from "./hooks/useProjectsStorage";
 import { useSettingsStorage } from "./hooks/useSettingsStorage";
 import { useUserConfigStorage } from "./hooks/useUserConfigStorage";
 import "./index.scss";
@@ -14,7 +14,7 @@ export const App: React.FC = () => {
     <AppContext.Provider
       value={{
         errorMessage: useState(""),
-        projects: useProjectStorage(),
+        projects: useProjectsStorage(),
         settings: useSettingsStorage(),
         userConfig: useUserConfigStorage(),
       }}

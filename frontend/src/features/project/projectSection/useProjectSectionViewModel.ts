@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ProjectApi } from "../../../api/ProjectApi";
 import { useProjectIdStorage } from "../../../hooks/useProjectIdStorage";
+import { useProjects } from "../../../hooks/useProjects";
 import { useRequest } from "../../../hooks/useRequest";
 import { useSettings } from "../../../hooks/useSettings";
 import { useUserConfig } from "../../../hooks/useUserConfig";
@@ -9,7 +10,7 @@ import { isOlderThanHours } from "../../../utils/isOlderThan";
 
 export const useProjectSectionViewModel = () => {
   const request = useRequest();
-  const [projects, setProjects] = useState<IProject[]>([]);
+  const [projects, setProjects] = useProjects();
   const [userConfig, setUserConfig] = useUserConfig();
   const [displaySettings, setDisplaySettings] = useState(
     userConfig.displaySettings
@@ -41,6 +42,9 @@ export const useProjectSectionViewModel = () => {
     });
   };
 
+  /**
+   * Marks all projects as completed
+   */
   const onCheckAll = () =>
     setProjects((projects) => {
       projects.forEach((project) => {
@@ -52,6 +56,9 @@ export const useProjectSectionViewModel = () => {
       return [...projects];
     });
 
+  /**
+   * Marks all projects as completed, which are older than 24 hours
+   */
   const onCheckOld = () =>
     setProjects((projects) => {
       projects.forEach((project) => {
