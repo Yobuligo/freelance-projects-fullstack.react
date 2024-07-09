@@ -15,11 +15,12 @@ export class ProjectCollector implements IProjectCollector {
       const projects: IProject[] = [];
 
       try {
-        for (let i = 0; i < providerRequests.length; i++) {
-          const providerRequest = providerRequests[i];
-          const providerProjects = await this.requestProjects(providerRequest);
-          projects.push(...providerProjects);
-        }
+        // parallelize fetching data for each provider
+        const requests = providerRequests.map((providerRequest) =>
+          this.requestProjects(providerRequest)
+        );
+        const requestedProjects = await Promise.all(requests);
+        requestedProjects.forEach((items) => projects.push(...items));
       } catch (error) {
         reject(error);
       }
