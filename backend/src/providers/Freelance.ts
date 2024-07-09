@@ -87,6 +87,7 @@ export class Freelance implements IProvider {
       const url = this.getUrl(htmlSearch);
 
       const project: IProject = {
+        applied: false,
         company: "", // not available for freelance.de
         completed: false,
         createdAt,
