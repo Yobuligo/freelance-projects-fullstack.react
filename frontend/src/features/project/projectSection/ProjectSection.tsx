@@ -55,6 +55,7 @@ export const ProjectSection: React.FC = () => {
           <div>
             <ProjectList
               isLoading={viewModel.isLoading}
+              onChange={viewModel.onProjectChanged}
               onChecked={viewModel.onProjectChecked}
               onSelectProject={viewModel.onSelectProject}
               onUnchecked={viewModel.onProjectUnchecked}
@@ -63,6 +64,7 @@ export const ProjectSection: React.FC = () => {
             />
             <div className={styles.completedSection}>
               <CompletedSection
+                onChange={viewModel.onProjectChanged}
                 onChecked={viewModel.onProjectChecked}
                 onSelectProject={viewModel.onSelectProject}
                 onUnchecked={viewModel.onProjectUnchecked}

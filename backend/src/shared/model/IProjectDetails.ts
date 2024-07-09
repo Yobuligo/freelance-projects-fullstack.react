@@ -5,4 +5,5 @@ export interface IProjectDetails {
   applied: boolean;
   completed: boolean;
   completedAt?: Date;
+  contact?: string;
 }

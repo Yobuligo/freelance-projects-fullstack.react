@@ -1,6 +1,7 @@
 import { IProject } from "../../../shared/model/IProject";
+import { IProjectChangeable } from "../types/IProjectChangeable";
 
-export interface IProjectItemProps {
+export interface IProjectItemProps extends IProjectChangeable {
   isSelected: boolean;
   onChecked?: (project: IProject) => void;
   onSelect?: (project: IProject) => void;

@@ -147,6 +147,16 @@ export const useProjectSectionViewModel = () => {
     });
   };
 
+  const onProjectChanged = (project: IProject) => {
+    setProjects((previous) => {
+      const index = previous.findIndex((item) => item.id === project.id);
+      if (index !== -1) {
+        previous.splice(index, 1, project);
+      }
+      return [...previous];
+    });
+  };
+
   const needsDisplaySelectedProject =
     selectedProject && userConfig.openLinkInline === true;
 
@@ -160,6 +170,7 @@ export const useProjectSectionViewModel = () => {
     onSelectProject,
     onCheckAll,
     onCheckOld,
+    onProjectChanged,
     onProjectChecked,
     onProjectUnchecked,
     onReload,

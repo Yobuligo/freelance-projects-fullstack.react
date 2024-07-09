@@ -15,6 +15,7 @@ export const ProjectList: React.FC<IProjectListProps> = (props) => {
     <ProjectItem
       isSelected={props.selectedProject?.id === project.id}
       key={project.id}
+      onChange={props.onChange}
       onSelect={props.onSelectProject}
       onChecked={props.onChecked}
       onUnchecked={props.onUnchecked}

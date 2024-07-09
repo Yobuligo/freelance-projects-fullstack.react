@@ -61,7 +61,9 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
         <div>{renderDate(props.project.createdAt)}</div>
       </div>
       <div className={styles.projectDetails}>
-        {displayDetails && <ProjectDetails project={props.project} />}
+        {displayDetails && (
+          <ProjectDetails project={props.project} onChange={props.onChange} />
+        )}
         <Collapse collapsed={displayDetails} setCollapsed={setDisplayDetails} />
       </div>
     </Card>

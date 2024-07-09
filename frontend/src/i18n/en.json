@@ -8,7 +8,9 @@
     "projectDetails": {
         "applied": "Applied",
         "applicationType": "Application type",
-        "contact": "Contact"
+        "contact": "Contact",
+        "portal": "Portal",
+        "email": "Email"
     },
     "projectList": {
         "noProjects": "No suitable projects found",

@@ -32,6 +32,7 @@ export const CompletedSection: React.FC<ICompletedSectionProps> = (props) => {
       {!collapsed && (
         <ProjectList
           selectedProject={props.selectedProject}
+          onChange={props.onChange}
           onSelectProject={props.onSelectProject}
           onChecked={props.onChecked}
           onUnchecked={props.onUnchecked}
