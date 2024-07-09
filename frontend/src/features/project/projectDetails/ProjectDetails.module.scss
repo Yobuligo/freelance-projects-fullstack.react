@@ -1,0 +1,8 @@
+@import "../../../Variables.scss";
+
+.item {
+  display: flex;
+  flex-direction: row;
+  column-gap: $negative-space;
+  align-items: center;
+}

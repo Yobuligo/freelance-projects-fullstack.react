@@ -6,6 +6,7 @@ import { CheckedIcon } from "../../../icons/CheckedIcon";
 import { UncheckedIcon } from "../../../icons/UncheckedIcon";
 import { renderDate } from "../../../shared/utils/renderDate";
 import { style } from "../../../utils/style";
+import { ProjectDetails } from "../projectDetails/ProjectDetails";
 import { IProjectItemProps } from "./IProjectItemProps";
 import styles from "./ProjectItem.module.scss";
 
@@ -60,7 +61,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
         <div>{renderDate(props.project.createdAt)}</div>
       </div>
       <div className={styles.projectDetails}>
-        {displayDetails && <>Hello World</>}
+        {displayDetails && <ProjectDetails project={props.project} />}
         <Collapse collapsed={displayDetails} setCollapsed={setDisplayDetails} />
       </div>
     </Card>
