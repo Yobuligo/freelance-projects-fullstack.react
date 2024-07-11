@@ -3,6 +3,9 @@ import { IProject, ProjectMeta } from "../shared/model/IProject";
 import { IProviderRequests } from "./../shared/model/IProviderRequests";
 import { RESTApi } from "./RESTApi";
 
+/**
+ * This class is responsible to control the access to the data layer for projects.
+ */
 class ProjectApiDefault extends RESTApi {
   findAll(
     providerRequests: IProviderRequest[],
