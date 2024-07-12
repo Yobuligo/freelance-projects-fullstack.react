@@ -28,6 +28,16 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
     triggerChange();
   };
 
+  const onRejectChanged = (checked: boolean) => {
+    props.project.rejected = checked;
+    if (checked === true) {
+      props.project.rejectedAt = new Date().toISOString() as unknown as Date;
+    } else {
+      props.project.rejectedAt = undefined;
+    }
+    triggerChange();
+  };
+
   const onSelectPortal = () => {
     props.project.applicationType = ApplicationType.Portal;
     triggerChange();
@@ -81,6 +91,11 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
         <div className={styles.title}>{t(texts.projectDetails.applied)}</div>
         <Switch checked={props.project.applied} onChange={onApplyChanged} />
         <>{props.project.appliedAt && formatDate(props.project.appliedAt)}</>
+      </div>
+      <div className={styles.item}>
+        <div className={styles.title}>{t(texts.projectDetails.rejected)}</div>
+        <Switch checked={props.project.rejected} onChange={onRejectChanged} />
+        <>{props.project.rejectedAt && formatDate(props.project.rejectedAt)}</>
       </div>
       <div className={styles.item}>
         <div className={styles.title}>

@@ -12,8 +12,9 @@
         "applied": "Applied",
         "applicationType": "Application type",
         "contact": "Contact",
+        "email": "Email",
         "portal": "Portal",
-        "email": "Email"
+        "rejected": "Rejected"
     },
     "projectList": {
         "noProjects": "No suitable projects found",
