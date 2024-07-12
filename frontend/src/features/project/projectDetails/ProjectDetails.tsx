@@ -28,6 +28,9 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
     triggerChange();
   };
 
+  /**
+   * Switch to reject was changed
+   */
   const onRejectChanged = (checked: boolean) => {
     props.project.rejected = checked;
     if (checked === true) {
