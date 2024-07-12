@@ -15,6 +15,9 @@ class ProjectApiDefault extends RESTApi {
     return this.post(`${this.host}${ProjectMeta.path}`, requests);
   }
 
+  /**
+   * Converts the provider requests to the format which is expected from the backend.
+   */
   private convertToBackendFormat(
     providerRequests: IProviderRequest[],
     force?: boolean
