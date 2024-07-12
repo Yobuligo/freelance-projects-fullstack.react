@@ -53,6 +53,7 @@ export class FreelancerMap implements IProvider {
         id: hash.sha256().update(url).digest("hex"),
         location,
         provider: ProviderType.FreelancerMap,
+        rejected: false,
         title,
         url: this.createUrl(url),
       };

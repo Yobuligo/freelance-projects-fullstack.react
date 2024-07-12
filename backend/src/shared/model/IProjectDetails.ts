@@ -7,4 +7,6 @@ export interface IProjectDetails {
   completed: boolean;
   completedAt?: Date;
   contact?: string;
+  rejected: boolean;
+  rejectedAt?: Date;
 }
