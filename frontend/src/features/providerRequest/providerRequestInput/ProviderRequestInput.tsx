@@ -27,13 +27,6 @@ export const ProviderRequestInput: React.FC<IProviderRequestInputProps> = (
       />
 
       <LabeledInput
-        classNameInput={styles.providerUrlInput}
-        value={viewModel.providerUrl}
-        label={t(texts.providerRequestInput.providerUrl)}
-        onChange={viewModel.onChangeProviderUrl}
-      />
-
-      <LabeledInput
         classNameInput={styles.requestTitleInput}
         value={viewModel.requestTitle}
         label={t(texts.providerRequestInput.requestTitle)}
@@ -43,6 +36,13 @@ export const ProviderRequestInput: React.FC<IProviderRequestInputProps> = (
             viewModel.onAdd();
           }
         }}
+      />
+
+      <LabeledInput
+        classNameInput={styles.providerUrlInput}
+        value={viewModel.providerUrl}
+        label={t(texts.providerRequestInput.providerUrl)}
+        onChange={viewModel.onChangeProviderUrl}
       />
 
       <Button disabled={!viewModel.isInputValid()} onClick={viewModel.onAdd}>
