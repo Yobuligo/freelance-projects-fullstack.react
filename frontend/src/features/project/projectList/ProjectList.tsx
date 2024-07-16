@@ -11,6 +11,7 @@ export const ProjectList: React.FC<IProjectListProps> = (props) => {
   const { t } = useTranslation();
   const [settings] = useSettings();
 
+  console.log(`ProjectList: ${props.listAndItemColorClassName}`);
   const items = props.projects.map((project) => (
     <ProjectItem
       isSelected={props.selectedProject?.id === project.id}
@@ -20,6 +21,7 @@ export const ProjectList: React.FC<IProjectListProps> = (props) => {
       onChecked={props.onChecked}
       onUnchecked={props.onUnchecked}
       project={project}
+      className={props.listAndItemColorClassName}
     />
   ));
 

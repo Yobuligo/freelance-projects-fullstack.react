@@ -9,4 +9,5 @@ export interface IProjectListProps
   onChecked: (project: IProject) => void;
   onUnchecked: (project: IProject) => void;
   projects: IProject[];
+  listAndItemColorClassName?: string;
 }

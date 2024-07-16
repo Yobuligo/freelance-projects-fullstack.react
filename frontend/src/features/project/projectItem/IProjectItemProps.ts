@@ -7,4 +7,5 @@ export interface IProjectItemProps extends IProjectChangeable {
   onSelect?: (project: IProject) => void;
   onUnchecked?: (project: IProject) => void;
   project: IProject;
+  className?: string;
 }
