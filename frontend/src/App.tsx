@@ -1,13 +1,12 @@
 import { useState } from "react";
-import styles from "./App.module.scss";
-import { ErrorDisplay } from "./components/errorDisplay/ErrorDisplay";
+import { RouterProvider } from "react-router-dom";
 import { AppContext } from "./context/AppContext";
-import { ProjectSection } from "./features/project/projectSection/ProjectSection";
-import { ProviderDetailsContextProvider } from "./features/providerDetailsContextProvider/ProviderDetailsContextProvider";
 import { useProjectsStorage } from "./hooks/useProjectsStorage";
+import { useSessionStorage } from "./hooks/useSessionStorage";
 import { useSettingsStorage } from "./hooks/useSettingsStorage";
 import { useUserConfigStorage } from "./hooks/useUserConfigStorage";
 import "./index.scss";
+import { AppRouter } from "./routes/AppRouter";
 
 export const App: React.FC = () => {
   return (
@@ -15,16 +14,12 @@ export const App: React.FC = () => {
       value={{
         errorMessage: useState(""),
         projects: useProjectsStorage(),
+        session: useSessionStorage(),
         settings: useSettingsStorage(),
         userConfig: useUserConfigStorage(),
       }}
     >
-      <ProviderDetailsContextProvider>
-        <div className={styles.app}>
-          <ErrorDisplay />
-          <ProjectSection />
-        </div>
-      </ProviderDetailsContextProvider>
+      <RouterProvider router={AppRouter} />
     </AppContext.Provider>
   );
 };

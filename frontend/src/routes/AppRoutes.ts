@@ -1,4 +1,7 @@
 import { configureRoutes } from "./core/configureRoutes";
 import { route } from "./core/route";
 
-export const AppRoutes = configureRoutes({ login: route("/login") });
+export const AppRoutes = configureRoutes({
+  login: route("/login"),
+  projects: route("/"),
+});

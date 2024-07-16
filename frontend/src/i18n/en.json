@@ -2,11 +2,23 @@
     "appliedCard": {
         "applied": "Applied ({{numberProjects}})"
     },
-    "trashCard": {
-        "trash": "Trash ({{numberProjects}})"
-    },
     "general": {
         "unknownError": "An unknown error occurred"
+    },
+    "login": {
+        "errorLogin": "Unknown error while login",
+        "errorRegister": "Unknown error while register",
+        "login": "Login",
+        "password": "Password",
+        "register": "Register",
+        "registerText": "Register instead",
+        "successUserCreated": "User was created. Please login.",
+        "title": "Login",
+        "username": "Username"
+    },
+    "logout": {
+        "errorLogout": "Unknown error while logout",
+        "title": "Logout"
     },
     "projectDetails": {
         "applied": "Applied",
@@ -49,5 +61,8 @@
     },
     "settingsUpload": {
         "uploaded": "Uploaded"
+    },
+    "trashCard": {
+        "trash": "Trash ({{numberProjects}})"
     }
 }

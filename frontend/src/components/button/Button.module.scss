@@ -2,6 +2,15 @@
 @import "../../Mixins.scss";
 
 .button {
+  margin: 0;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  font-size: medium;
+  font-weight: 400;
+}
+
+.buttonCard {
   display: flex;
   flex-direction: row;
   align-items: center;

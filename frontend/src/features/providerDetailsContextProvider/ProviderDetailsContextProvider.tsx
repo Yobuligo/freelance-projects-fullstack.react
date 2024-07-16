@@ -7,6 +7,9 @@ import { useRequest } from "../../hooks/useRequest";
 import { IProviderDetails } from "../../shared/model/IProviderDetails";
 import { IProviderDetailsContextProvider } from "./IProviderDetailsContextProviderProps";
 
+/**
+ * A context provider which is required to load the available providers like freelance.de, freelancermap.de etc.
+ */
 export const ProviderDetailsContextProvider: React.FC<
   IProviderDetailsContextProvider
 > = (props) => {
