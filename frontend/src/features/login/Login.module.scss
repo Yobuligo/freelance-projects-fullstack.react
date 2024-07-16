@@ -1,0 +1,38 @@
+@import "../../Variables.scss";
+@import "../../styles/core/colors.module.scss";
+
+.login {
+  margin-top: 10rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30rem;
+}
+
+.loginCard {
+  display: flex;
+  flex-direction: column;
+  row-gap: $negative-space;
+  padding: 1rem;
+}
+
+.headline {
+  margin-bottom: 0;
+}
+
+.register {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+
+.errorMessage {
+  background-color: $color-error;
+  color: white;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  column-gap: $negative-space;
+  justify-content: right;
+}

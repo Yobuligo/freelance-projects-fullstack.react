@@ -2,11 +2,16 @@
     "appliedCard": {
         "applied": "Applied ({{numberProjects}})"
     },
-    "trashCard": {
-        "trash": "Trash ({{numberProjects}})"
-    },
     "general": {
         "unknownError": "An unknown error occurred"
+    },
+    "login": {
+        "cancel": "Cancel",
+        "login": "Login",
+        "password": "Password",
+        "register": "Register",
+        "title": "Login",
+        "username": "Username"
     },
     "projectDetails": {
         "applied": "Applied",
@@ -49,5 +54,8 @@
     },
     "settingsUpload": {
         "uploaded": "Uploaded"
+    },
+    "trashCard": {
+        "trash": "Trash ({{numberProjects}})"
     }
 }
