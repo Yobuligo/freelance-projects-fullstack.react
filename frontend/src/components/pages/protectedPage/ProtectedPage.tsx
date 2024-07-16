@@ -22,7 +22,9 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
     <Page>
       <div className={styles.protectedPage}>
         <div className={styles.header}>
-          <Button onClick={logout}>{t(texts.general.logout)}</Button>
+          <Button onClick={logout}>{`${t(texts.general.logout)} (${
+            session.username
+          })`}</Button>
         </div>
         <div>{props.children}</div>
       </div>
