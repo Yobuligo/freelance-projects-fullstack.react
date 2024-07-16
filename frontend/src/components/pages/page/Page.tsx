@@ -1,5 +1,6 @@
 import { IPageProps } from "./IPageProps";
+import styles from "./Page.module.scss";
 
 export const Page: React.FC<IPageProps> = (props) => {
-  return <>{props.children}</>;
+  return <div className={styles.page}>{props.children}</div>;
 };

@@ -21,7 +21,7 @@ export const useLoginViewModel = () => {
 
   const disableLoginButton = username.length === 0 || password.length === 0;
 
-  const disablePassword = username.length === 0;
+  const disablePassword = username.length === 0 && password.length === 0;
 
   const resetErrorMessage = () => setErrorMessage("");
 
@@ -53,6 +53,12 @@ export const useLoginViewModel = () => {
     }
   };
 
+  const onEnter = () => {
+    if (!disableLoginButton) {
+      onConfirm();
+    }
+  };
+
   const onRegister = async () => {
     const credentials: ICredentials = { password, username };
     try {
@@ -79,6 +85,7 @@ export const useLoginViewModel = () => {
     disablePassword,
     errorMessage,
     onConfirm,
+    onEnter,
     onToggleLoginMode,
     setPassword,
     setUsername,

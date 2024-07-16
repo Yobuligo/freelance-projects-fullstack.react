@@ -27,12 +27,14 @@ export const Login: React.FC = () => {
         <LabeledInput
           label={t(texts.login.username)}
           onChange={viewModel.setUsername}
+          onEnter={viewModel.onEnter}
           value={viewModel.username}
         />
         <LabeledInput
           disabled={viewModel.disablePassword}
           label={t(texts.login.password)}
           onChange={viewModel.setPassword}
+          onEnter={viewModel.onEnter}
           type="password"
           value={viewModel.password}
         />
@@ -53,7 +55,6 @@ export const Login: React.FC = () => {
               ? t(texts.login.login)
               : t(texts.login.register)}
           </Button>
-          <Button>{t(texts.login.cancel)}</Button>
         </div>
       </Card>
     </div>

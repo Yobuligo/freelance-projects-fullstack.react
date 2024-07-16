@@ -3,10 +3,10 @@
         "applied": "Applied ({{numberProjects}})"
     },
     "general": {
+        "logout": "Logout",
         "unknownError": "An unknown error occurred"
     },
     "login": {
-        "cancel": "Cancel",
         "errorLogin": "Unknown error while login",
         "errorRegister": "Unknown error while register",
         "login": "Login",
