@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { RouterProvider } from "react-router-dom";
 import { AppContext } from "./context/AppContext";
-import { ProviderDetailsContextProvider } from "./features/providerDetailsContextProvider/ProviderDetailsContextProvider";
 import { useProjectsStorage } from "./hooks/useProjectsStorage";
 import { useSettingsStorage } from "./hooks/useSettingsStorage";
 import { useUserConfigStorage } from "./hooks/useUserConfigStorage";
@@ -18,9 +17,7 @@ export const App: React.FC = () => {
         userConfig: useUserConfigStorage(),
       }}
     >
-      <ProviderDetailsContextProvider>
-        <RouterProvider router={AppRouter} />
-      </ProviderDetailsContextProvider>
+      <RouterProvider router={AppRouter} />
     </AppContext.Provider>
   );
 };

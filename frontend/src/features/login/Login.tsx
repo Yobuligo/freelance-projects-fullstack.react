@@ -40,7 +40,10 @@ export const Login: React.FC = () => {
             : t(texts.login.login)}
         </button>
         <div className={styles.footer}>
-          <Button disabled={viewModel.disableLoginButton}>
+          <Button
+            disabled={viewModel.disableLoginButton}
+            onClick={viewModel.onConfirm}
+          >
             {viewModel.loginMode
               ? t(texts.login.login)
               : t(texts.login.register)}

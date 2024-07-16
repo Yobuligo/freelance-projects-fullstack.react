@@ -4,7 +4,7 @@ import { RESTApi } from "./RESTApi";
 
 class UserApiDefault extends RESTApi {
   login(credentials: ICredentials): Promise<ISession> {
-    throw new Error("Not yet implemented");
+    return this.post(`${this.host}/login`, credentials);
   }
 
   register(credentials: ICredentials) {
