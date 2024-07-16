@@ -78,6 +78,7 @@ export const ProjectSection: React.FC = () => {
                 title={t(texts.appliedCard.applied, {
                   numberProjects: viewModel.appliedProjects.length.toString(),
                 })}
+                listAndItemColorClassName={styles.itemApplied}
               />
             </div>
             <div className={styles.projectSubSection}>
@@ -93,6 +94,7 @@ export const ProjectSection: React.FC = () => {
                 title={t(texts.trashCard.trash, {
                   numberProjects: viewModel.trashProjects.length.toString(),
                 })}
+                listAndItemColorClassName={styles.itemTrash}
               />
             </div>
           </div>

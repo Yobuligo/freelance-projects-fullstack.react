@@ -32,7 +32,8 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
     <Card
       className={style(
         styles.projectItem,
-        props.isSelected ? styles.projectItemSelected : ""
+        props.isSelected ? styles.projectItemSelected : "",
+        props.className
       )}
     >
       <div className={styles.projectItemIcon}>

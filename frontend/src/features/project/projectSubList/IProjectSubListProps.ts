@@ -11,4 +11,5 @@ export interface IProjectSubListProps
   projects: IProject[];
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
+  listAndItemColorClassName?: string;
 }
