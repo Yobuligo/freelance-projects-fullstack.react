@@ -2,6 +2,7 @@ import { useState } from "react";
 import { RouterProvider } from "react-router-dom";
 import { AppContext } from "./context/AppContext";
 import { useProjectsStorage } from "./hooks/useProjectsStorage";
+import { useSessionStorage } from "./hooks/useSessionStorage";
 import { useSettingsStorage } from "./hooks/useSettingsStorage";
 import { useUserConfigStorage } from "./hooks/useUserConfigStorage";
 import "./index.scss";
@@ -13,6 +14,7 @@ export const App: React.FC = () => {
       value={{
         errorMessage: useState(""),
         projects: useProjectsStorage(),
+        session: useSessionStorage(),
         settings: useSettingsStorage(),
         userConfig: useUserConfigStorage(),
       }}

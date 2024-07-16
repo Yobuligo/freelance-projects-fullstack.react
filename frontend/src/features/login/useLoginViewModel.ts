@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserApi } from "../../api/UserApi";
+import { useSession } from "../../hooks/useSession";
 import { useToggle } from "../../hooks/useToggle";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
+import { AppRoutes } from "../../routes/AppRoutes";
 import { ICredentials } from "../../shared/model/ICredentials";
 import { isError } from "../../shared/utils/isError";
 
@@ -13,6 +16,8 @@ export const useLoginViewModel = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginMode, toggleLoginMode] = useToggle(true);
+  const [, setSession] = useSession();
+  const navigate = useNavigate();
 
   const disableLoginButton = username.length === 0 || password.length === 0;
 
@@ -37,6 +42,8 @@ export const useLoginViewModel = () => {
     const credentials: ICredentials = { password, username };
     try {
       const session = await UserApi.login(credentials);
+      setSession(session);
+      navigate(AppRoutes.projects.toPath());
     } catch (error) {
       if (isError(error)) {
         updateErrorMessage(error.message);
