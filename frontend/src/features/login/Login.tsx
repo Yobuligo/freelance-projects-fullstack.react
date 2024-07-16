@@ -19,6 +19,11 @@ export const Login: React.FC = () => {
         {viewModel.errorMessage && (
           <Card className={styles.errorMessage}>{viewModel.errorMessage}</Card>
         )}
+        {viewModel.successMessage && (
+          <Card className={styles.successMessage}>
+            {viewModel.successMessage}
+          </Card>
+        )}
         <LabeledInput
           label={t(texts.login.username)}
           onChange={viewModel.setUsername}

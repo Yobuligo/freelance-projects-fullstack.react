@@ -37,6 +37,11 @@
   color: white;
 }
 
+.successMessage {
+  background-color: $color-success;
+  color: white;
+}
+
 .footer {
   display: flex;
   flex-direction: row;

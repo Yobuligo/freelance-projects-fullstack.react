@@ -7,10 +7,13 @@
     },
     "login": {
         "cancel": "Cancel",
+        "errorLogin": "Unknown error while login",
+        "errorRegister": "Unknown error while register",
         "login": "Login",
         "password": "Password",
         "register": "Register",
         "registerText": "Register instead",
+        "successUserCreated": "User was created. Please login.",
         "title": "Login",
         "username": "Username"
     },
