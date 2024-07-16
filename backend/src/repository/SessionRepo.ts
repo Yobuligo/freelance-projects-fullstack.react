@@ -1,12 +1,17 @@
+import { IUser } from "../model/IUser";
 import { ISession } from "../shared/model/ISession";
 import { uuid } from "../utils/uuid";
 
 class SessionRepoDefault {
   private sessions: ISession[] = [];
 
-  createUserSession(username: string): ISession {
-    this.deleteUserSession(username);
-    const session: ISession = { id: uuid(), username: username };
+  createUserSession(user: IUser): ISession {
+    this.deleteUserSession(user.username);
+    const session: ISession = {
+      id: uuid(),
+      userId: user.id,
+      username: user.username,
+    };
     this.sessions.push(session);
     return session;
   }
@@ -19,9 +24,9 @@ class SessionRepoDefault {
     } else return false;
   }
 
-  deleteUserSession(username: string) {
+  deleteUserSession(userId: string) {
     const index = this.sessions.findIndex(
-      (session) => session.username === username
+      (session) => session.userId === userId
     );
     this.sessions.splice(index, 1);
   }

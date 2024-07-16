@@ -23,7 +23,7 @@ export class UserController {
           .status(404)
           .send(createError(`Incorrect username or password.`));
       }
-      const session = SessionRepo.createUserSession(credentials.username);
+      const session = SessionRepo.createUserSession(user);
       res.status(201).send(session);
     });
   }
