@@ -1,6 +1,6 @@
-import { Button } from "../../components/button/Button";
 import { Card } from "../../components/card/Card";
 import { LabeledInput } from "../../components/labeledInput/LabeledInput";
+import { SpinnerButton } from "../../components/spinnerButton/SpinnerButton";
 import { texts } from "../../hooks/useTranslation/texts";
 import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import styles from "./Login.module.scss";
@@ -47,14 +47,15 @@ export const Login: React.FC = () => {
             : t(texts.login.login)}
         </button>
         <div className={styles.footer}>
-          <Button
+          <SpinnerButton
             disabled={viewModel.disableLoginButton}
+            displaySpinner={viewModel.displaySpinner}
             onClick={viewModel.onConfirm}
           >
             {viewModel.loginMode
               ? t(texts.login.login)
               : t(texts.login.register)}
-          </Button>
+          </SpinnerButton>
         </div>
       </Card>
     </div>

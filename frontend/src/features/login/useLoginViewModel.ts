@@ -16,6 +16,7 @@ export const useLoginViewModel = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginMode, toggleLoginMode] = useToggle(true);
+  const [displaySpinner, setDisplaySpinner] = useState(false);
   const [, setSession] = useSession();
   const navigate = useNavigate();
 
@@ -30,6 +31,11 @@ export const useLoginViewModel = () => {
     setSuccessMessage("");
   };
 
+  const updateSuccessMessage = (successMessage: string) => {
+    setErrorMessage("");
+    setSuccessMessage(successMessage);
+  };
+
   const onConfirm = () => {
     if (loginMode) {
       onLogin();
@@ -39,6 +45,7 @@ export const useLoginViewModel = () => {
   };
 
   const onLogin = async () => {
+    setDisplaySpinner(true);
     const credentials: ICredentials = { password, username };
     try {
       const session = await UserApi.login(credentials);
@@ -51,6 +58,7 @@ export const useLoginViewModel = () => {
         updateErrorMessage(t(texts.login.errorLogin));
       }
     }
+    setDisplaySpinner(false);
   };
 
   const onEnter = () => {
@@ -60,10 +68,11 @@ export const useLoginViewModel = () => {
   };
 
   const onRegister = async () => {
+    setDisplaySpinner(true);
     const credentials: ICredentials = { password, username };
     try {
       await UserApi.register(credentials);
-      setSuccessMessage(t(texts.login.successUserCreated));
+      updateSuccessMessage(t(texts.login.successUserCreated));
       toggleLoginMode(true);
       setPassword("");
     } catch (error) {
@@ -73,6 +82,7 @@ export const useLoginViewModel = () => {
         updateErrorMessage(t(texts.login.errorRegister));
       }
     }
+    setDisplaySpinner(false);
   };
 
   const onToggleLoginMode = () => {
@@ -83,6 +93,7 @@ export const useLoginViewModel = () => {
   return {
     disableLoginButton,
     disablePassword,
+    displaySpinner,
     errorMessage,
     onConfirm,
     onEnter,

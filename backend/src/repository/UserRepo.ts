@@ -8,6 +8,9 @@ class UserRepoDefault {
 
   createUser(credentials: ICredentials): IUser | undefined {
     const password = this.hashPassword(credentials.password);
+    const pepper = this.hashPassword(uuid());
+    console.log(pepper);
+
     const user: IUser = {
       id: uuid(),
       password: password,
