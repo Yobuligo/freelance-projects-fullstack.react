@@ -13,7 +13,9 @@ export const Login: React.FC = () => {
   return (
     <div className={styles.login}>
       <Card className={styles.loginCard}>
-        <h3 className={styles.headline}>{t(texts.login.title)}</h3>
+        <h3 className={styles.headline}>
+          {viewModel.loginMode ? t(texts.login.title) : t(texts.login.register)}
+        </h3>
         {viewModel.errorMessage && (
           <Card className={styles.errorMessage}>{viewModel.errorMessage}</Card>
         )}
@@ -29,10 +31,19 @@ export const Login: React.FC = () => {
           type="password"
           value={viewModel.password}
         />
-        <div className={styles.register}>{t(texts.login.register)}</div>
+        <button
+          className={styles.register}
+          onClick={viewModel.onToggleLoginMode}
+        >
+          {viewModel.loginMode
+            ? t(texts.login.registerText)
+            : t(texts.login.login)}
+        </button>
         <div className={styles.footer}>
           <Button disabled={viewModel.disableLoginButton}>
-            {t(texts.login.login)}
+            {viewModel.loginMode
+              ? t(texts.login.login)
+              : t(texts.login.register)}
           </Button>
           <Button>{t(texts.login.cancel)}</Button>
         </div>

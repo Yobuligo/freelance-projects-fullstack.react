@@ -22,6 +22,10 @@
 .register {
   display: flex;
   flex-direction: row;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  color: white;
   justify-content: right;
   &:hover {
     cursor: pointer;

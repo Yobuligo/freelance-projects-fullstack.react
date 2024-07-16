@@ -10,6 +10,7 @@
         "login": "Login",
         "password": "Password",
         "register": "Register",
+        "registerText": "Register instead",
         "title": "Login",
         "username": "Username"
     },
