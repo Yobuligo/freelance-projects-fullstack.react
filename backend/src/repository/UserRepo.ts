@@ -17,6 +17,7 @@ class UserRepoDefault {
       username: credentials.username,
       password: password,
       salt,
+      createdAt: new Date(),
     };
     this.users.push(user);
     return user;
