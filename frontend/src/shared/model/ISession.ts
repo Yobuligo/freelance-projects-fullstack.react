@@ -1,4 +1,6 @@
-export interface ISession {
-  id: string;
+import { IEntity } from "../types/IEntity";
+
+export interface ISession extends IEntity {
+  userId: string;
   username: string;
 }
