@@ -11,6 +11,7 @@ class SessionRepoDefault {
       id: uuid(),
       userId: user.id,
       username: user.username,
+      createdAt: new Date(),
     };
     this.sessions.push(session);
     return session;
