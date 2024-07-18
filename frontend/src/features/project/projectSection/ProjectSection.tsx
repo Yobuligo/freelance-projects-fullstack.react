@@ -41,6 +41,7 @@ export const ProjectSection: React.FC = () => {
         </Button>
         <Button onClick={viewModel.onCheckOld}>
           <CheckOldIcon className={styles.icon} />
+          {t(texts.projectSection.tickOld)}
         </Button>
       </Toolbar>
 

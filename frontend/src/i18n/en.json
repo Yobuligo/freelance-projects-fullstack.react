@@ -33,7 +33,8 @@
         "noProjectsExtended": "No suitable projects found. Please open the settings and add provider from which the projects should be fetched."
     },
     "projectSection": {
-        "captionReloadButton": "Reload"
+        "captionReloadButton": "Reload",
+        "tickOld": "Tick old"
     },
     "providerRequestInput": {
         "providerType": "Provider Type",
