@@ -1,9 +1,15 @@
-import { DataTypes, Model, ModelStatic } from "sequelize";
+import {
+  DataTypes,
+  HasManyGetAssociationsMixin,
+  Model,
+  ModelStatic,
+} from "sequelize";
+import { db } from "../db/db";
 import { IProject } from "../shared/model/IProject";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
-import { db } from "../db/db";
+import { UserProjects } from "./UserProjects";
 
-export const Projects: ModelStatic<Model<IProject, IEntityDetails<IProject>>> =
+const projects: ModelStatic<Model<IProject, IEntityDetails<IProject>>> =
   db.define("projects", {
     providerType: DataTypes.INTEGER,
     company: DataTypes.STRING,
@@ -11,3 +17,7 @@ export const Projects: ModelStatic<Model<IProject, IEntityDetails<IProject>>> =
     title: DataTypes.STRING,
     url: DataTypes.STRING,
   });
+
+export class Projects extends projects {
+  declare getUserProjects: HasManyGetAssociationsMixin<UserProjects>;
+}
