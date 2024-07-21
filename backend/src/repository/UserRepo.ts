@@ -4,9 +4,8 @@ import { hash } from "../utils/hash";
 import { uuid } from "../utils/uuid";
 
 class UserRepoDefault {
-  private PEPPER =
-    "c894eed9031e71867d76ca1784fadb0a87ca7cd4b83e2c5603a818d2616576f8";
   private users: IUser[] = [];
+  PEPPER: any;
 
   createUser(credentials: ICredentials): IUser | undefined {
     const salt = hash(uuid());
@@ -18,6 +17,7 @@ class UserRepoDefault {
       password: password,
       salt,
       createdAt: new Date(),
+      updatedAt: new Date(),
     };
     this.users.push(user);
     return user;
