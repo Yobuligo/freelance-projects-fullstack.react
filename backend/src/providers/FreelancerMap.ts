@@ -50,6 +50,7 @@ export class FreelancerMap implements IProvider {
         company,
         completed: false,
         createdAt: this.parseDate(createdDate),
+        updatedAt: this.parseDate(createdDate),
         id: hash.sha256().update(url).digest("hex"),
         location,
         provider: ProviderType.FreelancerMap,

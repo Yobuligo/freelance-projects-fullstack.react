@@ -10,4 +10,5 @@ export const AppConfig = {
   DB_PASSWORD: process.env.DB_PASSWORD,
   PEPPER: "c894eed9031e71867d76ca1784fadb0a87ca7cd4b83e2c5603a818d2616576f8",
   SERVER_PORT: parseInt(process.env.SERVER_PORT!),
+  NEW_IMPLEMENTATION: process.env.NEW_IMPLEMENTATION,
 };

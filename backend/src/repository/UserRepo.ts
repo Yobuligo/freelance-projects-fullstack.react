@@ -1,15 +1,15 @@
 import { IUser } from "../model/IUser";
 import { ICredentials } from "../shared/model/ICredentials";
 import { hash } from "../utils/hash";
+import { hashPassword } from "../utils/hashPassword";
 import { uuid } from "../utils/uuid";
 
 class UserRepoDefault {
   private users: IUser[] = [];
-  PEPPER: any;
 
-  createUser(credentials: ICredentials): IUser | undefined {
+  createUser(credentials: ICredentials): IUser {
     const salt = hash(uuid());
-    const password = this.hashPassword(credentials.password, salt);
+    const password = hashPassword(credentials.password, salt);
 
     const user: IUser = {
       id: uuid(),
@@ -28,7 +28,7 @@ class UserRepoDefault {
     if (!user) {
       return;
     }
-    const password = this.hashPassword(credentials.password, user.salt);
+    const password = hashPassword(credentials.password, user.salt);
     if (password === user.password) {
       return user;
     }
@@ -37,10 +37,6 @@ class UserRepoDefault {
 
   findByUsername(username: string): IUser | undefined {
     return this.users.find((user) => user.username === username);
-  }
-
-  private hashPassword(password: string, salt: string): string {
-    return hash(`${password}-${salt}-${this.PEPPER}`);
   }
 }
 

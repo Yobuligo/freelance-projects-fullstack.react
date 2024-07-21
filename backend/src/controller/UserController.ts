@@ -2,8 +2,9 @@ import { Router } from "express";
 import { SessionRepo } from "../repository/SessionRepo";
 import { UserRepo } from "../repository/UserRepo";
 import { ICredentials } from "../shared/model/ICredentials";
-import { createError } from "../shared/utils/createError";
 import { ISession } from "../shared/model/ISession";
+import { createError } from "../shared/utils/createError";
+import { UserRepository } from "../repository/UserRepository";
 
 export class UserController {
   readonly router = Router();
@@ -17,6 +18,7 @@ export class UserController {
   private login() {
     this.router.post("/users/login", (req, res) => {
       const credentials: ICredentials = req.body;
+
       const user = UserRepo.findByCredentials(credentials);
       if (!user) {
         return res
@@ -39,11 +41,15 @@ export class UserController {
   private register() {
     this.router.post("/users/register", (req, res) => {
       const credentials: ICredentials = req.body;
+
+      const userRepository = new UserRepository();
       const user = UserRepo.findByUsername(credentials.username);
       if (user) {
         return res.status(409).send(createError(`User already exists.`));
       }
       UserRepo.createUser(credentials);
+      userRepository.createUser(credentials);
+
       return res.status(201).send(true);
     });
   }

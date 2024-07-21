@@ -91,6 +91,7 @@ export class Freelance implements IProvider {
         company: "", // not available for freelance.de
         completed: false,
         createdAt,
+        updatedAt: createdAt,
         id: hash.sha256().update(url).digest("hex"),
         location,
         provider: ProviderType.Freelance,

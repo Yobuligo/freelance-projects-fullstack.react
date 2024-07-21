@@ -9,6 +9,7 @@ class SessionRepoDefault {
     this.deleteUserSession(user.username);
     const session: ISession = {
       id: uuid(),
+      expiresAt: new Date(), // Todo - take a valid date
       userId: user.id,
       username: user.username,
       createdAt: new Date(),
