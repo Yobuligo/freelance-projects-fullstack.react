@@ -1,38 +1,30 @@
 import { IUser } from "../model/IUser";
+import { Sessions } from "../model/Sessions";
 import { ISession } from "../shared/model/ISession";
-import { uuid } from "../utils/uuid";
+import { ParentRepository } from "./core/ParentRepository";
 
-class SessionRepoDefault {
-  private sessions: ISession[] = [];
+export class SessionRepo extends ParentRepository<ISession> {
+  constructor() {
+    super(Sessions);
+  }
 
-  createUserSession(user: IUser): ISession {
-    this.deleteUserSession(user.username);
-    const session: ISession = {
-      id: uuid(),
+  async createUserSession(user: IUser): Promise<ISession> {
+    await this.deleteUserSession(user.username);
+    const session = await this.add({
       expiresAt: new Date(), // Todo - take a valid date
       userId: user.id,
       username: user.username,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    this.sessions.push(session);
+    });
+
     return session;
   }
 
-  deleteSession(session: ISession): boolean {
-    const index = this.sessions.findIndex((item) => item.id === session.id);
-    if (index !== -1) {
-      this.sessions.splice(index, 1);
-      return true;
-    } else return false;
+  async deleteSession(session: ISession): Promise<boolean> {
+    const count = await this.model.destroy({ where: { id: session.id } });
+    return count === 1;
   }
 
-  deleteUserSession(userId: string) {
-    const index = this.sessions.findIndex(
-      (session) => session.userId === userId
-    );
-    this.sessions.splice(index, 1);
+  async deleteUserSession(userId: string) {
+    await this.model.destroy({ where: { userId } });
   }
 }
-
-export const SessionRepo = new SessionRepoDefault();
