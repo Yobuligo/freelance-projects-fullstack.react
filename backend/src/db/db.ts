@@ -1,11 +1,14 @@
+import { configDotenv } from "dotenv";
 import { Sequelize } from "sequelize";
 import { AppConfig } from "../AppConfig";
 
+// configDotenv();
+
 export const db = new Sequelize({
-  dialect: AppConfig.DB_DIALECT,
-  host: AppConfig.DB_HOST,
-  port: AppConfig.DB_PORT,
-  database: AppConfig.DB_NAME,
-  username: AppConfig.DB_USERNAME,
-  password: AppConfig.DB_PASSWORD,
+  dialect: "mariadb",
+  host: "localhost",
+  port: 3306,
+  database: "freelancer-app",
+  username: "root",
+  password: "master",
 });

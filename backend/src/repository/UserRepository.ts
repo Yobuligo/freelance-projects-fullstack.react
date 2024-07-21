@@ -40,7 +40,7 @@ export class UserRepository extends ParentRepository<IUser> {
   }
 
   async findByUsername(username: string): Promise<IUser | undefined> {
-    const data = await this.model.findOne({ where: { username } });
-    return data?.dataValues;
+    const user = await this.findFirst({ username });
+    return user;
   }
 }

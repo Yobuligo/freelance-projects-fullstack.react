@@ -1,11 +1,13 @@
-import { configDotenv } from "dotenv";
 import express from "express";
 import { ProjectController } from "./controller/ProjectController";
 import { ProviderDetailsController } from "./controller/ProviderDetailsController";
 import { ProviderMetaController } from "./controller/ProviderMetaController";
 import { UserController } from "./controller/UserController";
+import { Sessions } from "./model/Sessions";
+import { Users } from "./model/Users";
 
-configDotenv();
+Users.sync();
+Sessions.sync();
 
 const server = express();
 server.use(express.json());
