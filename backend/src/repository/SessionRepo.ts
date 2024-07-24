@@ -20,8 +20,7 @@ export class SessionRepo extends Repository<ISession> {
   }
 
   async deleteSession(session: ISession): Promise<boolean> {
-    const count = await this.model.destroy({ where: { id: session.id } });
-    return count === 1;
+    return await this.deleteById(session.id);
   }
 
   async deleteUserSession(userId: string) {

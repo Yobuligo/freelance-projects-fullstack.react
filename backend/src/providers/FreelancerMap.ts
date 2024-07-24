@@ -46,12 +46,12 @@ export class FreelancerMap implements IProvider {
       const url = htmlSearch.className("project-title").firstAttrValue("href");
 
       const project: IProject = {
+        id: 0,
         applied: false,
         company,
         completed: false,
         createdAt: this.parseDate(createdDate),
         updatedAt: this.parseDate(createdDate),
-        id: hash.sha256().update(url).digest("hex"),
         location,
         provider: ProviderType.FreelancerMap,
         rejected: false,

@@ -87,12 +87,12 @@ export class Freelance implements IProvider {
       const url = this.getUrl(htmlSearch);
 
       const project: IProject = {
+        id: 0,
         applied: false,
         company: "", // not available for freelance.de
         completed: false,
         createdAt,
         updatedAt: createdAt,
-        id: hash.sha256().update(url).digest("hex"),
         location,
         provider: ProviderType.Freelance,
         rejected: false,

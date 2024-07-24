@@ -14,62 +14,53 @@ export abstract class Repository<T extends IEntity> implements IRepository<T> {
   /**
    * Adds an entity by its data
    */
-  add(entity: IEntityDetails<T>): Promise<T> {
-    return new Promise(async (resolve, _) => {
-      const data = await this.model.create(entity as any);
-      const newEntity = data.dataValues;
-      resolve(newEntity);
-    });
+  async add(entity: IEntityDetails<T>): Promise<T> {
+    const data = await this.model.create(entity as any);
+    return data.toJSON();
   }
 
   /**
    * Deletes an entity by its id
    */
-  deleteById(id: number): Promise<boolean> {
-    return new Promise(async (resolve) => {
-      const count = await this.model.destroy({
-        where: {
-          id: id,
-        } as WhereOptions,
-      });
-      resolve(count === 1);
+  async deleteById(id: number): Promise<boolean> {
+    const count = await this.model.destroy({
+      where: {
+        id: id,
+      } as WhereOptions,
     });
+    return count === 1;
   }
 
   /**
    * Returns all instances of that type
    */
-  findAll(filter?: IFilterConfig<T> | undefined): Promise<T[]> {
-    return new Promise(async (resolve) => {
-      let data;
-      if (filter) {
-        data = await this.model.findAll({ where: filter as WhereOptions });
-      } else {
-        data = await this.model.findAll();
-      }
-      const entities = data.map((entity) => entity.toJSON());
-      resolve(entities);
-    });
+  async findAll(filter?: IFilterConfig<T> | undefined): Promise<T[]> {
+    let data;
+    if (filter) {
+      data = await this.model.findAll({ where: filter as WhereOptions });
+    } else {
+      data = await this.model.findAll();
+    }
+    const entities = data.map((entity) => entity.toJSON());
+    return entities;
   }
 
   /**
    * Finds an entity by its id
    */
-  findById(id: number): Promise<T | undefined> {
-    return new Promise(async (resolve) => {
-      const data = await this.model.findByPk(id);
-      resolve(data?.toJSON());
-    });
+  async findById(id: number): Promise<T | undefined> {
+    const data = await this.model.findByPk(id);
+    return data?.toJSON();
   }
 
   /**
    * Returns the first item of that type
    */
-  findFirst(filter?: IFilterConfig<T> | undefined): Promise<T | undefined> {
-    return new Promise(async (resolve) => {
-      const data = await this.model.findOne({ where: filter as WhereOptions });
-      resolve(data?.toJSON());
-    });
+  async findFirst(
+    filter?: IFilterConfig<T> | undefined
+  ): Promise<T | undefined> {
+    const data = await this.model.findOne({ where: filter as WhereOptions });
+    return data?.toJSON();
   }
 
   version(id: number): Promise<Date> {
