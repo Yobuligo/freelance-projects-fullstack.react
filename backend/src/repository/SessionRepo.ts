@@ -1,9 +1,9 @@
 import { IUser } from "../model/IUser";
 import { Sessions } from "../model/Sessions";
 import { ISession } from "../shared/model/ISession";
-import { ParentRepository } from "./core/ParentRepository";
+import { Repository } from "./core/Repository";
 
-export class SessionRepo extends ParentRepository<ISession> {
+export class SessionRepo extends Repository<ISession> {
   constructor() {
     super(Sessions);
   }

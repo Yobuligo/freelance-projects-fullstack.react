@@ -4,9 +4,9 @@ import { ICredentials } from "../shared/model/ICredentials";
 import { hash } from "../utils/hash";
 import { hashPassword } from "../utils/hashPassword";
 import { uuid } from "../utils/uuid";
-import { ParentRepository } from "./core/ParentRepository";
+import { Repository } from "./core/Repository";
 
-export class UserRepo extends ParentRepository<IUser> {
+export class UserRepo extends Repository<IUser> {
   constructor() {
     super(Users);
   }
