@@ -12,9 +12,15 @@ import { UserProjects } from "./UserProjects";
 const users: ModelStatic<Model<IUser, IEntityDetails<IUser>>> = db.define(
   "users",
   {
-    password: DataTypes.STRING,
+    username: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    },
+    password: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    },
     salt: DataTypes.STRING,
-    username: DataTypes.STRING,
   }
 );
 
