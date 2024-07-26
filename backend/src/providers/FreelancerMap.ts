@@ -46,7 +46,7 @@ export class FreelancerMap implements IProvider {
       const url = htmlSearch.className("project-title").firstAttrValue("href");
 
       const project: IProject = {
-        id: 0,
+        id: "0",
         applied: false,
         company,
         completed: false,
