@@ -1,7 +1,7 @@
-import { AppConfig } from "../AppConfig";
-import { IError } from "../shared/model/IError";
-import { createError } from "../shared/utils/createError";
-import { isError } from "../shared/utils/isError";
+import { AppConfig } from "../../AppConfig";
+import { IError } from "../../shared/model/IError";
+import { createError } from "../../shared/utils/createError";
+import { isError } from "../../shared/utils/isError";
 
 export abstract class RESTApi {
   protected get<T>(url: string): Promise<T> {

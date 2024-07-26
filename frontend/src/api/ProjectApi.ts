@@ -1,7 +1,7 @@
 import { IProviderRequest } from "../model/IProviderRequest";
 import { IProject, ProjectMeta } from "../shared/model/IProject";
 import { IProviderRequests } from "./../shared/model/IProviderRequests";
-import { RESTApi } from "./RESTApi";
+import { RESTApi } from "./core/RESTApi";
 
 /**
  * This class is responsible to control the access to the data layer for projects.

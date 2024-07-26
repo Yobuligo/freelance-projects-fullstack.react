@@ -2,7 +2,7 @@ import {
   IProviderDetails,
   ProviderDetailsMeta,
 } from "../shared/model/IProviderDetails";
-import { RESTApi } from "./RESTApi";
+import { RESTApi } from "./core/RESTApi";
 
 class ProviderDetailsApiDefault extends RESTApi {
   findAll(): Promise<IProviderDetails[]> {
