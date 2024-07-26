@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ProjectRepo } from "../repository/ProjectRepo";
-import { UserRepo } from "../repository/UserRepo";
+import { SessionRepo } from "../repository/SessionRepo";
 import { ProjectCollector } from "../services/projectCollector/ProjectCollector";
 import { ProjectMeta } from "../shared/model/IProject";
 import { IProviderRequests } from "../shared/model/IProviderRequests";
@@ -8,7 +8,6 @@ import { NetworkInfo } from "../shared/services/NetworkInfo";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
 import { sortProjects } from "../utils/sortProjects";
-import { SessionRepo } from "../repository/SessionRepo";
 
 export class ProjectController {
   readonly router = Router();
@@ -23,10 +22,9 @@ export class ProjectController {
         return res.status(502).send(createError("Missing internet connection"));
       }
 
-      try {
-        const sessionRepo = new SessionRepo();
-        await sessionRepo.checkSession(req.params.id);
-      } catch (error) {
+      const sessionRepo = new SessionRepo();
+      const session = await sessionRepo.findById(parseInt(req.params.id));
+      if (!session) {
         return res.status(401).send(createError("Invalid user session"));
       }
 
@@ -43,6 +41,7 @@ export class ProjectController {
         await projectRepo.modify(sortedProjects);
 
         // find user projects for projects
+        
 
         // insert new user projects if not yet exist
 

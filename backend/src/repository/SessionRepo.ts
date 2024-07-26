@@ -19,7 +19,7 @@ export class SessionRepo extends Repository<ISession> {
     return session;
   }
 
-  async checkSession(id: string) {
+  async validate(id: string) {
     const session = await this.model.findByPk(id);
     if (!session) {
       throw new Error(`Invalid session`);
