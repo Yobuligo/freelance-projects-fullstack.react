@@ -1,21 +1,25 @@
 import { AppConfig } from "../../AppConfig";
 import { IError } from "../../shared/model/IError";
+import { HaveTokenMeta } from "../../shared/types/IHaveToken";
 import { createError } from "../../shared/utils/createError";
 import { isError } from "../../shared/utils/isError";
+import { SessionRepo } from "./SessionRepo";
 
 export abstract class RESTApi {
   protected get<T>(url: string): Promise<T> {
-    return this.createPromise(url, async () => {
-      return await fetch(url, {
+    const extendedUrl = this.extendUrl(url);
+    return this.createPromise(extendedUrl, async () => {
+      return await fetch(extendedUrl, {
         method: "GET",
       });
     });
   }
 
   protected post<T>(url: string, data: any): Promise<T> {
-    return this.createPromise(url, async () => {
+    const extendedUrl = this.extendUrl(url);
+    return this.createPromise(extendedUrl, async () => {
       const body = JSON.stringify(data);
-      return await fetch(url, {
+      return await fetch(extendedUrl, {
         body: body,
         headers: {
           "Content-Type": "application/json",
@@ -63,5 +67,15 @@ export abstract class RESTApi {
 
   private createFetchError(url: string): IError {
     return createError(`Error while fetching data from '${url}'`);
+  }
+
+  /**
+   * Extends the url, e.g. by adding a the session token
+   */
+  private extendUrl(url: string): string {
+    if (SessionRepo.instance.session) {
+      return `${url}?${HaveTokenMeta.path}=${SessionRepo.instance.session.id}`;
+    }
+    return url;
   }
 }
