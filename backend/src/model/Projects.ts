@@ -11,9 +11,9 @@ import { UserProjects } from "./UserProjects";
 
 const projects: ModelStatic<Model<IProject, IEntityDetails<IProject>>> =
   db.define("projects", {
-    providerType: DataTypes.INTEGER,
     company: DataTypes.STRING,
     location: DataTypes.STRING,
+    provider: DataTypes.STRING,    
     title: DataTypes.STRING,
     url: DataTypes.STRING,
   });

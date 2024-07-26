@@ -9,6 +9,10 @@ export class ProjectRepo extends Repository<IProject> {
   }
 
   async addAllIfNotExist(projects: IEntityDetails<IProject>[]) {
+    if (projects.length === 0) {
+      return;
+    }
+
     const urls = projects.map((project) => project.url);
     const existingProjectData = await this.model.findAll({
       where: { url: urls },

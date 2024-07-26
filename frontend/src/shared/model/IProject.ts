@@ -7,6 +7,7 @@ export interface IProject extends IProjectDetails, IEntity {
   company: string;
   location: string;
   provider: ProviderType;
+  publishedAt: Date;
   title: string;
   url: string;
 }

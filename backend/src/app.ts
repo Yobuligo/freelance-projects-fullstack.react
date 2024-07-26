@@ -8,10 +8,10 @@ import { Sessions } from "./model/Sessions";
 import { UserProjects } from "./model/UserProjects";
 import { Users } from "./model/Users";
 
-Users.sync();
-Sessions.sync();
-Projects.sync();
-UserProjects.sync();
+Users.sync({ alter: true });
+Sessions.sync({ alter: true });
+Projects.sync({ alter: true });
+UserProjects.sync({ alter: true });
 
 const server = express();
 server.use(express.json());

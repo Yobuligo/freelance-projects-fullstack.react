@@ -33,6 +33,8 @@ export class ProjectController {
         const projectRepo = new ProjectRepo();
         await projectRepo.addAllIfNotExist(sortedProjects);
 
+        // load user projects from db
+
         res.status(200).send(sortedProjects);
       } catch (error) {
         if (isError(error)) {
