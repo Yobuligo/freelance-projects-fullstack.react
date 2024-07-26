@@ -2,6 +2,6 @@ import { IEntity } from "../types/IEntity";
 
 export interface ISession extends IEntity {
   expiresAt: Date;
-  userId: number;
+  userId: string;
   username: string;
 }

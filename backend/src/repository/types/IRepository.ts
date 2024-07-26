@@ -5,7 +5,7 @@ import { IEntity } from "../../shared/types/IEntity";
  * It represents each type of repository and contains general methods.
  */
 export interface IRepository<T extends IEntity> {
-  deleteById(id: number): Promise<boolean>;
-  findById(id: number): Promise<T | undefined>;
-  version(id: number): Promise<Date>;
+  deleteById(id: string): Promise<boolean>;
+  findById(id: string): Promise<T | undefined>;
+  version(id: string): Promise<Date>;
 }

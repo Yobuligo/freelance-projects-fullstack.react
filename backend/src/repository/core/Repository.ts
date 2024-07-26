@@ -14,7 +14,7 @@ export abstract class Repository<T extends IEntity> implements IRepository<T> {
   /**
    * Deletes an entity by its id
    */
-  async deleteById(id: number): Promise<boolean> {
+  async deleteById(id: string): Promise<boolean> {
     const count = await this.model.destroy({
       where: {
         id: id,
@@ -40,7 +40,7 @@ export abstract class Repository<T extends IEntity> implements IRepository<T> {
   /**
    * Finds an entity by its id
    */
-  async findById(id: number): Promise<T | undefined> {
+  async findById(id: string): Promise<T | undefined> {
     const data = await this.model.findByPk(id);
     return data?.toJSON();
   }
@@ -63,7 +63,7 @@ export abstract class Repository<T extends IEntity> implements IRepository<T> {
     return data.toJSON();
   }
 
-  version(id: number): Promise<Date> {
+  version(id: string): Promise<Date> {
     return new Promise(async (resolve, reject) => {
       const entity = await this.findById(id);
       if (!entity) {

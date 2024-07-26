@@ -23,7 +23,7 @@ export class ProjectController {
       }
 
       const sessionRepo = new SessionRepo();
-      const session = await sessionRepo.findById(parseInt(req.params.id));
+      const session = await sessionRepo.findById(req.params.id);
       if (!session) {
         return res.status(401).send(createError("Invalid user session"));
       }

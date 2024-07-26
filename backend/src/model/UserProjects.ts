@@ -10,10 +10,12 @@ import { IUserProject } from "../shared/model/IUserProject";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
 import { Projects } from "./Projects";
 import { Users } from "./Users";
+import { createIdType } from "./createIdType";
 
 const userProjects: ModelStatic<
   Model<IUserProject, IEntityDetails<IUserProject>>
 > = db.define("user-projects", {
+  id: createIdType(),
   applied: DataTypes.BOOLEAN,
   appliedAt: {
     allowNull: true,

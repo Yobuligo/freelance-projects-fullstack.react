@@ -8,11 +8,13 @@ import { db } from "../db/db";
 import { IProject } from "../shared/model/IProject";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
 import { UserProjects } from "./UserProjects";
+import { createIdType } from "./createIdType";
 
 const projects: ModelStatic<Model<IProject, IEntityDetails<IProject>>> =
   db.define(
     "projects",
     {
+      id: createIdType(),
       company: DataTypes.STRING,
       location: DataTypes.STRING,
       provider: DataTypes.STRING,
