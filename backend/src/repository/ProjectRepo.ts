@@ -8,7 +8,11 @@ export class ProjectRepo extends Repository<IProject> {
     super(Projects);
   }
 
-  async addAllIfNotExist(projects: IEntityDetails<IProject>[]) {
+  /**
+   * Inserts the given {@link projects} to the database, if they are not existing yet.
+   * Skips insert, if a project with the same url already exists
+   */
+  async modify(projects: IEntityDetails<IProject>[]) {
     if (projects.length === 0) {
       return;
     }

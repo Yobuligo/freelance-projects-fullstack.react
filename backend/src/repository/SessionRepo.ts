@@ -10,7 +10,7 @@ export class SessionRepo extends Repository<ISession> {
 
   async createUserSession(user: IUser): Promise<ISession> {
     await this.deleteUserSession(user.username);
-    const session = await this.add({
+    const session = await this.insert({
       expiresAt: new Date(), // Todo - take a valid date
       userId: user.id,
       username: user.username,

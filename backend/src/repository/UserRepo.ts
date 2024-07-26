@@ -15,7 +15,7 @@ export class UserRepo extends Repository<IUser> {
     const salt = hash(uuid());
     const password = hashPassword(credentials.password, salt);
 
-    const user = await this.add({
+    const user = await this.insert({
       password,
       salt,
       username: credentials.username,

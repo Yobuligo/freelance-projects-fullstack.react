@@ -29,11 +29,16 @@ export class ProjectController {
         const projects = await projectCollector.collect(providerRequests);
         const sortedProjects = sortProjects(projects);
 
-        // persist projects
+        // update projects master data if they not exist
         const projectRepo = new ProjectRepo();
-        await projectRepo.addAllIfNotExist(sortedProjects);
+        await projectRepo.modify(sortedProjects);
 
-        // load user projects from db
+        // find user projects for projects
+
+
+        // insert new user projects if not yet exist
+
+        // return user projects
 
         res.status(200).send(sortedProjects);
       } catch (error) {

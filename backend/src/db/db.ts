@@ -1,8 +1,4 @@
-import { configDotenv } from "dotenv";
 import { Sequelize } from "sequelize";
-import { AppConfig } from "../AppConfig";
-
-// configDotenv();
 
 export const db = new Sequelize({
   dialect: "mariadb",

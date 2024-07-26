@@ -12,14 +12,6 @@ export abstract class Repository<T extends IEntity> implements IRepository<T> {
   constructor(protected model: ISequelizeModel<T>) {}
 
   /**
-   * Adds an entity by its data
-   */
-  async add(entity: IEntityDetails<T>): Promise<T> {
-    const data = await this.model.create(entity as any);
-    return data.toJSON();
-  }
-
-  /**
    * Deletes an entity by its id
    */
   async deleteById(id: number): Promise<boolean> {
@@ -61,6 +53,14 @@ export abstract class Repository<T extends IEntity> implements IRepository<T> {
   ): Promise<T | undefined> {
     const data = await this.model.findOne({ where: filter as WhereOptions });
     return data?.toJSON();
+  }
+
+  /**
+   * Inserts an entity by its data
+   */
+  async insert(entity: IEntityDetails<T>): Promise<T> {
+    const data = await this.model.create(entity as any);
+    return data.toJSON();
   }
 
   version(id: number): Promise<Date> {
