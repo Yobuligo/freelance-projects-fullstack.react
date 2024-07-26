@@ -59,7 +59,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
           <h3 className={styles.title}>{props.project.title}</h3>
         </a>
         <div className={styles.location}>{props.project.location}</div>
-        <div>{renderDate(props.project.createdAt)}</div>
+        <div>{renderDate(props.project.publishedAt)}</div>
       </div>
       <div className={styles.projectDetails}>
         {displayDetails && (

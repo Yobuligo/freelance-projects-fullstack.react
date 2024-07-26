@@ -1,7 +1,7 @@
-import hash from "hash.js";
 import { DOMParser } from "xmldom";
 import { Provider } from "../decorators/Provider";
 import { HTMLSearch } from "../services/htmlSearch/HTMLSearch";
+import { IHTMLSearch } from "../services/htmlSearch/IHTMLSearch";
 import { Log } from "../services/logging/Log";
 import { IProject } from "../shared/model/IProject";
 import { ProviderType } from "../shared/types/ProviderType";
@@ -40,7 +40,7 @@ export class FreelancerMap implements IProvider {
     elements.forEach((htmlElement) => {
       const htmlSearch = new HTMLSearch(htmlElement.origin);
       const company = htmlSearch.className("company").firstValue();
-      const createdDate = htmlSearch.className("created-date").firstValue();
+      const publishedAt = this.getPublishedAt(htmlSearch);
       const location = htmlSearch.className("city").firstValue();
       const title = htmlSearch.className("project-title").firstValue();
       const url = htmlSearch.className("project-title").firstAttrValue("href");
@@ -50,13 +50,14 @@ export class FreelancerMap implements IProvider {
         applied: false,
         company,
         completed: false,
-        createdAt: this.parseDate(createdDate),
-        updatedAt: this.parseDate(createdDate),
         location,
         provider: ProviderType.FreelancerMap,
+        publishedAt,
         rejected: false,
         title,
         url: this.createUrl(url),
+        createdAt: publishedAt,
+        updatedAt: publishedAt,
       };
       projects.push(project);
     });
@@ -74,5 +75,10 @@ export class FreelancerMap implements IProvider {
     createDate = createDate.replace("eingetragenam:", "");
     let [date, time] = createDate.split("/");
     return toDate(date, time);
+  }
+
+  private getPublishedAt(htmlSearch: IHTMLSearch): Date {
+    const publishedAt = htmlSearch.className("created-date").firstValue();
+    return this.parseDate(publishedAt);
   }
 }

@@ -98,7 +98,7 @@ export const useProjectSectionViewModel = () => {
   const onCheckOld = () =>
     setProjects((projects) => {
       projects.forEach((project) => {
-        if (!project.completed && isOlderThanHours(project.createdAt, 24)) {
+        if (!project.completed && isOlderThanHours(project.publishedAt, 24)) {
           project.completed = true;
         }
       });

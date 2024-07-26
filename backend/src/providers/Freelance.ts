@@ -81,7 +81,7 @@ export class Freelance implements IProvider {
     elements.forEach((element) => {
       const htmlSearch: IHTMLSearch = new HTMLSearch(element.origin);
 
-      const createdAt = this.getCreatedAt(htmlSearch);
+      const publishedAt = this.getPublishedAt(htmlSearch);
       const location = this.getLocation(htmlSearch);
       const title = this.getTitle(htmlSearch);
       const url = this.getUrl(htmlSearch);
@@ -91,13 +91,14 @@ export class Freelance implements IProvider {
         applied: false,
         company: "", // not available for freelance.de
         completed: false,
-        createdAt,
-        updatedAt: createdAt,
         location,
         provider: ProviderType.Freelance,
+        publishedAt,
         rejected: false,
         title,
         url,
+        createdAt: publishedAt,
+        updatedAt: publishedAt,
       };
       projects.push(project);
     });
@@ -138,7 +139,7 @@ export class Freelance implements IProvider {
     return location;
   }
 
-  private getCreatedAt(htmlSearch: IHTMLSearch) {
+  private getPublishedAt(htmlSearch: IHTMLSearch) {
     const createDate =
       htmlSearch
         .className("icon-list")
