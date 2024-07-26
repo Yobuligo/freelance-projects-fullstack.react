@@ -19,6 +19,15 @@ export class SessionRepo extends Repository<ISession> {
     return session;
   }
 
+  async checkSession(id: string) {
+    const session = await this.model.findByPk(id);
+    if (!session) {
+      throw new Error(`Invalid session`);
+    }
+
+    // todo - check if session is expired
+  }
+
   async deleteSession(session: ISession): Promise<boolean> {
     return await this.deleteById(session.id);
   }
