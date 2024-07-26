@@ -7,6 +7,7 @@ import { IProject } from "../shared/model/IProject";
 import { ProviderType } from "../shared/types/ProviderType";
 import { toDate } from "../utils/toDate";
 import { IProvider } from "./core/IProvider";
+import { uuid } from "../utils/uuid";
 
 @Provider(ProviderType.FreelancerMap, "freelancermap.de")
 export class FreelancerMap implements IProvider {
@@ -46,7 +47,7 @@ export class FreelancerMap implements IProvider {
       const url = htmlSearch.className("project-title").firstAttrValue("href");
 
       const project: IProject = {
-        id: "0",
+        id: uuid(),
         applied: false,
         company,
         completed: false,

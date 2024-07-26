@@ -9,6 +9,7 @@ import { ProviderType } from "../shared/types/ProviderType";
 import { error } from "../shared/utils/error";
 import { toDate } from "../utils/toDate";
 import { IProvider } from "./core/IProvider";
+import { uuid } from "../utils/uuid";
 
 @Provider(ProviderType.Freelance, "freelance.de")
 export class Freelance implements IProvider {
@@ -87,7 +88,7 @@ export class Freelance implements IProvider {
       const url = this.getUrl(htmlSearch);
 
       const project: IProject = {
-        id: "0",
+        id: uuid(),
         applied: false,
         company: "", // not available for freelance.de
         completed: false,
