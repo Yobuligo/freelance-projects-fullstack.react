@@ -1,0 +1,11 @@
+<svg viewBox="0 0 1920 1080"
+    xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="backgroundShapes">
+            <polygon points="0,432 1536,324 1728,216 0,540"/>
+            <!-- <polygon points="1920,684 384,540 192,432 1920,756"/> -->
+            <!-- <polygon points="1920,432 384,324 192,216 1920,540"/> -->
+            <!-- <polygon points="1920,648 384,756 192,864 1920,540"/> -->
+        </clipPath>
+    </defs>
+</svg>
