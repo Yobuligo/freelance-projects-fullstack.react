@@ -6,7 +6,6 @@ import { ProviderRequestInput } from "../../providerRequest/providerRequestInput
 import { ProviderRequestList } from "../../providerRequest/providerRequestList/ProviderRequestList";
 import { SettingsConfigList } from "../settingsConfigList/SettingsConfigList";
 import { SettingsSection } from "../settingsSection/SettingsSection";
-import { SettingsTransfer } from "../settingsTransfer/SettingsTransfer";
 import styles from "./Settings.module.scss";
 import { useSettingsViewModel } from "./useSettingsViewModel";
 
@@ -21,9 +20,6 @@ export const Settings: React.FC = () => {
         <h1>{t(texts.settingsSection.title)}</h1>
       </div>
       <div className={styles.settingsContent}>
-        <SettingsSection title={t(texts.settingsSection.dataTransfer)}>
-          <SettingsTransfer />
-        </SettingsSection>
         <SettingsSection title={t(texts.settingsSection.addNewSearchUrl)}>
           <ProviderRequestInput onAdd={viewModel.onAddProviderRequest} />
         </SettingsSection>

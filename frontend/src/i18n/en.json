@@ -47,21 +47,12 @@
     },
     "settingsSection": {
         "title": "Settings",
-        "dataTransfer": "Data transfer",
         "addNewSearchUrl": "New search url",
         "savedSearches": "Saved searches",
         "generalSettings": {
             "caption": "General settings",
             "openLinkInline": "Open link on click inline"
         }
-    },
-    "settingsTransfer": {
-        "copiedToClipboard": "Copied to clipboard",
-        "downloadConfig": "Download config",
-        "uploadConfig": "Upload config"
-    },
-    "settingsUpload": {
-        "uploaded": "Uploaded"
     },
     "trashCard": {
         "trash": "Trash ({{numberProjects}})"
