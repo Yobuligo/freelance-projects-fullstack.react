@@ -5,7 +5,7 @@ import { ProjectCollector } from "../services/projectCollector/ProjectCollector"
 import { IProject } from "../shared/model/IProject";
 import { IProviderRequests } from "../shared/model/IProviderRequests";
 import { ISession } from "../shared/model/ISession";
-import { UserProjectMeta } from "../shared/model/IUserProject";
+import { IUserProject, UserProjectMeta } from "../shared/model/IUserProject";
 import { NetworkInfo } from "../shared/services/NetworkInfo";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
@@ -18,6 +18,7 @@ export class UserProjectController extends Controller {
   constructor() {
     super();
     this.findAll();
+    this.updateAll();
   }
 
   private findAll() {
@@ -41,6 +42,20 @@ export class UserProjectController extends Controller {
             res.status(500).send(createError("Error while loading projects"));
           }
         }
+      });
+    });
+  }
+
+  private updateAll() {
+    this.router.put(UserProjectMeta.path, async (req, res) => {
+      if (!(await NetworkInfo.isConnected())) {
+        return res.status(502).send(createError("Missing internet connection"));
+      }
+
+      this.handleSessionRequest(req, res, async () => {
+        const userProjects: IUserProject[] = req.body;
+        const userProjectRepo = new UserProjectRepo();
+        await userProjectRepo.updateAll(userProjects);
       });
     });
   }

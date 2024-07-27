@@ -23,6 +23,9 @@ export class UserProjectRepo extends Repository<IUserProject> {
     return data.map((model) => model.toJSON());
   }
 
+  /**
+   * Inserts new user projects for the given {@link projects}. Skips projects, if a user project for one or more project id already exist.
+   */
   async modify(userId: string, projects: IProject[]): Promise<IUserProject[]> {
     if (projects.length === 0) {
       return [];
@@ -58,6 +61,23 @@ export class UserProjectRepo extends Repository<IUserProject> {
 
     const userProjects = await this.findByUserId(userId);
     return userProjects;
+  }
+
+  async updateAll(userProjects: IUserProject[]) {
+    await this.model.bulkCreate(userProjects, {
+      updateOnDuplicate: [
+        "applicationType",
+        "applied",
+        "appliedAt",
+        "completed",
+        "completedAt",
+        "contact",
+        "createdAt",
+        "rejected",
+        "rejectedAt",
+        "updatedAt",
+      ],
+    });
   }
 
   private createUserProject(

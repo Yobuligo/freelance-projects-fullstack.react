@@ -15,6 +15,21 @@ export abstract class RESTApi {
     });
   }
 
+  protected put<T>(url: string, data: any): Promise<T> {
+    const extendedUrl = this.extendUrl(url);
+    return this.createPromise(extendedUrl, async () => {
+      const body = JSON.stringify(data);
+      return await fetch(extendedUrl, {
+        body: body,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "PUT",
+        mode: "cors",
+      });
+    });
+  }
+
   protected post<T>(url: string, data: any): Promise<T> {
     const extendedUrl = this.extendUrl(url);
     return this.createPromise(extendedUrl, async () => {

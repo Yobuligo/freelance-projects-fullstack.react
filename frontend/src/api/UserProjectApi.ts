@@ -4,12 +4,16 @@ import { IUserProject, UserProjectMeta } from "../shared/model/IUserProject";
 import { RESTApi } from "./core/RESTApi";
 
 export class UserProjectApi extends RESTApi {
-  findAll(
+  async findAll(
     providerRequests: IProviderRequest[],
     force?: boolean
   ): Promise<IUserProject[]> {
     const requests = this.convertToBackendFormat(providerRequests, force);
-    return this.post(`${this.host}${UserProjectMeta.path}`, requests);
+    return await this.post(`${this.host}${UserProjectMeta.path}`, requests);
+  }
+
+  async updateAll(userProjects: IUserProject[]): Promise<IUserProject> {
+    return await this.put(`${this.host}${UserProjectMeta.path}`, userProjects);
   }
 
   /**
