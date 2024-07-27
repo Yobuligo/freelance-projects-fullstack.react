@@ -7,6 +7,8 @@ import { useUserProjects } from "../../../hooks/useUserProjects";
 import { IUserProject } from "../../../shared/model/IUserProject";
 import { isOlderThanHours } from "../../../utils/isOlderThan";
 import { sortUserProjects } from "../../../utils/sortUserProjects";
+import { setUserProjectCompleted } from "../utils/setUserProjectCompleted";
+import { setUserProjectInCompleted } from "../utils/setUserProjectInCompleted";
 
 export const useProjectSectionViewModel = () => {
   const request = useRequest();
@@ -55,6 +57,19 @@ export const useProjectSectionViewModel = () => {
     [userProjects]
   );
 
+  const updateUserProjects = async (userProjects: IUserProject[]) => {
+    if (userProjects.length === 0) {
+      return;
+    }
+    const userProjectApi = new UserProjectApi();
+    await userProjectApi.updateAll(userProjects);
+  };
+
+  const updateUserProject = async (userProject: IUserProject) => {
+    const userProjects = [userProject];
+    await updateUserProjects(userProjects);
+  };
+
   /**
    * Loads user projects from providers and merges it with the data from the local storage
    * If projects are already available take these projects, otherwise create new instances
@@ -79,11 +94,15 @@ export const useProjectSectionViewModel = () => {
    */
   const onCheckAll = () =>
     setUserProjects((userProjects) => {
+      const toBeUpdatedUserProjects: IUserProject[] = [];
       userProjects.forEach((userProject) => {
         if (!userProject.completed) {
-          userProject.completed = true;
+          setUserProjectCompleted(userProject);
+          toBeUpdatedUserProjects.push(userProject);
         }
       });
+
+      updateUserProjects(toBeUpdatedUserProjects);
       return [...userProjects];
     });
 
@@ -92,30 +111,36 @@ export const useProjectSectionViewModel = () => {
    */
   const onCheckOld = () =>
     setUserProjects((userProjects) => {
+      const toBeUpdatedUserProjects: IUserProject[] = [];
       userProjects.forEach((userProject) => {
         if (
           !userProject.completed &&
           isOlderThanHours(userProject.project.publishedAt, 24)
         ) {
-          userProject.completed = true;
+          setUserProjectCompleted(userProject);
+          toBeUpdatedUserProjects.push(userProject);
         }
       });
+
+      updateUserProjects(toBeUpdatedUserProjects);
       return [...userProjects];
     });
 
-  const onUserProjectChecked = (userProject: IUserProject) =>
+  const onUserProjectChecked = (userProject: IUserProject) => {
     setUserProjects((previous) => {
-      userProject.completed = true;
-      userProject.completedAt = new Date().toISOString() as unknown as Date;
+      setUserProjectCompleted(userProject);
+      updateUserProject(userProject);
       return [...previous];
     });
+  };
 
-  const onUserProjectUnchecked = (userProject: IUserProject) =>
+  const onUserProjectUnchecked = (userProject: IUserProject) => {
     setUserProjects((previous) => {
-      userProject.completed = false;
-      userProject.completedAt = undefined;
+      setUserProjectInCompleted(userProject);
+      updateUserProject(userProject);
       return [...previous];
     });
+  };
 
   const onReload = () => loadUserProjects(true);
 
@@ -149,6 +174,7 @@ export const useProjectSectionViewModel = () => {
       if (index !== -1) {
         previous.splice(index, 1, userProject);
       }
+      updateUserProject(userProject);
       return [...previous];
     });
   };
