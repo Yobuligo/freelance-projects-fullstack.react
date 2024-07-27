@@ -3,7 +3,7 @@ import { IHavePath } from "../../shared/types/IHavePath";
 import { RESTApi } from "./RESTApi";
 
 export abstract class Repository<T> extends RESTApi {
-  constructor(private path: IHavePath) {
+  constructor(private meta: IHavePath) {
     super();
   }
 
@@ -51,6 +51,6 @@ export abstract class Repository<T> extends RESTApi {
    * localhost:5000/api/persons
    */
   protected get url(): string {
-    return `${this.host}${this.path}`;
+    return `${this.host}${this.meta.path}`;
   }
 }
