@@ -3,15 +3,15 @@ import { UserProjectController } from "./controller/UserProjectController";
 import { ProviderDetailsController } from "./controller/ProviderDetailsController";
 import { ProviderMetaController } from "./controller/ProviderMetaController";
 import { UserController } from "./controller/UserController";
-import { Projects } from "./model/Projects";
-import { Sessions } from "./model/Sessions";
-import { UserProjects } from "./model/UserProjects";
-import { Users } from "./model/Users";
+import { Project } from "./model/Projects";
+import { Session } from "./model/Session";
+import { UserProject } from "./model/UserProject";
+import { User } from "./model/User";
 
-Users.sync({ alter: true });
-Sessions.sync({ alter: true });
-Projects.sync({ alter: true });
-UserProjects.sync({ alter: true });
+User.sync({ alter: true });
+Session.sync({ alter: true });
+Project.sync({ alter: true });
+UserProject.sync({ alter: true });
 
 const server = express();
 server.use(express.json());

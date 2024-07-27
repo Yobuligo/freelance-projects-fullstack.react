@@ -1,12 +1,12 @@
 import { Model } from "sequelize";
-import { Projects } from "../model/Projects";
+import { Project } from "../model/Projects";
 import { IProject } from "../shared/model/IProject";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
 import { Repository } from "./core/Repository";
 
 export class ProjectRepo extends Repository<IProject> {
   constructor() {
-    super(Projects);
+    super(Project);
   }
 
   /**

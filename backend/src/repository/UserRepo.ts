@@ -1,5 +1,5 @@
 import { IUser } from "../model/IUser";
-import { Users } from "../model/Users";
+import { User } from "../model/User";
 import { ICredentials } from "../shared/model/ICredentials";
 import { hash } from "../utils/hash";
 import { hashPassword } from "../utils/hashPassword";
@@ -8,7 +8,7 @@ import { Repository } from "./core/Repository";
 
 export class UserRepo extends Repository<IUser> {
   constructor() {
-    super(Users);
+    super(User);
   }
 
   async createUser(credentials: ICredentials): Promise<IUser> {

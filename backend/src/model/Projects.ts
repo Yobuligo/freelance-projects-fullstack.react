@@ -7,10 +7,10 @@ import {
 import { db } from "../db/db";
 import { IProject } from "../shared/model/IProject";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
-import { UserProjects } from "./UserProjects";
+import { UserProject } from "./UserProject";
 import { createIdType } from "./createIdType";
 
-const projects: ModelStatic<Model<IProject, IEntityDetails<IProject>>> =
+const project: ModelStatic<Model<IProject, IEntityDetails<IProject>>> =
   db.define(
     "projects",
     {
@@ -25,6 +25,6 @@ const projects: ModelStatic<Model<IProject, IEntityDetails<IProject>>> =
     { indexes: [{ unique: true, fields: ["url"] }] }
   );
 
-export class Projects extends projects {
-  declare getUserProjects: HasManyGetAssociationsMixin<UserProjects>;
+export class Project extends project {
+  declare getUserProjects: HasManyGetAssociationsMixin<UserProject>;
 }

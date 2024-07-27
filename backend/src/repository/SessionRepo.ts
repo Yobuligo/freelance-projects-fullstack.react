@@ -1,11 +1,11 @@
 import { IUser } from "../model/IUser";
-import { Sessions } from "../model/Sessions";
+import { Session } from "../model/Session";
 import { ISession } from "../shared/model/ISession";
 import { Repository } from "./core/Repository";
 
 export class SessionRepo extends Repository<ISession> {
   constructor() {
-    super(Sessions);
+    super(Session);
   }
 
   async createUserSession(user: IUser): Promise<ISession> {

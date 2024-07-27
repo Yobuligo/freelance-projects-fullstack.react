@@ -6,11 +6,12 @@ import {
 } from "sequelize";
 import { db } from "../db/db";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
-import { IUser } from "./IUser";
-import { UserProjects } from "./UserProjects";
 import { createIdType } from "./createIdType";
+import { IUser } from "./IUser";
+import { UserProject } from "./UserProject";
+import { UserProviderRequest } from "./UserProviderRequest";
 
-const users: ModelStatic<Model<IUser, IEntityDetails<IUser>>> = db.define(
+const user: ModelStatic<Model<IUser, IEntityDetails<IUser>>> = db.define(
   "users",
   {
     id: createIdType(),
@@ -26,6 +27,7 @@ const users: ModelStatic<Model<IUser, IEntityDetails<IUser>>> = db.define(
   }
 );
 
-export class Users extends users {
-  declare getUserProjects: HasManyGetAssociationsMixin<UserProjects>;
+export class User extends user {
+  declare getUserProjects: HasManyGetAssociationsMixin<UserProject>;
+  declare getUserProviderRequests: HasManyGetAssociationsMixin<UserProviderRequest>;
 }

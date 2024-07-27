@@ -1,6 +1,6 @@
 import { WhereOptions } from "sequelize";
-import { Projects } from "../model/Projects";
-import { UserProjects } from "../model/UserProjects";
+import { Project } from "../model/Projects";
+import { UserProject } from "../model/UserProject";
 import { IProject } from "../shared/model/IProject";
 import { IUserProject } from "../shared/model/IUserProject";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
@@ -9,7 +9,7 @@ import { Repository } from "./core/Repository";
 
 export class UserProjectRepo extends Repository<IUserProject> {
   constructor() {
-    super(UserProjects);
+    super(UserProject);
   }
 
   /**
@@ -18,7 +18,7 @@ export class UserProjectRepo extends Repository<IUserProject> {
   async findByUserId(userId: string): Promise<IUserProject[]> {
     const data = await this.model.findAll({
       where: { userId },
-      include: [Projects],
+      include: [Project],
     });
     return data.map((model) => model.toJSON());
   }
@@ -35,7 +35,7 @@ export class UserProjectRepo extends Repository<IUserProject> {
     const projectIds = projects.map((project) => project.id);
     const existingUserProjects = await this.model.findAll({
       where: { projectId: [projectIds] } as WhereOptions,
-      include: [Projects],
+      include: [Project],
     });
 
     // find projects which are currently not saved as user project

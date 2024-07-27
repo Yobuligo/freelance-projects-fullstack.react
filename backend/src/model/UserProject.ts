@@ -8,11 +8,11 @@ import {
 import { db } from "../db/db";
 import { IUserProject } from "../shared/model/IUserProject";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
-import { Projects } from "./Projects";
-import { Users } from "./Users";
+import { Project } from "./Projects";
+import { User } from "./User";
 import { createIdType } from "./createIdType";
 
-const userProjects: ModelStatic<
+const userProject: ModelStatic<
   Model<IUserProject, IEntityDetails<IUserProject>>
 > = db.define("user-projects", {
   id: createIdType(),
@@ -41,15 +41,15 @@ const userProjects: ModelStatic<
   },
 });
 
-export class UserProjects extends userProjects {
-  declare getUser: BelongsToGetAssociationMixin<Users>;
-  declare getProject: BelongsToGetAssociationMixin<Projects>;
-  declare setUser: BelongsToSetAssociationMixin<Users, number>;
-  declare setProject: BelongsToSetAssociationMixin<Projects, number>;
+export class UserProject extends userProject {
+  declare getUser: BelongsToGetAssociationMixin<User>;
+  declare getProject: BelongsToGetAssociationMixin<Project>;
+  declare setUser: BelongsToSetAssociationMixin<User, number>;
+  declare setProject: BelongsToSetAssociationMixin<Project, number>;
 }
 
-Projects.hasMany(UserProjects);
-UserProjects.belongsTo(Projects);
+Project.hasMany(UserProject);
+UserProject.belongsTo(Project);
 
-Users.hasMany(UserProjects);
-UserProjects.belongsTo(Users);
+User.hasMany(UserProject);
+UserProject.belongsTo(User);
