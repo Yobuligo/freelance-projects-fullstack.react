@@ -3,8 +3,8 @@ import { IProjectIFrame } from "./IProjectIFrameProps";
 export const ProjectIFrame: React.FC<IProjectIFrame> = (props) => {
   return (
     <iframe
-      src={props.project.url}
-      title={props.project.title}
+      src={props.userProject.project.url}
+      title={props.userProject.project.title}
       width={props.width}
       height={props.height}
     />

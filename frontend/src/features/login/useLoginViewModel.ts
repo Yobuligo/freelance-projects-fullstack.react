@@ -48,7 +48,8 @@ export const useLoginViewModel = () => {
     setDisplaySpinner(true);
     const credentials: ICredentials = { password, username };
     try {
-      const session = await UserApi.login(credentials);
+      const userApi = new UserApi();
+      const session = await userApi.login(credentials);
       setSession(session);
       navigate(AppRoutes.projects.toPath());
     } catch (error) {
@@ -71,7 +72,8 @@ export const useLoginViewModel = () => {
     setDisplaySpinner(true);
     const credentials: ICredentials = { password, username };
     try {
-      await UserApi.register(credentials);
+      const userApi = new UserApi();
+      await userApi.register(credentials);
       updateSuccessMessage(t(texts.login.successUserCreated));
       toggleLoginMode(true);
       setPassword("");

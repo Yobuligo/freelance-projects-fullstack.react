@@ -1,18 +1,15 @@
 import { IProviderRequest } from "../model/IProviderRequest";
-import { IProject, ProjectMeta } from "../shared/model/IProject";
-import { IProviderRequests } from "./../shared/model/IProviderRequests";
+import { IProviderRequests } from "../shared/model/IProviderRequests";
+import { IUserProject, UserProjectMeta } from "../shared/model/IUserProject";
 import { RESTApi } from "./core/RESTApi";
 
-/**
- * This class is responsible to control the access to the data layer for projects.
- */
-class ProjectApiDefault extends RESTApi {
+export class UserProjectApi extends RESTApi {
   findAll(
     providerRequests: IProviderRequest[],
     force?: boolean
-  ): Promise<IProject[]> {
+  ): Promise<IUserProject[]> {
     const requests = this.convertToBackendFormat(providerRequests, force);
-    return this.post(`${this.host}${ProjectMeta.path}`, requests);
+    return this.post(`${this.host}${UserProjectMeta.path}`, requests);
   }
 
   /**
@@ -43,5 +40,3 @@ class ProjectApiDefault extends RESTApi {
     return requests;
   }
 }
-
-export const ProjectApi = new ProjectApiDefault();

@@ -1,5 +1,6 @@
 import { ApplicationType } from "../types/ApplicationType";
 import { IEntity } from "../types/IEntity";
+import { IHavePath } from "../types/IHavePath";
 import { IProject } from "./IProject";
 
 export interface IUserProject extends IEntity {
@@ -14,3 +15,5 @@ export interface IUserProject extends IEntity {
   rejectedAt?: Date;
   userId: string;
 }
+
+export const UserProjectMeta: IHavePath = { path: "/user-projects" };

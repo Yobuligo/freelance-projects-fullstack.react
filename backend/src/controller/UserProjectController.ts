@@ -2,16 +2,17 @@ import { Router } from "express";
 import { ProjectRepo } from "../repository/ProjectRepo";
 import { UserProjectRepo } from "../repository/UserProjectRepo";
 import { ProjectCollector } from "../services/projectCollector/ProjectCollector";
-import { IProject, ProjectMeta } from "../shared/model/IProject";
+import { IProject } from "../shared/model/IProject";
 import { IProviderRequests } from "../shared/model/IProviderRequests";
 import { ISession } from "../shared/model/ISession";
+import { UserProjectMeta } from "../shared/model/IUserProject";
 import { NetworkInfo } from "../shared/services/NetworkInfo";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
 import { sortUserProjects } from "../utils/sortUserProjects";
 import { Controller } from "./Controller";
 
-export class ProjectController extends Controller {
+export class UserProjectController extends Controller {
   readonly router = Router();
 
   constructor() {
@@ -20,7 +21,7 @@ export class ProjectController extends Controller {
   }
 
   private findAll() {
-    this.router.post(ProjectMeta.path, async (req, res) => {
+    this.router.post(UserProjectMeta.path, async (req, res) => {
       if (!(await NetworkInfo.isConnected())) {
         return res.status(502).send(createError("Missing internet connection"));
       }

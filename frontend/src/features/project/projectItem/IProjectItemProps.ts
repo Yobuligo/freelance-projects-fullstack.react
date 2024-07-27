@@ -1,11 +1,11 @@
-import { IProject } from "../../../shared/model/IProject";
-import { IProjectChangeable } from "../types/IProjectChangeable";
+import { IUserProject } from "../../../shared/model/IUserProject";
+import { IUserProjectChangeable } from "../types/IUserProjectChangeable";
 
-export interface IProjectItemProps extends IProjectChangeable {
+export interface IProjectItemProps extends IUserProjectChangeable {
   isSelected: boolean;
-  onChecked?: (project: IProject) => void;
-  onSelect?: (project: IProject) => void;
-  onUnchecked?: (project: IProject) => void;
-  project: IProject;
+  onChecked?: (userProject: IUserProject) => void;
+  onSelect?: (userProject: IUserProject) => void;
+  onUnchecked?: (userProject: IUserProject) => void;
+  userProject: IUserProject;
   className?: string;
 }

@@ -1,14 +1,14 @@
-import { IProject } from "../../../shared/model/IProject";
-import { IProjectChangeable } from "../types/IProjectChangeable";
-import { IProjectSelectable } from "../types/IProjectSelectable";
+import { IUserProject } from "../../../shared/model/IUserProject";
+import { IUserProjectChangeable } from "../types/IUserProjectChangeable";
+import { IUserProjectSelectable } from "../types/IUserProjectSelectable";
 
 export interface IProjectSubListProps
-  extends IProjectSelectable,
-    IProjectChangeable {
+  extends IUserProjectSelectable,
+    IUserProjectChangeable {
   collapsed: boolean;
-  onChecked: (project: IProject) => void;
-  onUnchecked: (project: IProject) => void;
-  projects: IProject[];
+  onChecked: (userProject: IUserProject) => void;
+  onUnchecked: (userProject: IUserProject) => void;
+  userProjects: IUserProject[];
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
   listAndItemColorClassName?: string;

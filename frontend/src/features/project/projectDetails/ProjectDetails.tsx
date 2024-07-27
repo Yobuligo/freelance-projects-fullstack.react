@@ -12,18 +12,18 @@ import styles from "./ProjectDetails.module.scss";
 export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
   const { t } = useTranslation();
 
-  const triggerChange = () => props.onChange?.(props.project);
+  const triggerChange = () => props.onChange?.(props.userProject);
 
   const onApplyChanged = (checked: boolean) => {
-    props.project.applied = checked;
+    props.userProject.applied = checked;
     if (checked === true) {
-      props.project.appliedAt = new Date().toISOString() as unknown as Date;
+      props.userProject.appliedAt = new Date().toISOString() as unknown as Date;
     } else {
-      props.project.appliedAt = undefined;
+      props.userProject.appliedAt = undefined;
     }
 
-    if (checked === true && props.project.applicationType === undefined) {
-      props.project.applicationType = ApplicationType.Portal;
+    if (checked === true && props.userProject.applicationType === undefined) {
+      props.userProject.applicationType = ApplicationType.Portal;
     }
     triggerChange();
   };
@@ -32,27 +32,28 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
    * Switch to reject was changed
    */
   const onRejectChanged = (checked: boolean) => {
-    props.project.rejected = checked;
+    props.userProject.rejected = checked;
     if (checked === true) {
-      props.project.rejectedAt = new Date().toISOString() as unknown as Date;
+      props.userProject.rejectedAt =
+        new Date().toISOString() as unknown as Date;
     } else {
-      props.project.rejectedAt = undefined;
+      props.userProject.rejectedAt = undefined;
     }
     triggerChange();
   };
 
   const onSelectPortal = () => {
-    props.project.applicationType = ApplicationType.Portal;
+    props.userProject.applicationType = ApplicationType.Portal;
     triggerChange();
   };
 
   const onSelectEmail = () => {
-    props.project.applicationType = ApplicationType.Email;
+    props.userProject.applicationType = ApplicationType.Email;
     triggerChange();
   };
 
   const onContactChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.project.contact = event.target.value;
+    props.userProject.contact = event.target.value;
     triggerChange();
   };
 
@@ -84,7 +85,7 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
   const findSelected = (): IApplicationTypeOption | undefined => {
     return applicationTypeItems.find(
       (applicationTypeOption) =>
-        applicationTypeOption.type === props.project.applicationType
+        applicationTypeOption.type === props.userProject.applicationType
     );
   };
 
@@ -92,13 +93,22 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
     <div className={styles.projectDetails}>
       <div className={styles.item}>
         <div className={styles.title}>{t(texts.projectDetails.applied)}</div>
-        <Switch checked={props.project.applied} onChange={onApplyChanged} />
-        <>{props.project.appliedAt && formatDate(props.project.appliedAt)}</>
+        <Switch checked={props.userProject.applied} onChange={onApplyChanged} />
+        <>
+          {props.userProject.appliedAt &&
+            formatDate(props.userProject.appliedAt)}
+        </>
       </div>
       <div className={styles.item}>
         <div className={styles.title}>{t(texts.projectDetails.rejected)}</div>
-        <Switch checked={props.project.rejected} onChange={onRejectChanged} />
-        <>{props.project.rejectedAt && formatDate(props.project.rejectedAt)}</>
+        <Switch
+          checked={props.userProject.rejected}
+          onChange={onRejectChanged}
+        />
+        <>
+          {props.userProject.rejectedAt &&
+            formatDate(props.userProject.rejectedAt)}
+        </>
       </div>
       <div className={styles.item}>
         <div className={styles.title}>
@@ -115,7 +125,7 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
         <input
           className={styles.contact}
           type="text"
-          value={props.project.contact}
+          value={props.userProject.contact}
           onChange={onContactChange}
         />
       </div>

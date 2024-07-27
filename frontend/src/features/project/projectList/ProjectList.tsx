@@ -12,15 +12,15 @@ export const ProjectList: React.FC<IProjectListProps> = (props) => {
   const [settings] = useSettings();
 
   console.log(`ProjectList: ${props.listAndItemColorClassName}`);
-  const items = props.projects.map((project) => (
+  const items = props.userProjects.map((userProject) => (
     <ProjectItem
-      isSelected={props.selectedProject?.id === project.id}
-      key={project.id}
+      isSelected={props.selectedUserProject?.id === userProject.id}
+      key={userProject.id}
       onChange={props.onChange}
-      onSelect={props.onSelectProject}
+      onSelect={props.onSelectUserProject}
       onChecked={props.onChecked}
       onUnchecked={props.onUnchecked}
-      project={project}
+      userProject={userProject}
       className={props.listAndItemColorClassName}
     />
   ));

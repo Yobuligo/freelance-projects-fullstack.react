@@ -22,7 +22,7 @@ export const ProjectSection: React.FC = () => {
   const { t } = useTranslation();
   const viewModel = useProjectSectionViewModel();
 
-  useInitialize(viewModel.loadProjects);
+  useInitialize(viewModel.loadUserProjects);
 
   return (
     <div className={styles.projectSection}>
@@ -53,58 +53,59 @@ export const ProjectSection: React.FC = () => {
         )}
         <div
           className={
-            viewModel.needsDisplaySelectedProject ? styles.listsSection : ""
+            viewModel.needsDisplaySelectedUserProject ? styles.listsSection : ""
           }
         >
           <div>
             <ProjectList
               isLoading={viewModel.isLoading}
-              onChange={viewModel.onProjectChanged}
-              onChecked={viewModel.onProjectChecked}
-              onSelectProject={viewModel.onSelectProject}
-              onUnchecked={viewModel.onProjectUnchecked}
-              projects={viewModel.openProjects}
-              selectedProject={viewModel.selectedProject}
+              onChange={viewModel.onUserProjectChanged}
+              onChecked={viewModel.onUserProjectChecked}
+              onSelectUserProject={viewModel.onSelectUserProject}
+              onUnchecked={viewModel.onUserProjectUnchecked}
+              userProjects={viewModel.openUserProjects}
+              selectedUserProject={viewModel.selectedUserProject}
             />
             <div className={styles.projectSubSection}>
               <ProjectSubList
-                collapsed={viewModel.appliedProjectsCollapsed}
-                onChange={viewModel.onProjectChanged}
-                onChecked={viewModel.onProjectChecked}
-                onSelectProject={viewModel.onSelectProject}
-                onUnchecked={viewModel.onProjectUnchecked}
-                projects={viewModel.appliedProjects}
-                selectedProject={viewModel.selectedProject}
-                setCollapsed={viewModel.onSetAppliedProjectsCollapsed}
+                collapsed={viewModel.appliedUserProjectsCollapsed}
+                onChange={viewModel.onUserProjectChanged}
+                onChecked={viewModel.onUserProjectChecked}
+                onSelectUserProject={viewModel.onSelectUserProject}
+                onUnchecked={viewModel.onUserProjectUnchecked}
+                userProjects={viewModel.appliedUserProjects}
+                selectedUserProject={viewModel.selectedUserProject}
+                setCollapsed={viewModel.onSetAppliedUserProjectsCollapsed}
                 title={t(texts.appliedCard.applied, {
-                  numberProjects: viewModel.appliedProjects.length.toString(),
+                  numberProjects:
+                    viewModel.appliedUserProjects.length.toString(),
                 })}
                 listAndItemColorClassName={styles.itemApplied}
               />
             </div>
             <div className={styles.projectSubSection}>
               <ProjectSubList
-                collapsed={viewModel.trashProjectsCollapsed}
-                onChange={viewModel.onProjectChanged}
-                onChecked={viewModel.onProjectChecked}
-                onSelectProject={viewModel.onSelectProject}
-                onUnchecked={viewModel.onProjectUnchecked}
-                projects={viewModel.trashProjects}
-                selectedProject={viewModel.selectedProject}
-                setCollapsed={viewModel.onSetTrashProjectsCollapsed}
+                collapsed={viewModel.trashUserProjectsCollapsed}
+                onChange={viewModel.onUserProjectChanged}
+                onChecked={viewModel.onUserProjectChecked}
+                onSelectUserProject={viewModel.onSelectUserProject}
+                onUnchecked={viewModel.onUserProjectUnchecked}
+                userProjects={viewModel.trashUserProjects}
+                selectedUserProject={viewModel.selectedUserProject}
+                setCollapsed={viewModel.onSetTrashUserProjectsCollapsed}
                 title={t(texts.trashCard.trash, {
-                  numberProjects: viewModel.trashProjects.length.toString(),
+                  numberProjects: viewModel.trashUserProjects.length.toString(),
                 })}
                 listAndItemColorClassName={styles.itemTrash}
               />
             </div>
           </div>
 
-          {viewModel.needsDisplaySelectedProject &&
-            viewModel.selectedProject && (
+          {viewModel.needsDisplaySelectedUserProject &&
+            viewModel.selectedUserProject && (
               <Card className={styles.readingSection}>
                 <ProjectIFrame
-                  project={viewModel.selectedProject}
+                  userProject={viewModel.selectedUserProject}
                   height="100%"
                   width="100%"
                 />

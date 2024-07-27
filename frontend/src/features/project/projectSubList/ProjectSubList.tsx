@@ -9,7 +9,9 @@ export const ProjectSubList: React.FC<IProjectSubListProps> = (props) => {
   console.log(`ProjectSubList: ${props.listAndItemColorClassName}`);
   return (
     <>
-      <Card className={style(styles.collapseIcon, props.listAndItemColorClassName)}>
+      <Card
+        className={style(styles.collapseIcon, props.listAndItemColorClassName)}
+      >
         <Collapse
           collapsed={props.collapsed}
           setCollapsed={props.setCollapsed}
@@ -18,12 +20,12 @@ export const ProjectSubList: React.FC<IProjectSubListProps> = (props) => {
       </Card>
       {!props.collapsed && (
         <ProjectList
-          selectedProject={props.selectedProject}
+          selectedUserProject={props.selectedUserProject}
           onChange={props.onChange}
-          onSelectProject={props.onSelectProject}
+          onSelectUserProject={props.onSelectUserProject}
           onChecked={props.onChecked}
           onUnchecked={props.onUnchecked}
-          projects={props.projects}
+          userProjects={props.userProjects}
           listAndItemColorClassName={props.listAndItemColorClassName}
         />
       )}

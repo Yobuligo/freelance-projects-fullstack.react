@@ -11,7 +11,7 @@ import { IProjectItemProps } from "./IProjectItemProps";
 import styles from "./ProjectItem.module.scss";
 
 export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
-  const [checked, setChecked] = useState(props.project.completed);
+  const [checked, setChecked] = useState(props.userProject.completed);
   const [displayDetails, setDisplayDetails] = useState(false);
   const providerDetails = useProviderDetails();
 
@@ -19,14 +19,14 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
     setChecked((previous) => {
       previous = !previous;
       if (previous === true) {
-        props.onChecked?.(props.project);
+        props.onChecked?.(props.userProject);
       } else {
-        props.onUnchecked?.(props.project);
+        props.onUnchecked?.(props.userProject);
       }
       return previous;
     });
 
-  const onSelect = () => props.onSelect?.(props.project);
+  const onSelect = () => props.onSelect?.(props.userProject);
 
   return (
     <Card
@@ -44,26 +44,33 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
         )}
       </div>
       <div className={styles.projectItemDetails} onClick={onSelect}>
-        <div>{providerDetails.findByType(props.project.provider)}</div>
+        <div>
+          {providerDetails.findByType(props.userProject.project.provider)}
+        </div>
         <div className={styles.company}>
-          {props.project.company.length > 0
-            ? props.project.company
+          {props.userProject.project.company.length > 0
+            ? props.userProject.project.company
             : "Company not provided"}
         </div>
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href={props.project.url}
+          href={props.userProject.project.url}
           className={styles.titleLink}
         >
-          <h3 className={styles.title}>{props.project.title}</h3>
+          <h3 className={styles.title}>{props.userProject.project.title}</h3>
         </a>
-        <div className={styles.location}>{props.project.location}</div>
-        <div>{renderDate(props.project.publishedAt)}</div>
+        <div className={styles.location}>
+          {props.userProject.project.location}
+        </div>
+        <div>{renderDate(props.userProject.project.publishedAt)}</div>
       </div>
       <div className={styles.projectDetails}>
         {displayDetails && (
-          <ProjectDetails project={props.project} onChange={props.onChange} />
+          <ProjectDetails
+            userProject={props.userProject}
+            onChange={props.onChange}
+          />
         )}
         <Collapse collapsed={displayDetails} setCollapsed={setDisplayDetails} />
       </div>

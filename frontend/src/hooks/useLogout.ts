@@ -13,7 +13,8 @@ export const useLogout = () => {
     setIsLoggingOut(true);
     if (session) {
       try {
-        await UserApi.logout(session);
+        const userApi = new UserApi();
+        await userApi.logout(session);
       } catch (error) {
         setIsLoggingOut(false);
         throw error;

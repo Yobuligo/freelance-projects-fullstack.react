@@ -1,125 +1,123 @@
 import { useMemo, useState } from "react";
-import { ProjectApi } from "../../../api/ProjectApi";
-import { useProjects } from "../../../hooks/useProjects";
+import { UserProjectApi } from "../../../api/UserProjectApi";
 import { useRequest } from "../../../hooks/useRequest";
 import { useSettings } from "../../../hooks/useSettings";
 import { useUserConfig } from "../../../hooks/useUserConfig";
-import { IProject } from "../../../shared/model/IProject";
+import { useUserProjects } from "../../../hooks/useUserProjects";
+import { IUserProject } from "../../../shared/model/IUserProject";
 import { isOlderThanHours } from "../../../utils/isOlderThan";
-import { sortProjects } from "../../../utils/sortProjects";
+import { sortUserProjects } from "../../../utils/sortUserProjects";
 
 export const useProjectSectionViewModel = () => {
   const request = useRequest();
-  const [projects, setProjects] = useProjects();
+  const [userProjects, setUserProjects] = useUserProjects();
   const [userConfig, setUserConfig] = useUserConfig();
   const [displaySettings, setDisplaySettings] = useState(
     userConfig.displaySettings
   );
   const [settings] = useSettings();
-  const [selectedProject, setSelectedProject] = useState<IProject | undefined>(
-    undefined
-  );
-  const [appliedProjectsCollapsed, setAppliedProjectsCollapsed] = useState(
-    userConfig.collapseApplied ?? true
-  );
-  const [trashProjectsCollapsed, setTrashProjectsCollapsed] = useState(
+  const [selectedUserProject, setSelectedUserProject] = useState<
+    IUserProject | undefined
+  >(undefined);
+  const [appliedUserProjectsCollapsed, setAppliedUserProjectsCollapsed] =
+    useState(userConfig.collapseApplied ?? true);
+  const [trashUserProjectsCollapsed, setTrashUserProjectsCollapsed] = useState(
     userConfig.collapseTrash ?? true
   );
 
-  const openProjects = useMemo(
-    () => projects.filter((project) => !project.completed),
-    [projects]
-  );
-
-  const appliedProjects = useMemo(
-    () =>
-      projects
-        .filter((project) => project.completed && project.applied)
-        .sort(sortProjects),
-    [projects]
-  );
-
-  const trashProjects = useMemo(
-    () =>
-      projects
-        .filter((project) => project.completed && !project.applied)
-        .sort(sortProjects),
-    [projects]
+  /**
+   * Returns a list of projects, which are not open, so not marked as completed or applied to
+   */
+  const openUserProjects = useMemo(
+    () => userProjects.filter((userProject) => !userProject.completed),
+    [userProjects]
   );
 
   /**
-   * Loads projects from providers and merges it with the data from the local storage
+   * Returns a list of projects, the user has applied to
+   */
+  const appliedUserProjects = useMemo(
+    () =>
+      userProjects
+        .filter((userProject) => userProject.completed && userProject.applied)
+        .sort(sortUserProjects),
+    [userProjects]
+  );
+
+  /**
+   * Returns a list of projects, the user has marked as completed, those who are not interesting
+   */
+  const trashUserProjects = useMemo(
+    () =>
+      userProjects
+        .filter((userProject) => userProject.completed && !userProject.applied)
+        .sort(sortUserProjects),
+    [userProjects]
+  );
+
+  /**
+   * Loads user projects from providers and merges it with the data from the local storage
    * If projects are already available take these projects, otherwise create new instances
    */
-  const loadProjects = async (force?: boolean) => {
+  const loadUserProjects = async (force?: boolean) => {
     await request.send(async () => {
       const enabledProviderRequests = settings.providerRequests.filter(
         (item) => item.enabled === true
       );
-      const fetchedProjects = await ProjectApi.findAll(
+      const projectApi = new UserProjectApi();
+      const fetchedUserProjects = await projectApi.findAll(
         enabledProviderRequests,
         force
       );
 
-      // find new projects, which are currently unknown
-      const newProjects = fetchedProjects.filter((fetchedProject) => {
-        const index = projects.findIndex(
-          (project) => project.id === fetchedProject.id
-        );
-        return index === -1;
-      });
-
-      // add new projects to the project list
-      if (newProjects.length > 0) {
-        setProjects((previous) => {
-          previous.push(...newProjects);
-          return [...previous];
-        });
-      }
+      setUserProjects(fetchedUserProjects);
     });
   };
 
   /**
-   * Marks all projects as completed
+   * Marks all user projects as completed
    */
   const onCheckAll = () =>
-    setProjects((projects) => {
-      projects.forEach((project) => {
-        if (!project.completed) {
-          project.completed = true;
+    setUserProjects((userProjects) => {
+      userProjects.forEach((userProject) => {
+        if (!userProject.completed) {
+          userProject.completed = true;
         }
       });
-      return [...projects];
+      return [...userProjects];
     });
 
   /**
-   * Marks all projects as completed, which are older than 24 hours
+   * Marks all user projects as completed, which are older than 24 hours
    */
   const onCheckOld = () =>
-    setProjects((projects) => {
-      projects.forEach((project) => {
-        if (!project.completed && isOlderThanHours(project.publishedAt, 24)) {
-          project.completed = true;
+    setUserProjects((userProjects) => {
+      userProjects.forEach((userProject) => {
+        if (
+          !userProject.completed &&
+          isOlderThanHours(userProject.project.publishedAt, 24)
+        ) {
+          userProject.completed = true;
         }
       });
-      return [...projects];
+      return [...userProjects];
     });
 
-  const onProjectChecked = (project: IProject) =>
-    setProjects((previous) => {
-      project.completed = true;
-      project.completedAt = new Date().toISOString() as unknown as Date;
+  const onUserProjectChecked = (userProject: IUserProject) =>
+    setUserProjects((previous) => {
+      userProject.completed = true;
+      userProject.completedAt = new Date().toISOString() as unknown as Date;
       return [...previous];
     });
 
-  const onProjectUnchecked = (project: IProject) =>
-    setProjects((previous) => {
-      project.completed = false;
-      project.completedAt = undefined;
+  const onUserProjectUnchecked = (userProject: IUserProject) =>
+    setUserProjects((previous) => {
+      userProject.completed = false;
+      userProject.completedAt = undefined;
       return [...previous];
     });
 
-  const onReload = () => loadProjects(true);
+  const onReload = () => loadUserProjects(true);
 
   const onToggleDisplaySettings = () =>
     setDisplaySettings((previous) => {
@@ -130,33 +128,33 @@ export const useProjectSectionViewModel = () => {
       return previous;
     });
 
-  const onSelectProject = (project: IProject) => {
-    setSelectedProject((previous) => {
+  const onSelectUserProject = (userProject: IUserProject) => {
+    setSelectedUserProject((previous) => {
       // if selected project shouldn't be displayed, set it to undefined
       if (userConfig.openLinkInline === false) {
         return undefined;
       }
 
       // same project was clicked. Unselect all projects
-      if (previous?.id === project.id) {
+      if (previous?.id === userProject.id) {
         return undefined;
       }
-      return project;
+      return userProject;
     });
   };
 
-  const onProjectChanged = (project: IProject) => {
-    setProjects((previous) => {
-      const index = previous.findIndex((item) => item.id === project.id);
+  const onUserProjectChanged = (userProject: IUserProject) => {
+    setUserProjects((previous) => {
+      const index = previous.findIndex((item) => item.id === userProject.id);
       if (index !== -1) {
-        previous.splice(index, 1, project);
+        previous.splice(index, 1, userProject);
       }
       return [...previous];
     });
   };
 
-  const onSetAppliedProjectsCollapsed = () =>
-    setAppliedProjectsCollapsed((previous) => {
+  const onSetAppliedUserProjectsCollapsed = () =>
+    setAppliedUserProjectsCollapsed((previous) => {
       previous = !previous;
       setUserConfig((userConfig) => {
         userConfig.collapseApplied = previous;
@@ -165,8 +163,8 @@ export const useProjectSectionViewModel = () => {
       return previous;
     });
 
-  const onSetTrashProjectsCollapsed = () =>
-    setTrashProjectsCollapsed((previous) => {
+  const onSetTrashUserProjectsCollapsed = () =>
+    setTrashUserProjectsCollapsed((previous) => {
       previous = !previous;
       setUserConfig((userConfig) => {
         userConfig.collapseTrash = previous;
@@ -175,29 +173,29 @@ export const useProjectSectionViewModel = () => {
       return previous;
     });
 
-  const needsDisplaySelectedProject =
-    selectedProject && userConfig.openLinkInline === true;
+  const needsDisplaySelectedUserProject =
+    selectedUserProject && userConfig.openLinkInline === true;
 
   return {
-    appliedProjects,
-    appliedProjectsCollapsed,
+    appliedUserProjects,
+    appliedUserProjectsCollapsed,
     displaySettings,
     isLoading: request.isLoading,
-    loadProjects,
-    needsDisplaySelectedProject,
-    onSelectProject,
+    loadUserProjects,
+    needsDisplaySelectedUserProject,
+    onSelectUserProject,
     onCheckAll,
     onCheckOld,
-    onProjectChanged,
-    onProjectChecked,
-    onProjectUnchecked,
+    onUserProjectChanged,
+    onUserProjectChecked,
+    onUserProjectUnchecked,
     onReload,
-    onSetAppliedProjectsCollapsed,
-    onSetTrashProjectsCollapsed,
+    onSetAppliedUserProjectsCollapsed,
+    onSetTrashUserProjectsCollapsed,
     onToggleDisplaySettings,
-    openProjects,
-    selectedProject,
-    trashProjects,
-    trashProjectsCollapsed,
+    openUserProjects,
+    selectedUserProject,
+    trashUserProjects,
+    trashUserProjectsCollapsed,
   };
 };

@@ -1,7 +1,7 @@
-import { IProject } from "../../../shared/model/IProject";
+import { IUserProject } from "../../../shared/model/IUserProject";
 
 export interface IProjectIFrame {
   height?: string;
-  project: IProject;
+  userProject: IUserProject;
   width?: string;
 }
