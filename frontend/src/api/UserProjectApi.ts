@@ -1,19 +1,19 @@
 import { IProviderRequest } from "../model/IProviderRequest";
 import { IProviderRequests } from "../shared/model/IProviderRequests";
 import { IUserProject, UserProjectMeta } from "../shared/model/IUserProject";
-import { RESTApi } from "./core/RESTApi";
+import { Repository } from "./core/Repository";
 
-export class UserProjectApi extends RESTApi {
-  async findAll(
+export class UserProjectApi extends Repository<IUserProject> {
+  constructor() {
+    super(UserProjectMeta);
+  }
+
+  async findAllByProviderRequests(
     providerRequests: IProviderRequest[],
     force?: boolean
   ): Promise<IUserProject[]> {
     const requests = this.convertToBackendFormat(providerRequests, force);
     return await this.post(`${this.host}${UserProjectMeta.path}`, requests);
-  }
-
-  async updateAll(userProjects: IUserProject[]): Promise<IUserProject> {
-    return await this.put(`${this.host}${UserProjectMeta.path}`, userProjects);
   }
 
   /**

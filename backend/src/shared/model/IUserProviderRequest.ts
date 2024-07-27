@@ -1,4 +1,5 @@
 import { IEntity } from "../types/IEntity";
+import { IHavePath } from "../types/IHavePath";
 import { ProviderType } from "../types/ProviderType";
 
 export interface IUserProviderRequest extends IEntity {
@@ -8,3 +9,7 @@ export interface IUserProviderRequest extends IEntity {
   title: string;
   url: string;
 }
+
+export const UserProviderRequestMeta: IHavePath = {
+  path: "/user-provider-requests",
+};

@@ -2,12 +2,10 @@ import {
   IProviderDetails,
   ProviderDetailsMeta,
 } from "../shared/model/IProviderDetails";
-import { RESTApi } from "./core/RESTApi";
+import { Repository } from "./core/Repository";
 
-class ProviderDetailsApiDefault extends RESTApi {
-  findAll(): Promise<IProviderDetails[]> {
-    return this.get(`${this.host}${ProviderDetailsMeta.path}`);
+export class ProviderDetailsApi extends Repository<IProviderDetails> {
+  constructor() {
+    super(ProviderDetailsMeta);
   }
 }
-
-export const ProviderDetailsApi = new ProviderDetailsApiDefault();

@@ -1,4 +1,3 @@
-import { AppConfig } from "../../AppConfig";
 import { IError } from "../../shared/model/IError";
 import { HaveTokenMeta } from "../../shared/types/IHaveToken";
 import { createError } from "../../shared/utils/createError";
@@ -6,6 +5,19 @@ import { isError } from "../../shared/utils/isError";
 import { SessionRepo } from "./SessionRepo";
 
 export abstract class RESTApi {
+  protected delete<T>(url: string): Promise<T> {
+    const extendedUrl = this.extendUrl(url);
+    return this.createPromise(extendedUrl, async () => {
+      return await fetch(extendedUrl, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "DELETE",
+        mode: "cors",
+      });
+    });
+  }
+
   protected get<T>(url: string): Promise<T> {
     const extendedUrl = this.extendUrl(url);
     return this.createPromise(extendedUrl, async () => {
@@ -43,10 +55,6 @@ export abstract class RESTApi {
         mode: "cors",
       });
     });
-  }
-
-  protected get host(): string {
-    return AppConfig.HOST;
   }
 
   private async createPromise<T>(

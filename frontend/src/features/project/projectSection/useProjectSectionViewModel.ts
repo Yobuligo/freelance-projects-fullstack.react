@@ -80,7 +80,7 @@ export const useProjectSectionViewModel = () => {
         (item) => item.enabled === true
       );
       const projectApi = new UserProjectApi();
-      const fetchedUserProjects = await projectApi.findAll(
+      const fetchedUserProjects = await projectApi.findAllByProviderRequests(
         enabledProviderRequests,
         force
       );

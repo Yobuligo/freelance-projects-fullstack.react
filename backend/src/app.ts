@@ -7,6 +7,7 @@ import { Project } from "./model/Projects";
 import { Session } from "./model/Session";
 import { UserProject } from "./model/UserProject";
 import { User } from "./model/User";
+import { UserProviderRequestController } from "./controller/UserProviderRequestController";
 
 User.sync({ alter: true });
 Session.sync({ alter: true });
@@ -28,4 +29,5 @@ server.use("/api", new UserProjectController().router);
 server.use("/api", new ProviderMetaController().router);
 server.use("/api", new ProviderDetailsController().router);
 server.use("/api", new UserController().router);
+server.use("/api", new UserProviderRequestController().router);
 server.listen(5000);

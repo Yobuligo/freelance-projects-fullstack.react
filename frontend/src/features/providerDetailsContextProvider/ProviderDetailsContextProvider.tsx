@@ -20,7 +20,8 @@ export const ProviderDetailsContextProvider: React.FC<
 
   useInitialize(() => {
     request.send(async () => {
-      const providerDetails = await ProviderDetailsApi.findAll();
+      const providerDetailsApi = new ProviderDetailsApi();
+      const providerDetails = await providerDetailsApi.findAll();
       setProviderDetails(providerDetails);
     });
   });
