@@ -1,12 +1,14 @@
 import { Router } from "express";
 import { ProjectRepo } from "../repository/ProjectRepo";
+import { UserProjectRepo } from "../repository/UserProjectRepo";
 import { ProjectCollector } from "../services/projectCollector/ProjectCollector";
-import { ProjectMeta } from "../shared/model/IProject";
+import { IProject, ProjectMeta } from "../shared/model/IProject";
 import { IProviderRequests } from "../shared/model/IProviderRequests";
+import { ISession } from "../shared/model/ISession";
 import { NetworkInfo } from "../shared/services/NetworkInfo";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
-import { sortProjects } from "../utils/sortProjects";
+import { sortUserProjects } from "../utils/sortUserProjects";
 import { Controller } from "./Controller";
 
 export class ProjectController extends Controller {
@@ -25,24 +27,12 @@ export class ProjectController extends Controller {
 
       this.handleSessionRequest(req, res, async (session) => {
         const providerRequests: IProviderRequests[] = req.body;
-
         try {
-          // collect projects
-          const projectCollector = new ProjectCollector();
-          const projects = await projectCollector.collect(providerRequests);
-          const sortedProjects = sortProjects(projects);
-
-          // update projects master data if they not exist
-          const projectRepo = new ProjectRepo();
-          await projectRepo.modify(sortedProjects);
-
-          // find user projects for projects
-
-          // insert new user projects if not yet exist
-
-          // return user projects
-
-          res.status(200).send(sortedProjects);
+          const sortedUserProjects = await this.findUserProjects(
+            providerRequests,
+            session
+          );
+          res.status(200).send(sortedUserProjects);
         } catch (error) {
           if (isError(error)) {
             res.status(500).send(error);
@@ -52,5 +42,34 @@ export class ProjectController extends Controller {
         }
       });
     });
+  }
+
+  private async findUserProjects(
+    providerRequests: IProviderRequests[],
+    session: ISession
+  ) {
+    const collectedProjects = await this.collectProjects(providerRequests);
+    const projects = await this.updateProjects(collectedProjects);
+    const userProjects = await this.updateUserProjects(session, projects);
+    const sortedUserProjects = sortUserProjects(userProjects);
+    return sortedUserProjects;
+  }
+
+  private async updateUserProjects(session: ISession, projects: IProject[]) {
+    const userProjectRepo = new UserProjectRepo();
+    const userProjects = await userProjectRepo.modify(session.userId, projects);
+    return userProjects;
+  }
+
+  private async updateProjects(collectedProjects: IProject[]) {
+    const projectRepo = new ProjectRepo();
+    const projects = await projectRepo.modify(collectedProjects);
+    return projects;
+  }
+
+  private async collectProjects(providerRequests: IProviderRequests[]) {
+    const projectCollector = new ProjectCollector();
+    const collectedProjects = await projectCollector.collect(providerRequests);
+    return collectedProjects;
   }
 }

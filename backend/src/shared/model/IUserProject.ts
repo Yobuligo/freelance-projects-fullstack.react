@@ -12,5 +12,5 @@ export interface IUserProject extends IEntity {
   project: IProject;
   rejected: boolean;
   rejectedAt?: Date;
-  username: string;
+  userId: string;
 }
