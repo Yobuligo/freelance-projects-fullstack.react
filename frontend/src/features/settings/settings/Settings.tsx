@@ -21,14 +21,15 @@ export const Settings: React.FC = () => {
       </div>
       <div className={styles.settingsContent}>
         <SettingsSection title={t(texts.settingsSection.addNewSearchUrl)}>
-          <ProviderRequestInput onAdd={viewModel.onAddProviderRequest} />
+          <ProviderRequestInput onAdd={viewModel.onAddUserProviderRequest} />
         </SettingsSection>
         <SettingsSection title={t(texts.settingsSection.savedSearches)}>
           <ProviderRequestList
-            providerRequests={viewModel.settings.providerRequests}
-            onDelete={viewModel.onDeleteProviderRequest}
-            onDisable={viewModel.onDisableProviderRequest}
-            onEnable={viewModel.onEnableProviderRequest}
+            isLoading={viewModel.isUserProviderRequestsLoading}
+            onDelete={viewModel.onDeleteUserProviderRequest}
+            onDisable={viewModel.onUpdateUserProviderRequest}
+            onEnable={viewModel.onEnableUserProviderRequest}
+            userProviderRequests={viewModel.userProviderRequests}
           />
         </SettingsSection>
         <SettingsSection

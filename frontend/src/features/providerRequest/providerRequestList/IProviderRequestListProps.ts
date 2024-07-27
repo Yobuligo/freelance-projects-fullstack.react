@@ -1,6 +1,7 @@
-import { IProviderRequest } from "../../../model/IProviderRequest";
+import { IUserProviderRequest } from "../../../shared/model/IUserProviderRequest";
 import { IProviderRequestEvents } from "../providerRequestItem/IProviderRequestEvents";
 
 export interface IProviderRequestListProps extends IProviderRequestEvents {
-  providerRequests: IProviderRequest[];
+  userProviderRequests: IUserProviderRequest[];
+  isLoading: boolean;
 }

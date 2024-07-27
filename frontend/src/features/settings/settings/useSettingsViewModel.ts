@@ -1,57 +1,99 @@
+import { useCallback, useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
-import { useSettings } from "../../../hooks/useSettings";
-import { IProviderRequest } from "../../../model/IProviderRequest";
+import { useSession } from "../../../hooks/useSession";
+import { useUserProviderRequests } from "../../../hooks/useUserProviderRequests";
+import { IUserProviderRequest } from "../../../shared/model/IUserProviderRequest";
 import { ProviderType } from "../../../shared/types/ProviderType";
+import { UserProviderRequestApi } from "./../../../api/UserProviderRequestApi";
 
 export const useSettingsViewModel = () => {
-  const [settings, setSettings] = useSettings();
+  const [session] = useSession();
+  const [isUserProviderRequestsLoading, setIsUserProviderRequestLoading] =
+    useState(false);
+  const [userProviderRequests, setUserProviderRequests] =
+    useUserProviderRequests();
 
-  const onAddProviderRequest = (
-    providerType: ProviderType,
-    providerUrl: string,
-    requestTitle: string
+  const loadUserProviderRequests = useCallback(async () => {
+    setIsUserProviderRequestLoading(true);
+    const userProviderRequestApi = new UserProviderRequestApi();
+    const userProviderRequests = await userProviderRequestApi.findAll();
+    setUserProviderRequests(userProviderRequests);
+    setIsUserProviderRequestLoading(false);
+  }, [setUserProviderRequests]);
+
+  useEffect(() => {
+    loadUserProviderRequests();
+  }, [loadUserProviderRequests]);
+
+  const onAddUserProviderRequest = (
+    provider: ProviderType,
+    url: string,
+    title: string
   ) => {
-    setSettings((previous) => {
-      previous.providerRequests.push({
+    const userId = session?.userId;
+    if (!userId) {
+      throw new Error(
+        `Error when adding user provider request. Invalid user session`
+      );
+    }
+
+    setUserProviderRequests((previous) => {
+      const userProviderRequest: IUserProviderRequest = {
         id: uuid(),
+        userId,
         enabled: true,
-        providerType,
-        providerUrl,
-        requestTitle,
-      });
-      return { ...previous };
+        provider,
+        url,
+        title,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      previous.push(userProviderRequest);
+      const userProviderRequestApi = new UserProviderRequestApi();
+      userProviderRequestApi.insert(userProviderRequest);
+      return [...previous];
     });
   };
 
-  const onDeleteProviderRequest = (providerRequest: IProviderRequest) => {
-    setSettings((previous) => {
-      const index = previous.providerRequests.findIndex(
-        (item) => item.id === providerRequest.id
+  const onDeleteUserProviderRequest = (
+    userProviderRequest: IUserProviderRequest
+  ) => {
+    setUserProviderRequests((previous) => {
+      const index = previous.findIndex(
+        (item) => item.id === userProviderRequest.id
       );
       if (index !== -1) {
-        previous.providerRequests.splice(index, 1);
+        previous.splice(index, 1);
       }
-      return { ...previous };
+
+      const userProviderRequestApi = new UserProviderRequestApi();
+      userProviderRequestApi.deleteById(userProviderRequest.id);
+      return [...previous];
     });
   };
 
-  const onUpdateProviderRequest = (providerRequest: IProviderRequest) => {
-    setSettings((previous) => {
-      const index = previous.providerRequests.findIndex(
-        (item) => item.id === providerRequest.id
+  const onUpdateUserProviderRequest = (
+    userProviderRequest: IUserProviderRequest
+  ) => {
+    setUserProviderRequests((previous) => {
+      const index = previous.findIndex(
+        (item) => item.id === userProviderRequest.id
       );
       if (index !== -1) {
-        previous.providerRequests.splice(index, 1, providerRequest);
+        previous.splice(index, 1, userProviderRequest);
       }
-      return { ...previous };
+      const userProviderRequestApi = new UserProviderRequestApi();
+      userProviderRequestApi.update(userProviderRequest);
+      return [...previous];
     });
   };
 
   return {
-    onAddProviderRequest,
-    onDeleteProviderRequest,
-    onDisableProviderRequest: onUpdateProviderRequest,
-    onEnableProviderRequest: onUpdateProviderRequest,
-    settings,
+    isUserProviderRequestsLoading,
+    onAddUserProviderRequest,
+    onDeleteUserProviderRequest,
+    onUpdateUserProviderRequest,
+    onEnableUserProviderRequest: onUpdateUserProviderRequest,
+    userProviderRequests,
   };
 };

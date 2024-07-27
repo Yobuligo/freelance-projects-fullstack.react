@@ -8,9 +8,9 @@ export const ProviderRequestList: React.FC<IProviderRequestListProps> = (
   props
 ) => {
   const { t } = useTranslation();
-  const items = props.providerRequests.map((providerRequest, index) => (
+  const items = props.userProviderRequests.map((providerRequest, index) => (
     <div key={index}>
-      <ProviderRequestItem {...props} providerRequest={providerRequest} />
+      <ProviderRequestItem {...props} userProviderRequest={providerRequest} />
     </div>
   ));
 

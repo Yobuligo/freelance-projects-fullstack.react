@@ -9,7 +9,6 @@ const userProviderRequest: ModelStatic<
   Model<IUserProviderRequest, IEntityDetails<IUserProviderRequest>>
 > = db.define("user-provider-requests", {
   id: createIdType(),
-  userId: DataTypes.STRING,
   enabled: DataTypes.BOOLEAN,
   provider: DataTypes.STRING,
   title: DataTypes.STRING,

@@ -63,6 +63,34 @@ export abstract class Repository<T extends IEntity> implements IRepository<T> {
     return data.toJSON();
   }
 
+  /**
+   * Updates the props of an entity beside the technical fields id, createdAt and updatedAt
+   */
+  async update(entity: T) {
+    await this.updateAll([entity]);
+  }
+
+  /**
+   * Updates the props of a list of entities beside the technical fields id, createdAt and updatedAt
+   */
+  async updateAll(entities: T[]) {
+    if (entities.length === 0) {
+      return;
+    }
+
+    const entity = entities[0];
+    const propNames: (keyof T)[] = [];
+    for (const propName in entity) {
+      if (propName !== "id") {
+        propNames.push(propName);
+      }
+    }
+
+    await this.model.bulkCreate(entities as any, {
+      updateOnDuplicate: propNames,
+    });
+  }
+
   version(id: string): Promise<Date> {
     return new Promise(async (resolve, reject) => {
       const entity = await this.findById(id);

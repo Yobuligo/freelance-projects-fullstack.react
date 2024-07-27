@@ -20,19 +20,19 @@ export const ProviderRequestItem: React.FC<IProviderRequestItemProps> = (
         />
         <DeleteIcon onClick={viewModel.onDelete} />
         <Switch
-          checked={props.providerRequest.enabled ?? true}
+          checked={props.userProviderRequest.enabled ?? true}
           onChange={viewModel.onSwitchChanged}
           sliderColor={colors.colorPrimaryDark}
           colorOnState={colors.colorPrimary}
         />
         <div className={styles.providerType}>{viewModel.providerTitle}</div>
         <div className={styles.providerTitle}>
-          {props.providerRequest.requestTitle ?? ""}
+          {props.userProviderRequest.title ?? ""}
         </div>
       </div>
       {!viewModel.collapsed && (
         <div className={styles.providerUrl}>
-          {props.providerRequest.providerUrl}
+          {props.userProviderRequest.url}
         </div>
       )}
     </div>

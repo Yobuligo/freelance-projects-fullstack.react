@@ -8,7 +8,9 @@ import { Session } from "./model/Session";
 import { UserProject } from "./model/UserProject";
 import { User } from "./model/User";
 import { UserProviderRequestController } from "./controller/UserProviderRequestController";
+import { UserProviderRequest } from "./model/UserProviderRequest";
 
+UserProviderRequest.sync({ alter: true });
 User.sync({ alter: true });
 Session.sync({ alter: true });
 Project.sync({ alter: true });

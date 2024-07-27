@@ -1,0 +1,61 @@
+{
+    "settings": {
+        "providerRequests": [
+            {
+                "id": "8df2db29-7745-4306-9fdd-62773abe4c7b",
+                "enabled": true,
+                "providerType": "FREELANCE",
+                "providerUrl": "https://www.freelance.de/search/project.php?__search_freetext=React+OR+TypeScript+OR+JavaScript+OR+express+OR+abap",
+                "requestTitle": "React TypeScript JavaScript Express ABAP"
+            },
+            {
+                "id": "085d6aea-91e5-4e5e-b655-024b566aad48",
+                "enabled": false,
+                "providerType": "COMPUTER_FUTURES",
+                "providerUrl": "https://www.computerfutures.com/de-de/stellensuche/?keywords=React+TypeScript+JavaScript+ABAP+Express&country=Deutschland&searchRadius=50km&type=Freelance",
+                "requestTitle": "React TypeScript JavaScript Express ABAP"
+            },
+            {
+                "id": "8d4f3ddd-9ad6-48a7-baea-1d87ced09578",
+                "enabled": true,
+                "providerType": "FREELANCE_MAP",
+                "providerUrl": "https://www.freelancermap.de/projektboerse.html?categories%5B0%5D=1&created=2&projectContractTypes%5B0%5D=contracting&remoteInPercent%5B0%5D=100&remoteInPercent%5B1%5D=1&query=React&countries%5B%5D=1&sort=1&pagenr=1",
+                "requestTitle": "React"
+            },
+            {
+                "id": "7a9a44cf-e6ab-4b1e-801f-4e7bffbc0cf8",
+                "enabled": true,
+                "providerType": "FREELANCE_MAP",
+                "providerUrl": "https://www.freelancermap.de/projektboerse.html?categories%5B0%5D=1&created=2&projectContractTypes%5B0%5D=contracting&remoteInPercent%5B0%5D=100&remoteInPercent%5B1%5D=1&query=TypeScript&countries%5B%5D=1&sort=1&pagenr=1",
+                "requestTitle": "TypeScript"
+            },
+            {
+                "id": "f11b06dd-ed88-488f-ba20-fd4cb9677ec6",
+                "enabled": true,
+                "providerType": "FREELANCE_MAP",
+                "providerUrl": "https://www.freelancermap.de/projektboerse.html?categories%5B0%5D=1&created=2&projectContractTypes%5B0%5D=contracting&remoteInPercent%5B0%5D=100&remoteInPercent%5B1%5D=1&query=JavaScript&countries%5B%5D=1&sort=1&pagenr=1",
+                "requestTitle": "JavaScript"
+            },
+            {
+                "id": "e201a41e-a999-47f9-8ac0-ed22be69b1ea",
+                "enabled": true,
+                "providerType": "FREELANCE_MAP",
+                "providerUrl": "https://www.freelancermap.de/projektboerse.html?categories%5B0%5D=1&created=2&projectContractTypes%5B0%5D=contracting&remoteInPercent%5B0%5D=100&remoteInPercent%5B1%5D=1&query=Express&countries%5B%5D=1&sort=1&pagenr=1",
+                "requestTitle": "Express"
+            },
+            {
+                "id": "8eea684e-3daf-4899-8dbf-22bde6b2f0c3",
+                "enabled": true,
+                "providerType": "FREELANCE_MAP",
+                "providerUrl": "https://www.freelancermap.de/projektboerse.html?categories%5B0%5D=1&created=2&projectContractTypes%5B0%5D=contracting&remoteInPercent%5B0%5D=100&remoteInPercent%5B1%5D=1&query=ABAP&countries%5B%5D=1&sort=1&pagenr=1",
+                "requestTitle": "ABAP"
+            }
+        ]
+    },
+    "userConfig": {
+        "collapseApplied": true,
+        "collapseTrash": true,
+        "displaySettings": true,
+        "openLinkInline": false
+    }
+}

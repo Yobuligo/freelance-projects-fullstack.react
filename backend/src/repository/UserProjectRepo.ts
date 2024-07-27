@@ -63,23 +63,6 @@ export class UserProjectRepo extends Repository<IUserProject> {
     return userProjects;
   }
 
-  async updateAll(userProjects: IUserProject[]) {
-    await this.model.bulkCreate(userProjects, {
-      updateOnDuplicate: [
-        "applicationType",
-        "applied",
-        "appliedAt",
-        "completed",
-        "completedAt",
-        "contact",
-        "createdAt",
-        "rejected",
-        "rejectedAt",
-        "updatedAt",
-      ],
-    });
-  }
-
   private createUserProject(
     userId: string,
     project: IProject

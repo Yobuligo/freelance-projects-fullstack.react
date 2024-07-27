@@ -7,19 +7,19 @@ export const useProviderRequestItemViewModel = (
 ) => {
   const [collapsed, setCollapsed] = useState(true);
 
-  const onDelete = () => props.onDelete?.(props.providerRequest);
+  const onDelete = () => props.onDelete?.(props.userProviderRequest);
 
   const onSwitchChanged = (checked: boolean) => {
-    props.providerRequest.enabled = checked;
+    props.userProviderRequest.enabled = checked;
     checked
-      ? props.onEnable?.(props.providerRequest)
-      : props.onDisable?.(props.providerRequest);
+      ? props.onEnable?.(props.userProviderRequest)
+      : props.onDisable?.(props.userProviderRequest);
   };
 
   const providerDetails = useProviderDetails();
 
   const providerTitle = providerDetails.findByType(
-    props.providerRequest.providerType
+    props.userProviderRequest.provider
   );
 
   return {

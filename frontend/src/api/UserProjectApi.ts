@@ -1,6 +1,6 @@
-import { IProviderRequest } from "../model/IProviderRequest";
 import { IProviderRequests } from "../shared/model/IProviderRequests";
 import { IUserProject, UserProjectMeta } from "../shared/model/IUserProject";
+import { IUserProviderRequest } from "../shared/model/IUserProviderRequest";
 import { Repository } from "./core/Repository";
 
 export class UserProjectApi extends Repository<IUserProject> {
@@ -9,10 +9,10 @@ export class UserProjectApi extends Repository<IUserProject> {
   }
 
   async findAllByProviderRequests(
-    providerRequests: IProviderRequest[],
+    userProviderRequests: IUserProviderRequest[],
     force?: boolean
   ): Promise<IUserProject[]> {
-    const requests = this.convertToBackendFormat(providerRequests, force);
+    const requests = this.convertToBackendFormat(userProviderRequests, force);
     return await this.post(`${this.host}${UserProjectMeta.path}`, requests);
   }
 
@@ -20,23 +20,23 @@ export class UserProjectApi extends Repository<IUserProject> {
    * Converts the provider requests to the format which is expected from the backend.
    */
   private convertToBackendFormat(
-    providerRequests: IProviderRequest[],
+    userProviderRequests: IUserProviderRequest[],
     force?: boolean
   ): IProviderRequests[] {
     const requests: IProviderRequests[] = [];
 
-    providerRequests.forEach((providerRequest) => {
+    userProviderRequests.forEach((userProviderRequest) => {
       const request = requests.find(
-        (request) => request.providerType === providerRequest.providerType
+        (request) => request.providerType === userProviderRequest.provider
       );
 
       if (request) {
-        request.urls.push(providerRequest.providerUrl);
+        request.urls.push(userProviderRequest.url);
       } else {
         requests.push({
           force: force,
-          providerType: providerRequest.providerType,
-          urls: [providerRequest.providerUrl],
+          providerType: userProviderRequest.provider,
+          urls: [userProviderRequest.url],
         });
       }
     });

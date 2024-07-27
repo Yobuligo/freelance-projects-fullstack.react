@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import { UserProjectApi } from "../../../api/UserProjectApi";
 import { useRequest } from "../../../hooks/useRequest";
-import { useSettings } from "../../../hooks/useSettings";
 import { useUserConfig } from "../../../hooks/useUserConfig";
 import { useUserProjects } from "../../../hooks/useUserProjects";
+import { useUserProviderRequests } from "../../../hooks/useUserProviderRequests";
 import { IUserProject } from "../../../shared/model/IUserProject";
 import { isOlderThanHours } from "../../../utils/isOlderThan";
 import { sortUserProjects } from "../../../utils/sortUserProjects";
@@ -17,7 +17,7 @@ export const useProjectSectionViewModel = () => {
   const [displaySettings, setDisplaySettings] = useState(
     userConfig.displaySettings
   );
-  const [settings] = useSettings();
+  const [userProviderRequests] = useUserProviderRequests();
   const [selectedUserProject, setSelectedUserProject] = useState<
     IUserProject | undefined
   >(undefined);
@@ -76,12 +76,12 @@ export const useProjectSectionViewModel = () => {
    */
   const loadUserProjects = async (force?: boolean) => {
     await request.send(async () => {
-      const enabledProviderRequests = settings.providerRequests.filter(
+      const enabledUserProviderRequests = userProviderRequests.filter(
         (item) => item.enabled === true
       );
       const projectApi = new UserProjectApi();
       const fetchedUserProjects = await projectApi.findAllByProviderRequests(
-        enabledProviderRequests,
+        enabledUserProviderRequests,
         force
       );
 
