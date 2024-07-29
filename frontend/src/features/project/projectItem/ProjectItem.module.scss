@@ -1,9 +1,11 @@
 @import "../../../styles/core/colors.module.scss";
+@import "../../../styles/core/mixins.scss";
 @import "../../../Variables.scss";
 
 .projectItem {
   display: flex;
   flex-direction: row;
+  @include glassy($color-hover, 0.8);
 }
 
 .projectItemSelected {

@@ -2,7 +2,10 @@
     xmlns="http://www.w3.org/2000/svg">
     <defs>
         <clipPath id="backgroundShapes">
-            <polygon points="0,432 1536,324 1728,216 0,540"/>
+            <!-- <polygon points="0,432 1536,324 1728,216 0,540"/> -->
+            <polygon points="0,432 1024,378 1536,324 1728,216 1024,378 0,540"/>
+            <polygon points="1024,378 1536,324 1728,216 1024,378 1024,378" transform="rotate(-10 50 100) translate(-800 -50)" />
+            <!-- <polygon points="1236,724 1428,616 724,778 724,778"  /> -->
             <!-- <polygon points="1920,684 384,540 192,432 1920,756"/> -->
             <!-- <polygon points="1920,432 384,324 192,216 1920,540"/> -->
             <!-- <polygon points="1920,648 384,756 192,864 1920,540"/> -->

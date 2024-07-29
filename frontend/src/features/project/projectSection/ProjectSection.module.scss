@@ -1,5 +1,6 @@
 @import "../../../Variables.scss";
 @import "../../../styles/core/colors.module.scss";
+@import "../../../styles/core/mixins.scss";
 
 .projectSection {
   display: flex;
@@ -43,9 +44,9 @@
 }
 
 .itemApplied {
-  background-color: $color-primary;
+  @include glassy($color-primary, 0.5);
 }
 
 .itemTrash {
-  background-color: $color-secondary-dark;
+  @include glassy($color-secondary-dark, 0.8);
 }

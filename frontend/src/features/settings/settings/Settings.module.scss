@@ -1,10 +1,12 @@
 @import "../../../styles/core/colors.module.scss";
+@import "../../../styles/core/mixins.scss";
 @import "../../../Variables.scss";
 
 .settings {
   display: flex;
   flex-direction: column;
   row-gap: 0.4rem;
+  @include glassy($color-primary, 0.5);
 }
 
 .title {
@@ -20,7 +22,7 @@
   fill: $color-primary-dark;
 }
 
-.title > h1 {
+.title>h1 {
   margin: 0;
   font-size: 1.2rem;
 }
