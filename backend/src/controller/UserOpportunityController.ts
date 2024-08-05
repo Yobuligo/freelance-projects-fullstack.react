@@ -14,7 +14,6 @@ import { NetworkInfo } from "../shared/services/NetworkInfo";
 import { ProviderType } from "../shared/types/ProviderType";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
-import { sortUserOpportunities } from "../utils/sortUserOpportunities";
 import { Controller } from "./Controller";
 
 export class UserOpportunityController extends Controller {
@@ -69,9 +68,29 @@ export class UserOpportunityController extends Controller {
     });
   }
 
-  private async findUserOpportunities(session: ISession, force?: boolean) {
-    await this.fetchNewOpportunities(session, force);
-    return await this.loadUserOpportunities(session);
+  private async findUserOpportunities(
+    session: ISession,
+    force?: boolean
+  ): Promise<IUserOpportunity[]> {
+    // the user opportunities are matching the current filter (user provider request config)
+    const userOpportunities = await this.fetchOpportunities(session, force);
+
+    // in addition add all user opportunities, which are completed or the current user has applied for
+    const persistedUserOpportunities = await this.loadUserOpportunities(
+      session
+    );
+
+    // add fetched opportunities to persisted user opportunities list, if not already part of it
+    userOpportunities.forEach((userOpportunity) => {
+      const index = persistedUserOpportunities.findIndex(
+        (item) => item.id === userOpportunity.id
+      );
+      if (index === -1) {
+        persistedUserOpportunities.push(userOpportunity)
+      }
+    });
+
+    return persistedUserOpportunities;
   }
 
   private async loadProviderRequests(
@@ -115,7 +134,14 @@ export class UserOpportunityController extends Controller {
     return providerRequest;
   }
 
-  private async fetchNewOpportunities(session: ISession, force?: boolean) {
+  /**
+   * Fetches opportunities from provider by the configured user provider requests.
+   * Persists opportunities if currently unknown and create corresponding user opportunities for the current user.
+   */
+  private async fetchOpportunities(
+    session: ISession,
+    force?: boolean
+  ): Promise<IUserOpportunity[]> {
     const providerRequests = await this.loadProviderRequests(session, force);
     const collectedOpportunities = await this.collectOpportunities(
       providerRequests
@@ -123,15 +149,19 @@ export class UserOpportunityController extends Controller {
     const opportunities = await this.updateOpportunities(
       collectedOpportunities
     );
-    await this.updateUserOpportunities(session, opportunities);
+    const userOpportunities = await this.updateUserOpportunities(
+      session,
+      opportunities
+    );
+    return userOpportunities;
   }
 
   private async updateUserOpportunities(
     session: ISession,
     opportunities: IOpportunity[]
-  ) {
+  ): Promise<IUserOpportunity[]> {
     const userOpportunityRepo = new UserOpportunityRepo();
-    await userOpportunityRepo.modify(session.userId, opportunities);
+    return await userOpportunityRepo.modify(session.userId, opportunities);
   }
 
   private async updateOpportunities(collectedOpportunities: IOpportunity[]) {
@@ -150,9 +180,8 @@ export class UserOpportunityController extends Controller {
 
   private async loadUserOpportunities(session: ISession) {
     const userOpportunityRepo = new UserOpportunityRepo();
-    const userOpportunities = await userOpportunityRepo.findByUserId(
+    return await userOpportunityRepo.findCompletedOrAppliedByUserId(
       session.userId
     );
-    return sortUserOpportunities(userOpportunities);
   }
 }

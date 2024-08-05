@@ -1,4 +1,4 @@
-import { WhereOptions } from "sequelize";
+import { Model, WhereOptions } from "sequelize";
 import { Opportunity } from "../model/sequelize/Opportunity";
 import { UserOpportunity } from "../model/sequelize/UserOpportunity";
 import { IOpportunity } from "../shared/model/IOpportunity";
@@ -6,6 +6,7 @@ import { IUserOpportunity } from "../shared/model/IUserOpportunity";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
 import { ExcludeRefs } from "../types/ExcludeRefs";
 import { Repository } from "./core/Repository";
+import { Op } from "sequelize";
 
 export class UserOpportunityRepo extends Repository<IUserOpportunity> {
   constructor() {
@@ -23,8 +24,19 @@ export class UserOpportunityRepo extends Repository<IUserOpportunity> {
     return data.map((model) => model.toJSON());
   }
 
+  async findCompletedOrAppliedByUserId(
+    userId: string
+  ): Promise<IUserOpportunity[]> {
+    const data = await this.model.findAll({
+      where: { userId, [Op.or]: [{ applied: true }, { completed: true }] },
+      include: [Opportunity],
+    });
+    return data.map((model) => model.toJSON());
+  }
+
   /**
    * Inserts new user opportunities for the given {@link opportunities}. Skips opportunities, if a user opportunity for one or more opportunity id already exist.
+   * Prerequisite is that {@link opportunities} only contains ids of existing entities.
    */
   async modify(userId: string, opportunities: IOpportunity[]) {
     if (opportunities.length === 0) {
@@ -49,15 +61,25 @@ export class UserOpportunityRepo extends Repository<IUserOpportunity> {
     );
 
     // create user opportunities for those, who are currently not loaded / persisted
+    let insertedUserOpportunities: Model<
+      IUserOpportunity,
+      IEntityDetails<IUserOpportunity>
+    >[] = [];
     if (opportunitiesToBeInserted.length > 0) {
       const userOpportunities: IEntityDetails<IUserOpportunity>[] =
         opportunitiesToBeInserted.map((opportunity) =>
           this.createUserOpportunity(userId, opportunity)
         );
-      await this.model.bulkCreate(
+      insertedUserOpportunities = await this.model.bulkCreate(
         userOpportunities as IEntityDetails<IUserOpportunity>[]
       );
     }
+
+    // Return a list of existing entries and new created entries
+    return [
+      ...existingUserOpportunities.map((model) => model.toJSON()),
+      ...insertedUserOpportunities.map((model) => model.toJSON()),
+    ];
   }
 
   private createUserOpportunity(
