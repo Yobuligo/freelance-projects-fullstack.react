@@ -2,10 +2,10 @@ import { Router } from "express";
 import { ProjectRepo } from "../repository/ProjectRepo";
 import { UserProjectRepo } from "../repository/UserProjectRepo";
 import { ProjectCollector } from "../services/projectCollector/ProjectCollector";
-import { IProject } from "../shared/model/IProject";
+import { IOpportunity } from "../shared/model/IOpportunity";
 import { IProviderRequests } from "../shared/model/IProviderRequests";
 import { ISession } from "../shared/model/ISession";
-import { IUserProject, UserProjectMeta } from "../shared/model/IUserProject";
+import { IUserOpportunity, UserOpportunityMeta } from "../shared/model/IUserOpportunity";
 import { NetworkInfo } from "../shared/services/NetworkInfo";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
@@ -23,7 +23,7 @@ export class UserProjectController extends Controller {
   }
 
   private findAll() {
-    this.router.post(UserProjectMeta.path, async (req, res) => {
+    this.router.post(UserOpportunityMeta.path, async (req, res) => {
       if (!(await NetworkInfo.isConnected())) {
         return res.status(502).send(createError("Missing internet connection"));
       }
@@ -54,13 +54,13 @@ export class UserProjectController extends Controller {
   }
 
   private updateAll() {
-    this.router.put(UserProjectMeta.path, async (req, res) => {
+    this.router.put(UserOpportunityMeta.path, async (req, res) => {
       if (!(await NetworkInfo.isConnected())) {
         return res.status(502).send(createError("Missing internet connection"));
       }
 
       this.handleSessionRequest(req, res, async () => {
-        const userProjects: IUserProject[] = req.body;
+        const userProjects: IUserOpportunity[] = req.body;
         const userProjectRepo = new UserProjectRepo();
         await userProjectRepo.updateAll(userProjects);
       });
@@ -78,13 +78,13 @@ export class UserProjectController extends Controller {
     return sortedUserProjects;
   }
 
-  private async updateUserProjects(session: ISession, projects: IProject[]) {
+  private async updateUserProjects(session: ISession, projects: IOpportunity[]) {
     const userProjectRepo = new UserProjectRepo();
     const userProjects = await userProjectRepo.modify(session.userId, projects);
     return userProjects;
   }
 
-  private async updateProjects(collectedProjects: IProject[]) {
+  private async updateProjects(collectedProjects: IOpportunity[]) {
     const projectRepo = new ProjectRepo();
     const projects = await projectRepo.modify(collectedProjects);
     return projects;

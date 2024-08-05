@@ -1,6 +1,6 @@
-import { IUserProject } from "../../../shared/model/IUserProject";
+import { IUserOpportunity } from "../../../shared/model/IUserOpportunity";
 import { IUserProjectChangeable } from "../types/IUserProjectChangeable";
 
 export interface IProjectDetailsProps extends IUserProjectChangeable {
-  userProject: IUserProject;
+  userProject: IUserOpportunity;
 }

@@ -1,19 +1,19 @@
 import { Model } from "sequelize";
-import { Project } from "../model/Projects";
-import { IProject } from "../shared/model/IProject";
+import { Opportunity } from "../model/Opportunity";
+import { IOpportunity } from "../shared/model/IOpportunity";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
 import { Repository } from "./core/Repository";
 
-export class ProjectRepo extends Repository<IProject> {
+export class ProjectRepo extends Repository<IOpportunity> {
   constructor() {
-    super(Project);
+    super(Opportunity);
   }
 
   /**
    * Inserts the given {@link projects} to the database, if they are not existing yet.
    * Skips insert, if a project with the same url already exists
    */
-  async modify(projects: IEntityDetails<IProject>[]): Promise<IProject[]> {
+  async modify(projects: IEntityDetails<IOpportunity>[]): Promise<IOpportunity[]> {
     if (projects.length === 0) {
       return [];
     }
@@ -29,7 +29,7 @@ export class ProjectRepo extends Repository<IProject> {
       (project) => !existingProjectUrls.includes(project.url)
     );
 
-    let createdProjects: Model<IProject, IEntityDetails<IProject>>[] = [];
+    let createdProjects: Model<IOpportunity, IEntityDetails<IOpportunity>>[] = [];
     if (projectsToBeInserted.length > 0) {
       createdProjects = await this.model.bulkCreate(projectsToBeInserted);
     }

@@ -1,6 +1,6 @@
-import { IUserProject } from "../../../shared/model/IUserProject";
+import { IUserOpportunity } from "../../../shared/model/IUserOpportunity";
 
-export const setUserProjectCompleted = (userProject: IUserProject) => {
+export const setUserProjectCompleted = (userProject: IUserOpportunity) => {
   userProject.completed = true;
   userProject.completedAt = new Date().toISOString() as unknown as Date;
 };

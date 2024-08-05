@@ -1,13 +1,13 @@
 import { WhereOptions } from "sequelize";
-import { Project } from "../model/Projects";
+import { Opportunity } from "../model/Opportunity";
 import { UserProject } from "../model/UserProject";
-import { IProject } from "../shared/model/IProject";
-import { IUserProject } from "../shared/model/IUserProject";
+import { IOpportunity } from "../shared/model/IOpportunity";
+import { IUserOpportunity } from "../shared/model/IUserOpportunity";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
 import { ExcludeRefs } from "../types/ExcludeRefs";
 import { Repository } from "./core/Repository";
 
-export class UserProjectRepo extends Repository<IUserProject> {
+export class UserProjectRepo extends Repository<IUserOpportunity> {
   constructor() {
     super(UserProject);
   }
@@ -15,10 +15,10 @@ export class UserProjectRepo extends Repository<IUserProject> {
   /**
    * Returns all user projects by the given {@link userId}.
    */
-  async findByUserId(userId: string): Promise<IUserProject[]> {
+  async findByUserId(userId: string): Promise<IUserOpportunity[]> {
     const data = await this.model.findAll({
       where: { userId },
-      include: [Project],
+      include: [Opportunity],
     });
     return data.map((model) => model.toJSON());
   }
@@ -26,7 +26,7 @@ export class UserProjectRepo extends Repository<IUserProject> {
   /**
    * Inserts new user projects for the given {@link projects}. Skips projects, if a user project for one or more project id already exist.
    */
-  async modify(userId: string, projects: IProject[]): Promise<IUserProject[]> {
+  async modify(userId: string, projects: IOpportunity[]): Promise<IUserOpportunity[]> {
     if (projects.length === 0) {
       return [];
     }
@@ -35,7 +35,7 @@ export class UserProjectRepo extends Repository<IUserProject> {
     const projectIds = projects.map((project) => project.id);
     const existingUserProjects = await this.model.findAll({
       where: { projectId: [projectIds] } as WhereOptions,
-      include: [Project],
+      include: [Opportunity],
     });
 
     // find projects which are currently not saved as user project
@@ -50,12 +50,12 @@ export class UserProjectRepo extends Repository<IUserProject> {
 
     // create user projects for those, who are currently not loaded / persisted
     if (projectsToBeInserted.length > 0) {
-      const userProjects: IEntityDetails<IUserProject>[] =
+      const userProjects: IEntityDetails<IUserOpportunity>[] =
         projectsToBeInserted.map((project) =>
           this.createUserProject(userId, project)
         );
       await this.model.bulkCreate(
-        userProjects as IEntityDetails<IUserProject>[]
+        userProjects as IEntityDetails<IUserOpportunity>[]
       );
     }
 
@@ -65,9 +65,9 @@ export class UserProjectRepo extends Repository<IUserProject> {
 
   private createUserProject(
     userId: string,
-    project: IProject
-  ): IEntityDetails<IUserProject> {
-    const userProject: ExcludeRefs<IEntityDetails<IUserProject>> = {
+    project: IOpportunity
+  ): IEntityDetails<IUserOpportunity> {
+    const userProject: ExcludeRefs<IEntityDetails<IUserOpportunity>> = {
       applied: false,
       completed: false,
       rejected: false,
@@ -75,6 +75,6 @@ export class UserProjectRepo extends Repository<IUserProject> {
     };
 
     (userProject as any)["projectId"] = project.id;
-    return userProject as IEntityDetails<IUserProject>;
+    return userProject as IEntityDetails<IUserOpportunity>;
   }
 }

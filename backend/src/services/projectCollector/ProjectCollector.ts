@@ -2,7 +2,7 @@ import { AppConfig } from "../../AppConfig";
 import { IProvider } from "../../providers/core/IProvider";
 import { ProviderFactory } from "../../providers/core/ProviderFactory";
 import { ProjectRequestRepo } from "../../repository/ProjectRequestRepo";
-import { IProject } from "../../shared/model/IProject";
+import { IOpportunity } from "../../shared/model/IOpportunity";
 import { IProviderRequests } from "../../shared/model/IProviderRequests";
 import { ProviderType } from "../../shared/types/ProviderType";
 import { createError } from "../../shared/utils/createError";
@@ -10,9 +10,9 @@ import { wait } from "../../utils/wait";
 import { IProjectCollector } from "./IProjectCollector";
 
 export class ProjectCollector implements IProjectCollector {
-  collect(providerRequests: IProviderRequests[]): Promise<IProject[]> {
+  collect(providerRequests: IProviderRequests[]): Promise<IOpportunity[]> {
     return new Promise(async (resolve, reject) => {
-      const projects: IProject[] = [];
+      const projects: IOpportunity[] = [];
 
       try {
         // parallelize fetching data for each provider
@@ -30,8 +30,8 @@ export class ProjectCollector implements IProjectCollector {
     });
   }
 
-  private removeDuplicates(projects: IProject[]): IProject[] {
-    const harmonizedProjects: IProject[] = [];
+  private removeDuplicates(projects: IOpportunity[]): IOpportunity[] {
+    const harmonizedProjects: IOpportunity[] = [];
     projects.forEach((project) => {
       const index = harmonizedProjects.findIndex(
         (item) => item.id === project.id
@@ -45,9 +45,9 @@ export class ProjectCollector implements IProjectCollector {
 
   private async requestProjects(
     providerRequest: IProviderRequests
-  ): Promise<IProject[]> {
+  ): Promise<IOpportunity[]> {
     return new Promise(async (resolve, reject) => {
-      const projects: IProject[] = [];
+      const projects: IOpportunity[] = [];
       const provider = this.createProvider(providerRequest);
 
       for (let i = 0; i < providerRequest.urls.length; i++) {
@@ -85,7 +85,7 @@ export class ProjectCollector implements IProjectCollector {
   private cacheProjects(
     provider: ProviderType,
     url: string,
-    projects: IProject[]
+    projects: IOpportunity[]
   ) {
     ProjectRequestRepo.set(provider, url, projects);
   }

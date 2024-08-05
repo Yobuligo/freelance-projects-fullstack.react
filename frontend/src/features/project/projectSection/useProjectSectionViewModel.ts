@@ -4,7 +4,7 @@ import { useRequest } from "../../../hooks/useRequest";
 import { useUserConfig } from "../../../hooks/useUserConfig";
 import { useUserProjects } from "../../../hooks/useUserProjects";
 import { useUserProviderRequests } from "../../../hooks/useUserProviderRequests";
-import { IUserProject } from "../../../shared/model/IUserProject";
+import { IUserOpportunity } from "../../../shared/model/IUserOpportunity";
 import { isOlderThanHours } from "../../../utils/isOlderThan";
 import { sortUserProjects } from "../../../utils/sortUserProjects";
 import { setUserProjectCompleted } from "../utils/setUserProjectCompleted";
@@ -19,7 +19,7 @@ export const useProjectSectionViewModel = () => {
   );
   const [userProviderRequests] = useUserProviderRequests();
   const [selectedUserProject, setSelectedUserProject] = useState<
-    IUserProject | undefined
+    IUserOpportunity | undefined
   >(undefined);
   const [appliedUserProjectsCollapsed, setAppliedUserProjectsCollapsed] =
     useState(userConfig.collapseApplied ?? true);
@@ -57,7 +57,7 @@ export const useProjectSectionViewModel = () => {
     [userProjects]
   );
 
-  const updateUserProjects = async (userProjects: IUserProject[]) => {
+  const updateUserProjects = async (userProjects: IUserOpportunity[]) => {
     if (userProjects.length === 0) {
       return;
     }
@@ -65,7 +65,7 @@ export const useProjectSectionViewModel = () => {
     await userProjectApi.updateAll(userProjects);
   };
 
-  const updateUserProject = async (userProject: IUserProject) => {
+  const updateUserProject = async (userProject: IUserOpportunity) => {
     const userProjects = [userProject];
     await updateUserProjects(userProjects);
   };
@@ -94,7 +94,7 @@ export const useProjectSectionViewModel = () => {
    */
   const onCheckAll = () =>
     setUserProjects((userProjects) => {
-      const toBeUpdatedUserProjects: IUserProject[] = [];
+      const toBeUpdatedUserProjects: IUserOpportunity[] = [];
       userProjects.forEach((userProject) => {
         if (!userProject.completed) {
           setUserProjectCompleted(userProject);
@@ -111,7 +111,7 @@ export const useProjectSectionViewModel = () => {
    */
   const onCheckOld = () =>
     setUserProjects((userProjects) => {
-      const toBeUpdatedUserProjects: IUserProject[] = [];
+      const toBeUpdatedUserProjects: IUserOpportunity[] = [];
       userProjects.forEach((userProject) => {
         if (
           !userProject.completed &&
@@ -126,7 +126,7 @@ export const useProjectSectionViewModel = () => {
       return [...userProjects];
     });
 
-  const onUserProjectChecked = (userProject: IUserProject) => {
+  const onUserProjectChecked = (userProject: IUserOpportunity) => {
     setUserProjects((previous) => {
       setUserProjectCompleted(userProject);
       updateUserProject(userProject);
@@ -134,7 +134,7 @@ export const useProjectSectionViewModel = () => {
     });
   };
 
-  const onUserProjectUnchecked = (userProject: IUserProject) => {
+  const onUserProjectUnchecked = (userProject: IUserOpportunity) => {
     setUserProjects((previous) => {
       setUserProjectInCompleted(userProject);
       updateUserProject(userProject);
@@ -153,7 +153,7 @@ export const useProjectSectionViewModel = () => {
       return previous;
     });
 
-  const onSelectUserProject = (userProject: IUserProject) => {
+  const onSelectUserProject = (userProject: IUserOpportunity) => {
     setSelectedUserProject((previous) => {
       // if selected project shouldn't be displayed, set it to undefined
       if (userConfig.openLinkInline === false) {
@@ -168,7 +168,7 @@ export const useProjectSectionViewModel = () => {
     });
   };
 
-  const onUserProjectChanged = (userProject: IUserProject) => {
+  const onUserProjectChanged = (userProject: IUserOpportunity) => {
     setUserProjects((previous) => {
       const index = previous.findIndex((item) => item.id === userProject.id);
       if (index !== -1) {

@@ -2,7 +2,7 @@ import { IEntity } from "../types/IEntity";
 import { IHavePath } from "../types/IHavePath";
 import { ProviderType } from "../types/ProviderType";
 
-export interface IProject extends IEntity {
+export interface IOpportunity extends IEntity {
   company: string;
   location: string;
   provider: ProviderType;
@@ -11,4 +11,4 @@ export interface IProject extends IEntity {
   url: string;
 }
 
-export const ProjectMeta: IHavePath = { path: "/projects" };
+export const OpportunityMeta: IHavePath = { path: "/opportunities" };

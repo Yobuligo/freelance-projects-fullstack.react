@@ -5,14 +5,14 @@ import {
   ModelStatic,
 } from "sequelize";
 import { db } from "../db/db";
-import { IProject } from "../shared/model/IProject";
+import { IOpportunity } from "../shared/model/IOpportunity";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
 import { UserProject } from "./UserProject";
 import { createIdType } from "./createIdType";
 
-const project: ModelStatic<Model<IProject, IEntityDetails<IProject>>> =
+const opportunity: ModelStatic<Model<IOpportunity, IEntityDetails<IOpportunity>>> =
   db.define(
-    "projects",
+    "opportunities",
     {
       id: createIdType(),
       company: DataTypes.STRING,
@@ -25,6 +25,6 @@ const project: ModelStatic<Model<IProject, IEntityDetails<IProject>>> =
     { indexes: [{ unique: true, fields: ["url"] }] }
   );
 
-export class Project extends project {
+export class Opportunity extends opportunity {
   declare getUserProjects: HasManyGetAssociationsMixin<UserProject>;
 }

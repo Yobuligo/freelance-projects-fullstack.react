@@ -1,19 +1,19 @@
 import { IProviderRequests } from "../shared/model/IProviderRequests";
-import { IUserProject, UserProjectMeta } from "../shared/model/IUserProject";
+import { IUserOpportunity, UserOpportunitiesMeta } from "../shared/model/IUserOpportunity";
 import { IUserProviderRequest } from "../shared/model/IUserProviderRequest";
 import { Repository } from "./core/Repository";
 
-export class UserProjectApi extends Repository<IUserProject> {
+export class UserProjectApi extends Repository<IUserOpportunity> {
   constructor() {
-    super(UserProjectMeta);
+    super(UserOpportunitiesMeta);
   }
 
   async findAllByProviderRequests(
     userProviderRequests: IUserProviderRequest[],
     force?: boolean
-  ): Promise<IUserProject[]> {
+  ): Promise<IUserOpportunity[]> {
     const requests = this.convertToBackendFormat(userProviderRequests, force);
-    return await this.post(`${this.host}${UserProjectMeta.path}`, requests);
+    return await this.post(`${this.host}${UserOpportunitiesMeta.path}`, requests);
   }
 
   /**

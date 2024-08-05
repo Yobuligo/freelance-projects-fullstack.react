@@ -1,6 +1,6 @@
-import { IUserProject } from "../shared/model/IUserProject";
+import { IUserOpportunity } from "../shared/model/IUserOpportunity";
 
-export const sortUserProjects = (left: IUserProject, right: IUserProject) => {
+export const sortUserProjects = (left: IUserOpportunity, right: IUserOpportunity) => {
   if (!left.completedAt) {
     return 1;
   }

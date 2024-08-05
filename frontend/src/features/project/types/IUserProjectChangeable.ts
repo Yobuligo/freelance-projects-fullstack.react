@@ -1,5 +1,5 @@
-import { IUserProject } from "../../../shared/model/IUserProject";
+import { IUserOpportunity } from "../../../shared/model/IUserOpportunity";
 
 export interface IUserProjectChangeable {
-  onChange?: (userProject: IUserProject) => void;
+  onChange?: (userProject: IUserOpportunity) => void;
 }

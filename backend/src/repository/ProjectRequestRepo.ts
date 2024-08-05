@@ -1,5 +1,5 @@
 import { IProjectRequest } from "../model/IProjectRequest";
-import { IProject } from "../shared/model/IProject";
+import { IOpportunity } from "../shared/model/IOpportunity";
 import { ProviderType } from "../shared/types/ProviderType";
 
 class ProjectRequestRepoDefault {
@@ -9,7 +9,7 @@ class ProjectRequestRepoDefault {
     return this.projectRequests.get(url);
   }
 
-  set(provider: ProviderType, url: string, projects: IProject[]) {
+  set(provider: ProviderType, url: string, projects: IOpportunity[]) {
     this.projectRequests.set(url, {
       createdAt: new Date(),
       projects,

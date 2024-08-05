@@ -1,6 +1,6 @@
-import { IUserProject } from "../../../shared/model/IUserProject";
+import { IUserOpportunity } from "../../../shared/model/IUserOpportunity";
 
 export interface IUserProjectSelectable {
-  selectedUserProject: IUserProject | undefined;
-  onSelectUserProject: (userProject: IUserProject) => void;
+  selectedUserProject: IUserOpportunity | undefined;
+  onSelectUserProject: (userProject: IUserOpportunity) => void;
 }

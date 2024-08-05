@@ -1,19 +1,19 @@
 import { ApplicationType } from "../types/ApplicationType";
 import { IEntity } from "../types/IEntity";
 import { IHavePath } from "../types/IHavePath";
-import { IProject } from "./IProject";
+import { IOpportunity } from "./IOpportunity";
 
-export interface IUserProject extends IEntity {
+export interface IUserOpportunity extends IEntity {
   completed: boolean;
   completedAt?: Date;
   applicationType?: ApplicationType;
   applied: boolean;
   appliedAt?: Date;
   contact?: string;
-  project: IProject;
+  project: IOpportunity;
   rejected: boolean;
   rejectedAt?: Date;
-  username: string;
+  userId: string;
 }
 
-export const UserProjectMeta: IHavePath = { path: "/user-projects" };
+export const UserOpportunityMeta: IHavePath = { path: "/user-opportunities" };

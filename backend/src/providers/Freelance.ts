@@ -4,7 +4,7 @@ import { Provider } from "../decorators/Provider";
 import { HTMLSearch } from "../services/htmlSearch/HTMLSearch";
 import { IHTMLSearch } from "../services/htmlSearch/IHTMLSearch";
 import { Log } from "../services/logging/Log";
-import { IProject } from "../shared/model/IProject";
+import { IOpportunity } from "../shared/model/IOpportunity";
 import { ProviderType } from "../shared/types/ProviderType";
 import { error } from "../shared/utils/error";
 import { toDate } from "../utils/toDate";
@@ -13,7 +13,7 @@ import { uuid } from "../utils/uuid";
 
 @Provider(ProviderType.Freelance, "freelance.de")
 export class Freelance implements IProvider {
-  request(url: string): Promise<IProject[]> {
+  request(url: string): Promise<IOpportunity[]> {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await fetch(url);
@@ -52,13 +52,13 @@ export class Freelance implements IProvider {
   private async fetchOffsetPages(
     url: string,
     countPages: number
-  ): Promise<IProject[]> {
+  ): Promise<IOpportunity[]> {
     if (countPages < 2) {
       return [];
     }
 
     return new Promise(async (resolve, reject) => {
-      const projects: IProject[] = [];
+      const projects: IOpportunity[] = [];
       for (let i = 1; i < countPages; i++) {
         const offset = i * 20;
         const offsetUrl = `${url}&_offset=${offset}`;
@@ -74,8 +74,8 @@ export class Freelance implements IProvider {
     });
   }
 
-  private extractProjects(rootElement: Element): IProject[] {
-    const projects: IProject[] = [];
+  private extractProjects(rootElement: Element): IOpportunity[] {
+    const projects: IOpportunity[] = [];
     const htmlSearch = new HTMLSearch(rootElement);
     const elements = htmlSearch.className("list-item-content").find();
 
@@ -87,7 +87,7 @@ export class Freelance implements IProvider {
       const title = this.getTitle(htmlSearch);
       const url = this.getUrl(htmlSearch);
 
-      const project: IProject = {
+      const project: IOpportunity = {
         id: uuid(),
         applied: false,
         company: "", // not available for freelance.de

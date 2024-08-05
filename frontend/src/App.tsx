@@ -5,7 +5,7 @@ import { useSessionStorage } from "./hooks/useSessionStorage";
 import { useUserConfigStorage } from "./hooks/useUserConfigStorage";
 import "./index.scss";
 import { AppRouter } from "./routes/AppRouter";
-import { IUserProject } from "./shared/model/IUserProject";
+import { IUserOpportunity } from "./shared/model/IUserOpportunity";
 import { IUserProviderRequest } from "./shared/model/IUserProviderRequest";
 
 export const App: React.FC = () => {
@@ -13,7 +13,7 @@ export const App: React.FC = () => {
     <AppContext.Provider
       value={{
         errorMessage: useState(""),
-        userProjects: useState<IUserProject[]>([]),
+        userProjects: useState<IUserOpportunity[]>([]),
         session: useSessionStorage(),
         userConfig: useUserConfigStorage(),
         userProviderRequests: useState<IUserProviderRequest[]>([]),

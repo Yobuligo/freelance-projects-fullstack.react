@@ -3,7 +3,7 @@ import { Provider } from "../decorators/Provider";
 import { HTMLSearch } from "../services/htmlSearch/HTMLSearch";
 import { IHTMLSearch } from "../services/htmlSearch/IHTMLSearch";
 import { Log } from "../services/logging/Log";
-import { IProject } from "../shared/model/IProject";
+import { IOpportunity } from "../shared/model/IOpportunity";
 import { ProviderType } from "../shared/types/ProviderType";
 import { toDate } from "../utils/toDate";
 import { IProvider } from "./core/IProvider";
@@ -11,7 +11,7 @@ import { uuid } from "../utils/uuid";
 
 @Provider(ProviderType.FreelancerMap, "freelancermap.de")
 export class FreelancerMap implements IProvider {
-  request(url: string): Promise<IProject[]> {
+  request(url: string): Promise<IOpportunity[]> {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await fetch(url);
@@ -31,8 +31,8 @@ export class FreelancerMap implements IProvider {
     });
   }
 
-  private extractProjects(rootElement: Element): IProject[] {
-    const projects: IProject[] = [];
+  private extractProjects(rootElement: Element): IOpportunity[] {
+    const projects: IOpportunity[] = [];
     const htmlSearch = new HTMLSearch(rootElement);
     const elements = htmlSearch
       .className("project-container project card box")
@@ -46,7 +46,7 @@ export class FreelancerMap implements IProvider {
       const title = htmlSearch.className("project-title").firstValue();
       const url = htmlSearch.className("project-title").firstAttrValue("href");
 
-      const project: IProject = {
+      const project: IOpportunity = {
         id: uuid(),
         applied: false,
         company,

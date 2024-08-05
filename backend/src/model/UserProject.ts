@@ -6,14 +6,14 @@ import {
   ModelStatic,
 } from "sequelize";
 import { db } from "../db/db";
-import { IUserProject } from "../shared/model/IUserProject";
+import { IUserOpportunity } from "../shared/model/IUserOpportunity";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
-import { Project } from "./Projects";
+import { Opportunity } from "./Opportunity";
 import { User } from "./User";
 import { createIdType } from "./createIdType";
 
 const userProject: ModelStatic<
-  Model<IUserProject, IEntityDetails<IUserProject>>
+  Model<IUserOpportunity, IEntityDetails<IUserOpportunity>>
 > = db.define("user-projects", {
   id: createIdType(),
   applied: DataTypes.BOOLEAN,
@@ -43,13 +43,13 @@ const userProject: ModelStatic<
 
 export class UserProject extends userProject {
   declare getUser: BelongsToGetAssociationMixin<User>;
-  declare getProject: BelongsToGetAssociationMixin<Project>;
+  declare getProject: BelongsToGetAssociationMixin<Opportunity>;
   declare setUser: BelongsToSetAssociationMixin<User, number>;
-  declare setProject: BelongsToSetAssociationMixin<Project, number>;
+  declare setProject: BelongsToSetAssociationMixin<Opportunity, number>;
 }
 
-Project.hasMany(UserProject);
-UserProject.belongsTo(Project);
+Opportunity.hasMany(UserProject);
+UserProject.belongsTo(Opportunity);
 
 User.hasMany(UserProject);
 UserProject.belongsTo(User);
