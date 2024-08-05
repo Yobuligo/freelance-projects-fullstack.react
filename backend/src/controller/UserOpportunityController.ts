@@ -33,12 +33,6 @@ export class UserOpportunityController extends Controller {
 
       this.handleSessionRequest(req, res, async (session) => {
         const providerRequests: IProviderRequests[] = req.body;
-
-        const userProviderRequestRepo = new UserProviderRequestRepo();
-        const userProviderRequests = await userProviderRequestRepo.findByUserId(
-          session.userId
-        );
-
         try {
           const sortedUserOpportunities = await this.findUserOpportunities(
             providerRequests,
@@ -76,6 +70,14 @@ export class UserOpportunityController extends Controller {
     providerRequests: IProviderRequests[],
     session: ISession
   ) {
+    await this.fetchNewOpportunities(providerRequests, session);
+    return await this.loadUserOpportunities(session);
+  }
+
+  private async fetchNewOpportunities(
+    providerRequests: IProviderRequests[],
+    session: ISession
+  ) {
     const collectedOpportunities = await this.collectOpportunities(
       providerRequests
     );
@@ -83,7 +85,6 @@ export class UserOpportunityController extends Controller {
       collectedOpportunities
     );
     await this.updateUserOpportunities(session, opportunities);
-    return await this.loadUserOpportunities(session);
   }
 
   private async updateUserOpportunities(
