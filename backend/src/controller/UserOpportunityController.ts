@@ -9,11 +9,11 @@ import { IUserOpportunity, UserOpportunityMeta } from "../shared/model/IUserOppo
 import { NetworkInfo } from "../shared/services/NetworkInfo";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
-import { sortUserProjects } from "../utils/sortUserProjects";
+import { sortUserOpportunities } from "../utils/sortUserProjects";
 import { Controller } from "./Controller";
 import { UserProviderRequestRepo } from "../repository/UserProviderRequestRepo";
 
-export class UserProjectController extends Controller {
+export class UserOpportunityController extends Controller {
   readonly router = Router();
 
   constructor() {
@@ -37,11 +37,11 @@ export class UserProjectController extends Controller {
         );
 
         try {
-          const sortedUserProjects = await this.findUserProjects(
+          const sortedUserOpportunities = await this.findUserOpportunities(
             providerRequests,
             session
           );
-          res.status(200).send(sortedUserProjects);
+          res.status(200).send(sortedUserOpportunities);
         } catch (error) {
           if (isError(error)) {
             res.status(500).send(error);
@@ -67,24 +67,24 @@ export class UserProjectController extends Controller {
     });
   }
 
-  private async findUserProjects(
+  private async findUserOpportunities(
     providerRequests: IProviderRequests[],
     session: ISession
   ) {
-    const collectedProjects = await this.collectProjects(providerRequests);
-    const projects = await this.updateProjects(collectedProjects);
-    const userProjects = await this.updateUserProjects(session, projects);
-    const sortedUserProjects = sortUserProjects(userProjects);
-    return sortedUserProjects;
+    const collectedOpportunities = await this.collectProjects(providerRequests);
+    const opportunities = await this.updateOpportunities(collectedOpportunities);
+    const userProjects = await this.updateUserOpportunities(session, opportunities);
+    const sortedUserOpportunities = sortUserOpportunities(userProjects);
+    return sortedUserOpportunities;
   }
 
-  private async updateUserProjects(session: ISession, projects: IOpportunity[]) {
+  private async updateUserOpportunities(session: ISession, projects: IOpportunity[]) {
     const userProjectRepo = new UserProjectRepo();
     const userProjects = await userProjectRepo.modify(session.userId, projects);
     return userProjects;
   }
 
-  private async updateProjects(collectedProjects: IOpportunity[]) {
+  private async updateOpportunities(collectedProjects: IOpportunity[]) {
     const projectRepo = new ProjectRepo();
     const projects = await projectRepo.modify(collectedProjects);
     return projects;

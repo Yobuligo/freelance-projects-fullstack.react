@@ -1,9 +1,9 @@
 import { IUserOpportunity } from "../shared/model/IUserOpportunity";
 
-export const sortUserProjects = (
-  userProjects: IUserOpportunity[]
+export const sortUserOpportunities = (
+  userOpportunities: IUserOpportunity[]
 ): IUserOpportunity[] => {
-  return userProjects.sort((left, right) => {
+  return userOpportunities.sort((left, right) => {
     const leftTime = left.createdAt.getTime();
     const rightTime = right.createdAt.getTime();
 

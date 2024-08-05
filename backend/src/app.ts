@@ -1,5 +1,5 @@
 import express from "express";
-import { UserProjectController } from "./controller/UserProjectController";
+import { UserOpportunityController } from "./controller/UserOpportunityController";
 import { ProviderDetailsController } from "./controller/ProviderDetailsController";
 import { ProviderMetaController } from "./controller/ProviderMetaController";
 import { UserController } from "./controller/UserController";
@@ -27,7 +27,7 @@ server.use((_, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
-server.use("/api", new UserProjectController().router);
+server.use("/api", new UserOpportunityController().router);
 server.use("/api", new ProviderMetaController().router);
 server.use("/api", new ProviderDetailsController().router);
 server.use("/api", new UserController().router);
