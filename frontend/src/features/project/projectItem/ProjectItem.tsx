@@ -45,25 +45,25 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
       </div>
       <div className={styles.projectItemDetails} onClick={onSelect}>
         <div>
-          {providerDetails.findByType(props.userProject.project.provider)}
+          {providerDetails.findByType(props.userProject.opportunity.provider)}
         </div>
         <div className={styles.company}>
-          {props.userProject.project.company.length > 0
-            ? props.userProject.project.company
+          {props.userProject.opportunity.company.length > 0
+            ? props.userProject.opportunity.company
             : "Company not provided"}
         </div>
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href={props.userProject.project.url}
+          href={props.userProject.opportunity.url}
           className={styles.titleLink}
         >
-          <h3 className={styles.title}>{props.userProject.project.title}</h3>
+          <h3 className={styles.title}>{props.userProject.opportunity.title}</h3>
         </a>
         <div className={styles.location}>
-          {props.userProject.project.location}
+          {props.userProject.opportunity.location}
         </div>
-        <div>{renderDate(props.userProject.project.publishedAt)}</div>
+        <div>{renderDate(props.userProject.opportunity.publishedAt)}</div>
       </div>
       <div className={styles.projectDetails}>
         {displayDetails && (

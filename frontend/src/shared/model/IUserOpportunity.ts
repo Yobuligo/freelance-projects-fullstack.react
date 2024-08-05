@@ -10,7 +10,7 @@ export interface IUserOpportunity extends IEntity {
   applied: boolean;
   appliedAt?: Date;
   contact?: string;
-  project: IOpportunity;
+  opportunity: IOpportunity;
   rejected: boolean;
   rejectedAt?: Date;
   username: string;

@@ -1,59 +1,61 @@
 import { AppConfig } from "../../AppConfig";
 import { IProvider } from "../../providers/core/IProvider";
 import { ProviderFactory } from "../../providers/core/ProviderFactory";
-import { ProjectRequestRepo } from "../../repository/ProjectRequestRepo";
+import { OpportunityRequestRepo } from "../../repository/OpportunityRequestRepo";
 import { IOpportunity } from "../../shared/model/IOpportunity";
 import { IProviderRequests } from "../../shared/model/IProviderRequests";
 import { ProviderType } from "../../shared/types/ProviderType";
 import { createError } from "../../shared/utils/createError";
 import { wait } from "../../utils/wait";
-import { IProjectCollector } from "./IProjectCollector";
+import { IOpportunityCollector } from "./IOpportunityCollector";
 
-export class ProjectCollector implements IProjectCollector {
+export class OpportunityCollector implements IOpportunityCollector {
   collect(providerRequests: IProviderRequests[]): Promise<IOpportunity[]> {
     return new Promise(async (resolve, reject) => {
-      const projects: IOpportunity[] = [];
+      const opportunities: IOpportunity[] = [];
 
       try {
         // parallelize fetching data for each provider
         const requests = providerRequests.map((providerRequest) =>
-          this.requestProjects(providerRequest)
+          this.requestOpportunities(providerRequest)
         );
-        const requestedProjects = await Promise.all(requests);
-        requestedProjects.forEach((items) => projects.push(...items));
+        const requestedOpportunities = await Promise.all(requests);
+        requestedOpportunities.forEach((items) => opportunities.push(...items));
       } catch (error) {
         reject(error);
       }
 
-      const harmonizedProjects = this.removeDuplicates(projects);
-      resolve(harmonizedProjects);
+      const harmonizedOpportunities = this.removeDuplicates(opportunities);
+      resolve(harmonizedOpportunities);
     });
   }
 
-  private removeDuplicates(projects: IOpportunity[]): IOpportunity[] {
-    const harmonizedProjects: IOpportunity[] = [];
-    projects.forEach((project) => {
-      const index = harmonizedProjects.findIndex(
-        (item) => item.id === project.id
+  private removeDuplicates(opportunities: IOpportunity[]): IOpportunity[] {
+    const harmonizedOpportunities: IOpportunity[] = [];
+    opportunities.forEach((opportunity) => {
+      const index = harmonizedOpportunities.findIndex(
+        (item) => item.id === opportunity.id
       );
       if (index === -1) {
-        harmonizedProjects.push(project);
+        harmonizedOpportunities.push(opportunity);
       }
     });
-    return harmonizedProjects;
+    return harmonizedOpportunities;
   }
 
-  private async requestProjects(
+  private async requestOpportunities(
     providerRequest: IProviderRequests
   ): Promise<IOpportunity[]> {
     return new Promise(async (resolve, reject) => {
-      const projects: IOpportunity[] = [];
+      const opportunities: IOpportunity[] = [];
       const provider = this.createProvider(providerRequest);
 
       for (let i = 0; i < providerRequest.urls.length; i++) {
         const url = providerRequest.urls[i];
         if (!this.needsReload(url) && providerRequest.force !== true) {
-          projects.push(...(ProjectRequestRepo.find(url)?.projects ?? []));
+          opportunities.push(
+            ...(OpportunityRequestRepo.find(url)?.opportunities ?? [])
+          );
           continue;
         }
 
@@ -62,32 +64,32 @@ export class ProjectCollector implements IProjectCollector {
         }
 
         try {
-          const providerProjects = await provider.request(url);
-          projects.push(...providerProjects);
-          this.cacheProjects(
+          const providerOpportunities = await provider.request(url);
+          opportunities.push(...providerOpportunities);
+          this.cacheOpportunities(
             providerRequest.providerType,
             url,
-            providerProjects
+            providerOpportunities
           );
         } catch (error) {
           reject(
             createError(
-              `Error while loading projects of provider ${providerRequest.providerType}.`
+              `Error while loading opportunities of provider ${providerRequest.providerType}.`
             )
           );
         }
       }
 
-      resolve(projects);
+      resolve(opportunities);
     });
   }
 
-  private cacheProjects(
+  private cacheOpportunities(
     provider: ProviderType,
     url: string,
-    projects: IOpportunity[]
+    opportunities: IOpportunity[]
   ) {
-    ProjectRequestRepo.set(provider, url, projects);
+    OpportunityRequestRepo.set(provider, url, opportunities);
   }
 
   private createProvider(providerRequest: IProviderRequests): IProvider {
@@ -95,12 +97,12 @@ export class ProjectCollector implements IProjectCollector {
   }
 
   private needsReload(url: string): boolean {
-    const projectRequest = ProjectRequestRepo.find(url);
-    if (!projectRequest) {
+    const opportunityRequest = OpportunityRequestRepo.find(url);
+    if (!opportunityRequest) {
       return true;
     }
 
-    const createdAt = new Date(projectRequest.createdAt);
+    const createdAt = new Date(opportunityRequest.createdAt);
     createdAt.setTime(
       createdAt.getTime() + AppConfig.reloadIntervalMins * 60000
     );

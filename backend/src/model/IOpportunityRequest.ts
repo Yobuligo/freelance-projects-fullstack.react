@@ -1,9 +1,9 @@
 import { IOpportunity } from "../shared/model/IOpportunity";
 import { ProviderType } from "../shared/types/ProviderType";
 
-export interface IProjectRequest {
+export interface IOpportunityRequest {
   createdAt: Date;
-  projects: IOpportunity[];
+  opportunities: IOpportunity[];
   provider: ProviderType;
   url: string;
 }

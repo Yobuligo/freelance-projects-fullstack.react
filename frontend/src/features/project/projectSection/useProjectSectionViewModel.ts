@@ -115,7 +115,7 @@ export const useProjectSectionViewModel = () => {
       userProjects.forEach((userProject) => {
         if (
           !userProject.completed &&
-          isOlderThanHours(userProject.project.publishedAt, 24)
+          isOlderThanHours(userProject.opportunity.publishedAt, 24)
         ) {
           setUserProjectCompleted(userProject);
           toBeUpdatedUserProjects.push(userProject);

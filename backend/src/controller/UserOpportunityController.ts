@@ -1,17 +1,20 @@
 import { Router } from "express";
 import { OpportunityRepo } from "../repository/OpportunityRepo";
-import { UserProjectRepo } from "../repository/UserProjectRepo";
-import { ProjectCollector } from "../services/projectCollector/ProjectCollector";
+import { UserOpportunityRepo } from "../repository/UserOpportunityRepo";
+import { UserProviderRequestRepo } from "../repository/UserProviderRequestRepo";
+import { OpportunityCollector } from "../services/opportunityCollector/OpportunityCollector";
 import { IOpportunity } from "../shared/model/IOpportunity";
 import { IProviderRequests } from "../shared/model/IProviderRequests";
 import { ISession } from "../shared/model/ISession";
-import { IUserOpportunity, UserOpportunityMeta } from "../shared/model/IUserOpportunity";
+import {
+  IUserOpportunity,
+  UserOpportunityMeta,
+} from "../shared/model/IUserOpportunity";
 import { NetworkInfo } from "../shared/services/NetworkInfo";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
-import { sortUserOpportunities } from "../utils/sortUserProjects";
+import { sortUserOpportunities } from "../utils/sortUserOpportunities";
 import { Controller } from "./Controller";
-import { UserProviderRequestRepo } from "../repository/UserProviderRequestRepo";
 
 export class UserOpportunityController extends Controller {
   readonly router = Router();
@@ -46,7 +49,9 @@ export class UserOpportunityController extends Controller {
           if (isError(error)) {
             res.status(500).send(error);
           } else {
-            res.status(500).send(createError("Error while loading projects"));
+            res
+              .status(500)
+              .send(createError("Error while loading opportunities"));
           }
         }
       });
@@ -60,9 +65,9 @@ export class UserOpportunityController extends Controller {
       }
 
       this.handleSessionRequest(req, res, async () => {
-        const userProjects: IUserOpportunity[] = req.body;
-        const userProjectRepo = new UserProjectRepo();
-        await userProjectRepo.updateAll(userProjects);
+        const userOpportunities: IUserOpportunity[] = req.body;
+        const userOpportunityRepo = new UserOpportunityRepo();
+        await userOpportunityRepo.updateAll(userOpportunities);
       });
     });
   }
@@ -71,28 +76,43 @@ export class UserOpportunityController extends Controller {
     providerRequests: IProviderRequests[],
     session: ISession
   ) {
-    const collectedOpportunities = await this.collectProjects(providerRequests);
-    const opportunities = await this.updateOpportunities(collectedOpportunities);
-    const userProjects = await this.updateUserOpportunities(session, opportunities);
-    const sortedUserOpportunities = sortUserOpportunities(userProjects);
+    const collectedOpportunities = await this.collectOpportunities(
+      providerRequests
+    );
+    const opportunities = await this.updateOpportunities(
+      collectedOpportunities
+    );
+    const userOpportunities = await this.updateUserOpportunities(
+      session,
+      opportunities
+    );
+    const sortedUserOpportunities = sortUserOpportunities(userOpportunities);
     return sortedUserOpportunities;
   }
 
-  private async updateUserOpportunities(session: ISession, projects: IOpportunity[]) {
-    const userProjectRepo = new UserProjectRepo();
-    const userProjects = await userProjectRepo.modify(session.userId, projects);
-    return userProjects;
+  private async updateUserOpportunities(
+    session: ISession,
+    opportunities: IOpportunity[]
+  ) {
+    const userOpportunityRepo = new UserOpportunityRepo();
+    const userOpportunities = await userOpportunityRepo.modify(
+      session.userId,
+      opportunities
+    );
+    return userOpportunities;
   }
 
-  private async updateOpportunities(collectedProjects: IOpportunity[]) {
-    const projectRepo = new OpportunityRepo();
-    const projects = await projectRepo.modify(collectedProjects);
-    return projects;
+  private async updateOpportunities(collectedOpportunities: IOpportunity[]) {
+    const opportunityRepo = new OpportunityRepo();
+    const opportunities = await opportunityRepo.modify(collectedOpportunities);
+    return opportunities;
   }
 
-  private async collectProjects(providerRequests: IProviderRequests[]) {
-    const projectCollector = new ProjectCollector();
-    const collectedProjects = await projectCollector.collect(providerRequests);
-    return collectedProjects;
+  private async collectOpportunities(providerRequests: IProviderRequests[]) {
+    const opportunityCollector = new OpportunityCollector();
+    const collectedOpportunities = await opportunityCollector.collect(
+      providerRequests
+    );
+    return collectedOpportunities;
   }
 }

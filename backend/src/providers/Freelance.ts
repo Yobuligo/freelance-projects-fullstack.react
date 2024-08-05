@@ -18,17 +18,17 @@ export class Freelance implements IProvider {
         const response = await fetch(url);
         const html = await response.text();
 
-        Log.info(`Request freelance.de projects from freelance.de server.`);
+        Log.info(`Request freelance.de opportunities from freelance.de server.`);
 
         const document = this.createDocument(html);
         const rootElement = this.getRootElement(document);
         const countPages = this.getCountPages(document);
 
-        const projects = this.extractProjects(rootElement);
-        const projectsOffsetPage = await this.fetchOffsetPages(url, countPages);
-        projects.push(...projectsOffsetPage);
+        const opportunities = this.extractOpportunities(rootElement);
+        const opportunitiesOffsetPage = await this.fetchOffsetPages(url, countPages);
+        opportunities.push(...opportunitiesOffsetPage);
 
-        resolve(projects);
+        resolve(opportunities);
       } catch (error) {
         reject(error);
       }
@@ -57,7 +57,7 @@ export class Freelance implements IProvider {
     }
 
     return new Promise(async (resolve, reject) => {
-      const projects: IOpportunity[] = [];
+      const opportunities: IOpportunity[] = [];
       for (let i = 1; i < countPages; i++) {
         const offset = i * 20;
         const offsetUrl = `${url}&_offset=${offset}`;
@@ -66,15 +66,15 @@ export class Freelance implements IProvider {
 
         const document = this.createDocument(html);
         const rootElement = this.getRootElement(document);
-        const extractedProjects = this.extractProjects(rootElement);
-        projects.push(...extractedProjects);
+        const extractedOpportunities = this.extractOpportunities(rootElement);
+        opportunities.push(...extractedOpportunities);
       }
-      resolve(projects);
+      resolve(opportunities);
     });
   }
 
-  private extractProjects(rootElement: Element): IOpportunity[] {
-    const projects: IOpportunity[] = [];
+  private extractOpportunities(rootElement: Element): IOpportunity[] {
+    const opportunities: IOpportunity[] = [];
     const htmlSearch = new HTMLSearch(rootElement);
     const elements = htmlSearch.className("list-item-content").find();
 
@@ -86,7 +86,7 @@ export class Freelance implements IProvider {
       const title = this.getTitle(htmlSearch);
       const url = this.getUrl(htmlSearch);
 
-      const project: IOpportunity = {
+      const opportunity: IOpportunity = {
         id: uuid(),
         company: "", // not available for freelance.de
         location,
@@ -97,10 +97,10 @@ export class Freelance implements IProvider {
         createdAt: publishedAt,
         updatedAt: publishedAt,
       };
-      projects.push(project);
+      opportunities.push(opportunity);
     });
 
-    return projects;
+    return opportunities;
   }
 
   private getUrl(htmlSearch: IHTMLSearch) {

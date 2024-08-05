@@ -17,22 +17,22 @@ export class FreelancerMap implements IProvider {
         const response = await fetch(url);
         const html = await response.text();
 
-        Log.info(`Request freelancerMap projects from freelancerMap server.`);
+        Log.info(`Request freelancerMap opportunities from freelancerMap server.`);
 
         const parser = new DOMParser();
         const document = parser.parseFromString(html, "text/html");
         const rootElement = document.getElementsByClassName("project-list")[0];
 
-        const projects = this.extractProjects(rootElement);
-        resolve(projects);
+        const opportunities = this.extractOpportunities(rootElement);
+        resolve(opportunities);
       } catch (error) {
         reject(error);
       }
     });
   }
 
-  private extractProjects(rootElement: Element): IOpportunity[] {
-    const projects: IOpportunity[] = [];
+  private extractOpportunities(rootElement: Element): IOpportunity[] {
+    const opportunities: IOpportunity[] = [];
     const htmlSearch = new HTMLSearch(rootElement);
     const elements = htmlSearch
       .className("project-container project card box")
@@ -46,7 +46,7 @@ export class FreelancerMap implements IProvider {
       const title = htmlSearch.className("project-title").firstValue();
       const url = htmlSearch.className("project-title").firstAttrValue("href");
 
-      const project: IOpportunity = {
+      const opportunity: IOpportunity = {
         id: uuid(),
         company,
         location,
@@ -57,10 +57,10 @@ export class FreelancerMap implements IProvider {
         createdAt: publishedAt,
         updatedAt: publishedAt,
       };
-      projects.push(project);
+      opportunities.push(opportunity);
     });
 
-    return projects;
+    return opportunities;
   }
 
   private createUrl(url: string): string {
