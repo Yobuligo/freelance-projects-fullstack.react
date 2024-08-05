@@ -26,10 +26,7 @@ export class UserOpportunityRepo extends Repository<IUserOpportunity> {
   /**
    * Inserts new user opportunities for the given {@link opportunities}. Skips opportunities, if a user opportunity for one or more opportunity id already exist.
    */
-  async modify(
-    userId: string,
-    opportunities: IOpportunity[]
-  ): Promise<IUserOpportunity[]> {
+  async modify(userId: string, opportunities: IOpportunity[]) {
     if (opportunities.length === 0) {
       return [];
     }
@@ -61,9 +58,6 @@ export class UserOpportunityRepo extends Repository<IUserOpportunity> {
         userOpportunities as IEntityDetails<IUserOpportunity>[]
       );
     }
-
-    const userOpportunities = await this.findByUserId(userId);
-    return userOpportunities;
   }
 
   private createUserOpportunity(

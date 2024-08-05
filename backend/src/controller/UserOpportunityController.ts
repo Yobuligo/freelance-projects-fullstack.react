@@ -82,12 +82,8 @@ export class UserOpportunityController extends Controller {
     const opportunities = await this.updateOpportunities(
       collectedOpportunities
     );
-    const userOpportunities = await this.updateUserOpportunities(
-      session,
-      opportunities
-    );
-    const sortedUserOpportunities = sortUserOpportunities(userOpportunities);
-    return sortedUserOpportunities;
+    await this.updateUserOpportunities(session, opportunities);
+    return await this.loadUserOpportunities(session);
   }
 
   private async updateUserOpportunities(
@@ -95,11 +91,7 @@ export class UserOpportunityController extends Controller {
     opportunities: IOpportunity[]
   ) {
     const userOpportunityRepo = new UserOpportunityRepo();
-    const userOpportunities = await userOpportunityRepo.modify(
-      session.userId,
-      opportunities
-    );
-    return userOpportunities;
+    await userOpportunityRepo.modify(session.userId, opportunities);
   }
 
   private async updateOpportunities(collectedOpportunities: IOpportunity[]) {
@@ -114,5 +106,13 @@ export class UserOpportunityController extends Controller {
       providerRequests
     );
     return collectedOpportunities;
+  }
+
+  private async loadUserOpportunities(session: ISession) {
+    const userOpportunityRepo = new UserOpportunityRepo();
+    const userOpportunities = await userOpportunityRepo.findByUserId(
+      session.userId
+    );
+    return sortUserOpportunities(userOpportunities);
   }
 }
