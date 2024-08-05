@@ -27,15 +27,19 @@ export class UserOpportunityController extends Controller {
   }
 
   private findAll() {
-    this.router.post(UserOpportunityMeta.path, async (req, res) => {
+    this.router.get(UserOpportunityMeta.path, async (req, res) => {
       if (!(await NetworkInfo.isConnected())) {
         return res.status(502).send(createError("Missing internet connection"));
       }
 
       this.handleSessionRequest(req, res, async (session) => {
+        const force: boolean | undefined = req.query.force
+          ? req.query.force === "true"
+          : undefined;
         try {
           const sortedUserOpportunities = await this.findUserOpportunities(
-            session
+            session,
+            force
           );
           res.status(200).send(sortedUserOpportunities);
         } catch (error) {
@@ -65,13 +69,14 @@ export class UserOpportunityController extends Controller {
     });
   }
 
-  private async findUserOpportunities(session: ISession) {
-    await this.fetchNewOpportunities(session);
+  private async findUserOpportunities(session: ISession, force?: boolean) {
+    await this.fetchNewOpportunities(session, force);
     return await this.loadUserOpportunities(session);
   }
 
   private async loadProviderRequests(
-    session: ISession
+    session: ISession,
+    force?: boolean
   ): Promise<IProviderRequests[]> {
     const userProviderRequestRepo = new UserProviderRequestRepo();
     const userProviderRequests = await userProviderRequestRepo.findByUserId(
@@ -88,7 +93,8 @@ export class UserOpportunityController extends Controller {
         ) ??
         this.createProviderRequest(
           providerRequests,
-          userProviderRequest.provider
+          userProviderRequest.provider,
+          force
         );
       providerRequest.urls.push(userProviderRequest.url);
     });
@@ -97,18 +103,20 @@ export class UserOpportunityController extends Controller {
 
   private createProviderRequest(
     providerRequests: IProviderRequests[],
-    provider: ProviderType
+    provider: ProviderType,
+    force?: boolean
   ): IProviderRequests {
     const providerRequest: IProviderRequests = {
       providerType: provider,
       urls: [],
+      force,
     };
     providerRequests.push(providerRequest);
     return providerRequest;
   }
 
-  private async fetchNewOpportunities(session: ISession) {
-    const providerRequests = await this.loadProviderRequests(session);
+  private async fetchNewOpportunities(session: ISession, force?: boolean) {
+    const providerRequests = await this.loadProviderRequests(session, force);
     const collectedOpportunities = await this.collectOpportunities(
       providerRequests
     );

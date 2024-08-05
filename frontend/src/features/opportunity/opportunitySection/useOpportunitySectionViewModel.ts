@@ -3,7 +3,6 @@ import { UserOpportunityApi } from "../../../api/UserOpportunityApi";
 import { useRequest } from "../../../hooks/useRequest";
 import { useUserConfig } from "../../../hooks/useUserConfig";
 import { useUserOpportunities } from "../../../hooks/useUserOpportunities";
-import { useUserProviderRequests } from "../../../hooks/useUserProviderRequests";
 import { IUserOpportunity } from "../../../shared/model/IUserOpportunity";
 import { isOlderThanHours } from "../../../utils/isOlderThan";
 import { sortUserOpportunities } from "../../../utils/sortUserOpportunities";
@@ -17,7 +16,6 @@ export const useOpportunitySectionViewModel = () => {
   const [displaySettings, setDisplaySettings] = useState(
     userConfig.displaySettings
   );
-  const [userProviderRequests] = useUserProviderRequests();
   const [selectedUserOpportunity, setSelectedUserOpportunity] = useState<
     IUserOpportunity | undefined
   >(undefined);
@@ -86,16 +84,9 @@ export const useOpportunitySectionViewModel = () => {
    */
   const loadUserOpportunities = async (force?: boolean) => {
     await request.send(async () => {
-      const enabledUserProviderRequests = userProviderRequests.filter(
-        (item) => item.enabled === true
-      );
       const opportunityApi = new UserOpportunityApi();
       const fetchedUserOpportunities =
-        await opportunityApi.findAllByProviderRequests(
-          enabledUserProviderRequests,
-          force
-        );
-
+        await opportunityApi.findAllByProviderRequests(force);
       setUserOpportunities(fetchedUserOpportunities);
     });
   };

@@ -18,8 +18,8 @@ export abstract class RESTApi {
     });
   }
 
-  protected get<T>(url: string): Promise<T> {
-    const extendedUrl = this.extendUrl(url);
+  protected get<T>(url: string, params?: object): Promise<T> {
+    const extendedUrl = this.extendUrl(url, params);
     return this.createPromise(extendedUrl, async () => {
       return await fetch(extendedUrl, {
         method: "GET",
@@ -93,11 +93,27 @@ export abstract class RESTApi {
   }
 
   /**
-   * Extends the url, e.g. by adding a the session token
+   * Extends the url, e.g. by adding a the session token or parameters
    */
-  private extendUrl(url: string): string {
+  private extendUrl(url: string, params?: object): string {
+    let urlParams = "";
     if (SessionRepo.instance.session) {
-      return `${url}?${HaveTokenMeta.path}=${SessionRepo.instance.session.id}`;
+      urlParams += `${HaveTokenMeta.path}=${SessionRepo.instance.session.id}`;
+    }
+
+    if (params) {
+      for (const propName in params) {
+        const propValue = (params as any)[propName];
+        if (urlParams.length > 0) {
+          urlParams += `&${propName}=${propValue}`;
+        } else {
+          urlParams += `${propName}=${propValue}`;
+        }
+      }
+    }
+
+    if (urlParams.length > 0) {
+      return `${url}?${urlParams}`;
     }
     return url;
   }
