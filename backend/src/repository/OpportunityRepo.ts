@@ -36,9 +36,13 @@ export class OpportunityRepo extends Repository<IOpportunity> {
       IEntityDetails<IOpportunity>
     >[] = [];
     if (opportunitiesToBeInserted.length > 0) {
-      createdOpportunities = await this.model.bulkCreate(
-        opportunitiesToBeInserted
-      );
+      try {
+        createdOpportunities = await this.model.bulkCreate(
+          opportunitiesToBeInserted
+        );
+      } catch (error) {
+        console.log(error)
+      }
     }
 
     return [

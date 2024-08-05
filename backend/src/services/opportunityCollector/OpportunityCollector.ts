@@ -30,11 +30,15 @@ export class OpportunityCollector implements IOpportunityCollector {
     });
   }
 
+  /**
+   * Remove duplicates from list.
+   * Perhaps the same opportunity was found by searching with "React" and "TypeScript". So remove it by comparing the urls.
+   */
   private removeDuplicates(opportunities: IOpportunity[]): IOpportunity[] {
     const harmonizedOpportunities: IOpportunity[] = [];
     opportunities.forEach((opportunity) => {
       const index = harmonizedOpportunities.findIndex(
-        (item) => item.id === opportunity.id
+        (item) => item.url === opportunity.url
       );
       if (index === -1) {
         harmonizedOpportunities.push(opportunity);
