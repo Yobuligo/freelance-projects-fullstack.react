@@ -7,8 +7,16 @@ export class UserProviderRequestRepo extends Repository<IUserProviderRequest> {
     super(UserProviderRequest);
   }
 
-  async findByUserId(userId: string): Promise<IUserProviderRequest[]> {
-    const data = await this.model.findAll({ where: { userId } });
-    return data.map((model) => model.toJSON());
+  async findByUserId(
+    userId: string,
+    enabled?: boolean
+  ): Promise<IUserProviderRequest[]> {
+    if (enabled !== undefined) {
+      const data = await this.model.findAll({ where: { userId, enabled } });
+      return data.map((model) => model.toJSON());
+    } else {
+      const data = await this.model.findAll({ where: { userId } });
+      return data.map((model) => model.toJSON());
+    }
   }
 }

@@ -11,6 +11,7 @@ import {
   UserOpportunityMeta,
 } from "../shared/model/IUserOpportunity";
 import { NetworkInfo } from "../shared/services/NetworkInfo";
+import { ProviderType } from "../shared/types/ProviderType";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
 import { sortUserOpportunities } from "../utils/sortUserOpportunities";
@@ -32,10 +33,8 @@ export class UserOpportunityController extends Controller {
       }
 
       this.handleSessionRequest(req, res, async (session) => {
-        const providerRequests: IProviderRequests[] = req.body;
         try {
           const sortedUserOpportunities = await this.findUserOpportunities(
-            providerRequests,
             session
           );
           res.status(200).send(sortedUserOpportunities);
@@ -66,18 +65,50 @@ export class UserOpportunityController extends Controller {
     });
   }
 
-  private async findUserOpportunities(
-    providerRequests: IProviderRequests[],
-    session: ISession
-  ) {
-    await this.fetchNewOpportunities(providerRequests, session);
+  private async findUserOpportunities(session: ISession) {
+    await this.fetchNewOpportunities(session);
     return await this.loadUserOpportunities(session);
   }
 
-  private async fetchNewOpportunities(
-    providerRequests: IProviderRequests[],
+  private async loadProviderRequests(
     session: ISession
-  ) {
+  ): Promise<IProviderRequests[]> {
+    const userProviderRequestRepo = new UserProviderRequestRepo();
+    const userProviderRequests = await userProviderRequestRepo.findByUserId(
+      session.userId,
+      true
+    );
+
+    const providerRequests: IProviderRequests[] = [];
+    userProviderRequests.forEach((userProviderRequest) => {
+      const providerRequest =
+        providerRequests.find(
+          (provideRequest) =>
+            provideRequest.providerType === userProviderRequest.provider
+        ) ??
+        this.createProviderRequest(
+          providerRequests,
+          userProviderRequest.provider
+        );
+      providerRequest.urls.push(userProviderRequest.url);
+    });
+    return providerRequests;
+  }
+
+  private createProviderRequest(
+    providerRequests: IProviderRequests[],
+    provider: ProviderType
+  ): IProviderRequests {
+    const providerRequest: IProviderRequests = {
+      providerType: provider,
+      urls: [],
+    };
+    providerRequests.push(providerRequest);
+    return providerRequest;
+  }
+
+  private async fetchNewOpportunities(session: ISession) {
+    const providerRequests = await this.loadProviderRequests(session);
     const collectedOpportunities = await this.collectOpportunities(
       providerRequests
     );
