@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ProjectRepo } from "../repository/ProjectRepo";
+import { OpportunityRepo } from "../repository/OpportunityRepo";
 import { UserProjectRepo } from "../repository/UserProjectRepo";
 import { ProjectCollector } from "../services/projectCollector/ProjectCollector";
 import { IOpportunity } from "../shared/model/IOpportunity";
@@ -85,7 +85,7 @@ export class UserOpportunityController extends Controller {
   }
 
   private async updateOpportunities(collectedProjects: IOpportunity[]) {
-    const projectRepo = new ProjectRepo();
+    const projectRepo = new OpportunityRepo();
     const projects = await projectRepo.modify(collectedProjects);
     return projects;
   }
