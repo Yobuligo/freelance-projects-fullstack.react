@@ -1,4 +1,4 @@
-import { UserProviderRequest } from "../model/UserProviderRequest";
+import { UserProviderRequest } from "../model/sequelize/UserProviderRequest";
 import { IUserProviderRequest } from "../shared/model/IUserProviderRequest";
 import { Repository } from "./core/Repository";
 

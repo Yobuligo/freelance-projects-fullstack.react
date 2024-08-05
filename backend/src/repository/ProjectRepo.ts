@@ -1,5 +1,5 @@
 import { Model } from "sequelize";
-import { Opportunity } from "../model/Opportunity";
+import { Opportunity } from "../model/sequelize/Opportunity";
 import { IOpportunity } from "../shared/model/IOpportunity";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
 import { Repository } from "./core/Repository";

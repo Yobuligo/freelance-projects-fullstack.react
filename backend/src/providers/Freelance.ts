@@ -1,4 +1,3 @@
-import hash from "hash.js";
 import { DOMParser } from "xmldom";
 import { Provider } from "../decorators/Provider";
 import { HTMLSearch } from "../services/htmlSearch/HTMLSearch";
@@ -8,8 +7,8 @@ import { IOpportunity } from "../shared/model/IOpportunity";
 import { ProviderType } from "../shared/types/ProviderType";
 import { error } from "../shared/utils/error";
 import { toDate } from "../utils/toDate";
-import { IProvider } from "./core/IProvider";
 import { uuid } from "../utils/uuid";
+import { IProvider } from "./core/IProvider";
 
 @Provider(ProviderType.Freelance, "freelance.de")
 export class Freelance implements IProvider {
@@ -89,13 +88,10 @@ export class Freelance implements IProvider {
 
       const project: IOpportunity = {
         id: uuid(),
-        applied: false,
         company: "", // not available for freelance.de
-        completed: false,
         location,
         provider: ProviderType.Freelance,
         publishedAt,
-        rejected: false,
         title,
         url,
         createdAt: publishedAt,

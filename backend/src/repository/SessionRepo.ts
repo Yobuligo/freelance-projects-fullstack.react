@@ -1,5 +1,5 @@
 import { IUser } from "../model/IUser";
-import { Session } from "../model/Session";
+import { Session } from "../model/sequelize/Session";
 import { ISession } from "../shared/model/ISession";
 import { Repository } from "./core/Repository";
 

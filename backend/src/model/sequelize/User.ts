@@ -4,11 +4,11 @@ import {
   Model,
   ModelStatic,
 } from "sequelize";
-import { db } from "../db/db";
-import { IEntityDetails } from "../shared/types/IEntityDetails";
-import { createIdType } from "./createIdType";
-import { IUser } from "./IUser";
-import { UserProject } from "./UserProject";
+import { db } from "../../db/db";
+import { IEntityDetails } from "../../shared/types/IEntityDetails";
+import { createIdType } from "../createIdType";
+import { IUser } from "../IUser";
+import { UserOpportunity } from "./UserOpportunity";
 import { UserProviderRequest } from "./UserProviderRequest";
 
 const user: ModelStatic<Model<IUser, IEntityDetails<IUser>>> = db.define(
@@ -28,6 +28,6 @@ const user: ModelStatic<Model<IUser, IEntityDetails<IUser>>> = db.define(
 );
 
 export class User extends user {
-  declare getUserProjects: HasManyGetAssociationsMixin<UserProject>;
+  declare getUserOpportunities: HasManyGetAssociationsMixin<UserOpportunity>;
   declare getUserProviderRequests: HasManyGetAssociationsMixin<UserProviderRequest>;
 }

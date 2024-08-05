@@ -3,18 +3,18 @@ import { UserOpportunityController } from "./controller/UserOpportunityControlle
 import { ProviderDetailsController } from "./controller/ProviderDetailsController";
 import { ProviderMetaController } from "./controller/ProviderMetaController";
 import { UserController } from "./controller/UserController";
-import { Opportunity } from "./model/Opportunity";
-import { Session } from "./model/Session";
-import { UserProject } from "./model/UserProject";
-import { User } from "./model/User";
+import { Opportunity } from "./model/sequelize/Opportunity";
+import { Session } from "./model/sequelize/Session";
+import { UserOpportunity } from "./model/sequelize/UserOpportunity";
+import { User } from "./model/sequelize/User";
 import { UserProviderRequestController } from "./controller/UserProviderRequestController";
-import { UserProviderRequest } from "./model/UserProviderRequest";
+import { UserProviderRequest } from "./model/sequelize/UserProviderRequest";
 
 UserProviderRequest.sync({ alter: true });
 User.sync({ alter: true });
 Session.sync({ alter: true });
 Opportunity.sync({ alter: true });
-UserProject.sync({ alter: true });
+UserOpportunity.sync({ alter: true });
 
 const server = express();
 server.use(express.json());

@@ -1,6 +1,6 @@
 import { WhereOptions } from "sequelize";
-import { Opportunity } from "../model/Opportunity";
-import { UserProject } from "../model/UserProject";
+import { Opportunity } from "../model/sequelize/Opportunity";
+import { UserOpportunity } from "../model/sequelize/UserOpportunity";
 import { IOpportunity } from "../shared/model/IOpportunity";
 import { IUserOpportunity } from "../shared/model/IUserOpportunity";
 import { IEntityDetails } from "../shared/types/IEntityDetails";
@@ -9,7 +9,7 @@ import { Repository } from "./core/Repository";
 
 export class UserProjectRepo extends Repository<IUserOpportunity> {
   constructor() {
-    super(UserProject);
+    super(UserOpportunity);
   }
 
   /**

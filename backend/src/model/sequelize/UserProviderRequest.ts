@@ -1,8 +1,8 @@
 import { DataTypes, Model, ModelStatic } from "sequelize";
-import { db } from "../db/db";
-import { IUserProviderRequest } from "../shared/model/IUserProviderRequest";
-import { IEntityDetails } from "../shared/types/IEntityDetails";
-import { createIdType } from "./createIdType";
+import { db } from "../../db/db";
+import { IUserProviderRequest } from "../../shared/model/IUserProviderRequest";
+import { IEntityDetails } from "../../shared/types/IEntityDetails";
+import { createIdType } from "../createIdType";
 import { User } from "./User";
 
 const userProviderRequest: ModelStatic<

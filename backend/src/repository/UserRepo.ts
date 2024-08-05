@@ -1,5 +1,5 @@
 import { IUser } from "../model/IUser";
-import { User } from "../model/User";
+import { User } from "../model/sequelize/User";
 import { ICredentials } from "../shared/model/ICredentials";
 import { hash } from "../utils/hash";
 import { hashPassword } from "../utils/hashPassword";

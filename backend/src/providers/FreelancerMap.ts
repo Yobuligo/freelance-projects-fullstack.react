@@ -6,8 +6,8 @@ import { Log } from "../services/logging/Log";
 import { IOpportunity } from "../shared/model/IOpportunity";
 import { ProviderType } from "../shared/types/ProviderType";
 import { toDate } from "../utils/toDate";
-import { IProvider } from "./core/IProvider";
 import { uuid } from "../utils/uuid";
+import { IProvider } from "./core/IProvider";
 
 @Provider(ProviderType.FreelancerMap, "freelancermap.de")
 export class FreelancerMap implements IProvider {
@@ -48,13 +48,10 @@ export class FreelancerMap implements IProvider {
 
       const project: IOpportunity = {
         id: uuid(),
-        applied: false,
         company,
-        completed: false,
         location,
         provider: ProviderType.FreelancerMap,
         publishedAt,
-        rejected: false,
         title,
         url: this.createUrl(url),
         createdAt: publishedAt,
