@@ -13,7 +13,7 @@ export const App: React.FC = () => {
     <AppContext.Provider
       value={{
         errorMessage: useState(""),
-        userProjects: useState<IUserOpportunity[]>([]),
+        userOpportunities: useState<IUserOpportunity[]>([]),
         session: useSessionStorage(),
         userConfig: useUserConfigStorage(),
         userProviderRequests: useState<IUserProviderRequest[]>([]),

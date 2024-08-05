@@ -1,6 +1,6 @@
 {
     "appliedCard": {
-        "applied": "Applied ({{numberProjects}})"
+        "applied": "Applied ({{numberOpportunities}})"
     },
     "general": {
         "unknownError": "An unknown error occurred"
@@ -20,7 +20,7 @@
         "errorLogout": "Unknown error while logout",
         "title": "Logout"
     },
-    "projectDetails": {
+    "opportunityDetails": {
         "applied": "Applied",
         "applicationType": "Application type",
         "contact": "Contact",
@@ -28,11 +28,11 @@
         "portal": "Portal",
         "rejected": "Rejected"
     },
-    "projectList": {
-        "noProjects": "No suitable projects found",
-        "noProjectsExtended": "No suitable projects found. Please open the settings and add provider from which the projects should be fetched."
+    "opportunityList": {
+        "noOpportunities": "No suitable opportunities found",
+        "noOpportunitiesExtended": "No suitable opportunities found. Please open the settings and add provider from which the opportunities should be fetched."
     },
-    "projectSection": {
+    "opportunitySection": {
         "captionReloadButton": "Reload",
         "tickOld": "Tick old"
     },
@@ -55,6 +55,6 @@
         }
     },
     "trashCard": {
-        "trash": "Trash ({{numberProjects}})"
+        "trash": "Trash ({{numberOpportunities}})"
     }
 }

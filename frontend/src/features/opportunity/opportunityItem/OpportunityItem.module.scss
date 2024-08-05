@@ -1,0 +1,49 @@
+@import "../../../styles/core/colors.module.scss";
+@import "../../../Variables.scss";
+
+.opportunityItem {
+  display: flex;
+  flex-direction: row;
+}
+
+.opportunityItemSelected {
+  background-color: $color-hover;
+}
+
+.opportunityItemDetails {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.opportunityItemIcon {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem;
+  align-items: center;
+}
+
+.opportunityDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: $negative-space;
+}
+
+.company {
+  font-size: 1rem;
+}
+
+.title {
+  margin: 0;
+  color: $color-primary-dark;
+}
+
+.titleLink {
+  text-decoration: none;
+}
+
+.location {
+  font-size: 0.75rem;
+}

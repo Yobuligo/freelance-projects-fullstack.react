@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import { LoginPage } from "../pages/LoginPage";
-import { ProjectPage } from "../pages/ProjectPage";
+import { OpportunityPage } from "../pages/OpportunityPage";
 import { AppRoutes } from "./AppRoutes";
 
 export const AppRouter = createBrowserRouter([
-  { path: AppRoutes.projects.origin, element: <ProjectPage /> },
+  { path: AppRoutes.opportunities.origin, element: <OpportunityPage /> },
   { path: AppRoutes.login.origin, element: <LoginPage /> },
 ]);

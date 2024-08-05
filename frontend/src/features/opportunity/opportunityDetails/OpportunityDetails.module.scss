@@ -1,0 +1,20 @@
+@import "../../../Variables.scss";
+
+.opportunityDetails {
+  height: 100%;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  column-gap: $negative-space;
+  align-items: center;
+}
+
+.contact{
+  width: 15rem;
+}
+
+.title {
+  width: 10rem;
+}

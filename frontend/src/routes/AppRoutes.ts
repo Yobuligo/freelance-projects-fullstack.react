@@ -3,5 +3,5 @@ import { route } from "./core/route";
 
 export const AppRoutes = configureRoutes({
   login: route("/login"),
-  projects: route("/"),
+  opportunities: route("/"),
 });

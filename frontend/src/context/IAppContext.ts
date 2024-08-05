@@ -8,6 +8,6 @@ export interface IAppContext {
   errorMessage: Value<string>;
   session: Value<ISession | undefined>;
   userConfig: Value<IUserConfig>;
-  userProjects: Value<IUserOpportunity[]>;
+  userOpportunities: Value<IUserOpportunity[]>;
   userProviderRequests: Value<IUserProviderRequest[]>;
 }
