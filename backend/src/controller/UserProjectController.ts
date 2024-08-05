@@ -11,6 +11,7 @@ import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
 import { sortUserProjects } from "../utils/sortUserProjects";
 import { Controller } from "./Controller";
+import { UserProviderRequestRepo } from "../repository/UserProviderRequestRepo";
 
 export class UserProjectController extends Controller {
   readonly router = Router();
@@ -29,6 +30,12 @@ export class UserProjectController extends Controller {
 
       this.handleSessionRequest(req, res, async (session) => {
         const providerRequests: IProviderRequests[] = req.body;
+
+        const userProviderRequestRepo = new UserProviderRequestRepo();
+        const userProviderRequests = await userProviderRequestRepo.findByUserId(
+          session.id
+        );
+
         try {
           const sortedUserProjects = await this.findUserProjects(
             providerRequests,
