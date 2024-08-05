@@ -33,7 +33,7 @@ export class UserProjectController extends Controller {
 
         const userProviderRequestRepo = new UserProviderRequestRepo();
         const userProviderRequests = await userProviderRequestRepo.findByUserId(
-          session.id
+          session.userId
         );
 
         try {
