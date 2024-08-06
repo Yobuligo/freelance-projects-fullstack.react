@@ -17,7 +17,7 @@ Opportunity.sync({ alter: true });
 UserOpportunity.sync({ alter: true });
 
 const server = express();
-server.use(express.json());
+server.use(express.json({ limit: "2mb" }));
 server.use((_, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(

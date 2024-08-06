@@ -84,9 +84,9 @@ export const useOpportunitySectionViewModel = () => {
    */
   const loadUserOpportunities = async (force?: boolean) => {
     await request.send(async () => {
-      const opportunityApi = new UserOpportunityApi();
+      const userOpportunityApi = new UserOpportunityApi();
       const fetchedUserOpportunities =
-        await opportunityApi.findAllByProviderRequests(force);
+        await userOpportunityApi.findAllByProviderRequests(force);
       setUserOpportunities(fetchedUserOpportunities);
     });
   };
