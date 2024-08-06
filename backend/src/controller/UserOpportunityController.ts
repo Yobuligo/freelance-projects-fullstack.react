@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { DateTime } from "../core/services/date/DateTime";
 import { OpportunityRepo } from "../repository/OpportunityRepo";
 import { UserOpportunityRepo } from "../repository/UserOpportunityRepo";
 import { UserProviderRequestRepo } from "../repository/UserProviderRequestRepo";
@@ -76,6 +77,7 @@ export class UserOpportunityController extends Controller {
     const userOpportunities = await this.fetchOpportunities(session, force);
 
     // in addition add all user opportunities, which are completed or the current user has applied for
+    // those entries should always be displayed
     const persistedUserOpportunities = await this.loadUserOpportunities(
       session
     );
@@ -86,11 +88,11 @@ export class UserOpportunityController extends Controller {
         (item) => item.id === userOpportunity.id
       );
       if (index === -1) {
-        persistedUserOpportunities.push(userOpportunity)
+        persistedUserOpportunities.push(userOpportunity);
       }
     });
 
-    return persistedUserOpportunities;
+      return persistedUserOpportunities
   }
 
   private async loadProviderRequests(
