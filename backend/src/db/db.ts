@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 
 export const db = new Sequelize({
   dialect: "mariadb",
-  host: "localhost",
+  host: "raspberry",
   port: 3306,
   database: "freelancer-app",
   username: "root",
