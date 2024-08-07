@@ -1,7 +1,7 @@
 import { Collapse } from "../../../components/collapse/Collapse";
 import { Switch } from "../../../components/switch/Switch";
 import { DeleteIcon } from "../../../icons/DeleteIcon";
-import colors from "../../../styles/core/colors.module.scss";
+import colors from "../../../styles/colors.module.scss";
 import { IProviderRequestItemProps } from "./IProviderRequestItemProps";
 import styles from "./ProviderRequestItem.module.scss";
 import { useProviderRequestItemViewModel } from "./useProviderRequestItemViewModel";

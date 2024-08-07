@@ -1,6 +1,13 @@
-@import './styles/core/colors.module.scss';
+@import "./styles/colors.module.scss";
 
 body {
-    background: -webkit-gradient(linear, left top, right bottom, from($color-secondary), to($color-primary)) fixed;
-    color: $color-copy;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      right bottom,
+      from($color-secondary),
+      to($color-primary)
+    )
+    fixed;
+  color: $color-copy;
 }

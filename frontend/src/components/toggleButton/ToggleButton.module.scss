@@ -1,8 +1,8 @@
-@import "../../styles/core/colors.module.scss";
+@import "../../styles/colors.module.scss";
 
 .selected {
   border: none;
-  background-color: $color-primary;  
+  background-color: $color-primary;
 }
 
 .unSelected {

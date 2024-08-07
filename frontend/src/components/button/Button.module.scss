@@ -1,6 +1,6 @@
-@import "../../styles/core/colors.module.scss";
-@import "../../Mixins.scss";
-@import '../../Variables.scss';
+@import "../../styles/colors.module.scss";
+@import "../../styles/mixins.scss";
+@import '../../styles/dimensions.scss';
 
 .button {
   display: flex;
