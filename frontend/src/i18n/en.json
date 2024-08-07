@@ -2,6 +2,10 @@
     "appliedCard": {
         "applied": "Applied ({{numberOpportunities}})"
     },
+    "dashboard": {
+        "findOpportunities": "Find opportunities",
+        "timeTracker": "Time tracker"
+    },
     "general": {
         "unknownError": "An unknown error occurred"
     },

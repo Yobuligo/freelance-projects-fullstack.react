@@ -1,0 +1,19 @@
+@import "../../../styles/core/mixins.scss";
+@import "../../../Variables.scss";
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 1rem;
+  row-gap: 1rem;
+
+  @include medium-screen {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+  }
+
+  @include large-screen {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1rem;
+  }
+}
