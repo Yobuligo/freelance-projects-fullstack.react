@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import { ProjectApi } from "../../../../api/ProjectApi";
+import { TaskApi } from "../../../../api/TaskApi";
 import { checkNotNull } from "../../../../core/utils/checkNotNull";
 import { uuid } from "../../../../core/utils/uuid";
+import { useRequest } from "../../../../hooks/useRequest";
 import { useSession } from "../../../../hooks/useSession";
+import { texts } from "../../../../hooks/useTranslation/texts";
+import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { ProjectInfo } from "../../../../services/ProjectInfo";
 import { IProject } from "../../../../shared/model/IProject";
 import { ITask } from "../../../../shared/model/ITask";
-import { TaskApi } from "../../../../api/TaskApi";
 
 export const useProjectSectionViewModel = () => {
   const [projects, setProjects] = useState<IProject[]>([]);
@@ -14,15 +17,19 @@ export const useProjectSectionViewModel = () => {
   const [selectedProject, setSelectedProject] = useState<IProject | undefined>(
     undefined
   );
-  const [isLoading, setIsLoading] = useState(false);
+  const request = useRequest();
+  const { t } = useTranslation();
 
   const loadProjects = useCallback(async () => {
-    setIsLoading(true);
-    const projectApi = new ProjectApi();
-    const projects = await projectApi.findAll();
-    setProjects(projects);
-    setIsLoading(false);
-  }, []);
+    request.send(
+      async () => {
+        const projectApi = new ProjectApi();
+        const projects = await projectApi.findAll();
+        setProjects(projects);
+      },
+      () => t(texts.projectSection.errorLoadingProjects)
+    );
+  }, [request, t]);
 
   useEffect(() => {
     loadProjects();
@@ -128,7 +135,6 @@ export const useProjectSectionViewModel = () => {
   };
 
   return {
-    isLoading,
     onAdd,
     onDelete,
     onDeleteTask,
@@ -137,6 +143,7 @@ export const useProjectSectionViewModel = () => {
     onStart,
     onStop,
     projects,
+    request,
     selectedProject,
   };
 };

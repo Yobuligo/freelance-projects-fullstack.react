@@ -35,8 +35,11 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
     }
   };
 
-  const onBackToStart = () => navigate(AppRoutes.dashboard.toPath());
-
+  const onBackToStart = () => {
+    setErrorMessage("");
+    navigate(AppRoutes.dashboard.toPath());
+  };
+  
   return (
     <Page>
       <div className={styles.protectedPage}>

@@ -53,6 +53,9 @@
     "projectList": {
         "noProjects": "No projects found"
     },
+    "projectSection": {
+        "errorLoadingProjects": "Unknown error while loading projects"
+    },
     "providerRequestInput": {
         "providerType": "Provider Type",
         "providerUrl": "Provider Url",
