@@ -2,6 +2,9 @@ import { IOpportunityRequest } from "../model/IOpportunityRequest";
 import { IOpportunity } from "../shared/model/IOpportunity";
 import { ProviderType } from "../shared/types/ProviderType";
 
+/**
+ * This class is responsible for caching opportunity requests
+ */
 class OpportunityRequestRepoDefault {
   private readonly opportunitiesRequests: Map<string, IOpportunityRequest> =
     new Map();

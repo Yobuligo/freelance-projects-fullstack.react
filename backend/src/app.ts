@@ -9,12 +9,17 @@ import { UserOpportunity } from "./model/sequelize/UserOpportunity";
 import { User } from "./model/sequelize/User";
 import { UserProviderRequestController } from "./controller/UserProviderRequestController";
 import { UserProviderRequest } from "./model/sequelize/UserProviderRequest";
+import { ProjectController } from "./controller/ProjectController";
+import { Project } from "./model/sequelize/Project";
+import { Task } from "./model/sequelize/Task";
 
 UserProviderRequest.sync({ alter: true });
 User.sync({ alter: true });
 Session.sync({ alter: true });
 Opportunity.sync({ alter: true });
 UserOpportunity.sync({ alter: true });
+Project.sync({ alter: true });
+Task.sync({ alter: true });
 
 const server = express();
 server.use(express.json({ limit: "2mb" }));
@@ -32,4 +37,5 @@ server.use("/api", new ProviderMetaController().router);
 server.use("/api", new ProviderDetailsController().router);
 server.use("/api", new UserController().router);
 server.use("/api", new UserProviderRequestController().router);
+server.use("/api", new ProjectController().router);
 server.listen(5000);
