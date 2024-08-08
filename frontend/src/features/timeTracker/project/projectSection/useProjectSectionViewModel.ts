@@ -3,15 +3,14 @@ import { ProjectApi } from "../../../../api/ProjectApi";
 import { TaskApi } from "../../../../api/TaskApi";
 import { checkNotNull } from "../../../../core/utils/checkNotNull";
 import { uuid } from "../../../../core/utils/uuid";
-import { useRequest } from "../../../../hooks/useRequest";
+import { useErrorMessage } from "../../../../hooks/useErrorMessage";
 import { useSession } from "../../../../hooks/useSession";
+import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { ProjectInfo } from "../../../../services/ProjectInfo";
 import { IProject } from "../../../../shared/model/IProject";
 import { ITask } from "../../../../shared/model/ITask";
 import { isError } from "../../../../shared/utils/isError";
-import { useErrorMessage } from "../../../../hooks/useErrorMessage";
-import { texts } from "../../../../hooks/useTranslation/texts";
 
 export const useProjectSectionViewModel = () => {
   const [projects, setProjects] = useState<IProject[]>([]);
