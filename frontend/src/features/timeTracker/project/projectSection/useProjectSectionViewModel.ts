@@ -1,26 +1,48 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { ProjectApi } from "../../../../api/ProjectApi";
+import { checkNotNull } from "../../../../core/utils/checkNotNull";
 import { uuid } from "../../../../core/utils/uuid";
+import { useSession } from "../../../../hooks/useSession";
 import { ProjectInfo } from "../../../../services/ProjectInfo";
 import { IProject } from "../../../../shared/model/IProject";
 import { ITask } from "../../../../shared/model/ITask";
 
 export const useProjectSectionViewModel = () => {
   const [projects, setProjects] = useState<IProject[]>([]);
+  const [session] = useSession();
   const [selectedProject, setSelectedProject] = useState<IProject | undefined>(
     undefined
   );
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onAdd = (title: string) => {
+  const loadProjects = useCallback(async () => {
+    setIsLoading(true);
+    const projectApi = new ProjectApi();
+    const projects = await projectApi.findAll();
+    setProjects(projects);
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    loadProjects();
+  }, [loadProjects]);
+
+  const onAdd = async (title: string) => {
+    const newProject: IProject = {
+      id: uuid(),
+      tasks: [],
+      title,
+      userId: checkNotNull(session).userId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
     setProjects((previous) => {
-      previous.push({
-        id: uuid(),
-        tasks: [],
-        title,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
+      previous.push(newProject);
       return [...previous];
     });
+
+    const projectApi = new ProjectApi();
+    projectApi.insert(newProject);
   };
 
   const onDelete = (project: IProject) => {
@@ -88,6 +110,7 @@ export const useProjectSectionViewModel = () => {
   };
 
   return {
+    isLoading,
     onAdd,
     onDelete,
     onDeleteTask,

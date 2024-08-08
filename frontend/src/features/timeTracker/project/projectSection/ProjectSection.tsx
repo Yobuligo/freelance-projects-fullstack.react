@@ -1,3 +1,4 @@
+import { Spinner } from "../../../../components/spinner/Spinner";
 import { ProjectAdd } from "../projectAdd/ProjectAdd";
 import { ProjectDetails } from "../projectDetails/ProjectDetails";
 import { ProjectList } from "../projectList/ProjectList";
@@ -19,13 +20,17 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
       ) : (
         <>
           <ProjectAdd onAdd={viewModel.onAdd} />
-          <ProjectList
-            onClick={viewModel.onProjectSelected}
-            onDelete={viewModel.onDelete}
-            onStart={viewModel.onStart}
-            onStop={viewModel.onStop}
-            projects={viewModel.projects}
-          />
+          {viewModel.isLoading ? (
+            <Spinner />
+          ) : (
+            <ProjectList
+              onClick={viewModel.onProjectSelected}
+              onDelete={viewModel.onDelete}
+              onStart={viewModel.onStart}
+              onStop={viewModel.onStop}
+              projects={viewModel.projects}
+            />
+          )}
         </>
       )}
     </div>

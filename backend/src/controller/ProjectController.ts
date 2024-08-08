@@ -1,8 +1,6 @@
 import { Router } from "express";
 import { ProjectRepo } from "../repository/ProjectRepo";
 import { IProject, ProjectMeta } from "../shared/model/IProject";
-import { NetworkInfo } from "../shared/services/NetworkInfo";
-import { createError } from "../shared/utils/createError";
 import { Controller } from "./Controller";
 
 export class ProjectController extends Controller {
@@ -10,16 +8,17 @@ export class ProjectController extends Controller {
 
   constructor() {
     super();
+    this.deleteById();
     this.findAll();
     this.insert();
   }
 
+  private deleteById() {
+    this.router.delete(ProjectMeta.path, async (req, res) => {});
+  }
+
   private findAll() {
     this.router.get(ProjectMeta.path, async (req, res) => {
-      if (!(await NetworkInfo.isConnected())) {
-        return res.status(502).send(createError("Missing internet connection"));
-      }
-
       this.handleSessionRequest(req, res, async (session) => {
         const projectRepo = new ProjectRepo();
         const projects = await projectRepo.findByUserId(session.userId);
@@ -30,10 +29,6 @@ export class ProjectController extends Controller {
 
   private insert() {
     this.router.post(ProjectMeta.path, async (req, res) => {
-      if (!(await NetworkInfo.isConnected())) {
-        return res.status(502).send(createError("Missing internet connection"));
-      }
-
       this.handleSessionRequest(req, res, async () => {
         const project: IProject = req.body;
         const projectRepo = new ProjectRepo();

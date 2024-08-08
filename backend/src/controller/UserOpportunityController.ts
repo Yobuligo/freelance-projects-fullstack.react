@@ -57,10 +57,6 @@ export class UserOpportunityController extends Controller {
 
   private updateAll() {
     this.router.put(UserOpportunityMeta.path, async (req, res) => {
-      if (!(await NetworkInfo.isConnected())) {
-        return res.status(502).send(createError("Missing internet connection"));
-      }
-
       this.handleSessionRequest(req, res, async () => {
         const userOpportunities: IUserOpportunity[] = req.body;
         const userOpportunityRepo = new UserOpportunityRepo();
