@@ -29,8 +29,10 @@ export class UserOpportunityRepo extends Repository<IUserOpportunity> {
   ): Promise<IUserOpportunity[]> {
     const data = await this.model.findAll({
       where: {
-        userId: userId,
-        [Op.or]: [{ applied: true }, { completed: true }],
+        [Op.and]: [
+          { userId: userId },
+          { [Op.or]: [{ applied: true }, { completed: true }] },
+        ],
       },
       include: [Opportunity],
     });
@@ -49,7 +51,10 @@ export class UserOpportunityRepo extends Repository<IUserOpportunity> {
     // find existing user opportunities
     const opportunityIds = opportunities.map((opportunity) => opportunity.id);
     const existingUserOpportunities = await this.model.findAll({
-      where: { opportunityId: [opportunityIds] } as WhereOptions,
+      where: {
+        userId: userId,
+        opportunityId: [opportunityIds],
+      } as WhereOptions,
       include: [Opportunity],
     });
 
