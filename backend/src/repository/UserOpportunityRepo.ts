@@ -28,7 +28,10 @@ export class UserOpportunityRepo extends Repository<IUserOpportunity> {
     userId: string
   ): Promise<IUserOpportunity[]> {
     const data = await this.model.findAll({
-      where: { userId, [Op.or]: [{ applied: true }, { completed: true }] },
+      where: {
+        userId: userId,
+        [Op.or]: [{ applied: true }, { completed: true }],
+      },
       include: [Opportunity],
     });
     return data.map((model) => model.toJSON());
