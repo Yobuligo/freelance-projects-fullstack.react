@@ -9,6 +9,7 @@ import { StartIcon } from "../../../../icons/StartIcon";
 import { IProjectItemProps } from "./IProjectItemProps";
 import styles from "./ProjectItem.module.scss";
 import { useProjectItemViewModel } from "./useProjectItemViewModel";
+import componentStyle from "../../../../styles/components.module.scss";
 
 export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
   const viewModel = useProjectItemViewModel(props);
@@ -22,7 +23,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
           <h3 className={styles.title}>{props.project.title}</h3>
         </div>
         <Button onClick={viewModel.onDelete}>
-          <DeleteIcon className={styles.icon} />
+          <DeleteIcon className={componentStyle.icon} />
         </Button>
       </div>
       <Toolbar className={styles.toolbar}>
