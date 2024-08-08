@@ -1,0 +1,21 @@
+@import "../../../../styles/dimensions.scss";
+@import "../../../../styles/mixins.scss";
+
+.projectList {
+  display: grid;
+
+  grid-template-columns: 1fr;
+  column-gap: 2rem;
+
+  @include medium-screen {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+
+  @include large-screen {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2rem;
+  }
+
+  row-gap: $negative-space;
+}

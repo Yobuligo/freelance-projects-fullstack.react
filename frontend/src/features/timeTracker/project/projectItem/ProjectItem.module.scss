@@ -1,0 +1,43 @@
+@import "../../../../styles//colors.module.scss";
+@import "../../../../styles/dimensions.scss";
+
+.projectItem {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.titleContainer {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  column-gap: $negative-space;
+}
+
+.title {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 10rem;
+}
+
+.icon {
+  // fill: $color-secondary-lighter;
+}

@@ -7,7 +7,8 @@
         "trackTimes": "Track your times"
     },
     "general": {
-        "backToStart":"Back to Start",
+        "backToStart": "Back to Start",
+        "title": "Title",
         "unknownError": "An unknown error occurred"
     },
     "login": {
@@ -41,6 +42,14 @@
         "captionReloadButton": "Reload",
         "tickOld": "Tick old"
     },
+    "projectAdd": {
+        "addProject": "Add project"
+    },
+    "projectItem": {
+        "deleteProject": "Would you like to delete the project '{{title}}' and all its related data?",
+        "start": "Start",
+        "stop": "Stop"
+    },
     "providerRequestInput": {
         "providerType": "Provider Type",
         "providerUrl": "Provider Url",
@@ -58,6 +67,10 @@
             "caption": "General settings",
             "openLinkInline": "Open link on click inline"
         }
+    },
+    "taskItem": {
+        "deleteQuestion": "Would you like to delete task '{{title}}'?",
+        "running": "running"
     },
     "trashCard": {
         "trash": "Trash ({{numberOpportunities}})"
