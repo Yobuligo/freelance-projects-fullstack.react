@@ -5,6 +5,7 @@ import { ITask } from "./ITask";
 export interface IProject extends IEntity {
   tasks: ITask[];
   title: string;
+  userId: string;
 }
 
 export const ProjectMeta: IHavePath = { path: "/projects" };
