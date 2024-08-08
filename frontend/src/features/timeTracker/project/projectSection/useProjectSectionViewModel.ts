@@ -5,11 +5,13 @@ import { checkNotNull } from "../../../../core/utils/checkNotNull";
 import { uuid } from "../../../../core/utils/uuid";
 import { useRequest } from "../../../../hooks/useRequest";
 import { useSession } from "../../../../hooks/useSession";
-import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { ProjectInfo } from "../../../../services/ProjectInfo";
 import { IProject } from "../../../../shared/model/IProject";
 import { ITask } from "../../../../shared/model/ITask";
+import { isError } from "../../../../shared/utils/isError";
+import { useErrorMessage } from "../../../../hooks/useErrorMessage";
+import { texts } from "../../../../hooks/useTranslation/texts";
 
 export const useProjectSectionViewModel = () => {
   const [projects, setProjects] = useState<IProject[]>([]);
@@ -17,19 +19,27 @@ export const useProjectSectionViewModel = () => {
   const [selectedProject, setSelectedProject] = useState<IProject | undefined>(
     undefined
   );
-  const request = useRequest();
+  const [isLoading, setIsLoading] = useState(false);
+  const [, setErrorMessage] = useErrorMessage();
   const { t } = useTranslation();
 
   const loadProjects = useCallback(async () => {
-    request.send(
-      async () => {
-        const projectApi = new ProjectApi();
-        const projects = await projectApi.findAll();
-        setProjects(projects);
-      },
-      () => t(texts.projectSection.errorLoadingProjects)
-    );
-  }, [request, t]);
+    setIsLoading(true);
+    try {
+      const projectApi = new ProjectApi();
+      const projects = await projectApi.findAll();
+      setProjects(projects);
+    } catch (error) {
+      if (isError(error)) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage(t(texts.projectSection.errorLoadingProjects));
+      }
+    }
+    setIsLoading(false);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     loadProjects();
@@ -135,6 +145,7 @@ export const useProjectSectionViewModel = () => {
   };
 
   return {
+    isLoading,
     onAdd,
     onDelete,
     onDeleteTask,
@@ -143,7 +154,6 @@ export const useProjectSectionViewModel = () => {
     onStart,
     onStop,
     projects,
-    request,
     selectedProject,
   };
 };

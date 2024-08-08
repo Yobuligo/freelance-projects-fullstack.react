@@ -20,7 +20,7 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
       ) : (
         <>
           <ProjectAdd onAdd={viewModel.onAdd} />
-          {viewModel.request.isLoading ? (
+          {viewModel.isLoading ? (
             <Spinner />
           ) : (
             <ProjectList
