@@ -6,6 +6,7 @@ import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { AppRoutes } from "../../../routes/AppRoutes";
 import { isError } from "../../../shared/utils/isError";
+import { ErrorDisplay } from "../../errorDisplay/ErrorDisplay";
 import { SpinnerButton } from "../../spinnerButton/SpinnerButton";
 import { Page } from "../page/Page";
 import { IProtectedPageProps } from "./IProtectedPageProps";
@@ -51,6 +52,7 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
             texts.logout.title
           )} (${session.username})`}</SpinnerButton>
         </div>
+        <ErrorDisplay className={styles.errorDisplay} />
         <div>{props.children}</div>
       </div>
     </Page>
