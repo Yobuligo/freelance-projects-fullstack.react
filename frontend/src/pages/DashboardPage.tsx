@@ -6,7 +6,7 @@ import styles from "./DashboardPage.module.scss";
 
 export const DashboardPage: React.FC = () => {
   return (
-    <ProtectedPage>
+    <ProtectedPage displayBackToStart={false}>
       <ProviderDetailsContextProvider>
         <ErrorDisplay className={styles.errorDisplay} />
         <Dashboard />
