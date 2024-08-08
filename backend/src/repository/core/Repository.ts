@@ -81,7 +81,11 @@ export abstract class Repository<T extends IEntity> implements IRepository<T> {
     const entity = entities[0];
     const propNames: (keyof T)[] = [];
     for (const propName in entity) {
-      if (propName !== "id") {
+      if (
+        propName !== "id" &&
+        propName !== "createdAt" &&
+        propName !== "updatedAt"
+      ) {
         propNames.push(propName);
       }
     }
