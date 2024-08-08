@@ -14,7 +14,7 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
     <div className={styles.dashboard}>
       <DashboardItem
         onClick={() => navigate(AppRoutes.timeTracker.toPath())}
-        title={t(texts.dashboard.timeTracker)}
+        title={t(texts.dashboard.trackTimes)}
       />
       <DashboardItem
         onClick={() => navigate(AppRoutes.opportunities.toPath())}

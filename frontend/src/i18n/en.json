@@ -4,9 +4,10 @@
     },
     "dashboard": {
         "findOpportunities": "Find opportunities",
-        "timeTracker": "Time tracker"
+        "trackTimes": "Track your times"
     },
     "general": {
+        "backToStart":"Back to Start",
         "unknownError": "An unknown error occurred"
     },
     "login": {

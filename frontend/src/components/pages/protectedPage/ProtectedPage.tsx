@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useErrorMessage } from "../../../hooks/useErrorMessage";
 import { useLogout } from "../../../hooks/useLogout";
 import { useSession } from "../../../hooks/useSession";
@@ -16,6 +16,7 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
   const { logout, isLoggingOut } = useLogout();
   const { t } = useTranslation();
   const [, setErrorMessage] = useErrorMessage();
+  const navigate = useNavigate();
 
   if (!session) {
     return <Navigate to={AppRoutes.login.toPath()} />;
@@ -33,10 +34,15 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
     }
   };
 
+  const onBackToStart = () => navigate(AppRoutes.dashboard.toPath());
+
   return (
     <Page>
       <div className={styles.protectedPage}>
         <div className={styles.header}>
+          <div className={styles.backToStart} onClick={onBackToStart}>
+            {t(texts.general.backToStart)}
+          </div>
           <SpinnerButton displaySpinner={isLoggingOut} onClick={onLogout}>{`${t(
             texts.logout.title
           )} (${session.username})`}</SpinnerButton>

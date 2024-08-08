@@ -9,5 +9,9 @@
 .header {
   display: flex;
   flex-direction: row;
-  justify-content: right;
+  justify-content: space-between;
+}
+
+.backToStart {
+  cursor: pointer;
 }
