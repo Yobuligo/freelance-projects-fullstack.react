@@ -6,6 +6,7 @@ import { useSession } from "../../../../hooks/useSession";
 import { ProjectInfo } from "../../../../services/ProjectInfo";
 import { IProject } from "../../../../shared/model/IProject";
 import { ITask } from "../../../../shared/model/ITask";
+import { TaskApi } from "../../../../api/TaskApi";
 
 export const useProjectSectionViewModel = () => {
   const [projects, setProjects] = useState<IProject[]>([]);
@@ -63,41 +64,50 @@ export const useProjectSectionViewModel = () => {
   const onProjectUnselected = () => setSelectedProject(undefined);
 
   const onStart = (project: IProject) => {
-    // check if project is already running, if so, quit starting
+    // check if project is already running, if so, do not start another task
     if (ProjectInfo.hasRunningTask(project)) {
       return;
     }
 
+    const task: ITask = {
+      id: uuid(),
+      startedAt: new Date(),
+      projectId: project.id,
+      title: "Development",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
     // create new task and start
     setProjects((previous) => {
-      const task: ITask = {
-        id: uuid(),
-        startedAt: new Date(),
-        projectId: project.id,
-        title: "Development",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-
+      // add task
       project.tasks.push(task);
 
-      // update projects
+      // update projects to refresh UI
       const index = previous.findIndex((item) => item.id === project.id);
       previous.splice(index, 1, project);
       return [...previous];
     });
+
+    // add task to backend
+    const taskApi = new TaskApi();
+    taskApi.insert(task);
   };
 
   const onStop = (project: IProject) => {
     const task = ProjectInfo.stopRunningTask(project);
 
-    // task was stopped. Updated project
+    // task was stopped. Update project to refresh UI
     if (task) {
       setProjects((previous) => {
         const index = previous.findIndex((item) => item.id === project.id);
         previous.splice(index, 1, project);
         return [...previous];
       });
+
+      // update task in backend
+      const taskApi = new TaskApi();
+      taskApi.update(task);
     }
   };
 
@@ -111,6 +121,10 @@ export const useProjectSectionViewModel = () => {
       previous.splice(index, 1, project);
       return [...previous];
     });
+
+    // delete task in backend
+    const taskApi = new TaskApi();
+    taskApi.deleteById(task.id);
   };
 
   return {
