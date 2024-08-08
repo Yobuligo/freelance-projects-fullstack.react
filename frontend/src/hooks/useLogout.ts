@@ -17,7 +17,7 @@ export const useLogout = () => {
         await userApi.logout(session);
       } catch (error) {
         setIsLoggingOut(false);
-        throw error;
+        console.log(`Error while logging out current user. ${error}`);
       }
     }
     setSession(undefined);

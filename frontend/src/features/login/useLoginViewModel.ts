@@ -53,11 +53,8 @@ export const useLoginViewModel = () => {
       setSession(session);
       navigate(AppRoutes.dashboard.toPath());
     } catch (error) {
-      if (isError(error)) {
-        updateErrorMessage(error.message);
-      } else {
-        updateErrorMessage(t(texts.login.errorLogin));
-      }
+      console.log(`Error while login user. ${error}`);
+      updateErrorMessage(t(texts.login.errorLogin));
     }
     setDisplaySpinner(false);
   };
@@ -78,11 +75,8 @@ export const useLoginViewModel = () => {
       toggleLoginMode(true);
       setPassword("");
     } catch (error) {
-      if (isError(error)) {
-        updateErrorMessage(error.message);
-      } else {
-        updateErrorMessage(t(texts.login.errorRegister));
-      }
+      console.log(`Error while register user. ${error}`);
+      updateErrorMessage(t(texts.login.errorRegister));
     }
     setDisplaySpinner(false);
   };
