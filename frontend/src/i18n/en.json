@@ -50,6 +50,9 @@
         "start": "Start",
         "stop": "Stop"
     },
+    "projectList": {
+        "noProjects": "No projects found"
+    },
     "providerRequestInput": {
         "providerType": "Provider Type",
         "providerUrl": "Provider Url",
