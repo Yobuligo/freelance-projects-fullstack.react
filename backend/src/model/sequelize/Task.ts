@@ -17,5 +17,5 @@ const task: ModelStatic<Model<ITask, IEntityDetails<ITask>>> = db.define(
 
 export class Task extends task {}
 
-Project.hasMany(Task);
+Project.hasMany(Task, { onDelete: "CASCADE" });
 Task.belongsTo(Project);
