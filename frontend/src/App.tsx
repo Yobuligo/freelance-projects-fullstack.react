@@ -7,19 +7,25 @@ import "./index.scss";
 import { AppRouter } from "./routes/AppRouter";
 import { IUserOpportunity } from "./shared/model/IUserOpportunity";
 import { IUserProviderRequest } from "./shared/model/IUserProviderRequest";
+import { ReactComponent as BackgroundShapes } from "./assets/backgroundShapes.svg";
 
 export const App: React.FC = () => {
   return (
-    <AppContext.Provider
-      value={{
-        errorMessage: useState(""),
-        userOpportunities: useState<IUserOpportunity[]>([]),
-        session: useSessionStorage(),
-        userConfig: useUserConfigStorage(),
-        userProviderRequests: useState<IUserProviderRequest[]>([]),
-      }}
-    >
-      <RouterProvider router={AppRouter} />
-    </AppContext.Provider>
+    <>
+      <div className="backgroundShapes">
+        <BackgroundShapes />
+      </div>
+      <AppContext.Provider
+        value={{
+          errorMessage: useState(""),
+          userOpportunities: useState<IUserOpportunity[]>([]),
+          session: useSessionStorage(),
+          userConfig: useUserConfigStorage(),
+          userProviderRequests: useState<IUserProviderRequest[]>([]),
+        }}
+      >
+        <RouterProvider router={AppRouter} />
+      </AppContext.Provider>
+    </>
   );
 };

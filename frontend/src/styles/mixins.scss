@@ -25,3 +25,8 @@
   }
 }
 
+@mixin glassy($color: $color-primary, $amount: 0.5) {
+  background-color: transparentize($color, $amount);
+  border: 2px solid transparentize($color, calc($amount - 0.1));
+  backdrop-filter: blur(4px);
+}

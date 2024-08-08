@@ -17,11 +17,11 @@ export const Button: React.FC<IButtonProps> = (props) => {
         props.disabled === true ? styles.buttonDisabled : styles.buttonEnabled,
         props.className
       )}
+      onClick={onClick}
     >
       <button
         className={styles.button}
         disabled={props.disabled}
-        onClick={onClick}
       >
         {props.children}
       </button>

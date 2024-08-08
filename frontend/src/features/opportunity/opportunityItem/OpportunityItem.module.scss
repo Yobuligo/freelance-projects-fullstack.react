@@ -1,9 +1,11 @@
 @import "../../../styles/colors.module.scss";
 @import "../../../styles/dimensions.scss";
+@import "../../../styles/mixins.scss";
 
 .opportunityItem {
   display: flex;
   flex-direction: row;
+  @include glassy($color-hover, 0.8);
 }
 
 .opportunityItemSelected {

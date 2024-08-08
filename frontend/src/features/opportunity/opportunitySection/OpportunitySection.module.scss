@@ -1,5 +1,6 @@
 @import "../../../styles/dimensions.scss";
 @import "../../../styles/colors.module.scss";
+@import "../../../styles/mixins.scss";
 
 .opportunitySection {
   display: flex;
@@ -43,9 +44,9 @@
 }
 
 .itemApplied {
-  background-color: $color-primary;
+  @include glassy();
 }
 
 .itemTrash {
-  background-color: $color-secondary-dark;
+  @include glassy($color-secondary-dark, 0.8);
 }
