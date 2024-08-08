@@ -53,6 +53,9 @@ export const useProjectSectionViewModel = () => {
       }
       return [...previous];
     });
+
+    const projectApi = new ProjectApi();
+    projectApi.deleteById(project.id);
   };
 
   const onProjectSelected = (project: IProject) => setSelectedProject(project);
@@ -70,6 +73,7 @@ export const useProjectSectionViewModel = () => {
       const task: ITask = {
         id: uuid(),
         startedAt: new Date(),
+        projectId: project.id,
         title: "Development",
         createdAt: new Date(),
         updatedAt: new Date(),
