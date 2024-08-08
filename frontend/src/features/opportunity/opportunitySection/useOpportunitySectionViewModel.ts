@@ -8,6 +8,7 @@ import { isOlderThanHours } from "../../../utils/isOlderThan";
 import { sortUserOpportunities } from "../../../utils/sortUserOpportunities";
 import { setUserOpportunityCompleted } from "../utils/setUserOpportunityCompleted";
 import { setUserOpportunityInCompleted } from "../utils/setUserOpportunityInCompleted";
+import { DateTime } from "../../../core/services/date/DateTime";
 
 export const useOpportunitySectionViewModel = () => {
   const request = useRequest();
@@ -85,8 +86,14 @@ export const useOpportunitySectionViewModel = () => {
   const loadUserOpportunities = async (force?: boolean) => {
     await request.send(async () => {
       const userOpportunityApi = new UserOpportunityApi();
-      const fetchedUserOpportunities =
-        await userOpportunityApi.findAllByProviderRequests(force);
+      const fetchedUserOpportunities = (
+        await userOpportunityApi.findAllByProviderRequests(force)
+      ).sort((left, right) =>
+        DateTime.compare(
+          right.opportunity.publishedAt,
+          left.opportunity.publishedAt
+        )
+      );
       setUserOpportunities(fetchedUserOpportunities);
     });
   };
