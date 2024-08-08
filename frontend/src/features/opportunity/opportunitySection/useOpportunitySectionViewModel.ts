@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { UserOpportunityApi } from "../../../api/UserOpportunityApi";
+import { DateTime } from "../../../core/services/date/DateTime";
 import { useRequest } from "../../../hooks/useRequest";
 import { useUserConfig } from "../../../hooks/useUserConfig";
 import { useUserOpportunities } from "../../../hooks/useUserOpportunities";
@@ -8,7 +9,6 @@ import { isOlderThanHours } from "../../../utils/isOlderThan";
 import { sortUserOpportunities } from "../../../utils/sortUserOpportunities";
 import { setUserOpportunityCompleted } from "../utils/setUserOpportunityCompleted";
 import { setUserOpportunityInCompleted } from "../utils/setUserOpportunityInCompleted";
-import { DateTime } from "../../../core/services/date/DateTime";
 
 export const useOpportunitySectionViewModel = () => {
   const request = useRequest();
