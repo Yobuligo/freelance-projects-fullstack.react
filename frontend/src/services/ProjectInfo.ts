@@ -1,6 +1,8 @@
 import { Duration } from "../core/services/date/Duration";
+import { isNotNull } from "../core/utils/isNotNull";
 import { IProject } from "../shared/model/IProject";
 import { ITask } from "../shared/model/ITask";
+import { isNull } from "../shared/utils/isNull";
 import { TaskInfo } from "./TaskInfo";
 
 export class ProjectInfo {
@@ -16,7 +18,7 @@ export class ProjectInfo {
    */
   static findRunningTask(project: IProject): ITask | undefined {
     const index = project.tasks.findIndex(
-      (task) => task.startedAt !== undefined && task.stoppedAt === undefined
+      (task) => isNotNull(task.startedAt) && isNull(task.stoppedAt)
     );
     if (index !== -1) {
       return project.tasks.at(index);
