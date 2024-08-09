@@ -9,3 +9,10 @@
 .disabledIcon {
   fill: $color-disabled;
 }
+
+.input {
+  font-size: large;
+  padding: 0.25rem;
+  outline: none;
+  color: $color-primary-dark;
+}
