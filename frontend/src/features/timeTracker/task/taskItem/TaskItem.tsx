@@ -22,10 +22,10 @@ export const TaskItem: React.FC<ITaskItemProps> = (props) => {
   return (
     <Card className={styles.taskItem}>
       <div>{props.task.title}</div>
-      <div>{DateTime.format(props.task.startedAt, "d hh/mm/ss")}</div>
+      <div>{DateTime.format(props.task.startedAt, "yyyy-MM-dd hh:mm:ss")}</div>
       <div>
         {props.task.stoppedAt
-          ? DateTime.format(props.task.stoppedAt, "d hh/mm/ss")
+          ? DateTime.format(props.task.stoppedAt, "yyyy-MM-dd hh:mm:ss")
           : t(texts.taskItem.running)}
       </div>
       <DeleteIcon onClick={onDelete} />
