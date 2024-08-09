@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Switch } from "../../../components/switch/Switch";
 import { ToggleButtonGroup } from "../../../components/toggleButtonGroup/ToggleButtonGroup";
 import { texts } from "../../../hooks/useTranslation/texts";
@@ -9,20 +9,42 @@ import { IApplicationTypeOption } from "./IApplicationTypeOption";
 import { IOpportunityDetailsProps } from "./IOpportunityDetailsProps";
 import styles from "./OpportunityDetails.module.scss";
 
-export const OpportunityDetails: React.FC<IOpportunityDetailsProps> = (props) => {
+export const OpportunityDetails: React.FC<IOpportunityDetailsProps> = (
+  props
+) => {
   const { t } = useTranslation();
+
+  const [debounceTimeout, setDebounceTimeout] = useState<
+    NodeJS.Timeout | undefined
+  >(undefined);
+
+  const debounceInputValue = () => {
+    debounceTimeout && clearTimeout(debounceTimeout);
+    const timeoutId = setTimeout(() => {
+      triggerChange();
+      return () => {
+        clearTimeout(timeoutId);
+        setDebounceTimeout(undefined);
+      };
+    }, 500);
+    setDebounceTimeout(timeoutId);
+  };
 
   const triggerChange = () => props.onChange?.(props.userOpportunity);
 
   const onApplyChanged = (checked: boolean) => {
     props.userOpportunity.applied = checked;
     if (checked === true) {
-      props.userOpportunity.appliedAt = new Date().toISOString() as unknown as Date;
+      props.userOpportunity.appliedAt =
+        new Date().toISOString() as unknown as Date;
     } else {
       props.userOpportunity.appliedAt = undefined;
     }
 
-    if (checked === true && props.userOpportunity.applicationType === undefined) {
+    if (
+      checked === true &&
+      props.userOpportunity.applicationType === undefined
+    ) {
       props.userOpportunity.applicationType = ApplicationType.Portal;
     }
     triggerChange();
@@ -54,7 +76,8 @@ export const OpportunityDetails: React.FC<IOpportunityDetailsProps> = (props) =>
 
   const onContactChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.userOpportunity.contact = event.target.value;
-    triggerChange();
+    debounceInputValue();
+    // triggerChange();
   };
 
   const applicationTypeItems: IApplicationTypeOption[] = useMemo(
@@ -92,15 +115,22 @@ export const OpportunityDetails: React.FC<IOpportunityDetailsProps> = (props) =>
   return (
     <div className={styles.opportunityDetails}>
       <div className={styles.item}>
-        <div className={styles.title}>{t(texts.opportunityDetails.applied)}</div>
-        <Switch checked={props.userOpportunity.applied} onChange={onApplyChanged} />
+        <div className={styles.title}>
+          {t(texts.opportunityDetails.applied)}
+        </div>
+        <Switch
+          checked={props.userOpportunity.applied}
+          onChange={onApplyChanged}
+        />
         <>
           {props.userOpportunity.appliedAt &&
             formatDate(props.userOpportunity.appliedAt)}
         </>
       </div>
       <div className={styles.item}>
-        <div className={styles.title}>{t(texts.opportunityDetails.rejected)}</div>
+        <div className={styles.title}>
+          {t(texts.opportunityDetails.rejected)}
+        </div>
         <Switch
           checked={props.userOpportunity.rejected}
           onChange={onRejectChanged}
@@ -121,7 +151,9 @@ export const OpportunityDetails: React.FC<IOpportunityDetailsProps> = (props) =>
         />
       </div>
       <div className={styles.item}>
-        <div className={styles.title}>{t(texts.opportunityDetails.contact)}</div>
+        <div className={styles.title}>
+          {t(texts.opportunityDetails.contact)}
+        </div>
         <input
           className={styles.contact}
           type="text"
