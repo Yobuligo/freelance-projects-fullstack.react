@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { SessionRepo } from "../api/core/SessionRepo";
 import { ISession } from "../shared/model/ISession";
 import { Value } from "../types/Value";
+import { useInitialize } from "./useInitialize";
 import { useLocalStorage } from "./useLocalStorage";
 
 export const useSessionStorage = (): Value<ISession | undefined> => {
@@ -10,10 +11,12 @@ export const useSessionStorage = (): Value<ISession | undefined> => {
     undefined
   );
 
+  useInitialize(() => {
+    SessionRepo.instance.setSession(session[0]);
+  });  
+
   useEffect(() => {
-    if (session[0]) {
-      SessionRepo.instance.setSession(session[0]);
-    }
+    SessionRepo.instance.setSession(session[0]);
   }, [session]);
 
   return session;
