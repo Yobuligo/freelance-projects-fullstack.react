@@ -1,0 +1,11 @@
+@import '../../styles/colors.module.scss';
+
+.durationDisplay {
+  display: flex;
+  flex-direction: column;
+}
+
+.time {
+  font-size: x-large;
+  color: $color-primary-dark;
+}
