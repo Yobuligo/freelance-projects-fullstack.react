@@ -27,6 +27,7 @@ export const OpportunitySection: React.FC = () => {
   return (
     <div className={styles.opportunitySection}>
       <Toolbar
+        className={styles.toolbar}
         rightChildren={
           <Button onClick={viewModel.onToggleDisplaySettings}>
             <SettingsIcon className={styles.icon} />
@@ -45,77 +46,75 @@ export const OpportunitySection: React.FC = () => {
         </Button>
       </Toolbar>
 
-      <>
-        {viewModel.displaySettings && (
-          <div className={styles.settingsSection}>
-            <Settings />
-          </div>
-        )}
-        <div
-          className={
-            viewModel.needsDisplaySelectedUserOpportunity
-              ? styles.listsSection
-              : ""
-          }
-        >
-          <div>
-            <OpportunityList
-              isLoading={viewModel.isLoading}
+      {viewModel.displaySettings && (
+        <div className={styles.settingsSection}>
+          <Settings />
+        </div>
+      )}
+      <div
+        className={
+          viewModel.needsDisplaySelectedUserOpportunity
+            ? styles.listsSection
+            : ""
+        }
+      >
+        <div>
+          <OpportunityList
+            isLoading={viewModel.isLoading}
+            onChange={viewModel.onUserOpportunityChanged}
+            onChecked={viewModel.onUserOpportunityChecked}
+            onSelectUserOpportunity={viewModel.onSelectUserOpportunity}
+            onUnchecked={viewModel.onUserOpportunityUnchecked}
+            userOpportunities={viewModel.openUserOpportunities}
+            selectedUserOpportunity={viewModel.selectedUserOpportunity}
+          />
+          <div className={styles.opportunitySubSection}>
+            <OpportunitySubList
+              collapsed={viewModel.appliedUserOpportunitiesCollapsed}
               onChange={viewModel.onUserOpportunityChanged}
               onChecked={viewModel.onUserOpportunityChecked}
               onSelectUserOpportunity={viewModel.onSelectUserOpportunity}
               onUnchecked={viewModel.onUserOpportunityUnchecked}
-              userOpportunities={viewModel.openUserOpportunities}
+              userOpportunities={viewModel.appliedUserOpportunities}
               selectedUserOpportunity={viewModel.selectedUserOpportunity}
+              setCollapsed={viewModel.onSetAppliedUserOpportunitiesCollapsed}
+              title={t(texts.appliedCard.applied, {
+                numberOpportunities:
+                  viewModel.appliedUserOpportunities.length.toString(),
+              })}
+              listAndItemColorClassName={styles.itemApplied}
             />
-            <div className={styles.opportunitySubSection}>
-              <OpportunitySubList
-                collapsed={viewModel.appliedUserOpportunitiesCollapsed}
-                onChange={viewModel.onUserOpportunityChanged}
-                onChecked={viewModel.onUserOpportunityChecked}
-                onSelectUserOpportunity={viewModel.onSelectUserOpportunity}
-                onUnchecked={viewModel.onUserOpportunityUnchecked}
-                userOpportunities={viewModel.appliedUserOpportunities}
-                selectedUserOpportunity={viewModel.selectedUserOpportunity}
-                setCollapsed={viewModel.onSetAppliedUserOpportunitiesCollapsed}
-                title={t(texts.appliedCard.applied, {
-                  numberOpportunities:
-                    viewModel.appliedUserOpportunities.length.toString(),
-                })}
-                listAndItemColorClassName={styles.itemApplied}
-              />
-            </div>
-            <div className={styles.opportunitySubSection}>
-              <OpportunitySubList
-                collapsed={viewModel.trashUserOpportunitiesCollapsed}
-                onChange={viewModel.onUserOpportunityChanged}
-                onChecked={viewModel.onUserOpportunityChecked}
-                onSelectUserOpportunity={viewModel.onSelectUserOpportunity}
-                onUnchecked={viewModel.onUserOpportunityUnchecked}
-                userOpportunities={viewModel.trashUserOpportunities}
-                selectedUserOpportunity={viewModel.selectedUserOpportunity}
-                setCollapsed={viewModel.onSetTrashUserOpportunitiesCollapsed}
-                title={t(texts.trashCard.trash, {
-                  numberOpportunities:
-                    viewModel.trashUserOpportunities.length.toString(),
-                })}
-                listAndItemColorClassName={styles.itemTrash}
-              />
-            </div>
           </div>
-
-          {viewModel.needsDisplaySelectedUserOpportunity &&
-            viewModel.selectedUserOpportunity && (
-              <Card className={styles.readingSection}>
-                <OpportunityIFrame
-                  userOpportunity={viewModel.selectedUserOpportunity}
-                  height="100%"
-                  width="100%"
-                />
-              </Card>
-            )}
+          <div className={styles.opportunitySubSection}>
+            <OpportunitySubList
+              collapsed={viewModel.trashUserOpportunitiesCollapsed}
+              onChange={viewModel.onUserOpportunityChanged}
+              onChecked={viewModel.onUserOpportunityChecked}
+              onSelectUserOpportunity={viewModel.onSelectUserOpportunity}
+              onUnchecked={viewModel.onUserOpportunityUnchecked}
+              userOpportunities={viewModel.trashUserOpportunities}
+              selectedUserOpportunity={viewModel.selectedUserOpportunity}
+              setCollapsed={viewModel.onSetTrashUserOpportunitiesCollapsed}
+              title={t(texts.trashCard.trash, {
+                numberOpportunities:
+                  viewModel.trashUserOpportunities.length.toString(),
+              })}
+              listAndItemColorClassName={styles.itemTrash}
+            />
+          </div>
         </div>
-      </>
+
+        {viewModel.needsDisplaySelectedUserOpportunity &&
+          viewModel.selectedUserOpportunity && (
+            <Card className={styles.readingSection}>
+              <OpportunityIFrame
+                userOpportunity={viewModel.selectedUserOpportunity}
+                height="100%"
+                width="100%"
+              />
+            </Card>
+          )}
+      </div>
     </div>
   );
 };
