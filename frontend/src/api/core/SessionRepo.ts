@@ -17,7 +17,7 @@ export class SessionRepo {
     return this._session;
   }
 
-  setSession(session: ISession) {
+  setSession(session: ISession | undefined) {
     this._session = session;
   }
 }

@@ -39,7 +39,7 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
     setErrorMessage("");
     navigate(AppRoutes.dashboard.toPath());
   };
-  
+
   return (
     <Page>
       <div className={styles.protectedPage}>
