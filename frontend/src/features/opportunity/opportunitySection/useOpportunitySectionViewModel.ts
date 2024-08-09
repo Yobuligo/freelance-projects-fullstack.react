@@ -88,13 +88,14 @@ export const useOpportunitySectionViewModel = () => {
       const userOpportunityApi = new UserOpportunityApi();
       const fetchedUserOpportunities = (
         await userOpportunityApi.findAllByProviderRequests(force)
-      ).sort((left, right) =>
-        DateTime.compare(
+      )
+      const sortedFetchedUserOpportunities = fetchedUserOpportunities.sort((left, right) => {
+        return DateTime.compare(
           right.opportunity.publishedAt,
           left.opportunity.publishedAt
-        )
-      );
-      setUserOpportunities(fetchedUserOpportunities);
+        );
+      });
+      setUserOpportunities(sortedFetchedUserOpportunities);
     });
   };
 
