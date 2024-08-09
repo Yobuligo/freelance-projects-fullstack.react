@@ -1,8 +1,13 @@
-@import "../../../styles//dimensions.scss";
+@import "../../../styles/dimensions.scss";
+@import "../../../styles/mixins.scss";
 
 .page {
-  margin: 3rem 5rem;
+  margin: 1.5rem;
   display: flex;
   flex-direction: column;
   row-gap: $negative-space;
+
+  @include medium-screen {
+    margin: 3rem 5rem;
+  }
 }
