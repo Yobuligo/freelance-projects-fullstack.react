@@ -1,4 +1,4 @@
-import { IHavePath } from "../types/IHavePath";
+import { IRouteMeta } from "../types/IRouteMeta";
 import { ProviderType } from "../types/ProviderType";
 
 export interface IProviderDetails {
@@ -6,4 +6,4 @@ export interface IProviderDetails {
   type: ProviderType;
 }
 
-export const ProviderDetailsMeta: IHavePath = { path: "/provider-details" };
+export const ProviderDetailsRouteMeta: IRouteMeta = { path: "/provider-details" };

@@ -1,4 +1,4 @@
-import { IHavePath } from "../types/IHavePath";
+import { IRouteMeta } from "../types/IRouteMeta";
 import { IEntity } from "../types/IEntity";
 import { ITask } from "./ITask";
 
@@ -8,4 +8,4 @@ export interface IProject extends IEntity {
   userId: string;
 }
 
-export const ProjectMeta: IHavePath = { path: "/projects" };
+export const ProjectRouteMeta: IRouteMeta = { path: "/projects" };

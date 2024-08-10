@@ -2,7 +2,7 @@ import { Router } from "express";
 import { UserProviderRequestRepo } from "../repository/UserProviderRequestRepo";
 import {
   IUserProviderRequest,
-  UserProviderRequestMeta,
+  UserProviderRequestRouteMeta,
 } from "../shared/model/IUserProviderRequest";
 import { Controller } from "./Controller";
 
@@ -17,7 +17,7 @@ export class UserProviderRequestController extends Controller {
   }
 
   private findAll() {
-    this.router.get(UserProviderRequestMeta.path, async (req, res) => {
+    this.router.get(UserProviderRequestRouteMeta.path, async (req, res) => {
       this.handleSessionRequest(req, res, async (session) => {
         const userProviderRequestRepo = new UserProviderRequestRepo();
         const userProviderRequests = await userProviderRequestRepo.findByUserId(
@@ -29,7 +29,7 @@ export class UserProviderRequestController extends Controller {
   }
 
   private insert() {
-    this.router.post(UserProviderRequestMeta.path, (req, res) => {
+    this.router.post(UserProviderRequestRouteMeta.path, (req, res) => {
       this.handleSessionRequest(req, res, async () => {
         const userProviderRequest: IUserProviderRequest = req.body;
         const userProviderRequestRepo = new UserProviderRequestRepo();
@@ -42,7 +42,7 @@ export class UserProviderRequestController extends Controller {
   }
 
   private update() {
-    this.router.put(UserProviderRequestMeta.path, (req, res) => {
+    this.router.put(UserProviderRequestRouteMeta.path, (req, res) => {
       this.handleSessionRequest(req, res, async () => {
         const userProviderRequest: IUserProviderRequest = req.body;
         const userProviderRequestRepo = new UserProviderRequestRepo();

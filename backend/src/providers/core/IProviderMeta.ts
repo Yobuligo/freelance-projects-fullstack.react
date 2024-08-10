@@ -1,5 +1,5 @@
 import { ProviderClassType } from "./ProviderClassType";
-import { IHavePath } from "../../shared/types/IHavePath";
+import { IRouteMeta } from "../../shared/types/IRouteMeta";
 import { ProviderType } from "../../shared/types/ProviderType";
 
 export interface IProviderMeta {
@@ -8,4 +8,4 @@ export interface IProviderMeta {
   type: ProviderType;
 }
 
-export const ProviderMetaMeta: IHavePath = { path: "/provider-metas" };
+export const ProviderMetaMeta: IRouteMeta = { path: "/provider-metas" };

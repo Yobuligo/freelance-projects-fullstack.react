@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { IRepository } from "../repository/types/IRepository";
-import { IHavePath } from "../shared/types/IHavePath";
+import { IRouteMeta } from "../shared/types/IRouteMeta";
 import { IEntity } from "./../shared/types/IEntity";
 import { Controller } from "./Controller";
 
 export abstract class EntityController<T extends IEntity> extends Controller {
   readonly router = Router();
 
-  constructor(protected meta: IHavePath, protected repo: IRepository<T>) {
+  constructor(protected routeMeta: IRouteMeta, protected repo: IRepository<T>) {
     super();
     this.deleteById();
     this.insert();
@@ -15,7 +15,7 @@ export abstract class EntityController<T extends IEntity> extends Controller {
   }
 
   protected deleteById() {
-    this.router.delete(`${this.meta.path}/:id`, (req, res) => {
+    this.router.delete(`${this.routeMeta.path}/:id`, (req, res) => {
       this.handleSessionRequest(req, res, async () => {
         this.repo.deleteById(req.params.id);
       });
@@ -23,7 +23,7 @@ export abstract class EntityController<T extends IEntity> extends Controller {
   }
 
   protected insert() {
-    this.router.post(this.meta.path, (req, res) => {
+    this.router.post(this.routeMeta.path, (req, res) => {
       this.handleSessionRequest(req, res, async () => {
         const entity: T = req.body;
         const newEntity = await this.repo.insert(entity);
@@ -33,7 +33,7 @@ export abstract class EntityController<T extends IEntity> extends Controller {
   }
 
   protected update() {
-    this.router.put(this.meta.path, (req, res) => {
+    this.router.put(this.routeMeta.path, (req, res) => {
       this.handleSessionRequest(req, res, async () => {
         const entity: T = req.body;
         await this.repo.update(entity);

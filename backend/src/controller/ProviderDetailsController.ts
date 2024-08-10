@@ -2,7 +2,7 @@ import { Router } from "express";
 import { ProviderRegistryInfo } from "../providers/core/ProviderRegistryInfo";
 import {
   IProviderDetails,
-  ProviderDetailsMeta,
+  ProviderDetailsRouteMeta,
 } from "../shared/model/IProviderDetails";
 
 export class ProviderDetailsController {
@@ -13,7 +13,7 @@ export class ProviderDetailsController {
   }
 
   private findAll() {
-    this.router.get(ProviderDetailsMeta.path, (_, res) => {
+    this.router.get(ProviderDetailsRouteMeta.path, (_, res) => {
       const providerDetails: IProviderDetails[] = [];
       const providerMetas = ProviderRegistryInfo.findAll();
       providerMetas.forEach((providerMeta) => {

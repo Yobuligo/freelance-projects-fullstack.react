@@ -9,7 +9,7 @@ import { IProviderRequests } from "../shared/model/IProviderRequests";
 import { ISession } from "../shared/model/ISession";
 import {
   IUserOpportunity,
-  UserOpportunityMeta,
+  UserOpportunityRouteMeta,
 } from "../shared/model/IUserOpportunity";
 import { NetworkInfo } from "../shared/services/NetworkInfo";
 import { ProviderType } from "../shared/types/ProviderType";
@@ -27,7 +27,7 @@ export class UserOpportunityController extends Controller {
   }
 
   private findAll() {
-    this.router.get(UserOpportunityMeta.path, async (req, res) => {
+    this.router.get(UserOpportunityRouteMeta.path, async (req, res) => {
       if (!(await NetworkInfo.isConnected())) {
         return res.status(502).send(createError("Missing internet connection"));
       }
@@ -56,7 +56,7 @@ export class UserOpportunityController extends Controller {
   }
 
   private updateAll() {
-    this.router.put(UserOpportunityMeta.path, async (req, res) => {
+    this.router.put(UserOpportunityRouteMeta.path, async (req, res) => {
       this.handleSessionRequest(req, res, async () => {
         const userOpportunities: IUserOpportunity[] = req.body;
         const userOpportunityRepo = new UserOpportunityRepo();

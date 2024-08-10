@@ -1,5 +1,5 @@
 import { IEntity } from "../types/IEntity";
-import { IHavePath } from "../types/IHavePath";
+import { IRouteMeta } from "../types/IRouteMeta";
 import { ProviderType } from "../types/ProviderType";
 
 export interface IUserProviderRequest extends IEntity {
@@ -10,6 +10,6 @@ export interface IUserProviderRequest extends IEntity {
   url: string;
 }
 
-export const UserProviderRequestMeta: IHavePath = {
+export const UserProviderRequestRouteMeta: IRouteMeta = {
   path: "/user-provider-requests",
 };
