@@ -9,7 +9,7 @@ export class SessionRepo extends Repository<ISession> {
   }
 
   async createUserSession(user: IUser): Promise<ISession> {
-    await this.deleteUserSession(user.username);
+    await this.deleteUserSession(user.id);
     const session = await this.insert({
       expiresAt: new Date(), // Todo - take a valid date
       userId: user.id,
@@ -29,10 +29,11 @@ export class SessionRepo extends Repository<ISession> {
   }
 
   async deleteSession(session: ISession): Promise<boolean> {
-    return await this.deleteById(session.id);
+    return await this.deleteUserSession(session.userId);
   }
 
   async deleteUserSession(userId: string) {
-    await this.model.destroy({ where: { userId } });
+    const count = await this.model.destroy({ where: { userId } });
+    return count > 0;
   }
 }
