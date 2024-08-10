@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { DateTime } from "../core/services/date/DateTime";
 import { OpportunityRepo } from "../repository/OpportunityRepo";
 import { UserOpportunityRepo } from "../repository/UserOpportunityRepo";
 import { UserProviderRequestRepo } from "../repository/UserProviderRequestRepo";
@@ -16,6 +15,7 @@ import { ProviderType } from "../shared/types/ProviderType";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
 import { Controller } from "./Controller";
+import { SessionInterceptor } from "./core/sessionInterceptor";
 
 export class UserOpportunityController extends Controller {
   readonly router = Router();
@@ -27,18 +27,21 @@ export class UserOpportunityController extends Controller {
   }
 
   private findAll() {
-    this.router.get(UserOpportunityRouteMeta.path, async (req, res) => {
-      if (!(await NetworkInfo.isConnected())) {
-        return res.status(502).send(createError("Missing internet connection"));
-      }
+    this.router.get(
+      UserOpportunityRouteMeta.path,
+      SessionInterceptor(async (req, res) => {
+        if (!(await NetworkInfo.isConnected())) {
+          return res
+            .status(502)
+            .send(createError("Missing internet connection"));
+        }
 
-      this.handleSessionRequest(req, res, async (session) => {
         const force: boolean | undefined = req.query.force
           ? req.query.force === "true"
           : undefined;
         try {
           const sortedUserOpportunities = await this.findUserOpportunities(
-            session,
+            req.session,
             force
           );
           res.status(200).send(sortedUserOpportunities);
@@ -51,18 +54,19 @@ export class UserOpportunityController extends Controller {
               .send(createError("Error while loading opportunities"));
           }
         }
-      });
-    });
+      })
+    );
   }
 
   private updateAll() {
-    this.router.put(UserOpportunityRouteMeta.path, async (req, res) => {
-      this.handleSessionRequest(req, res, async () => {
+    this.router.put(
+      UserOpportunityRouteMeta.path,
+      SessionInterceptor(async (req) => {
         const userOpportunities: IUserOpportunity[] = req.body;
         const userOpportunityRepo = new UserOpportunityRepo();
         await userOpportunityRepo.updateAll(userOpportunities);
-      });
-    });
+      })
+    );
   }
 
   private async findUserOpportunities(
@@ -88,7 +92,7 @@ export class UserOpportunityController extends Controller {
       }
     });
 
-      return persistedUserOpportunities
+    return persistedUserOpportunities;
   }
 
   private async loadProviderRequests(
