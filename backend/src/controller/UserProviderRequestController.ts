@@ -5,7 +5,7 @@ import {
   UserProviderRequestRouteMeta,
 } from "../shared/model/IUserProviderRequest";
 import { Controller } from "./Controller";
-import { SessionInterceptor } from "./core/sessionInterceptor";
+import { SessionInterceptor } from "./core/SessionInterceptor";
 
 export class UserProviderRequestController extends Controller {
   readonly router = Router();

@@ -15,7 +15,7 @@ import { ProviderType } from "../shared/types/ProviderType";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
 import { Controller } from "./Controller";
-import { SessionInterceptor } from "./core/sessionInterceptor";
+import { SessionInterceptor } from "./core/SessionInterceptor";
 
 export class UserOpportunityController extends Controller {
   readonly router = Router();

@@ -3,7 +3,7 @@ import { IRepository } from "../repository/types/IRepository";
 import { IRouteMeta } from "../shared/types/IRouteMeta";
 import { IEntity } from "./../shared/types/IEntity";
 import { Controller } from "./Controller";
-import { SessionInterceptor } from "./core/sessionInterceptor";
+import { SessionInterceptor } from "./core/SessionInterceptor";
 
 export abstract class EntityController<T extends IEntity> extends Controller {
   readonly router = Router();
