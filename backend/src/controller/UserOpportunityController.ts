@@ -10,11 +10,11 @@ import {
   IUserOpportunity,
   UserOpportunityRouteMeta,
 } from "../shared/model/IUserOpportunity";
-import { NetworkInfo } from "../shared/services/NetworkInfo";
 import { ProviderType } from "../shared/types/ProviderType";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
 import { Controller } from "./Controller";
+import { NetworkCheckInterceptor } from "./core/NetworkCheckInterceptor";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 
 export class UserOpportunityController extends Controller {
@@ -29,13 +29,8 @@ export class UserOpportunityController extends Controller {
   private findAll() {
     this.router.get(
       UserOpportunityRouteMeta.path,
+      NetworkCheckInterceptor(),
       SessionInterceptor(async (req, res) => {
-        if (!(await NetworkInfo.isConnected())) {
-          return res
-            .status(502)
-            .send(createError("Missing internet connection"));
-        }
-
         const force: boolean | undefined = req.query.force
           ? req.query.force === "true"
           : undefined;

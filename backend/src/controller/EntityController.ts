@@ -18,7 +18,7 @@ export abstract class EntityController<T extends IEntity> extends Controller {
   protected deleteById() {
     this.router.delete(
       `${this.routeMeta.path}/:id`,
-      SessionInterceptor((req, res) => {
+      SessionInterceptor((req) => {
         this.repo.deleteById(req.params.id);
       })
     );
