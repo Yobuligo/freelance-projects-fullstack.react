@@ -1,18 +1,18 @@
 import {
   IUserOpportunity,
-  UserOpportunitiesMeta,
+  UserOpportunitiesRouteMeta,
 } from "../shared/model/IUserOpportunity";
 import { Repository } from "./core/Repository";
 
 export class UserOpportunityApi extends Repository<IUserOpportunity> {
   constructor() {
-    super(UserOpportunitiesMeta);
+    super(UserOpportunitiesRouteMeta);
   }
 
   async findAllByProviderRequests(
     force?: boolean
   ): Promise<IUserOpportunity[]> {
-    return await this.get(`${this.host}${UserOpportunitiesMeta.path}`, {
+    return await this.get(`${this.host}${UserOpportunitiesRouteMeta.path}`, {
       force,
     });
   }

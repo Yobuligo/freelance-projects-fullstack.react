@@ -1,6 +1,6 @@
 import { ApplicationType } from "../types/ApplicationType";
 import { IEntity } from "../types/IEntity";
-import { IHavePath } from "../types/IHavePath";
+import { IRouteMeta } from "../types/IRouteMeta";
 import { IOpportunity } from "./IOpportunity";
 
 export interface IUserOpportunity extends IEntity {
@@ -16,4 +16,4 @@ export interface IUserOpportunity extends IEntity {
   username: string;
 }
 
-export const UserOpportunitiesMeta: IHavePath = { path: "/user-opportunities" };
+export const UserOpportunitiesRouteMeta: IRouteMeta = { path: "/user-opportunities" };

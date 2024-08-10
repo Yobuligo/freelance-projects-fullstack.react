@@ -1,3 +1,3 @@
-import { IHavePath } from "../types/IHavePath";
+import { IRouteMeta } from "../types/IRouteMeta";
 
-export const UserMeta: IHavePath = { path: "/users" };
+export const UserRouteMeta: IRouteMeta = { path: "/users" };

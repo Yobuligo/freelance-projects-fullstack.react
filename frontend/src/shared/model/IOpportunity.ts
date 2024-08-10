@@ -1,5 +1,5 @@
 import { IEntity } from "../types/IEntity";
-import { IHavePath } from "../types/IHavePath";
+import { IRouteMeta } from "../types/IRouteMeta";
 import { ProviderType } from "../types/ProviderType";
 
 export interface IOpportunity extends IEntity {
@@ -11,4 +11,4 @@ export interface IOpportunity extends IEntity {
   url: string;
 }
 
-export const OpportunityMeta: IHavePath = { path: "/opportunities" };
+export const OpportunityRouteMeta: IRouteMeta = { path: "/opportunities" };

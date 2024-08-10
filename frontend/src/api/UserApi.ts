@@ -1,11 +1,11 @@
 import { ICredentials } from "../shared/model/ICredentials";
 import { ISession } from "../shared/model/ISession";
-import { UserMeta } from "../shared/model/UserMeta";
+import { UserRouteMeta } from "../shared/model/UserMeta";
 import { Repository } from "./core/Repository";
 
 export class UserApi extends Repository<any> {
   constructor() {
-    super(UserMeta);
+    super(UserRouteMeta);
   }
 
   login(credentials: ICredentials): Promise<ISession> {
