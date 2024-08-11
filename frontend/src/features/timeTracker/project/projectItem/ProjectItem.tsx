@@ -4,10 +4,13 @@ import { DurationDisplay } from "../../../../components/duration/DurationDisplay
 import { Toolbar } from "../../../../components/toolbar/Toolbar";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
+import { CheckIcon } from "../../../../icons/CheckIcon";
+import { CloseIcon } from "../../../../icons/CloseIcon";
 import { DeleteIcon } from "../../../../icons/DeleteIcon";
 import { EditIcon } from "../../../../icons/EditIcon";
 import { StartIcon } from "../../../../icons/StartIcon";
 import componentStyle from "../../../../styles/components.module.scss";
+import { style } from "../../../../utils/style";
 import { IProjectItemProps } from "./IProjectItemProps";
 import styles from "./ProjectItem.module.scss";
 import { useProjectItemViewModel } from "./useProjectItemViewModel";
@@ -22,15 +25,48 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
         <div className={styles.header}>
           <div className={styles.titleContainer} onClick={viewModel.onClick}>
             {viewModel.isRunning && <StartIcon />}
-            <h3 className={styles.title}>{props.project.title}</h3>
+            <input
+              className={style(
+                styles.input,
+                viewModel.displayMode ? styles.inputDisabled : ""
+              )}
+              disabled={false}
+              type="text"
+              value={props.project.title}
+            />
           </div>
-          <div>
-            <button className={styles.iconButton}>
-              <EditIcon className={componentStyle.icon} />
-            </button>
-            <button className={styles.iconButton} onClick={viewModel.onDelete}>
-              <DeleteIcon className={componentStyle.icon} />
-            </button>
+          <div className={styles.headerButtons}>
+            {viewModel.displayMode ? (
+              <>
+                <button className={styles.iconButton}>
+                  <EditIcon
+                    className={componentStyle.icon}
+                    onClick={viewModel.onEditMode}
+                  />
+                </button>
+                <button
+                  className={styles.iconButton}
+                  onClick={viewModel.onDelete}
+                >
+                  <DeleteIcon className={componentStyle.icon} />
+                </button>
+              </>
+            ) : (
+              <>
+                <button className={styles.iconButton}>
+                  <CheckIcon
+                    className={componentStyle.icon}
+                    onClick={viewModel.onConfirm}
+                  />
+                </button>
+                <button
+                  className={styles.iconButton}
+                  onClick={viewModel.onCancel}
+                >
+                  <CloseIcon className={componentStyle.icon} />
+                </button>
+              </>
+            )}
           </div>
         </div>
 

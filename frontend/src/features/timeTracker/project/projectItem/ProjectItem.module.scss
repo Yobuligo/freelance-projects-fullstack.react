@@ -14,6 +14,12 @@
   justify-content: space-between;
 }
 
+.headerButtons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -25,12 +31,28 @@
   display: flex;
   flex-direction: row;
   column-gap: $negative-space;
+  align-items: start;
 }
 
 .title {
   margin: 0;
   text-transform: uppercase;
   color: $color-primary-dark;
+}
+
+.input {
+  margin: 0;
+  text-transform: uppercase;
+  color: $color-primary-dark;
+  font-size: large;
+  font-weight: 600;
+  width: 90%;
+}
+
+.inputDisabled {
+  background-color: transparent;
+  outline: none;
+  border: 0;
 }
 
 .durationContainer {

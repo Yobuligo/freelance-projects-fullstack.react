@@ -7,6 +7,7 @@ import { TaskInfo } from "../../../../services/TaskInfo";
 import { IProjectItemProps } from "./IProjectItemProps";
 
 export const useProjectItemViewModel = (props: IProjectItemProps) => {
+  const [displayMode, setDisplayMode] = useState(true);
   const [duration, setDuration] = useState<Duration | undefined>(undefined);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | undefined>(
     undefined
@@ -28,7 +29,11 @@ export const useProjectItemViewModel = (props: IProjectItemProps) => {
     }
   };
 
-  const onClick = () => props.onClick?.(props.project);
+  const onClick = () => {
+    if (displayMode) {
+      props.onClick?.(props.project);
+    }
+  };
 
   const onStop = () => {
     props.onStop?.(props.project);
@@ -69,10 +74,24 @@ export const useProjectItemViewModel = (props: IProjectItemProps) => {
 
   const durationTotal = ProjectInfo.toDurationTotal(props.project);
 
+  const onCancel = () => {
+    setDisplayMode(true);
+  };
+
+  const onConfirm = () => {
+    setDisplayMode(true);
+  };
+
+  const onEditMode = () => setDisplayMode(false);
+
   return {
+    displayMode,
     duration,
     durationTotal,
     isRunning,
+    onCancel,
+    onConfirm,
+    onEditMode,
     onDelete,
     onClick,
     onStart,
