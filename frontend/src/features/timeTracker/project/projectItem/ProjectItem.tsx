@@ -5,6 +5,7 @@ import { Toolbar } from "../../../../components/toolbar/Toolbar";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { DeleteIcon } from "../../../../icons/DeleteIcon";
+import { EditIcon } from "../../../../icons/EditIcon";
 import { StartIcon } from "../../../../icons/StartIcon";
 import componentStyle from "../../../../styles/components.module.scss";
 import { IProjectItemProps } from "./IProjectItemProps";
@@ -23,9 +24,14 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
             {viewModel.isRunning && <StartIcon />}
             <h3 className={styles.title}>{props.project.title}</h3>
           </div>
-          <button className={styles.deleteButton} onClick={viewModel.onDelete}>
-            <DeleteIcon className={componentStyle.icon} />
-          </button>
+          <div>
+            <button className={styles.iconButton}>
+              <EditIcon className={componentStyle.icon} />
+            </button>
+            <button className={styles.iconButton} onClick={viewModel.onDelete}>
+              <DeleteIcon className={componentStyle.icon} />
+            </button>
+          </div>
         </div>
 
         <div className={styles.durationContainer}>
