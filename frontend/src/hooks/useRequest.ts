@@ -1,13 +1,10 @@
 import { useCallback, useMemo, useState } from "react";
-import { InvalidSessionError } from "../shared/errors/InvalidSessionError";
-import { NoSessionError } from "../shared/errors/NoSessionError";
 import { IError } from "../shared/model/IError";
 import { isError } from "../shared/utils/isError";
 import { useErrorMessage } from "./useErrorMessage";
 import { useLogout } from "./useLogout";
 import { texts } from "./useTranslation/texts";
 import { useTranslation } from "./useTranslation/useTranslation";
-import { ExpiredSessionError } from "../shared/errors/ExpiredSessionError";
 
 export const useRequest = () => {
   const [isProcessing, setIsLoading] = useState(false);
@@ -17,10 +14,11 @@ export const useRequest = () => {
 
   const handleError = useCallback(
     (error: IError) => {
+      console.log(error);
       if (
-        error.type === NoSessionError.name ||
-        error.type === InvalidSessionError.name ||
-        error.type === ExpiredSessionError.name
+        error.type === "NoSessionError" ||
+        error.type === "InvalidSessionError" ||
+        error.type === "ExpiredSessionError"
       ) {
         setErrorMessage(t(texts.general.logoutInvalidSession));
         logout.logout();
