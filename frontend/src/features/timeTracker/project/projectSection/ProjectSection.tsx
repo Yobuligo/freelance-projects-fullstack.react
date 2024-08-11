@@ -19,8 +19,11 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
         />
       ) : (
         <>
-          <ProjectAdd onAdd={viewModel.onAdd} />
-          {viewModel.request.isLoading ? (
+          <ProjectAdd
+            isAdding={viewModel.addProjectRequest.isProcessing}
+            onAdd={viewModel.onAdd}
+          />
+          {viewModel.loadProjectRequest.isProcessing ? (
             <Spinner />
           ) : (
             <ProjectList

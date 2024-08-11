@@ -60,7 +60,7 @@ export const OpportunitySection: React.FC = () => {
       >
         <div>
           <OpportunityList
-            isLoading={viewModel.isLoading}
+            isLoading={viewModel.isProcessing}
             onChange={viewModel.onUserOpportunityChanged}
             onChecked={viewModel.onUserOpportunityChecked}
             onSelectUserOpportunity={viewModel.onSelectUserOpportunity}

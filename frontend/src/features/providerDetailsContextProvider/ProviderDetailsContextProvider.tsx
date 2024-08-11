@@ -30,7 +30,7 @@ export const ProviderDetailsContextProvider: React.FC<
     <ProviderDetailsContext.Provider
       value={{ providerDetails: [providerDetails, setProviderDetails] }}
     >
-      {request.isLoading ? <Spinner color="black" /> : <>{props.children}</>}
+      {request.isProcessing ? <Spinner color="black" /> : <>{props.children}</>}
     </ProviderDetailsContext.Provider>
   );
 };

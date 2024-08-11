@@ -86,15 +86,16 @@ export const useOpportunitySectionViewModel = () => {
   const loadUserOpportunities = async (force?: boolean) => {
     await request.send(async () => {
       const userOpportunityApi = new UserOpportunityApi();
-      const fetchedUserOpportunities = (
-        await userOpportunityApi.findAllByProviderRequests(force)
-      )
-      const sortedFetchedUserOpportunities = fetchedUserOpportunities.sort((left, right) => {
-        return DateTime.compare(
-          right.opportunity.publishedAt,
-          left.opportunity.publishedAt
-        );
-      });
+      const fetchedUserOpportunities =
+        await userOpportunityApi.findAllByProviderRequests(force);
+      const sortedFetchedUserOpportunities = fetchedUserOpportunities.sort(
+        (left, right) => {
+          return DateTime.compare(
+            right.opportunity.publishedAt,
+            left.opportunity.publishedAt
+          );
+        }
+      );
       setUserOpportunities(sortedFetchedUserOpportunities);
     });
   };
@@ -218,7 +219,7 @@ export const useOpportunitySectionViewModel = () => {
     appliedUserOpportunities: appliedUserOpportunities,
     appliedUserOpportunitiesCollapsed: appliedUserOpportunitiesCollapsed,
     displaySettings,
-    isLoading: request.isLoading,
+    isProcessing: request.isProcessing,
     loadUserOpportunities,
     needsDisplaySelectedUserOpportunity,
     onSelectUserOpportunity,

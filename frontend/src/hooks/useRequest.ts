@@ -9,7 +9,7 @@ import { texts } from "./useTranslation/texts";
 import { useTranslation } from "./useTranslation/useTranslation";
 
 export const useRequest = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isProcessing, setIsLoading] = useState(false);
   const [, setErrorMessage] = useErrorMessage();
   const logout = useLogout();
   const { t } = useTranslation();
@@ -55,7 +55,7 @@ export const useRequest = () => {
     [handleError, setErrorMessage]
   );
 
-  const request = useMemo(() => ({ isLoading, send }), [isLoading, send]);
+  const request = useMemo(() => ({ isProcessing, send }), [isProcessing, send]);
 
   return request;
 };

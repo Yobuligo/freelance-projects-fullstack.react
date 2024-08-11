@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "../../../../components/button/Button";
 import { LabeledInput } from "../../../../components/labeledInput/LabeledInput";
+import { SpinnerButton } from "../../../../components/spinnerButton/SpinnerButton";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { IProjectAddProps } from "./IProjectAddProps";
@@ -29,9 +29,13 @@ export const ProjectAdd: React.FC<IProjectAddProps> = (props) => {
       />
 
       <div>
-        <Button disabled={title.length === 0} onClick={onAdd}>
+        <SpinnerButton
+          disabled={title.length === 0}
+          displaySpinner={props.isAdding}
+          onClick={onAdd}
+        >
           {t(texts.projectAdd.addProject)}
-        </Button>
+        </SpinnerButton>
       </div>
     </div>
   );

@@ -16,15 +16,17 @@ export const useProjectSectionViewModel = () => {
   const [selectedProject, setSelectedProject] = useState<IProject | undefined>(
     undefined
   );
-  const request = useRequest();
+  const addProjectRequest = useRequest();
+  const loadProjectRequest = useRequest();
+  const deleteProjectRequest = useRequest();
 
   const loadProjects = useCallback(async () => {
-    request.send(async () => {
+    loadProjectRequest.send(async () => {
       const projectApi = new ProjectApi();
       const projects = await projectApi.findAll();
       setProjects(projects);
     });
-  }, [request]);
+  }, [loadProjectRequest]);
 
   useInitialize(() => {
     loadProjects();
@@ -44,8 +46,10 @@ export const useProjectSectionViewModel = () => {
       return [...previous];
     });
 
-    const projectApi = new ProjectApi();
-    projectApi.insert(newProject);
+    addProjectRequest.send(async () => {
+      const projectApi = new ProjectApi();
+      await projectApi.insert(newProject);
+    });
   };
 
   const onDelete = (project: IProject) => {
@@ -57,8 +61,10 @@ export const useProjectSectionViewModel = () => {
       return [...previous];
     });
 
-    const projectApi = new ProjectApi();
-    projectApi.deleteById(project.id);
+    deleteProjectRequest.send(async () => {
+      const projectApi = new ProjectApi();
+      await projectApi.deleteById(project.id);
+    });
   };
 
   const onProjectSelected = (project: IProject) => setSelectedProject(project);
@@ -130,6 +136,7 @@ export const useProjectSectionViewModel = () => {
   };
 
   return {
+    addProjectRequest,
     onAdd,
     onDelete,
     onDeleteTask,
@@ -138,7 +145,7 @@ export const useProjectSectionViewModel = () => {
     onStart,
     onStop,
     projects,
-    request,
+    loadProjectRequest,
     selectedProject,
   };
 };
