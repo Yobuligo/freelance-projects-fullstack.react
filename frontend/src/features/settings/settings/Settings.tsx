@@ -25,7 +25,7 @@ export const Settings: React.FC = () => {
         </SettingsSection>
         <SettingsSection title={t(texts.settingsSection.savedSearches)}>
           <ProviderRequestList
-            isLoading={viewModel.isUserProviderRequestsLoading}
+            isLoading={viewModel.loadUserProviderRequestRequest.isProcessing}
             onDelete={viewModel.onDeleteUserProviderRequest}
             onDisable={viewModel.onUpdateUserProviderRequest}
             onEnable={viewModel.onEnableUserProviderRequest}

@@ -1,5 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { v4 as uuid } from "uuid";
+import { useInitialize } from "../../../hooks/useInitialize";
+import { useRequest } from "../../../hooks/useRequest";
 import { useSession } from "../../../hooks/useSession";
 import { useUserProviderRequests } from "../../../hooks/useUserProviderRequests";
 import { IUserProviderRequest } from "../../../shared/model/IUserProviderRequest";
@@ -8,22 +10,22 @@ import { UserProviderRequestApi } from "./../../../api/UserProviderRequestApi";
 
 export const useSettingsViewModel = () => {
   const [session] = useSession();
-  const [isUserProviderRequestsLoading, setIsUserProviderRequestLoading] =
-    useState(false);
   const [userProviderRequests, setUserProviderRequests] =
     useUserProviderRequests();
+  const loadUserProviderRequestRequest = useRequest();
+  const request = useRequest();
 
   const loadUserProviderRequests = useCallback(async () => {
-    setIsUserProviderRequestLoading(true);
-    const userProviderRequestApi = new UserProviderRequestApi();
-    const userProviderRequests = await userProviderRequestApi.findAll();
-    setUserProviderRequests(userProviderRequests);
-    setIsUserProviderRequestLoading(false);
-  }, [setUserProviderRequests]);
+    loadUserProviderRequestRequest.send(async () => {
+      const userProviderRequestApi = new UserProviderRequestApi();
+      const userProviderRequests = await userProviderRequestApi.findAll();
+      setUserProviderRequests(userProviderRequests);
+    });
+  }, [loadUserProviderRequestRequest, setUserProviderRequests]);
 
-  useEffect(() => {
+  useInitialize(() => {
     loadUserProviderRequests();
-  }, [loadUserProviderRequests]);
+  });
 
   const onAddUserProviderRequest = (
     provider: ProviderType,
@@ -49,8 +51,10 @@ export const useSettingsViewModel = () => {
         updatedAt: new Date(),
       };
       previous.push(userProviderRequest);
-      const userProviderRequestApi = new UserProviderRequestApi();
-      userProviderRequestApi.insert(userProviderRequest);
+      request.send(async () => {
+        const userProviderRequestApi = new UserProviderRequestApi();
+        await userProviderRequestApi.insert(userProviderRequest);
+      });
       return [...previous];
     });
   };
@@ -66,8 +70,10 @@ export const useSettingsViewModel = () => {
         previous.splice(index, 1);
       }
 
-      const userProviderRequestApi = new UserProviderRequestApi();
-      userProviderRequestApi.deleteById(userProviderRequest.id);
+      request.send(async () => {
+        const userProviderRequestApi = new UserProviderRequestApi();
+        await userProviderRequestApi.deleteById(userProviderRequest.id);
+      });
       return [...previous];
     });
   };
@@ -82,14 +88,16 @@ export const useSettingsViewModel = () => {
       if (index !== -1) {
         previous.splice(index, 1, userProviderRequest);
       }
-      const userProviderRequestApi = new UserProviderRequestApi();
-      userProviderRequestApi.update(userProviderRequest);
+      request.send(async () => {
+        const userProviderRequestApi = new UserProviderRequestApi();
+        await userProviderRequestApi.update(userProviderRequest);
+      });
       return [...previous];
     });
   };
 
   return {
-    isUserProviderRequestsLoading,
+    loadUserProviderRequestRequest,
     onAddUserProviderRequest,
     onDeleteUserProviderRequest,
     onUpdateUserProviderRequest,

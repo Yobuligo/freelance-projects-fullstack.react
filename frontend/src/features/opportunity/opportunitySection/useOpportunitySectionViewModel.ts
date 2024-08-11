@@ -70,8 +70,10 @@ export const useOpportunitySectionViewModel = () => {
     if (userOpportunities.length === 0) {
       return;
     }
-    const userOpportunityApi = new UserOpportunityApi();
-    await userOpportunityApi.updateAll(userOpportunities);
+    request.send(async () => {
+      const userOpportunityApi = new UserOpportunityApi();
+      await userOpportunityApi.updateAll(userOpportunities);
+    });
   };
 
   const updateUserOpportunity = async (userOpportunity: IUserOpportunity) => {

@@ -19,6 +19,7 @@ export const useProjectSectionViewModel = () => {
   const addProjectRequest = useRequest();
   const loadProjectRequest = useRequest();
   const deleteProjectRequest = useRequest();
+  const taskRequest = useRequest();
 
   const loadProjects = useCallback(async () => {
     loadProjectRequest.send(async () => {
@@ -98,8 +99,10 @@ export const useProjectSectionViewModel = () => {
     });
 
     // add task to backend
-    const taskApi = new TaskApi();
-    taskApi.insert(task);
+    taskRequest.send(async () => {
+      const taskApi = new TaskApi();
+      await taskApi.insert(task);
+    });
   };
 
   const onStop = (project: IProject) => {
@@ -114,8 +117,10 @@ export const useProjectSectionViewModel = () => {
       });
 
       // update task in backend
-      const taskApi = new TaskApi();
-      taskApi.update(task);
+      taskRequest.send(async () => {
+        const taskApi = new TaskApi();
+        await taskApi.update(task);
+      });
     }
   };
 
@@ -131,8 +136,10 @@ export const useProjectSectionViewModel = () => {
     });
 
     // delete task in backend
-    const taskApi = new TaskApi();
-    taskApi.deleteById(task.id);
+    taskRequest.send(async () => {
+      const taskApi = new TaskApi();
+      await taskApi.deleteById(task.id);
+    });
   };
 
   return {
