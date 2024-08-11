@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
+import { DateTime } from "../../core/date/DateTime";
 import { SessionRepo } from "../../repository/SessionRepo";
+import { ExpiredSessionError } from "../../shared/errors/ExpiredSessionError";
 import { InvalidSessionError } from "../../shared/errors/InvalidSessionError";
 import { NoSessionError } from "../../shared/errors/NoSessionError";
 import { createError } from "../../shared/utils/createError";
@@ -26,6 +28,12 @@ export const SessionInterceptor = (
       return res
         .status(401)
         .send(createError("Invalid session", InvalidSessionError.name));
+    }
+
+    if (DateTime.isBefore(session.expiresAt)) {
+      return res
+        .status(401)
+        .send(createError("Session expired", ExpiredSessionError.name));
     }
 
     const sessionRequest = req as ISessionRequest;

@@ -7,6 +7,7 @@ import { useErrorMessage } from "./useErrorMessage";
 import { useLogout } from "./useLogout";
 import { texts } from "./useTranslation/texts";
 import { useTranslation } from "./useTranslation/useTranslation";
+import { ExpiredSessionError } from "../shared/errors/ExpiredSessionError";
 
 export const useRequest = () => {
   const [isProcessing, setIsLoading] = useState(false);
@@ -18,7 +19,8 @@ export const useRequest = () => {
     (error: IError) => {
       if (
         error.type === NoSessionError.name ||
-        error.type === InvalidSessionError.name
+        error.type === InvalidSessionError.name ||
+        error.type === ExpiredSessionError.name
       ) {
         setErrorMessage(t(texts.general.logoutInvalidSession));
         logout.logout();
