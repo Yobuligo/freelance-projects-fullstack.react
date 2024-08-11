@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { RouterProvider } from "react-router-dom";
+import { ReactComponent as BackgroundShapes } from "./assets/backgroundShapes.svg";
 import { AppContext } from "./context/AppContext";
+import { useRecentlyProjectsStorage } from "./hooks/useRecentlyUsedProjectsStorage";
 import { useSessionStorage } from "./hooks/useSessionStorage";
 import { useUserConfigStorage } from "./hooks/useUserConfigStorage";
 import "./index.scss";
 import { AppRouter } from "./routes/AppRouter";
 import { IUserOpportunity } from "./shared/model/IUserOpportunity";
 import { IUserProviderRequest } from "./shared/model/IUserProviderRequest";
-import { ReactComponent as BackgroundShapes } from "./assets/backgroundShapes.svg";
 
 export const App: React.FC = () => {
   return (
@@ -18,9 +19,10 @@ export const App: React.FC = () => {
       <AppContext.Provider
         value={{
           errorMessage: useState(""),
-          userOpportunities: useState<IUserOpportunity[]>([]),
+          recentlyUsedProjects: useRecentlyProjectsStorage(),
           session: useSessionStorage(),
           userConfig: useUserConfigStorage(),
+          userOpportunities: useState<IUserOpportunity[]>([]),
           userProviderRequests: useState<IUserProviderRequest[]>([]),
         }}
       >

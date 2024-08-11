@@ -7,7 +7,6 @@ export const NetworkCheckInterceptor = () => {
     if (!(await NetworkInfo.isConnected())) {
       return res.status(502).send(createError("Missing internet connection"));
     }
-
     next();
   };
 };
