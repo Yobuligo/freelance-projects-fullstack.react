@@ -8,10 +8,11 @@ import { useTranslation } from "../../hooks/useTranslation/useTranslation";
 import { AppRoutes } from "../../routes/AppRoutes";
 import { ICredentials } from "../../shared/model/ICredentials";
 import { isError } from "../../shared/utils/isError";
+import { useErrorMessage } from "../../hooks/useErrorMessage";
 
 export const useLoginViewModel = () => {
   const { t } = useTranslation();
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useErrorMessage();
   const [successMessage, setSuccessMessage] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -51,6 +52,7 @@ export const useLoginViewModel = () => {
       const userApi = new UserApi();
       const session = await userApi.login(credentials);
       setSession(session);
+      setErrorMessage("");
       navigate(AppRoutes.dashboard.toPath());
     } catch (error) {
       if (isError(error)) {

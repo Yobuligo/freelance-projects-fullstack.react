@@ -8,6 +8,7 @@
     },
     "general": {
         "backToStart": "Back to Start",
+        "logoutInvalidSession": "Your were logged out due an invalid or expired session",
         "title": "New project",
         "unknownError": "An unknown error occurred"
     },
