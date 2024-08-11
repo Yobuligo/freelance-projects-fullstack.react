@@ -3,7 +3,7 @@ import { AppContext } from "../context/AppContext";
 
 export const useRecentlyUsedProjects = (): [
   recentlyUsedProjects: string[],
-  insertRecentlyUsedProject: (id: string) => void
+  insertRecentlyUsedProject: (projectId: string) => void
 ] => {
   const context = useContext(AppContext);
 

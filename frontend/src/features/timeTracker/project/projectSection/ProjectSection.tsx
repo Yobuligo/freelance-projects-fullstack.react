@@ -1,4 +1,6 @@
 import { Spinner } from "../../../../components/spinner/Spinner";
+import { texts } from "../../../../hooks/useTranslation/texts";
+import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { ProjectAdd } from "../projectAdd/ProjectAdd";
 import { ProjectDetails } from "../projectDetails/ProjectDetails";
 import { ProjectList } from "../projectList/ProjectList";
@@ -7,6 +9,7 @@ import styles from "./ProjectSection.module.scss";
 import { useProjectSectionViewModel } from "./useProjectSectionViewModel";
 
 export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
+  const { t } = useTranslation();
   const viewModel = useProjectSectionViewModel();
 
   return (
@@ -26,13 +29,30 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
           {viewModel.loadProjectRequest.isProcessing ? (
             <Spinner />
           ) : (
-            <ProjectList
-              onClick={viewModel.onProjectSelected}
-              onDelete={viewModel.onDelete}
-              onStart={viewModel.onStart}
-              onStop={viewModel.onStop}
-              projects={viewModel.projects}
-            />
+            <>
+              {viewModel.findRecentlyUsedProjects().length > 0 && (
+                <div className={styles.projectList}>
+                  {t(texts.projectSection.recentlyUsedProjects)}
+                  <ProjectList
+                    onClick={viewModel.onProjectSelected}
+                    onDelete={viewModel.onDelete}
+                    onStart={viewModel.onStart}
+                    onStop={viewModel.onStop}
+                    projects={viewModel.findRecentlyUsedProjects()}
+                  />
+                </div>
+              )}
+              <div className={styles.projectList}>
+                {t(texts.projectSection.all)}
+                <ProjectList
+                  onClick={viewModel.onProjectSelected}
+                  onDelete={viewModel.onDelete}
+                  onStart={viewModel.onStart}
+                  onStop={viewModel.onStop}
+                  projects={viewModel.projects}
+                />
+              </div>
+            </>
           )}
         </>
       )}

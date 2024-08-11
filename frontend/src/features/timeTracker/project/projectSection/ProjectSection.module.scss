@@ -1,5 +1,13 @@
+@import "../../../../styles/dimensions.scss";
+
 .projectSection {
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  row-gap: $negative-space;
 }

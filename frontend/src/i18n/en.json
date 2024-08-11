@@ -57,7 +57,9 @@
         "noProjects": "No projects found"
     },
     "projectSection": {
-        "errorLoadingProjects": "Unknown error while loading projects"
+        "all": "All",
+        "errorLoadingProjects": "Unknown error while loading projects",
+        "recentlyUsedProjects": "Recently"
     },
     "providerRequestInput": {
         "providerType": "Provider Type",

@@ -4,6 +4,7 @@ import { TaskApi } from "../../../../api/TaskApi";
 import { checkNotNull } from "../../../../core/utils/checkNotNull";
 import { uuid } from "../../../../core/utils/uuid";
 import { useInitialize } from "../../../../hooks/useInitialize";
+import { useRecentlyUsedProjects } from "../../../../hooks/useRecentlyUsedProjects";
 import { useRequest } from "../../../../hooks/useRequest";
 import { useSession } from "../../../../hooks/useSession";
 import { ProjectInfo } from "../../../../services/ProjectInfo";
@@ -13,6 +14,8 @@ import { ITask } from "../../../../shared/model/ITask";
 export const useProjectSectionViewModel = () => {
   const [projects, setProjects] = useState<IProject[]>([]);
   const [session] = useSession();
+  const [recentlyUsedProjectIds, insertRecentlyUsedProject] =
+    useRecentlyUsedProjects();
   const [selectedProject, setSelectedProject] = useState<IProject | undefined>(
     undefined
   );
@@ -32,6 +35,20 @@ export const useProjectSectionViewModel = () => {
   useInitialize(() => {
     loadProjects();
   });
+
+  const findRecentlyUsedProjects = () => {
+    const projectMap = new Map(
+      projects.map((project) => [project.id, project])
+    );
+    const recentlyUsedProjects: IProject[] = [];
+    recentlyUsedProjectIds.forEach((recentlyUsedProjectIds) => {
+      const project = projectMap.get(recentlyUsedProjectIds);
+      if (project) {
+        recentlyUsedProjects.push(project);
+      }
+    });
+    return recentlyUsedProjects;
+  };
 
   const onAdd = async (title: string) => {
     const newProject: IProject = {
@@ -103,6 +120,9 @@ export const useProjectSectionViewModel = () => {
       const taskApi = new TaskApi();
       await taskApi.insert(task);
     });
+
+    // add project to list of recently started projects
+    insertRecentlyUsedProject(project.id);
   };
 
   const onStop = (project: IProject) => {
@@ -144,6 +164,8 @@ export const useProjectSectionViewModel = () => {
 
   return {
     addProjectRequest,
+    findRecentlyUsedProjects,
+    loadProjectRequest,
     onAdd,
     onDelete,
     onDeleteTask,
@@ -152,7 +174,6 @@ export const useProjectSectionViewModel = () => {
     onStart,
     onStop,
     projects,
-    loadProjectRequest,
     selectedProject,
   };
 };
