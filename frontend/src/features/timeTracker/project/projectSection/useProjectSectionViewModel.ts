@@ -22,6 +22,7 @@ export const useProjectSectionViewModel = () => {
   const addProjectRequest = useRequest();
   const loadProjectRequest = useRequest();
   const deleteProjectRequest = useRequest();
+  const updateProjectRequest = useRequest();
   const taskRequest = useRequest();
 
   const loadProjects = useCallback(async () => {
@@ -82,6 +83,19 @@ export const useProjectSectionViewModel = () => {
     deleteProjectRequest.send(async () => {
       const projectApi = new ProjectApi();
       await projectApi.deleteById(project.id);
+    });
+  };
+
+  const onChange = (project: IProject) => {
+    setProjects((previous) => {
+      const index = previous.findIndex((item) => item.id === project.id);
+      previous.splice(index, 1, project);
+      return [...previous];
+    });
+
+    updateProjectRequest.send(async () => {
+      const projectApi = new ProjectApi();
+      await projectApi.update(project);
     });
   };
 
@@ -167,6 +181,7 @@ export const useProjectSectionViewModel = () => {
     findRecentlyUsedProjects,
     loadProjectRequest,
     onAdd,
+    onChange,
     onDelete,
     onDeleteTask,
     onProjectSelected,

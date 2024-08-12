@@ -31,8 +31,9 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
                 viewModel.displayMode ? styles.inputDisabled : ""
               )}
               disabled={false}
+              onChange={viewModel.onChangeProjectTitle}
               type="text"
-              value={props.project.title}
+              value={viewModel.projectTitle}
             />
           </div>
           <div className={styles.headerButtons}>

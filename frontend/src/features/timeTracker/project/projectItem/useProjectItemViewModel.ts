@@ -5,9 +5,11 @@ import { useTranslation } from "../../../../hooks/useTranslation/useTranslation"
 import { ProjectInfo } from "../../../../services/ProjectInfo";
 import { TaskInfo } from "../../../../services/TaskInfo";
 import { IProjectItemProps } from "./IProjectItemProps";
+import { IProject } from "../../../../shared/model/IProject";
 
 export const useProjectItemViewModel = (props: IProjectItemProps) => {
   const [displayMode, setDisplayMode] = useState(true);
+  const [projectTitle, setProjectTitle] = useState(props.project.title);
   const [duration, setDuration] = useState<Duration | undefined>(undefined);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | undefined>(
     undefined
@@ -76,13 +78,19 @@ export const useProjectItemViewModel = (props: IProjectItemProps) => {
 
   const onCancel = () => {
     setDisplayMode(true);
+    setProjectTitle(props.project.title);
   };
 
   const onConfirm = () => {
     setDisplayMode(true);
+    props.project.title = projectTitle;
+    props.onChange?.(props.project);
   };
 
   const onEditMode = () => setDisplayMode(false);
+
+  const onChangeProjectTitle = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setProjectTitle(event.target.value);
 
   return {
     displayMode,
@@ -90,11 +98,13 @@ export const useProjectItemViewModel = (props: IProjectItemProps) => {
     durationTotal,
     isRunning,
     onCancel,
+    onChangeProjectTitle,
+    onClick,
     onConfirm,
     onEditMode,
     onDelete,
-    onClick,
     onStart,
     onStop,
+    projectTitle,
   };
 };

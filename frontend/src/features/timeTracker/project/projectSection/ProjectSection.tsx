@@ -34,6 +34,7 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
                 <div className={styles.projectList}>
                   {t(texts.projectSection.recentlyUsedProjects)}
                   <ProjectList
+                    onChange={viewModel.onChange}
                     onClick={viewModel.onProjectSelected}
                     onDelete={viewModel.onDelete}
                     onStart={viewModel.onStart}
@@ -45,6 +46,7 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
               <div className={styles.projectList}>
                 {t(texts.projectSection.all)}
                 <ProjectList
+                  onChange={viewModel.onChange}
                   onClick={viewModel.onProjectSelected}
                   onDelete={viewModel.onDelete}
                   onStart={viewModel.onStart}
