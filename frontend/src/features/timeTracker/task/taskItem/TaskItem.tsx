@@ -40,6 +40,7 @@ export const TaskItem: React.FC<ITaskItemProps> = (props) => {
           type="time"
           value={viewModel.startedAtTime}
         />
+        <div className={styles.separator}></div>
         <LabeledInput
           classNameInput={inputClassNames}
           label={t(texts.taskItem.stoppedAtDate)}

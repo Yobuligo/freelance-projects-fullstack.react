@@ -36,9 +36,22 @@
   pointer-events: none;
 }
 
-.crudButtonPanel{
+.crudButtonPanel {
   align-items: start;
   @include medium-screen {
     align-items: center;
+  }
+}
+
+.separator {
+  width: 100%;
+  height: 50%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  @include medium-screen {
+    border-bottom: 1px solid white;
+    width: 2rem;
+    margin: 0;
   }
 }
