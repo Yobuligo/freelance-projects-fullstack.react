@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import { ProjectApi } from "../../../../api/ProjectApi";
-import { TaskApi } from "../../../../api/TaskApi";
 import { checkNotNull } from "../../../../core/utils/checkNotNull";
 import { uuid } from "../../../../core/utils/uuid";
 import { useInitialize } from "../../../../hooks/useInitialize";
@@ -10,6 +9,7 @@ import { useSession } from "../../../../hooks/useSession";
 import { ProjectInfo } from "../../../../services/ProjectInfo";
 import { IProject } from "../../../../shared/model/IProject";
 import { ITask } from "../../../../shared/model/ITask";
+import { TaskApi } from "./../../../../api/TaskApi";
 
 export const useProjectSectionViewModel = () => {
   const [projects, setProjects] = useState<IProject[]>([]);
@@ -86,13 +86,15 @@ export const useProjectSectionViewModel = () => {
     });
   };
 
-  const onChange = (project: IProject) => {
+  const onUpdateProject = (project: IProject) =>
     setProjects((previous) => {
       const index = previous.findIndex((item) => item.id === project.id);
       previous.splice(index, 1, project);
       return [...previous];
     });
 
+  const onChange = (project: IProject) => {
+    onUpdateProject(project);
     updateProjectRequest.send(async () => {
       const projectApi = new ProjectApi();
       await projectApi.update(project);
@@ -144,11 +146,7 @@ export const useProjectSectionViewModel = () => {
 
     // task was stopped. Update project to refresh UI
     if (task) {
-      setProjects((previous) => {
-        const index = previous.findIndex((item) => item.id === project.id);
-        previous.splice(index, 1, project);
-        return [...previous];
-      });
+      onUpdateProject(project);
 
       // update task in backend
       taskRequest.send(async () => {
@@ -156,6 +154,16 @@ export const useProjectSectionViewModel = () => {
         await taskApi.update(task);
       });
     }
+  };
+
+  const onChangeTask = (project: IProject, task: ITask) => {
+    onUpdateProject(project);
+
+    // update task in backed
+    taskRequest.send(async () => {
+      const taskApi = new TaskApi();
+      await taskApi.update(task);
+    });
   };
 
   const onDeleteTask = (project: IProject, task: ITask) => {
@@ -182,6 +190,7 @@ export const useProjectSectionViewModel = () => {
     loadProjectRequest,
     onAdd,
     onChange,
+    onChangeTask,
     onDelete,
     onDeleteTask,
     onProjectSelected,
