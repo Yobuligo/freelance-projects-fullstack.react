@@ -9,9 +9,8 @@
 }
 
 .header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
 }
 
 .headerButtons {
@@ -26,12 +25,12 @@
   row-gap: 1rem;
 }
 
-.titleContainer {
-  cursor: pointer;
+.headerTitleContainer {
   display: flex;
   flex-direction: row;
   column-gap: $negative-space;
   align-items: start;
+  cursor: pointer;
 }
 
 .title {
@@ -53,6 +52,7 @@
   background-color: transparent;
   outline: none;
   border: 0;
+  pointer-events: none;
 }
 
 .durationContainer {

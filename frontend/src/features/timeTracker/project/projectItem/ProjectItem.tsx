@@ -23,7 +23,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
     <Card className={styles.projectItem}>
       <div className={styles.content}>
         <div className={styles.header}>
-          <div className={styles.titleContainer} onClick={viewModel.onClick}>
+          <div className={styles.headerTitleContainer} onClick={viewModel.onClick}>
             {viewModel.isRunning && <StartIcon />}
             <input
               className={style(
@@ -42,7 +42,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
               <>
                 <button className={styles.iconButton}>
                   <EditIcon
-                    className={componentStyle.icon}
+                    className={componentStyle.clickableIcon}
                     onClick={viewModel.onEditMode}
                   />
                 </button>
@@ -50,14 +50,14 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
                   className={styles.iconButton}
                   onClick={viewModel.onDelete}
                 >
-                  <DeleteIcon className={componentStyle.icon} />
+                  <DeleteIcon className={componentStyle.clickableIcon} />
                 </button>
               </>
             ) : (
               <>
                 <button className={styles.iconButton}>
                   <CheckIcon
-                    className={componentStyle.icon}
+                    className={componentStyle.clickableIcon}
                     onClick={viewModel.onConfirm}
                   />
                 </button>
@@ -65,7 +65,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
                   className={styles.iconButton}
                   onClick={viewModel.onCancel}
                 >
-                  <CloseIcon className={componentStyle.icon} />
+                  <CloseIcon className={componentStyle.clickableIcon} />
                 </button>
               </>
             )}

@@ -6,6 +6,11 @@
   fill: $color-primary-dark;
 }
 
+.clickableIcon {
+  @extend .icon;
+  cursor: pointer;
+}
+
 .disabledIcon {
   fill: $color-disabled;
 }
