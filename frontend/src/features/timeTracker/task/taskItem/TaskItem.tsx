@@ -1,81 +1,68 @@
-import { useState } from "react";
 import { Card } from "../../../../components/card/Card";
 import { CrudButtonPanel } from "../../../../components/crudButtonPanel/CrudButtonPanel";
 import { LabeledInput } from "../../../../components/labeledInput/LabeledInput";
-import { DateTime } from "../../../../core/services/date/DateTime";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { style } from "../../../../utils/style";
 import { ITaskItemProps } from "./ITaskItemProps";
 import styles from "./TaskItem.module.scss";
+import { useTaskItemViewModel } from "./useTaskItemViewModel";
 
 export const TaskItem: React.FC<ITaskItemProps> = (props) => {
+  const viewModel = useTaskItemViewModel(props);
   const { t } = useTranslation();
-  const [displayMode, setDisplayMode] = useState(true);
-
-  const onDelete = () => {
-    if (
-      window.confirm(
-        t(texts.taskItem.deleteQuestion, { title: props.task.title })
-      )
-    ) {
-      props.onDelete?.(props.task);
-    }
-  };
 
   const inputClassNames = style(
     styles.input,
-    displayMode === true ? styles.inputDisabled : ""
+    viewModel.displayMode === true ? styles.inputDisabled : ""
   );
-
-  const onCancel = () => {
-    setDisplayMode(true);
-  };
-
-  const onConfirm = () => {
-    setDisplayMode(true);
-  };
-
-  const onEditMode = () => setDisplayMode(false);
 
   return (
     <Card className={styles.taskItem}>
       <div className={styles.inputs}>
         <LabeledInput
           classNameInput={inputClassNames}
-          label="Task Title"
-          value={props.task.title}
+          label={t(texts.taskItem.taskTitle)}
+          onChange={viewModel.onChangeTitle}
+          value={viewModel.title}
         />
         <LabeledInput
           classNameInput={inputClassNames}
-          label="Date"
+          label={t(texts.taskItem.startedAtDate)}
+          onChange={viewModel.onChangeStartedAtDate}
           type="date"
-          value={DateTime.format(props.task.startedAt, "yyyy-MM-dd")}
+          value={viewModel.startedAtDate}
         />
         <LabeledInput
           classNameInput={inputClassNames}
-          label="Started at"
+          label={t(texts.taskItem.startedAtTime)}
+          onChange={viewModel.onChangeStartedAtTime}
           type="time"
-          value={DateTime.format(props.task.startedAt, "hh:mm:ss")}
+          value={viewModel.startedAtTime}
         />
         <LabeledInput
           classNameInput={inputClassNames}
-          label="Stopped at"
+          label={t(texts.taskItem.stoppedAtDate)}
+          onChange={viewModel.onChangeStoppedAtDate}
+          type="date"
+          value={viewModel.stoppedAtDate}
+        />
+        <LabeledInput
+          classNameInput={inputClassNames}
+          label={t(texts.taskItem.stoppedAtTime)}
+          onChange={viewModel.onChangeStoppedAtTime}
           type="time"
-          value={
-            props.task.stoppedAt &&
-            DateTime.format(props.task.stoppedAt, "hh:mm:ss")
-          }
+          value={viewModel.stoppedAtTime}
         />
       </div>
       <div className={styles.buttonContainer}>
         <CrudButtonPanel
           className={styles.crudButtonPanel}
-          displayMode={displayMode}
-          onCancel={onCancel}
-          onConfirm={onConfirm}
-          onDelete={onDelete}
-          onEditMode={onEditMode}
+          displayMode={viewModel.displayMode}
+          onCancel={viewModel.onCancel}
+          onConfirm={viewModel.onConfirm}
+          onDelete={viewModel.onDelete}
+          onEditMode={viewModel.onEditMode}
         />
       </div>
     </Card>

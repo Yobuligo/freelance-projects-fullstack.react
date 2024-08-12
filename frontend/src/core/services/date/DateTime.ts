@@ -86,6 +86,11 @@ export class DateTime {
     return 0;
   }
 
+  static create(date: String, time: string): Date {
+    const dateString = `${date}T${time}.000`;
+    return new Date(dateString);
+  }
+
   /**
    * Disassembles the given {@link date} into its components.
    */

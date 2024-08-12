@@ -81,7 +81,12 @@
     },
     "taskItem": {
         "deleteQuestion": "Would you like to delete task '{{title}}'?",
-        "running": "running"
+        "running": "running",
+        "startedAtDate": "Started at date",
+        "startedAtTime": "Started at time",
+        "stoppedAtDate": "Stopped at date",
+        "stoppedAtTime": "Stopped at time",
+        "taskTitle": "Task title"
     },
     "taskSection": {
         "addTask": "Add task",
