@@ -5,7 +5,6 @@ import { useTranslation } from "../../../../hooks/useTranslation/useTranslation"
 import { ProjectInfo } from "../../../../services/ProjectInfo";
 import { TaskInfo } from "../../../../services/TaskInfo";
 import { IProjectItemProps } from "./IProjectItemProps";
-import { IProject } from "../../../../shared/model/IProject";
 
 export const useProjectItemViewModel = (props: IProjectItemProps) => {
   const [displayMode, setDisplayMode] = useState(true);
@@ -92,6 +91,16 @@ export const useProjectItemViewModel = (props: IProjectItemProps) => {
   const onChangeProjectTitle = (event: React.ChangeEvent<HTMLInputElement>) =>
     setProjectTitle(event.target.value);
 
+  const onKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      onConfirm();
+    }
+
+    if (event.key === "Escape") {
+      onCancel();
+    }
+  };
+
   return {
     displayMode,
     duration,
@@ -103,6 +112,7 @@ export const useProjectItemViewModel = (props: IProjectItemProps) => {
     onConfirm,
     onEditMode,
     onDelete,
+    onKeyUp,
     onStart,
     onStop,
     projectTitle,

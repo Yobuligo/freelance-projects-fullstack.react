@@ -32,6 +32,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
               )}
               disabled={false}
               onChange={viewModel.onChangeProjectTitle}
+              onKeyUp={viewModel.onKeyUp}
               type="text"
               value={viewModel.projectTitle}
             />
