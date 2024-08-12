@@ -3,19 +3,17 @@ import { CloseIcon } from "../../icons/CloseIcon";
 import { DeleteIcon } from "../../icons/DeleteIcon";
 import { EditIcon } from "../../icons/EditIcon";
 import componentStyles from "../../styles/components.module.scss";
+import { style } from "../../utils/style";
 import styles from "./CrudButtonPanel.module.scss";
 import { ICrudButtonPanelProps } from "./ICrudButtonPanelProps";
 
 export const CrudButtonPanel: React.FC<ICrudButtonPanelProps> = (props) => {
   return (
-    <div className={styles.crudButtonPanel}>
+    <div className={style(styles.crudButtonPanel, props.className)}>
       {props.displayMode ? (
         <>
-          <button className={styles.button}>
-            <EditIcon
-              className={componentStyles.clickableIcon}
-              onClick={props.onEditMode}
-            />
+          <button className={styles.button} onClick={props.onEditMode}>
+            <EditIcon className={componentStyles.clickableIcon} />
           </button>
           <button className={styles.button} onClick={props.onDelete}>
             <DeleteIcon className={componentStyles.clickableIcon} />
@@ -23,11 +21,8 @@ export const CrudButtonPanel: React.FC<ICrudButtonPanelProps> = (props) => {
         </>
       ) : (
         <>
-          <button className={styles.button}>
-            <CheckIcon
-              className={componentStyles.clickableIcon}
-              onClick={props.onConfirm}
-            />
+          <button className={styles.button} onClick={props.onConfirm}>
+            <CheckIcon className={componentStyles.clickableIcon} />
           </button>
           <button className={styles.button} onClick={props.onCancel}>
             <CloseIcon className={componentStyles.clickableIcon} />

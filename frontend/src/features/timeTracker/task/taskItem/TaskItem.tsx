@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Card } from "../../../../components/card/Card";
+import { CrudButtonPanel } from "../../../../components/crudButtonPanel/CrudButtonPanel";
 import { LabeledInput } from "../../../../components/labeledInput/LabeledInput";
 import { DateTime } from "../../../../core/services/date/DateTime";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
-import { DeleteIcon } from "../../../../icons/DeleteIcon";
-import { EditIcon } from "../../../../icons/EditIcon";
 import { style } from "../../../../utils/style";
 import { ITaskItemProps } from "./ITaskItemProps";
 import styles from "./TaskItem.module.scss";
@@ -28,6 +27,14 @@ export const TaskItem: React.FC<ITaskItemProps> = (props) => {
     styles.input,
     displayMode === true ? styles.inputDisabled : ""
   );
+
+  const onCancel = () => {
+    setDisplayMode(true);
+  };
+
+  const onConfirm = () => {
+    setDisplayMode(true);
+  };
 
   const onEditMode = () => setDisplayMode(false);
 
@@ -62,8 +69,14 @@ export const TaskItem: React.FC<ITaskItemProps> = (props) => {
         />
       </div>
       <div className={styles.buttonContainer}>
-        <EditIcon onClick={onEditMode} />
-        <DeleteIcon onClick={onDelete} />
+        <CrudButtonPanel
+          className={styles.crudButtonPanel}
+          displayMode={displayMode}
+          onCancel={onCancel}
+          onConfirm={onConfirm}
+          onDelete={onDelete}
+          onEditMode={onEditMode}
+        />
       </div>
     </Card>
   );
