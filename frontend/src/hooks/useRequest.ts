@@ -14,7 +14,6 @@ export const useRequest = () => {
 
   const handleError = useCallback(
     (error: IError) => {
-      console.log(error);
       if (
         error.type === "NoSessionError" ||
         error.type === "InvalidSessionError" ||
