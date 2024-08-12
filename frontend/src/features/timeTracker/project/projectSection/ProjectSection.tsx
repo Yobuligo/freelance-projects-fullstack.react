@@ -1,7 +1,7 @@
+import { AddInput } from "../../../../components/addInput/AddInput";
 import { Spinner } from "../../../../components/spinner/Spinner";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
-import { ProjectAdd } from "../projectAdd/ProjectAdd";
 import { ProjectDetails } from "../projectDetails/ProjectDetails";
 import { ProjectList } from "../projectList/ProjectList";
 import { IProjectSectionProps } from "./IProjectSectionProps";
@@ -22,7 +22,9 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
         />
       ) : (
         <>
-          <ProjectAdd
+          <AddInput
+            buttonCaption={t(texts.projectAdd.addProject)}
+            label={t(texts.general.title)}
             isAdding={viewModel.addProjectRequest.isProcessing}
             onAdd={viewModel.onAdd}
           />
