@@ -1,5 +1,41 @@
+@import "../../../../styles/colors.module.scss";
+@import "../../../../styles/mixins.scss";
+
 .taskItem {
   display: flex;
   flex-direction: row;
-  column-gap: 2rem;
+  justify-content: space-between;
+
+  @include medium-screen {
+    align-items: center;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+
+  @include medium-screen {
+    flex-direction: row;
+    column-gap: 2rem;
+  }
+}
+
+.input {
+  margin: 0;
+  color: $color-primary-dark;
+  font-size: large;
+  font-weight: 600;
+}
+
+.inputDisabled {
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  pointer-events: none;
 }

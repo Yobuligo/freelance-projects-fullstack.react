@@ -11,7 +11,10 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
   return (
     <div className={styles.projectDetails}>
       <ArrowBackIcon onClick={props.onBack} />
-      <TaskSection onDelete={onDeleteTask} tasks={props.project.tasks} />
+      <TaskSection
+        onDelete={onDeleteTask}
+        tasks={props.project.tasks}
+      />
     </div>
   );
 };

@@ -83,6 +83,10 @@
         "deleteQuestion": "Would you like to delete task '{{title}}'?",
         "running": "running"
     },
+    "taskSection": {
+        "addTask": "Add task",
+        "newTask": "New task"
+    },
     "trashCard": {
         "trash": "Trash ({{numberOpportunities}})"
     }

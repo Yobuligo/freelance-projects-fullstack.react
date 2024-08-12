@@ -1,15 +1,11 @@
 import { Button } from "../../../../components/button/Button";
 import { Card } from "../../../../components/card/Card";
+import { CrudButtonPanel } from "../../../../components/crudButtonPanel/CrudButtonPanel";
 import { DurationDisplay } from "../../../../components/duration/DurationDisplay";
 import { Toolbar } from "../../../../components/toolbar/Toolbar";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
-import { CheckIcon } from "../../../../icons/CheckIcon";
-import { CloseIcon } from "../../../../icons/CloseIcon";
-import { DeleteIcon } from "../../../../icons/DeleteIcon";
-import { EditIcon } from "../../../../icons/EditIcon";
 import { StartIcon } from "../../../../icons/StartIcon";
-import componentStyle from "../../../../styles/components.module.scss";
 import { style } from "../../../../utils/style";
 import { IProjectItemProps } from "./IProjectItemProps";
 import styles from "./ProjectItem.module.scss";
@@ -23,7 +19,10 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
     <Card className={styles.projectItem}>
       <div className={styles.content}>
         <div className={styles.header}>
-          <div className={styles.headerTitleContainer} onClick={viewModel.onClick}>
+          <div
+            className={styles.headerTitleContainer}
+            onClick={viewModel.onClick}
+          >
             {viewModel.isRunning && <StartIcon />}
             <input
               className={style(
@@ -38,37 +37,13 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
             />
           </div>
           <div className={styles.headerButtons}>
-            {viewModel.displayMode ? (
-              <>
-                <button className={styles.iconButton}>
-                  <EditIcon
-                    className={componentStyle.clickableIcon}
-                    onClick={viewModel.onEditMode}
-                  />
-                </button>
-                <button
-                  className={styles.iconButton}
-                  onClick={viewModel.onDelete}
-                >
-                  <DeleteIcon className={componentStyle.clickableIcon} />
-                </button>
-              </>
-            ) : (
-              <>
-                <button className={styles.iconButton}>
-                  <CheckIcon
-                    className={componentStyle.clickableIcon}
-                    onClick={viewModel.onConfirm}
-                  />
-                </button>
-                <button
-                  className={styles.iconButton}
-                  onClick={viewModel.onCancel}
-                >
-                  <CloseIcon className={componentStyle.clickableIcon} />
-                </button>
-              </>
-            )}
+            <CrudButtonPanel
+              displayMode={viewModel.displayMode}
+              onCancel={viewModel.onCancel}
+              onConfirm={viewModel.onConfirm}
+              onDelete={viewModel.onDelete}
+              onEditMode={viewModel.onEditMode}
+            />
           </div>
         </div>
 
