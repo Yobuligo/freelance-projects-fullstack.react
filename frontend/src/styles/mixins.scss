@@ -30,3 +30,9 @@
   border: 2px solid transparentize($color, calc($amount - 0.1));
   backdrop-filter: blur(4px);
 }
+
+@mixin transparent {
+  background-color: transparent;
+  border: 0;
+  outline: none;
+}

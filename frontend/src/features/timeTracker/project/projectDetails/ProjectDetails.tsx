@@ -4,6 +4,7 @@ import { TaskSection } from "../../task/taskSection/TaskSection";
 import { IProjectDetailsProps } from "./IProjectDetailsProps";
 import styles from "./ProjectDetails.module.scss";
 import componentStyles from "../../../../styles/components.module.scss";
+import { style } from "../../../../utils/style";
 
 export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
   const onDeleteTask = (task: ITask) =>
@@ -14,7 +15,7 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
 
   return (
     <div className={styles.projectDetails}>
-      <button className={componentStyles.clickableIcon}>
+      <button className={style(componentStyles.clickableIcon, styles.button)}>
         <ArrowBackIcon onClick={props.onBack} />
       </button>
       <TaskSection

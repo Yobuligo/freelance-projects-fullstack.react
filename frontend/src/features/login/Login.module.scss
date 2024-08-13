@@ -31,9 +31,7 @@
 .register {
   display: flex;
   flex-direction: row;
-  background-color: transparent;
-  border: 0;
-  outline: none;
+  @include transparent;
   color: white;
   justify-content: right;
   &:hover {
