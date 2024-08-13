@@ -91,16 +91,6 @@ export const useProjectItemViewModel = (props: IProjectItemProps) => {
   const onChangeProjectTitle = (event: React.ChangeEvent<HTMLInputElement>) =>
     setProjectTitle(event.target.value);
 
-  const onKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      onConfirm();
-    }
-
-    if (event.key === "Escape") {
-      onCancel();
-    }
-  };
-
   return {
     displayMode,
     duration,
@@ -112,7 +102,6 @@ export const useProjectItemViewModel = (props: IProjectItemProps) => {
     onConfirm,
     onEditMode,
     onDelete,
-    onKeyUp,
     onStart,
     onStop,
     projectTitle,

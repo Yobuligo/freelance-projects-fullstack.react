@@ -43,6 +43,8 @@ export const TaskItem: React.FC<ITaskItemProps> = (props) => {
           classNameInput={inputClassNames}
           label={t(texts.taskItem.taskTitle)}
           onChange={viewModel.onChangeTitle}
+          onEnter={viewModel.onConfirm}
+          onEscape={viewModel.onCancel}
           value={viewModel.title}
         />
         <LabeledInput
