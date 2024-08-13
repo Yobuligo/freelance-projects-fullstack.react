@@ -3,6 +3,7 @@ import { ITask } from "../../../../shared/model/ITask";
 import { TaskSection } from "../../task/taskSection/TaskSection";
 import { IProjectDetailsProps } from "./IProjectDetailsProps";
 import styles from "./ProjectDetails.module.scss";
+import componentStyles from "../../../../styles/components.module.scss";
 
 export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
   const onDeleteTask = (task: ITask) =>
@@ -13,7 +14,9 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
 
   return (
     <div className={styles.projectDetails}>
-      <ArrowBackIcon onClick={props.onBack} />
+      <button className={componentStyles.clickableIcon}>
+        <ArrowBackIcon onClick={props.onBack} />
+      </button>
       <TaskSection
         onChange={onChangeTask}
         onDelete={onDeleteTask}

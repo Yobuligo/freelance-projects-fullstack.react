@@ -56,10 +56,11 @@ export class UserOpportunityController extends Controller {
   private updateAll() {
     this.router.put(
       UserOpportunityRouteMeta.path,
-      SessionInterceptor(async (req) => {
+      SessionInterceptor(async (req, res) => {
         const userOpportunities: IUserOpportunity[] = req.body;
         const userOpportunityRepo = new UserOpportunityRepo();
         await userOpportunityRepo.updateAll(userOpportunities);
+        res.status(200).end();
       })
     );
   }
