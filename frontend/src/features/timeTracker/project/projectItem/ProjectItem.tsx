@@ -5,7 +5,6 @@ import { DurationDisplay } from "../../../../components/duration/DurationDisplay
 import { Toolbar } from "../../../../components/toolbar/Toolbar";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
-import { StartIcon } from "../../../../icons/StartIcon";
 import { style } from "../../../../utils/style";
 import { IProjectItemProps } from "./IProjectItemProps";
 import styles from "./ProjectItem.module.scss";
@@ -23,7 +22,6 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
             className={styles.headerTitleContainer}
             onClick={viewModel.onClick}
           >
-            {viewModel.isRunning && <StartIcon />}
             <input
               className={style(
                 styles.input,

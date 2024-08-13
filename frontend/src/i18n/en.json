@@ -47,11 +47,11 @@
         "addProject": "Add project"
     },
     "projectItem": {
-        "currentWorkedTime": "Current worked time",
+        "currentWorkedTime": "Current spent time",
         "deleteProject": "Would you like to delete the project '{{title}}' and all its related data?",
         "start": "Start",
         "stop": "Stop",
-        "totalWorkedTime": "Total worked time"
+        "totalWorkedTime": "Total spent time"
     },
     "projectList": {
         "noProjects": "No projects found"
