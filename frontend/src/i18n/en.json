@@ -82,6 +82,7 @@
     "taskItem": {
         "deleteQuestion": "Would you like to delete task '{{title}}'?",
         "running": "running",
+        "spentTime":" Spent time",
         "startedAtDate": "Started at date",
         "startedAtTime": "Started at time",
         "stoppedAtDate": "Stopped at date",

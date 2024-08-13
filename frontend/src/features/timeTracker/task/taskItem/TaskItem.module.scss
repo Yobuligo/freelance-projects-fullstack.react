@@ -1,5 +1,6 @@
 @import "../../../../styles/colors.module.scss";
 @import "../../../../styles/mixins.scss";
+@import "../../../../styles/dimensions.scss";
 
 .taskItem {
   display: flex;
@@ -50,8 +51,21 @@
   margin-bottom: 1rem;
 
   @include medium-screen {
-    border-bottom: 1px solid white;
     width: 2rem;
     margin: 0;
   }
+}
+
+.timeSeparator {
+  @extend .separator;
+  border-bottom: 1px solid white;
+}
+
+.duration {
+  font-size: large;
+  font-weight: 700;
+}
+
+.durationTitle {
+  margin-bottom: $label-input-space;
 }

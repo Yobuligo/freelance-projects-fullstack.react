@@ -1,14 +1,18 @@
+import { useCallback, useEffect, useState } from "react";
 import { Card } from "../../../../components/card/Card";
 import { CrudButtonPanel } from "../../../../components/crudButtonPanel/CrudButtonPanel";
+import { DurationDisplay } from "../../../../components/duration/DurationDisplay";
 import { LabeledInput } from "../../../../components/labeledInput/LabeledInput";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
+import { TaskInfo } from "../../../../services/TaskInfo";
 import { style } from "../../../../utils/style";
 import { ITaskItemProps } from "./ITaskItemProps";
 import styles from "./TaskItem.module.scss";
 import { useTaskItemViewModel } from "./useTaskItemViewModel";
 
 export const TaskItem: React.FC<ITaskItemProps> = (props) => {
+  const [duration, setDuration] = useState(TaskInfo.toDuration(props.task));
   const viewModel = useTaskItemViewModel(props);
   const { t } = useTranslation();
 
@@ -16,6 +20,21 @@ export const TaskItem: React.FC<ITaskItemProps> = (props) => {
     styles.input,
     viewModel.displayMode === true ? styles.inputDisabled : ""
   );
+
+  const startTimer = useCallback(() => {
+    setTimeout(() => {
+      setDuration(TaskInfo.toDuration(props.task));
+      if (TaskInfo.isRunning(props.task)) {
+        startTimer();
+      }
+    }, 1000);
+  }, [props.task]);
+
+  useEffect(() => {
+    if (TaskInfo.isRunning(props.task)) {
+      startTimer();
+    }
+  }, [props.task, startTimer]);
 
   return (
     <Card className={styles.taskItem}>
@@ -40,7 +59,7 @@ export const TaskItem: React.FC<ITaskItemProps> = (props) => {
           type="time"
           value={viewModel.startedAtTime}
         />
-        <div className={styles.separator}></div>
+        <div className={styles.timeSeparator}></div>
         <LabeledInput
           classNameInput={inputClassNames}
           label={t(texts.taskItem.stoppedAtDate)}
@@ -54,6 +73,13 @@ export const TaskItem: React.FC<ITaskItemProps> = (props) => {
           onChange={viewModel.onChangeStoppedAtTime}
           type="time"
           value={viewModel.stoppedAtTime}
+        />
+        <div className={styles.separator}></div>
+        <DurationDisplay
+          classNameTitle={styles.durationTitle}
+          classNameDuration={styles.duration}
+          duration={duration}
+          title={t(texts.taskItem.spentTime)}
         />
       </div>
       <div className={styles.buttonContainer}>
