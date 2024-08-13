@@ -88,6 +88,9 @@
         "stoppedAtTime": "Stopped at time",
         "taskTitle": "Task title"
     },
+    "taskList": {
+        "noTasks": "No tasks"
+    },
     "taskSection": {
         "addTask": "Add task",
         "newTask": "New task"
