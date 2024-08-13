@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc",
+    "deploy-peter": "docker build -t hoffmannpeter82/freelancing-portal-backend:latest . && docker push hoffmannpeter82/freelancing-portal-backend:latest",
+    "deploy-verena": "docker build -t ac0ria/freelancing-portal-backend:latest . && docker push ac0ria/freelancing-portal-backend:latest",
     "start": "nodemon ./dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

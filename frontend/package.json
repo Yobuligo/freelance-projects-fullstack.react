@@ -21,11 +21,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "deploy-peter": "docker build -t hoffmannpeter82/freelancing-portal-frontend:latest . && docker push hoffmannpeter82/freelancing-portal-frontend:latest",
+    "deploy-verena": "docker build -t ac0ria/freelancing-portal-frontend:latest . && docker push ac0ria/freelancing-portal-frontend:latest",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "docker build -t hoffmannpeter82/freelancing-portal-frontend:latest . && docker push hoffmannpeter82/freelancing-portal-frontend:latest"
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": [
