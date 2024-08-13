@@ -60,7 +60,7 @@ export class UserOpportunityController extends Controller {
         const userOpportunities: IUserOpportunity[] = req.body;
         const userOpportunityRepo = new UserOpportunityRepo();
         await userOpportunityRepo.updateAll(userOpportunities);
-        res.status(200).end();
+        res.status(200).send(true);
       })
     );
   }
