@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { SessionRepo } from "../repository/SessionRepo";
 import { UserRepo } from "../repository/UserRepo";
+import { IAuthentication } from "../shared/model/IAuthentication";
 import { ICredentials } from "../shared/model/ICredentials";
 import { ISession } from "../shared/model/ISession";
 import { createError } from "../shared/utils/createError";
@@ -16,10 +17,10 @@ export class UserController {
 
   private login() {
     this.router.post("/users/login", async (req, res) => {
-      const credentials: ICredentials = req.body;
-
+      const authentication: IAuthentication = req.body;
+      
       const userRepo = new UserRepo();
-      const user = await userRepo.findByCredentials(credentials);
+      const user = await userRepo.findByCredentials(authentication.credentials);
       if (!user) {
         return res
           .status(404)
@@ -27,7 +28,10 @@ export class UserController {
       }
 
       const sessionRepo = new SessionRepo();
-      const session = await sessionRepo.createUserSession(user);
+      const session = await sessionRepo.createUserSession(
+        user,
+        authentication.platform
+      );
       res.status(201).send(session);
     });
   }

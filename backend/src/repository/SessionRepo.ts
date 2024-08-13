@@ -9,10 +9,11 @@ export class SessionRepo extends Repository<ISession> {
     super(Session);
   }
 
-  async createUserSession(user: IUser): Promise<ISession> {
-    await this.deleteUserSession(user.id);
+  async createUserSession(user: IUser, platform: string): Promise<ISession> {
+    await this.deleteUserSession(user.id, platform);
     const session = await this.insert({
       expiresAt: DateTime.addHours(new Date(), 24),
+      platform: platform,
       userId: user.id,
       username: user.username,
     });
@@ -21,11 +22,11 @@ export class SessionRepo extends Repository<ISession> {
   }
 
   async deleteSession(session: ISession): Promise<boolean> {
-    return await this.deleteUserSession(session.userId);
+    return await this.deleteUserSession(session.userId, session.platform);
   }
 
-  async deleteUserSession(userId: string) {
-    const count = await this.model.destroy({ where: { userId } });
+  async deleteUserSession(userId: string, platform: string) {
+    const count = await this.model.destroy({ where: { userId, platform } });
     return count > 0;
   }
 }
