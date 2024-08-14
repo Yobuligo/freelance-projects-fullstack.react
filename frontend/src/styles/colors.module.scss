@@ -1,5 +1,5 @@
-$color-primary-darker: #38446B;
-$color-primary-dark: #4B5781;
+$color-primary-darker: #38446b;
+$color-primary-dark: #4b5781;
 $color-primary: #7c89b1;
 $color-primary-light: #a5afcf;
 $color-primary-lighter: #bcc3dc;
@@ -33,6 +33,8 @@ $color-hover: lighten($color-primary, 0.5);
 $color-enabled: black;
 $color-disabled: rgba(211, 211, 211, 0.63);
 
+$color-tab-selected: $color-secondary-darker;
+$color-tab-unselected: $color-secondary-lighter;
 
 :export {
   colorDisabled: $color-disabled;

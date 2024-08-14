@@ -82,7 +82,7 @@
     "taskItem": {
         "deleteQuestion": "Would you like to delete task '{{title}}'?",
         "running": "running",
-        "spentTime":" Spent time",
+        "spentTime": " Spent time",
         "startedAtDate": "Started at date",
         "startedAtTime": "Started at time",
         "stoppedAtDate": "Stopped at date",
@@ -95,6 +95,10 @@
     "taskSection": {
         "addTask": "Add task",
         "newTask": "New task"
+    },
+    "timeTracker": {
+        "projects": "Projects",
+        "reporting": "Reporting"
     },
     "trashCard": {
         "trash": "Trash ({{numberOpportunities}})"
