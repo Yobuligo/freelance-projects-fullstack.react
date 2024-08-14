@@ -1,7 +1,7 @@
 import { IProject, ProjectRouteMeta } from "../shared/model/IProject";
-import { Repository } from "./core/Repository";
+import { EntityRepository } from "./core/EntityRepository";
 
-export class ProjectApi extends Repository<IProject> {
+export class ProjectApi extends EntityRepository<IProject> {
   constructor() {
     super(ProjectRouteMeta);
   }

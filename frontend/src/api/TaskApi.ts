@@ -1,7 +1,7 @@
 import { ITask, TaskRouteMeta } from "../shared/model/ITask";
-import { Repository } from "./core/Repository";
+import { EntityRepository } from "./core/EntityRepository";
 
-export class TaskApi extends Repository<ITask> {
+export class TaskApi extends EntityRepository<ITask> {
   constructor() {
     super(TaskRouteMeta);
   }

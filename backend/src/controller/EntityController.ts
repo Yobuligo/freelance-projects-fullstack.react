@@ -37,7 +37,7 @@ export abstract class EntityController<
 
   protected update() {
     this.router.put(
-      this.routeMeta.path,
+      `${this.routeMeta.path}/:id`,
       SessionInterceptor(async (req, res) => {
         const entity: TEntity = req.body;
         await this.repo.update(entity);
