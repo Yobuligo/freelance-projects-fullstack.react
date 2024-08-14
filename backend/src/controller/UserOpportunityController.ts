@@ -59,7 +59,7 @@ export class UserOpportunityController extends EntityController<
       SessionInterceptor(async (req, res) => {
         const userOpportunities: IUserOpportunity[] = req.body;
         await this.repo.updateAll(userOpportunities);
-        res.send(200).end();
+        res.status(200).send(true);
       })
     );
   }

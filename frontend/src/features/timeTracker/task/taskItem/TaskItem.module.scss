@@ -31,9 +31,7 @@
 }
 
 .inputDisabled {
-  background-color: transparent;
-  outline: none;
-  border: 0;
+  @include transparent;
   pointer-events: none;
 }
 

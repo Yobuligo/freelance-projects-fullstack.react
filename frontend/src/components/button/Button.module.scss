@@ -1,24 +1,22 @@
 @import "../../styles/colors.module.scss";
 @import "../../styles/mixins.scss";
-@import '../../styles/dimensions.scss';
+@import "../../styles/dimensions.scss";
 
 .button {
   display: flex;
   flex-direction: row;
   column-gap: $negative-space;
   margin: 0;
-  background-color: transparent;
-  outline: none;
-  border: 0;
   font-size: medium;
   font-weight: 400;
+  @include transparent;
 }
 
 .buttonCard {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0.25rem
+  padding: 0.25rem;
 }
 
 .buttonEnabled {

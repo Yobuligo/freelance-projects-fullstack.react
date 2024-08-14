@@ -2,6 +2,7 @@ import { Button } from "../../../../components/button/Button";
 import { Card } from "../../../../components/card/Card";
 import { CrudButtonPanel } from "../../../../components/crudButtonPanel/CrudButtonPanel";
 import { DurationDisplay } from "../../../../components/duration/DurationDisplay";
+import { Input } from "../../../../components/input/Input";
 import { Toolbar } from "../../../../components/toolbar/Toolbar";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
@@ -22,14 +23,15 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
             className={styles.headerTitleContainer}
             onClick={viewModel.onClick}
           >
-            <input
+            <Input
               className={style(
                 styles.input,
                 viewModel.displayMode ? styles.inputDisabled : ""
               )}
               disabled={false}
               onChange={viewModel.onChangeProjectTitle}
-              onKeyUp={viewModel.onKeyUp}
+              onEnter={viewModel.onConfirm}
+              onEscape={viewModel.onCancel}
               type="text"
               value={viewModel.projectTitle}
             />

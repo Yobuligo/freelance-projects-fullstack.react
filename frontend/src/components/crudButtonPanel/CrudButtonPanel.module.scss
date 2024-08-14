@@ -1,10 +1,10 @@
+@import "../../styles/mixins.scss";
+
 .crudButtonPanel {
   display: flex;
   flex-direction: row;
 }
 
 .button {
-  background-color: transparent;
-  border: 0;
-  outline: none;
+  @include transparent;
 }

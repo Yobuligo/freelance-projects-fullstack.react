@@ -1,5 +1,6 @@
 @import "../../../../styles/colors.module.scss";
 @import "../../../../styles/dimensions.scss";
+@import "../../../../styles/mixins.scss";
 
 .projectItem {
   display: flex;
@@ -47,9 +48,7 @@
 }
 
 .inputDisabled {
-  background-color: transparent;
-  outline: none;
-  border: 0;
+  @include transparent;
   pointer-events: none;
 }
 

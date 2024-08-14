@@ -8,6 +8,7 @@ export const Session: ModelStatic<Model<ISession, IEntityDetails<ISession>>> =
   db.define("sessions", {
     id: createIdType(),
     expiresAt: DataTypes.DATE,
+    platform: DataTypes.STRING,
     userId: DataTypes.STRING,
     username: DataTypes.STRING,
   });

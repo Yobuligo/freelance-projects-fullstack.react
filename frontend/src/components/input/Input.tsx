@@ -10,6 +10,8 @@ export const Input: React.FC<IInputProps> = (props) => {
       props.onEscape?.();
     }
   };
-  
-  return <input {...props} onKeyDown={onKeyDown} />;
+
+  const { onEnter, onEscape, ...inputProps } = props;
+
+  return <input {...inputProps} onKeyDown={onKeyDown} />;
 };
