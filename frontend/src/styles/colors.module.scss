@@ -1,13 +1,39 @@
-$color-primary: #4a7fac;
-$color-primary-dark: #0a3f6d;
-$color-secondary: #81b8b9;
-$color-secondary-dark: #669fa0;
-$color-copy: white;
+$color-primary-darker: #2a0929;
+$color-primary-dark: #4c104a;
+$color-primary: #641261;
+$color-primary-light: #8c4a8a;
+$color-primary-lighter: #b87fb6;
+$color-primary-lightest: #f3e2f2;
+$color-accent: #47105c;
+$color-secondary-darker: #394510;
+$color-secondary-dark: #4f5e15;
+$color-secondary: #99af46;
+$color-secondary-light: #cde283;
+$color-secondary-lighter: #ecf5cc;
+$color-secondary-lightest: #f4f6ee;
+$color-secondary-lightestest: #f9faf6;
+
+// $color-primary-darker: #B76B1F;
+// $color-primary-dark: #DB8529;
+// $color-primary: #E4A562;
+// $color-primary-light: #F2D5B5;
+// $color-primary-lighter: #F5EBE0;
+// $color-accent: #146733;
+// $color-secondary-darker: #153d66;
+// $color-secondary-dark: #2a547f;
+// $color-secondary: #205a99;
+// $color-secondary-light: #518fd2;
+// $color-secondary-lighter: #96bee8;
+// $color-secondary-lightest: #e6edf4;
+// $color-secondary-lightestest: #e6edf4;
+
+$color-text: $color-primary-dark;
 $color-error: rgba(255, 0, 0, 0.493);
 $color-success: rgba(63, 150, 13, 0.493);
-$color-hover: lighten(#4a7fac, 0.5);
+$color-hover: lighten($color-primary, 0.5);
 $color-enabled: black;
 $color-disabled: rgba(211, 211, 211, 0.63);
+
 
 :export {
   colorDisabled: $color-disabled;

@@ -1,8 +1,8 @@
 @import '../../styles/colors.module.scss';
+@import '../../styles/mixins.scss';
 
 .card {
   border-radius: 8px;
   padding: 0.5rem;
-  border: 1px solid rgba(128, 128, 128, 0.151);
-  background-color: transparentize($color: $color-primary, $amount: 0.7);
+  @include glassy($color-secondary);
 }
