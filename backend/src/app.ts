@@ -1,7 +1,6 @@
 import express from "express";
 import { ProjectController } from "./controller/ProjectController";
 import { ProviderDetailsController } from "./controller/ProviderDetailsController";
-import { ProviderMetaController } from "./controller/ProviderMetaController";
 import { TaskController } from "./controller/TaskController";
 import { UserController } from "./controller/UserController";
 import { UserOpportunityController } from "./controller/UserOpportunityController";
@@ -34,7 +33,6 @@ server.use((_, res, next) => {
   next();
 });
 server.use("/api", new UserOpportunityController().router);
-server.use("/api", new ProviderMetaController().router);
 server.use("/api", new ProviderDetailsController().router);
 server.use("/api", new UserController().router);
 server.use("/api", new UserProviderRequestController().router);

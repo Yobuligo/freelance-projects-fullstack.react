@@ -1,14 +1,14 @@
-import { Router } from "express";
 import { IRepository } from "../repository/types/IRepository";
 import { IRouteMeta } from "../shared/types/IRouteMeta";
 import { IEntity } from "./../shared/types/IEntity";
 import { Controller } from "./Controller";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 
-export abstract class EntityController<T extends IEntity> extends Controller {
-  readonly router = Router();
-
-  constructor(protected routeMeta: IRouteMeta, protected repo: IRepository<T>) {
+export abstract class EntityController<
+  TEntity extends IEntity,
+  TRepository extends IRepository<TEntity>
+> extends Controller {
+  constructor(protected routeMeta: IRouteMeta, protected repo: TRepository) {
     super();
     this.deleteById();
     this.insert();
@@ -18,8 +18,8 @@ export abstract class EntityController<T extends IEntity> extends Controller {
   protected deleteById() {
     this.router.delete(
       `${this.routeMeta.path}/:id`,
-      SessionInterceptor((req) => {
-        this.repo.deleteById(req.params.id);
+      SessionInterceptor(async (req) => {
+        await this.repo.deleteById(req.params.id);
       })
     );
   }
@@ -28,7 +28,7 @@ export abstract class EntityController<T extends IEntity> extends Controller {
     this.router.post(
       this.routeMeta.path,
       SessionInterceptor(async (req, res) => {
-        const entity: T = req.body;
+        const entity: TEntity = req.body;
         const newEntity = await this.repo.insert(entity);
         res.status(201).send(newEntity);
       })
@@ -39,7 +39,7 @@ export abstract class EntityController<T extends IEntity> extends Controller {
     this.router.put(
       this.routeMeta.path,
       SessionInterceptor(async (req, res) => {
-        const entity: T = req.body;
+        const entity: TEntity = req.body;
         await this.repo.update(entity);
         res.status(200).send(true);
       })

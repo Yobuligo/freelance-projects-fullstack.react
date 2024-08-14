@@ -1,14 +1,13 @@
-import { Router } from "express";
 import { SessionRepo } from "../repository/SessionRepo";
 import { UserRepo } from "../repository/UserRepo";
 import { ICredentials } from "../shared/model/ICredentials";
 import { ISession } from "../shared/model/ISession";
 import { createError } from "../shared/utils/createError";
+import { Controller } from "./Controller";
 
-export class UserController {
-  readonly router = Router();
-
+export class UserController extends Controller {
   constructor() {
+    super();
     this.login();
     this.logout();
     this.register();

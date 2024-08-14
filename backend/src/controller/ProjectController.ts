@@ -3,7 +3,7 @@ import { IProject, ProjectRouteMeta } from "../shared/model/IProject";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 import { EntityController } from "./EntityController";
 
-export class ProjectController extends EntityController<IProject> {
+export class ProjectController extends EntityController<IProject, ProjectRepo> {
   constructor() {
     super(ProjectRouteMeta, new ProjectRepo());
     this.findAll();
@@ -13,8 +13,7 @@ export class ProjectController extends EntityController<IProject> {
     this.router.get(
       ProjectRouteMeta.path,
       SessionInterceptor(async (req, res) => {
-        const projectRepo = new ProjectRepo();
-        const projects = await projectRepo.findByUserId(req.session.userId);
+        const projects = await this.repo.findByUserId(req.session.userId);
         res.status(200).send(projects);
       })
     );

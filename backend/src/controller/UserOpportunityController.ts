@@ -1,4 +1,3 @@
-import { Router } from "express";
 import { OpportunityRepo } from "../repository/OpportunityRepo";
 import { UserOpportunityRepo } from "../repository/UserOpportunityRepo";
 import { UserProviderRequestRepo } from "../repository/UserProviderRequestRepo";
@@ -13,15 +12,16 @@ import {
 import { ProviderType } from "../shared/types/ProviderType";
 import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
-import { Controller } from "./Controller";
 import { NetworkCheckInterceptor } from "./core/NetworkCheckInterceptor";
 import { SessionInterceptor } from "./core/SessionInterceptor";
+import { EntityController } from "./EntityController";
 
-export class UserOpportunityController extends Controller {
-  readonly router = Router();
-
+export class UserOpportunityController extends EntityController<
+  IUserOpportunity,
+  UserOpportunityRepo
+> {
   constructor() {
-    super();
+    super(UserOpportunityRouteMeta, new UserOpportunityRepo());
     this.findAll();
     this.updateAll();
   }
@@ -56,10 +56,10 @@ export class UserOpportunityController extends Controller {
   private updateAll() {
     this.router.put(
       UserOpportunityRouteMeta.path,
-      SessionInterceptor(async (req) => {
+      SessionInterceptor(async (req, res) => {
         const userOpportunities: IUserOpportunity[] = req.body;
-        const userOpportunityRepo = new UserOpportunityRepo();
-        await userOpportunityRepo.updateAll(userOpportunities);
+        await this.repo.updateAll(userOpportunities);
+        res.send(200).end();
       })
     );
   }
@@ -157,8 +157,7 @@ export class UserOpportunityController extends Controller {
     session: ISession,
     opportunities: IOpportunity[]
   ): Promise<IUserOpportunity[]> {
-    const userOpportunityRepo = new UserOpportunityRepo();
-    return await userOpportunityRepo.modify(session.userId, opportunities);
+    return await this.repo.modify(session.userId, opportunities);
   }
 
   private async updateOpportunities(collectedOpportunities: IOpportunity[]) {
@@ -176,9 +175,6 @@ export class UserOpportunityController extends Controller {
   }
 
   private async loadUserOpportunities(session: ISession) {
-    const userOpportunityRepo = new UserOpportunityRepo();
-    return await userOpportunityRepo.findCompletedOrAppliedByUserId(
-      session.userId
-    );
+    return await this.repo.findCompletedOrAppliedByUserId(session.userId);
   }
 }
