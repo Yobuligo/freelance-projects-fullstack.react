@@ -1,36 +1,47 @@
-import { useMemo } from "react";
 import { LabeledInput } from "../../../../components/labeledInput/LabeledInput";
 import { ToggleButtonGroup } from "../../../../components/toggleButtonGroup/ToggleButtonGroup";
 import { Toolbar } from "../../../../components/toolbar/Toolbar";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
+import { DeleteIcon } from "../../../../icons/DeleteIcon";
+import componentStyles from "../../../../styles/components.module.scss";
 import { IReportSectionProps } from "./IReportSectionProps";
 import styles from "./ReportSection.module.scss";
+import { useReportSectionViewModel } from "./useReportSectionViewModel";
 
 export const ReportSection: React.FC<IReportSectionProps> = (props) => {
   const { t } = useTranslation();
-  const toggleButtonGroupItems = useMemo(
-    () => [
-      { key: 0, title: t(texts.general.day) },
-      { key: 1, title: t(texts.general.week) },
-      { key: 2, title: t(texts.general.month) },
-      { key: 3, title: t(texts.general.year) },
-    ],
-    [t]
-  );
+  const viewModel = useReportSectionViewModel();
 
   return (
     <div className={styles.reportSection}>
       <div>
         <Toolbar>
           <ToggleButtonGroup
-            items={toggleButtonGroupItems}
-            selected={toggleButtonGroupItems[0]}
+            disabled={viewModel.isToggleButtonGroupDisabled}
+            items={viewModel.toggleButtonGroupItems}
+            selected={viewModel.toggleButtonGroupItems[0]}
           />
         </Toolbar>
         <Toolbar>
-          <LabeledInput label="from" type="date" />
-          <LabeledInput label="to" type="date" />
+          <LabeledInput
+            label={t(texts.general.from)}
+            onChange={viewModel.onChangeFromDate}
+            type="date"
+            value={viewModel.fromDate}
+          />
+          <LabeledInput
+            label={t(texts.general.to)}
+            onChange={viewModel.onChangeToDate}
+            type="date"
+            value={viewModel.toDate}
+          />
+          <button
+            className={styles.deleteButton}
+            onClick={viewModel.onDeleteDate}
+          >
+            <DeleteIcon className={componentStyles.clickableIcon} />
+          </button>
         </Toolbar>
       </div>
     </div>
