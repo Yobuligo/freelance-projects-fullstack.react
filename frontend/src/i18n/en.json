@@ -8,9 +8,13 @@
     },
     "general": {
         "backToStart": "Back to Start",
+        "day": "Day",
         "logoutInvalidSession": "Your were logged out due an invalid or expired session",
+        "month": "Month",
         "title": "New project",
-        "unknownError": "An unknown error occurred"
+        "unknownError": "An unknown error occurred",
+        "week": "Week",
+        "year": "Year"
     },
     "login": {
         "errorLogin": "Unknown error while login",
