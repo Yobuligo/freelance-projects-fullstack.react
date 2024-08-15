@@ -1,5 +1,10 @@
-@import "./mixins.scss";
 @import "./colors.module.scss";
+
+@mixin hoverIcon {
+  &:hover {
+    fill: $color-button-hover;
+  }
+}
 
 .icon {
   fill: $color-primary-dark;
@@ -9,6 +14,7 @@
   @extend .icon;
   @include hoverIcon;
 }
+
 
 .iconClickable {
   @extend .iconHoverable;
@@ -24,4 +30,16 @@
   padding: 0.4rem 0.25rem;
   outline: none;
   color: $color-primary-dark;
+}
+
+@mixin hoverButton {
+  &:hover {
+    @extend .buttonActive;
+    @content;
+  }
+}
+
+.buttonActive {
+  background-color: $color-button-hover;
+  color: $color-button-text-hover;
 }

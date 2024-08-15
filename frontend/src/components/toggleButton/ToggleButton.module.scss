@@ -1,11 +1,11 @@
 @import "../../styles/colors.module.scss";
+@import "../../styles/mixins.scss";
+@import "../../styles/components.module.scss";
 
 .selected {
-  border: none;
-  background-color: $color-primary;
+  @extend .buttonActive;
 }
 
 .unSelected {
-  border: none;
-  background-color: $color-disabled;
+  background-color: $color-button-background;
 }
