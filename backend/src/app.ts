@@ -1,6 +1,7 @@
 import express from "express";
 import { ProjectController } from "./controller/ProjectController";
 import { ProviderDetailsController } from "./controller/ProviderDetailsController";
+import { ReportController } from "./controller/ReportController";
 import { TaskController } from "./controller/TaskController";
 import { UserController } from "./controller/UserController";
 import { UserOpportunityController } from "./controller/UserOpportunityController";
@@ -38,4 +39,5 @@ server.use("/api", new UserController().router);
 server.use("/api", new UserProviderRequestController().router);
 server.use("/api", new ProjectController().router);
 server.use("/api", new TaskController().router);
+server.use("/api", new ReportController().router);
 server.listen(5000);

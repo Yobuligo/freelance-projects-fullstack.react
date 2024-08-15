@@ -9,7 +9,7 @@ export class ReportApi extends Repository<any> {
   }
 
   findTimeSheets(dateTimeSpan: IDateTimeSpan): Promise<ITimeSheet[]> {
-    return this.get(`${this.url}/${TimeSheetRouteMeta.path}`, {
+    return this.get(`${this.url}${TimeSheetRouteMeta.path}`, {
       from: DateTime.toDate(dateTimeSpan.from),
       to: DateTime.toDate(dateTimeSpan.to),
     });

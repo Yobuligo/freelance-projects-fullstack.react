@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { Duration } from "../../../../core/services/date/Duration";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
-import { ProjectInfo } from "../../../../services/ProjectInfo";
-import { TaskInfo } from "../../../../services/TaskInfo";
+import { ProjectInfo } from "../../../../shared/services/ProjectInfo";
+import { TaskInfo } from "../../../../shared/services/TaskInfo";
 import { IProjectItemProps } from "./IProjectItemProps";
 
 export const useProjectItemViewModel = (props: IProjectItemProps) => {

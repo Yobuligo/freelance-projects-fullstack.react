@@ -5,7 +5,7 @@ import { DurationDisplay } from "../../../../components/duration/DurationDisplay
 import { LabeledInput } from "../../../../components/labeledInput/LabeledInput";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
-import { TaskInfo } from "../../../../services/TaskInfo";
+import { TaskInfo } from "../../../../shared/services/TaskInfo";
 import { style } from "../../../../utils/style";
 import { ITaskItemProps } from "./ITaskItemProps";
 import styles from "./TaskItem.module.scss";

@@ -1,8 +1,8 @@
-import { DateTime } from "../core/services/date/DateTime";
-import { Duration } from "../core/services/date/Duration";
-import { isNotNull } from "../core/utils/isNotNull";
-import { isNull } from "../core/utils/isNull";
-import { ITask } from "../shared/model/ITask";
+import { DateTime } from "../../core/services/date/DateTime";
+import { Duration } from "../../core/services/date/Duration";
+import { isNotNull } from "../../core/utils/isNotNull";
+import { isNull } from "../../core/utils/isNull";
+import { ITask } from "../model/ITask";
 
 export class TaskInfo {
   /**

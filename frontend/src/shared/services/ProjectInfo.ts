@@ -1,6 +1,6 @@
-import { Duration } from "../core/services/date/Duration";
-import { IProject } from "../shared/model/IProject";
-import { ITask } from "../shared/model/ITask";
+import { Duration } from "../../core/services/date/Duration";
+import { IProject } from "../model/IProject";
+import { ITask } from "../model/ITask";
 import { TaskInfo } from "./TaskInfo";
 
 export class ProjectInfo {
