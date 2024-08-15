@@ -1,4 +1,4 @@
-@import "../../../styles/colors.module.scss";
+@import "../../../styles/components.module.scss";
 
 .providerRequestInput {
   display: flex;
@@ -21,9 +21,9 @@
 }
 
 .iconEnabled {
-  fill: $color-enabled;
+  @extend .icon;
 }
 
 .iconDisabled {
-  fill: $color-disabled;
+  @extend .disabledIcon;
 }

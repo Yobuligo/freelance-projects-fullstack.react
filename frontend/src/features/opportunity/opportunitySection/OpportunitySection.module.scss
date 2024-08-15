@@ -1,6 +1,7 @@
 @import "../../../styles/dimensions.scss";
 @import "../../../styles/colors.module.scss";
 @import "../../../styles/mixins.scss";
+@import "../../../styles/components.module.scss";
 
 .opportunitySection {
   display: flex;
@@ -41,10 +42,6 @@
   display: flex;
   flex-direction: row;
   column-gap: $negative-space;
-}
-
-.icon {
-  fill: $color-primary-dark;
 }
 
 .itemApplied {

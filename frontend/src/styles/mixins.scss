@@ -21,10 +21,8 @@
 @mixin hoverButton {
   &:hover {
     background-color: $color-button-hover;
-    @content;
-  }
-  &:hover .button{
     color: $color-button-text-hover;
+    @content;
   }
 }
 
