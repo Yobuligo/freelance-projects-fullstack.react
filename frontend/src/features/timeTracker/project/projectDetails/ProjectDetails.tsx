@@ -1,10 +1,10 @@
 import { ArrowBackIcon } from "../../../../icons/ArrowBackIcon";
 import { ITask } from "../../../../shared/model/ITask";
+import componentStyles from "../../../../styles/components.module.scss";
+import { style } from "../../../../utils/style";
 import { TaskSection } from "../../task/taskSection/TaskSection";
 import { IProjectDetailsProps } from "./IProjectDetailsProps";
 import styles from "./ProjectDetails.module.scss";
-import componentStyles from "../../../../styles/components.module.scss";
-import { style } from "../../../../utils/style";
 
 export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
   const onDeleteTask = (task: ITask) =>
@@ -15,8 +15,11 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
 
   return (
     <div className={styles.projectDetails}>
-      <button className={style(componentStyles.clickableIcon, styles.button)}>
-        <ArrowBackIcon onClick={props.onBack} />
+      <button
+        className={style(styles.button)}
+        onClick={props.onBack}
+      >
+        <ArrowBackIcon className={componentStyles.clickableIcon} />
       </button>
       <TaskSection
         onChange={onChangeTask}
