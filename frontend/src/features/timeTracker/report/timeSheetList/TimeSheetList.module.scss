@@ -1,0 +1,9 @@
+@import "../../../../styles/dimensions.scss";
+@import "../../../../styles/mixins.scss";
+
+.timeSheetList {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: 1rem;
+  row-gap: 1rem;
+}

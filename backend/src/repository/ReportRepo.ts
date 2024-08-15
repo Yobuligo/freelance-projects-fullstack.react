@@ -40,7 +40,7 @@ export class ReportRepo {
 
       // create copy of project to not transfer the tasks again
       const timeSheet: ITimeSheet = {
-        duration,
+        durationInMilliseconds: duration.totalMilliseconds,
         project: {
           id: project.id,
           tasks: [],

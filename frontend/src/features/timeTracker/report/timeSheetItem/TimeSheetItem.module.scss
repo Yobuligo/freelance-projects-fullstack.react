@@ -1,0 +1,10 @@
+.timeSheetItem {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.title {
+  font-size: large;
+  font-weight: 600;
+}

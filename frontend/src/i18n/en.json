@@ -103,6 +103,9 @@
         "addTask": "Add task",
         "newTask": "New task"
     },
+    "timeSheetList": {
+        "noTimeSheetsFound": "No time sheets found"
+    },
     "timeTracker": {
         "projects": "Projects",
         "reporting": "Reporting"
