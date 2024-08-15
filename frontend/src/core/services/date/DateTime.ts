@@ -1,5 +1,6 @@
 import { DateTimeFormatter } from "./DateTimeFormatter";
 import { Duration } from "./Duration";
+import { ITimeInterval } from "./ITimeInterval";
 
 export class DateTime {
   private static msecInSeconds = 1000;
@@ -131,6 +132,97 @@ export class DateTime {
   }
 
   /**
+   * Returns the date of the last day of the month derived from the given {@link date}.
+   */
+  static getMonthEndDate(date: Date): Date {
+    // Create date of first of next month
+    const endDate = new Date(date.getFullYear(), DateTime.toMonth(date), 1);
+
+    // Subtract last day by one to get the last of the
+    return this.subtractDays(endDate, 1);
+  }
+
+  /**
+   * Returns the first and last date of a month derived from the given {@link date}.
+   *
+   * If {@link date} is a date of 15. january the date of the 1. january and last will be returned
+   */
+  static getMonthSpanDates(date: Date): ITimeInterval {
+    const from = this.getMonthStartDate(date);
+    const to = this.getMonthEndDate(date);
+    return { from, to };
+  }
+
+  /**
+   * Returns the date of the first day of the month derived from the given {@link date}.
+   */
+  static getMonthStartDate(date: Date): Date {
+    return new Date(date.getFullYear(), date.getMonth(), 1);
+  }
+
+  /**
+   * Returns the date of the last day of the week derived from the given {@link date}.
+   */
+  static getWeekEndDate(date: Date): Date {
+    const endDate = new Date(date);
+    const dayOfWeek = date.getDay();
+
+    // End of week is sunday
+    const diffToSunday = dayOfWeek === 0 ? 0 : 7 - dayOfWeek;
+    endDate.setDate(date.getDate() + diffToSunday);
+    endDate.setHours(23, 59, 59, 999);
+    return endDate;
+  }
+
+  /**
+   * Returns the first and last date of a week derived from the given {@link date}.
+   *
+   * If {@link date} is a date of wednesday the date of the previous monday and the following sunday will be returned
+   */
+  static getWeekSpanDates(date: Date): ITimeInterval {
+    const from = this.getWeekStartDate(date);
+    const to = this.getWeekEndDate(date);
+    return { from, to };
+  }
+
+  /**
+   * Returns the date of the first day of the week derived from the given {@link date}.
+   */
+  static getWeekStartDate(date: Date): Date {
+    const from = new Date(date);
+    const dayOfWeek = date.getDay();
+
+    // Start of week is monday
+    const diffToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+    from.setDate(date.getDate() - diffToMonday);
+    from.setHours(0, 0, 0, 0);
+    return from;
+  }
+
+  /**
+   * Returns the date of the last day of the year derived from the given {@link date}.
+   */
+  static getYearEndDate(date: Date): Date {
+    return new Date(date.getFullYear(), 11, 31);
+  }
+
+  /**
+   * Returns the first and last date of a year derived from the given {@link date}.
+   */
+  static getYearSpanDates(date: Date): ITimeInterval {
+    const from = this.getYearStartDate(date);
+    const to = this.getYearEndDate(date);
+    return { from, to };
+  }
+
+  /**
+   * Returns the date of the first day of the year derived from the given {@link date}.
+   */
+  static getYearStartDate(date: Date): Date {
+    return new Date(date.getFullYear(), 0, 1);
+  }
+
+  /**
    * Compares the given {@link date} with {@link compareDate} or with the current date if {@link compareDate} is undefined
    * and returns true if date is after (so later or younger) the compared value otherwise false.
    */
@@ -207,6 +299,13 @@ export class DateTime {
   }
 
   /**
+   * Extracts and returns the date of the given {@link date} in format yyyy-MM-dd
+   */
+  static toDate(date: Date): string {
+    return this.format(date, "yyyy-MM-dd");
+  }
+
+  /**
    * Extracts and returns the days of the given {@link date}.
    */
   static toDay(date: Date): number {
@@ -246,6 +345,13 @@ export class DateTime {
    */
   static toSeconds(date: Date): number {
     return this.toDateInstance(date).getSeconds();
+  }
+
+  /**
+   * Extracts and returns the time of the given {@link date} in format hh:mm
+   */
+  static toTime(date: Date): string {
+    return this.format(date, "hh:mm");
   }
 
   /**
