@@ -3,8 +3,6 @@ import { ToggleButtonGroup } from "../../../../components/toggleButtonGroup/Togg
 import { Toolbar } from "../../../../components/toolbar/Toolbar";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
-import { DeleteIcon } from "../../../../icons/DeleteIcon";
-import componentStyles from "../../../../styles/components.module.scss";
 import { IReportSectionProps } from "./IReportSectionProps";
 import styles from "./ReportSection.module.scss";
 import { useReportSectionViewModel } from "./useReportSectionViewModel";
@@ -15,34 +13,26 @@ export const ReportSection: React.FC<IReportSectionProps> = (props) => {
 
   return (
     <div className={styles.reportSection}>
-      <div>
-        <Toolbar>
-          <ToggleButtonGroup
-            disabled={viewModel.isToggleButtonGroupDisabled}
-            items={viewModel.toggleButtonGroupItems}
-            selected={viewModel.toggleButtonGroupItems[0]}
-          />
-        </Toolbar>
-        <Toolbar>
-          <LabeledInput
-            label={t(texts.general.from)}
-            onChange={viewModel.onChangeFromDate}
-            type="date"
-            value={viewModel.fromDate}
-          />
-          <LabeledInput
-            label={t(texts.general.to)}
-            onChange={viewModel.onChangeToDate}
-            type="date"
-            value={viewModel.toDate}
-          />
-          <button
-            className={styles.deleteButton}
-            onClick={viewModel.onDeleteDate}
-          >
-            <DeleteIcon className={componentStyles.clickableIcon} />
-          </button>
-        </Toolbar>
+      <Toolbar>
+        <ToggleButtonGroup
+          disabled={viewModel.isToggleButtonGroupDisabled}
+          items={viewModel.toggleButtonGroupItems}
+          selected={viewModel.toggleButtonGroupItems[0]}
+        />
+      </Toolbar>
+      <div className={styles.inputGroup}>
+        <LabeledInput
+          label={t(texts.general.from)}
+          onChange={viewModel.onChangeFromDate}
+          type="date"
+          value={viewModel.fromDate}
+        />
+        <LabeledInput
+          label={t(texts.general.to)}
+          onChange={viewModel.onChangeToDate}
+          type="date"
+          value={viewModel.toDate}
+        />
       </div>
     </div>
   );
