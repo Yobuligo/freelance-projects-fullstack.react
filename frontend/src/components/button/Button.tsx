@@ -13,16 +13,12 @@ export const Button: React.FC<IButtonProps> = (props) => {
   return (
     <Card
       className={style(
-        styles.buttonCard,
         props.disabled === true ? styles.buttonDisabled : styles.buttonEnabled,
         props.className
       )}
       onClick={onClick}
     >
-      <button
-        className={styles.button}
-        disabled={props.disabled}
-      >
+      <button className={styles.button} disabled={props.disabled}>
         {props.children}
       </button>
     </Card>

@@ -36,6 +36,12 @@ $color-disabled: rgba(211, 211, 211, 0.63);
 $color-tab-selected: $color-secondary-darker;
 $color-tab-unselected: $color-secondary-lighter;
 
+$color-button-text: $color-text;
+$color-button-text-hover: $color-secondary-darker;
+$color-button-hover: $color-hover;
+$color-button-disabled: $color-secondary-lightest;
+$color-button-text-disabled: $color-primary-light;
+
 :export {
   colorDisabled: $color-disabled;
   colorPrimary: $color-primary;

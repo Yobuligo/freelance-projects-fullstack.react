@@ -8,24 +8,22 @@
   column-gap: $negative-space;
   margin: 0;
   font-size: medium;
-  font-weight: 400;
+  font-weight: 600;
+  font-family: "SourceSans3";
+  color: $color-button-text;
   @include transparent;
 }
 
-.buttonCard {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0.25rem;
-}
-
 .buttonEnabled {
-  color: black;
   @include hoverButton {
     cursor: pointer;
   }
 }
 
-.buttonDisabled {
-  color: $color-disabled;
+.buttonDisabled{
+  background-color: $color-button-disabled;
+}
+
+.buttonDisabled .button{
+  color: $color-button-text-disabled;
 }

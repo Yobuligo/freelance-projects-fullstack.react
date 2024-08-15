@@ -14,14 +14,17 @@
 
 @mixin hoverIcon {
   &:hover {
-    fill: $color-hover;
+    fill: $color-button-hover;
   }
 }
 
 @mixin hoverButton {
   &:hover {
-    background-color: $color-hover;
+    background-color: $color-button-hover;
     @content;
+  }
+  &:hover .button{
+    color: $color-button-text-hover;
   }
 }
 

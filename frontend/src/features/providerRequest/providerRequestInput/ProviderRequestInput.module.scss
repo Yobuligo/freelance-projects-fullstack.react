@@ -16,6 +16,10 @@
   width: 20rem;
 }
 
+.button {
+  align-self: flex-end;
+}
+
 .iconEnabled {
   fill: $color-enabled;
 }
