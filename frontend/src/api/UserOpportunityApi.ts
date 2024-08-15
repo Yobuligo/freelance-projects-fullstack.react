@@ -2,9 +2,9 @@ import {
   IUserOpportunity,
   UserOpportunitiesRouteMeta,
 } from "../shared/model/IUserOpportunity";
-import { Repository } from "./core/Repository";
+import { EntityRepository } from "./core/EntityRepository";
 
-export class UserOpportunityApi extends Repository<IUserOpportunity> {
+export class UserOpportunityApi extends EntityRepository<IUserOpportunity> {
   constructor() {
     super(UserOpportunitiesRouteMeta);
   }

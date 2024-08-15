@@ -2,9 +2,9 @@ import {
   IUserProviderRequest,
   UserProviderRequestRouteMeta,
 } from "../shared/model/IUserProviderRequest";
-import { Repository } from "./core/Repository";
+import { EntityRepository } from "./core/EntityRepository";
 
-export class UserProviderRequestApi extends Repository<IUserProviderRequest> {
+export class UserProviderRequestApi extends EntityRepository<IUserProviderRequest> {
   constructor() {
     super(UserProviderRequestRouteMeta);
   }
