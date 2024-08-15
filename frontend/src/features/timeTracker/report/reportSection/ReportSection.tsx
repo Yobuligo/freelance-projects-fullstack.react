@@ -1,5 +1,5 @@
 import { Button } from "../../../../components/button/Button";
-import { TimePeriodFilter } from "../../../../components/timePeriodFilter/TimePeriodFilter";
+import { DateTimeSpanFilter } from "../../../../components/dateTimeSpanFilter/DateTimeSpanFilter";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { IReportSectionProps } from "./IReportSectionProps";
@@ -11,7 +11,7 @@ export const ReportSection: React.FC<IReportSectionProps> = (props) => {
   return (
     <div className={styles.reportSection}>
       <div className={styles.timePeriodFilter}>
-        <TimePeriodFilter />
+        <DateTimeSpanFilter />
         <Button className={styles.button}>{t(texts.general.apply)}</Button>
       </div>
     </div>
