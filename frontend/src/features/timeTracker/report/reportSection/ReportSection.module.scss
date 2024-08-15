@@ -1,2 +1,23 @@
+@import "../../../../styles/mixins.scss";
+
 .reportSection {
+}
+
+.timePeriodFilter {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+
+  @include medium-screen {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1rem;
+    align-items: end;
+  }
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
