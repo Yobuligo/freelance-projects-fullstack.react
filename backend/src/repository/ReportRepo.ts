@@ -28,6 +28,7 @@ export class ReportRepo {
           },
         },
       ],
+      order: ["title"],
     });
 
     projects.forEach((model) => {
