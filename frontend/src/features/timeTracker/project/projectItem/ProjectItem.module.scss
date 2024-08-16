@@ -1,6 +1,4 @@
-@import "../../../../styles/colors.module.scss";
-@import "../../../../styles/dimensions.scss";
-@import "../../../../styles/mixins.scss";
+@import "../../../../styles/global.scss";
 
 .projectItem {
   display: flex;
@@ -92,5 +90,6 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 10rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
 }

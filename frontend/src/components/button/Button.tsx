@@ -1,5 +1,4 @@
 import { style } from "../../utils/style";
-import { Card } from "../card/Card";
 import styles from "./Button.module.scss";
 import { IButtonProps } from "./IButtonProps";
 
@@ -11,20 +10,16 @@ export const Button: React.FC<IButtonProps> = (props) => {
   };
 
   return (
-    <Card
+    <button
       className={style(
-        styles.buttonCard,
+        styles.button,
         props.disabled === true ? styles.buttonDisabled : styles.buttonEnabled,
         props.className
       )}
+      disabled={props.disabled}
       onClick={onClick}
     >
-      <button
-        className={styles.button}
-        disabled={props.disabled}
-      >
-        {props.children}
-      </button>
-    </Card>
+      {props.children}
+    </button>
   );
 };

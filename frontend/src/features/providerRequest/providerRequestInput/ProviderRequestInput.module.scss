@@ -1,4 +1,4 @@
-@import "../../../styles/colors.module.scss";
+@import "../../../styles/global.scss";
 
 .providerRequestInput {
   display: flex;
@@ -16,10 +16,14 @@
   width: 20rem;
 }
 
+.button {
+  align-self: flex-end;
+}
+
 .iconEnabled {
-  fill: $color-enabled;
+  @extend .icon;
 }
 
 .iconDisabled {
-  fill: $color-disabled;
+  @extend .disabledIcon;
 }

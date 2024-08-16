@@ -19,7 +19,7 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
         className={style(styles.button)}
         onClick={props.onBack}
       >
-        <ArrowBackIcon className={componentStyles.clickableIcon} />
+        <ArrowBackIcon className={componentStyles.iconClickable} />
       </button>
       <TaskSection
         onChange={onChangeTask}

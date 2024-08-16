@@ -12,19 +12,6 @@
   }
 }
 
-@mixin hoverIcon {
-  &:hover {
-    fill: $color-hover;
-  }
-}
-
-@mixin hoverButton {
-  &:hover {
-    background-color: $color-hover;
-    @content;
-  }
-}
-
 @mixin glassy($color: $color-primary-light, $amount: 0.9) {
   background-color: transparentize($color, $amount);
   backdrop-filter: blur(4px);

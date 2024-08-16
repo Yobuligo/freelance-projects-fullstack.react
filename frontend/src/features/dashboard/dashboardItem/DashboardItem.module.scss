@@ -1,4 +1,4 @@
-@import '../../../styles/mixins.scss';
+@import '../../../styles/global.scss';
 
 .dashboardItem {
   cursor: pointer;
@@ -7,10 +7,16 @@
   justify-content: center;
   align-items: center;
   height: 7rem;
-
   @include glassy();
+
+  &:hover {
+    @include glassy($color-button-hover, 0.5);
+  }
+
 }
 
 .title {
   margin: 0;
+  font-family: "MerriweatherSans";
+  font-weight: 800;
 }

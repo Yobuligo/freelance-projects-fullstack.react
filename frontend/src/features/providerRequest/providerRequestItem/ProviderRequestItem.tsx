@@ -18,7 +18,7 @@ export const ProviderRequestItem: React.FC<IProviderRequestItemProps> = (
           collapsed={viewModel.collapsed}
           setCollapsed={viewModel.setCollapsed}
         />
-        <DeleteIcon onClick={viewModel.onDelete} />
+        <DeleteIcon onClick={viewModel.onDelete} className={styles.iconClickable}/>
         <Switch
           checked={props.userProviderRequest.enabled ?? true}
           onChange={viewModel.onSwitchChanged}

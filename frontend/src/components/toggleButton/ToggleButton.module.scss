@@ -1,11 +1,9 @@
-@import "../../styles/colors.module.scss";
+@import "../../styles/global.scss";
 
 .selected {
-  border: none;
-  background-color: $color-primary;
+  @extend .buttonActive;
 }
 
 .unSelected {
-  border: none;
-  background-color: $color-disabled;
+  background-color: $color-button-background;
 }

@@ -1,9 +1,12 @@
-@import "../../styles/colors.module.scss";
+@import "../../styles/global.scss";
 
 .tabItem {
   color: $color-tab-unselected;
-  font-size: large;
+  font-size: medium;
   font-weight: 600;
+  font-family: "MerriweatherSans";
+  text-transform: uppercase;
+
   &:hover {
     cursor: pointer;
     color: $color-tab-selected;

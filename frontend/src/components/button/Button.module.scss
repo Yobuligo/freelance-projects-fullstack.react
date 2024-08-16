@@ -1,6 +1,4 @@
-@import "../../styles/colors.module.scss";
-@import "../../styles/mixins.scss";
-@import "../../styles/dimensions.scss";
+@import "../../styles/global.scss";
 
 .button {
   display: flex;
@@ -8,24 +6,26 @@
   column-gap: $negative-space;
   margin: 0;
   font-size: medium;
-  font-weight: 400;
-  @include transparent;
-}
-
-.buttonCard {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0.25rem;
+  font-weight: 600;
+  font-family: "SourceSans3";
+  color: $color-button-text;
+  background-color: $color-button-background;
+  outline: none;
+  border:none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
 }
 
 .buttonEnabled {
-  color: black;
   @include hoverButton {
     cursor: pointer;
   }
 }
 
 .buttonDisabled {
-  color: $color-disabled;
+  background-color: $color-button-disabled;
+}
+
+.buttonDisabled {
+  color: $color-button-text-disabled;
 }

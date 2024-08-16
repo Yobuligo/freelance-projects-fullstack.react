@@ -45,7 +45,11 @@ export const ProviderRequestInput: React.FC<IProviderRequestInputProps> = (
         onChange={viewModel.onChangeProviderUrl}
       />
 
-      <Button disabled={!viewModel.isInputValid()} onClick={viewModel.onAdd}>
+      <Button
+        className={styles.button}
+        disabled={!viewModel.isInputValid()}
+        onClick={viewModel.onAdd}
+      >
         <AddIcon
           className={
             viewModel.isInputValid() ? styles.iconEnabled : styles.iconDisabled
