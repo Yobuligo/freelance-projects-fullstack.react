@@ -17,7 +17,7 @@
 }
 
 .buttonEnabled {
-  @include hoverButton {
+  @include buttonHover {
     cursor: pointer;
   }
 }

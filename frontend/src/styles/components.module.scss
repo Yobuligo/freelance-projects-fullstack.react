@@ -1,6 +1,18 @@
 @import "./colors.module.scss";
 
-@mixin hoverIcon {
+@mixin buttonHover {
+  &:hover {
+    @extend .buttonActive;
+    @content;
+  }
+}
+
+.buttonActive {
+  background-color: $color-button-hover;
+  color: $color-button-text-hover;
+}
+
+@mixin iconHover {
   &:hover {
     fill: $color-button-hover;
   }
@@ -12,7 +24,7 @@
 
 .iconHoverable {
   @extend .icon;
-  @include hoverIcon;
+  @include iconHover;
 }
 
 
@@ -21,7 +33,7 @@
   cursor: pointer;
 }
 
-.disabledIcon {
+.iconDisabled {
   fill: $color-button-text-disabled;
 }
 
@@ -30,16 +42,4 @@
   padding: 0.4rem 0.25rem;
   outline: none;
   color: $color-primary-dark;
-}
-
-@mixin hoverButton {
-  &:hover {
-    @extend .buttonActive;
-    @content;
-  }
-}
-
-.buttonActive {
-  background-color: $color-button-hover;
-  color: $color-button-text-hover;
 }
