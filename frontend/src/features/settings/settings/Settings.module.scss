@@ -1,4 +1,6 @@
-@import "../../../styles/global.scss";
+@import "../../../styles/colors.module.scss";
+@import "../../../styles/dimensions.scss";
+@import "../../../styles/mixins.scss";
 
 .settings {
   display: flex;
