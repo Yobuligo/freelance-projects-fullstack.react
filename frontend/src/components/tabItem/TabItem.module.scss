@@ -1,11 +1,12 @@
 @use "../../styles/colors.module.scss";
+@use "../../styles/components.module.scss";
 
 .tabItem {
   color: colors.$color-tab-unselected;
   font-size: medium;
   font-weight: 600;
-  font-family: "MerriweatherSans";
   text-transform: uppercase;
+  @extend .heading;
 
   &:hover {
     cursor: pointer;

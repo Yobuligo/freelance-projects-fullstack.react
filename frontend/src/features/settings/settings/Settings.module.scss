@@ -1,6 +1,7 @@
 @use "../../../styles/colors.module.scss";
 @use "../../../styles/dimensions.scss";
 @use "../../../styles/mixins.scss";
+@use "../../../styles/components.module.scss";
 
 .settings {
   display: flex;
@@ -16,6 +17,7 @@
   align-items: center;
   padding: 0.5rem;
   color: colors.$color-primary-dark;
+  @extend .heading;
 }
 
 .icon {

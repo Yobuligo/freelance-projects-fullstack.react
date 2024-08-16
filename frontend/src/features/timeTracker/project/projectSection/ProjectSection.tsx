@@ -28,6 +28,7 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
             label={t(texts.general.title)}
             isAdding={viewModel.addProjectRequest.isProcessing}
             onAdd={viewModel.onAdd}
+            classNameLabelInput={styles.title}
           />
           {viewModel.loadProjectRequest.isProcessing ? (
             <Spinner />
@@ -35,7 +36,9 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
             <>
               {viewModel.findRecentlyUsedProjects().length > 0 && (
                 <div className={styles.projectList}>
-                  {t(texts.projectSection.recentlyUsedProjects)}
+                  <h4 className={styles.title}>
+                    {t(texts.projectSection.recentlyUsedProjects)}
+                  </h4>
                   <ProjectList
                     onChange={viewModel.onChange}
                     onClick={viewModel.onProjectSelected}
@@ -47,7 +50,7 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
                 </div>
               )}
               <div className={styles.projectList}>
-                {t(texts.projectSection.all)}
+                <h4 className={styles.title}>{t(texts.projectSection.all)}</h4>
                 <ProjectList
                   onChange={viewModel.onChange}
                   onClick={viewModel.onProjectSelected}

@@ -1,6 +1,7 @@
 @use "../../../../styles/colors.module.scss";
 @use "../../../../styles/dimensions.scss";
 @use "../../../../styles/mixins.scss";
+@use "../../../../styles/components.module.scss";
 
 .projectItem {
   display: flex;
@@ -40,6 +41,7 @@
   font-size: large;
   font-weight: 600;
   width: 90%;
+  @extend .heading;
 }
 
 .inputDisabled {

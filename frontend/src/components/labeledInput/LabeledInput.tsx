@@ -12,7 +12,11 @@ export const LabeledInput: React.FC<ILabeledInputProps> = (props) => {
     props.onChange?.(event.target.value);
 
   return (
-    <LabeledElement elementId={id} label={props.label}>
+    <LabeledElement
+      elementId={id}
+      label={props.label}
+      classNameLabel={props.classNameLabelInput}
+    >
       <Input
         className={style(componentStyles.input, props.classNameInput)}
         disabled={props.disabled}

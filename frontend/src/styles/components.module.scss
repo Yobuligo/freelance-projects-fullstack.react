@@ -12,6 +12,16 @@
   color: colors.$color-button-text-hover;
 }
 
+.heading{
+  font-family: "MerriweatherSans";
+}
+
+.headingPageContent{
+  @extend .heading;
+  font-size: medium;
+  font-weight: 500;
+}
+
 @mixin iconHover {
   &:hover {
     fill: colors.$color-button-hover;

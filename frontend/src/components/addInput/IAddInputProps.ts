@@ -5,6 +5,11 @@ export interface IAddInputProps {
   buttonCaption?: string;
 
   /**
+   * Styling for the input label
+   */
+  classNameLabelInput?: string;
+
+  /**
    * Provides if the button should be displayed as spinner button. E.g. if adding was triggered.
    */
   isAdding?: boolean;
