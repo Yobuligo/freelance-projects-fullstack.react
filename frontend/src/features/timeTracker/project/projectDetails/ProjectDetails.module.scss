@@ -1,5 +1,6 @@
 @use "../../../../styles/mixins.scss";
 @use "../../../../styles/dimensions.scss";
+@use "../../../../styles/colors.module.scss";
 
 .projectDetails {
   display: flex;
@@ -14,6 +15,6 @@
 }
 
 .title {
-  color: $color-primary-dark;
+  color: colors.$color-primary-dark;
   margin: 0;
 }
