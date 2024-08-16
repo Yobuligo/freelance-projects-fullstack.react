@@ -41,6 +41,11 @@ $color-button-text: $color-text;
 $color-button-text-hover: $color-secondary-darker;
 $color-button-hover: $color-hover;
 $color-button-disabled: $color-secondary-lightest;
+
+$color-button-background-outlined: $color-secondary-lightestest;
+$color-button-outline: $color-primary-lighter;
+$color-button-hover-outline: $color-primary-lighter;
+$color-button-disabled-outline: $color-primary-lightest;
 $color-button-text-disabled: $color-primary-light;
 
 :export {

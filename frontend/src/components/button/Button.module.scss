@@ -18,6 +18,11 @@
   padding: 0.5rem 1rem;
 }
 
+.buttonOutlined{
+  outline: 2px solid colors.$color-button-outline;
+  background-color: colors.$color-button-background-outlined;
+}
+
 .buttonEnabled {
   @include components.buttonHover {
     cursor: pointer;

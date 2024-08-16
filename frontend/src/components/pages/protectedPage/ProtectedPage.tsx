@@ -51,9 +51,11 @@ export const ProtectedPage: React.FC<IProtectedPageProps> = (props) => {
             )}
           </div>
 
-          <SpinnerButton displaySpinner={isLoggingOut} onClick={onLogout}>{`${t(
-            texts.logout.title
-          )} (${session.username})`}</SpinnerButton>
+          <SpinnerButton
+            displaySpinner={isLoggingOut}
+            onClick={onLogout}
+            isOutlined
+          >{`${t(texts.logout.title)} (${session.username})`}</SpinnerButton>
         </div>
         <ErrorDisplay className={styles.errorDisplay} />
         <div>{props.children}</div>

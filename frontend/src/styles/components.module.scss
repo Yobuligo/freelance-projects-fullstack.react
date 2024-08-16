@@ -10,13 +10,17 @@
 .buttonActive {
   background-color: colors.$color-button-hover;
   color: colors.$color-button-text-hover;
+
+  &.buttonOutlined {
+    background-color: colors.$color-button-hover-outline;
+  }
 }
 
-.heading{
+.heading {
   font-family: "MerriweatherSans";
 }
 
-.headingPageContent{
+.headingPageContent {
   @extend .heading;
   font-size: medium;
   font-weight: 500;
