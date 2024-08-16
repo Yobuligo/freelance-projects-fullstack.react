@@ -1,7 +1,7 @@
-@import "../../styles/colors.module.scss";
+@use "../../styles/colors.module.scss";
 
 .tabItem {
-  color: $color-tab-unselected;
+  color: colors.$color-tab-unselected;
   font-size: medium;
   font-weight: 600;
   font-family: "MerriweatherSans";
@@ -9,10 +9,10 @@
 
   &:hover {
     cursor: pointer;
-    color: $color-tab-selected;
+    color: colors.$color-tab-selected;
   }
 }
 
 .selectedTabItem {
-  color: $color-tab-selected;
+  color: colors.$color-tab-selected;
 }

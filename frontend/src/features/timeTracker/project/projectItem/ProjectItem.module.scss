@@ -1,6 +1,6 @@
-@import "../../../../styles/colors.module.scss";
-@import "../../../../styles/dimensions.scss";
-@import "../../../../styles/mixins.scss";
+@use "../../../../styles/colors.module.scss";
+@use "../../../../styles/dimensions.scss";
+@use "../../../../styles/mixins.scss";
 
 .projectItem {
   display: flex;
@@ -29,21 +29,21 @@
 .headerTitleContainer {
   display: flex;
   flex-direction: row;
-  column-gap: $negative-space;
+  column-gap: dimensions.$negative-space;
   align-items: start;
   cursor: pointer;
 }
 
 .input {
   margin: 0;
-  color: $color-primary-dark;
+  color: colors.$color-primary-dark;
   font-size: large;
   font-weight: 600;
   width: 90%;
 }
 
 .inputDisabled {
-  @include transparent;
+  @include mixins.transparent;
   pointer-events: none;
 }
 
@@ -55,24 +55,24 @@
 }
 
 .totalDurationTitle {
-  color: $color-primary-dark;
+  color: colors.$color-primary-dark;
   font-size: large;
 }
 
 .totalDuration {
-  color: $color-primary-dark;
+  color: colors.$color-primary-dark;
   font-size: large;
   font-weight: 600;
 }
 
 .currentDurationTitle {
-  color: $color-text;
+  color: colors.$color-text;
   font-size: large;
   text-align: right;
 }
 
 .currentDuration {
-  color: $color-text;
+  color: colors.$color-text;
   font-size: x-large;
   text-align: right;
 }

@@ -1,4 +1,4 @@
-@import "./colors.module.scss";
+@use "./colors.module.scss";
 
 @mixin buttonHover {
   &:hover {
@@ -8,18 +8,18 @@
 }
 
 .buttonActive {
-  background-color: $color-button-hover;
-  color: $color-button-text-hover;
+  background-color: colors.$color-button-hover;
+  color: colors.$color-button-text-hover;
 }
 
 @mixin iconHover {
   &:hover {
-    fill: $color-button-hover;
+    fill: colors.$color-button-hover;
   }
 }
 
 .icon {
-  fill: $color-primary-dark;
+  fill: colors.$color-primary-dark;
 }
 
 .iconHoverable {
@@ -34,12 +34,12 @@
 }
 
 .iconDisabled {
-  fill: $color-button-text-disabled;
+  fill: colors.$color-button-text-disabled;
 }
 
 .input {
   font-size: large;
   padding: 0.4rem 0.25rem;
   outline: none;
-  color: $color-primary-dark;
+  color: colors.$color-primary-dark;
 }

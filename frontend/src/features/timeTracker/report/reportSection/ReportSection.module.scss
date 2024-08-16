@@ -1,5 +1,5 @@
-@import "../../../../styles/mixins.scss";
-@import "../../../../styles/dimensions.scss";
+@use "../../../../styles/mixins.scss";
+@use "../../../../styles/dimensions.scss";
 
 .reportSection {
   display: flex;
@@ -12,7 +12,7 @@
   flex-direction: column;
   row-gap: 1rem;
 
-  @include medium-screen {
+  @include mixins.medium-screen {
     display: flex;
     flex-direction: row;
     column-gap: 1rem;

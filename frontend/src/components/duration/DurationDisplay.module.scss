@@ -1,4 +1,4 @@
-@import '../../styles/colors.module.scss';
+@use '../../styles/colors.module.scss';
 
 .durationDisplay {
   display: flex;
@@ -7,5 +7,5 @@
 
 .time {
   font-size: x-large;
-  color: $color-primary-dark;
+  color: colors.$color-primary-dark;
 }

@@ -1,4 +1,4 @@
-@import "../../styles/mixins.scss";
+@use "../../styles/mixins.scss";
 
 .crudButtonPanel {
   display: flex;
@@ -6,5 +6,5 @@
 }
 
 .button {
-  @include transparent;
+  @include mixins.transparent;
 }

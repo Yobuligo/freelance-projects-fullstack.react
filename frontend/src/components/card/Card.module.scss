@@ -1,8 +1,8 @@
-@import '../../styles/colors.module.scss';
-@import '../../styles/mixins.scss';
+@use '../../styles/colors.module.scss';
+@use '../../styles/mixins.scss';
 
 .card {
   border-radius: 8px;
   padding: 0.5rem;
-  @include glassy($color-secondary);
+  @include mixins.glassy(colors.$color-secondary);
 }

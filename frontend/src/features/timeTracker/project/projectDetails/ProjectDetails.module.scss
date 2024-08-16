@@ -1,14 +1,14 @@
-@import "../../../../styles/mixins.scss";
-@import "../../../../styles/dimensions.scss";
+@use "../../../../styles/mixins.scss";
+@use "../../../../styles/dimensions.scss";
 
 .projectDetails {
   display: flex;
   flex-direction: column;
-  row-gap: $negative-space;
+  row-gap: dimensions.$negative-space;
 }
 
 .button {
-  @include transparent;
+  @include mixins.transparent;
   text-align: start;
   align-self: flex-start;
 }

@@ -1,4 +1,4 @@
-@import "../../../styles/dimensions.scss";
+@use "../../../styles/dimensions.scss";
 
 .opportunityDetails {
   height: 100%;
@@ -7,7 +7,7 @@
 .item {
   display: flex;
   flex-direction: row;
-  column-gap: $negative-space;
+  column-gap: dimensions.$negative-space;
   align-items: center;
 }
 

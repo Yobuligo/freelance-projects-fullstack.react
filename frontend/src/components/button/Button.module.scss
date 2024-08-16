@@ -1,17 +1,17 @@
-@import "../../styles/colors.module.scss";
-@import "../../styles/components.module.scss";
-@import "../../styles/dimensions.scss";
+@use "../../styles/colors.module.scss";
+@use "../../styles/components.module.scss";
+@use "../../styles/dimensions.scss";
 
 .button {
   display: flex;
   flex-direction: row;
-  column-gap: $negative-space;
+  column-gap: dimensions.$negative-space;
   margin: 0;
   font-size: medium;
   font-weight: 600;
   font-family: "SourceSans3";
-  color: $color-button-text;
-  background-color: $color-button-background;
+  color: colors.$color-button-text;
+  background-color: colors.$color-button-background;
   outline: none;
   border:none;
   border-radius: 8px;
@@ -19,15 +19,15 @@
 }
 
 .buttonEnabled {
-  @include buttonHover {
+  @include components.buttonHover {
     cursor: pointer;
   }
 }
 
 .buttonDisabled {
-  background-color: $color-button-disabled;
+  background-color: colors.$color-button-disabled;
 }
 
 .buttonDisabled {
-  color: $color-button-text-disabled;
+  color: colors.$color-button-text-disabled;
 }

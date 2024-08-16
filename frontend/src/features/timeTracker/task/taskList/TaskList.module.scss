@@ -1,7 +1,7 @@
-@import "../../../../styles/dimensions.scss";
+@use "../../../../styles/dimensions.scss";
 
 .taskList {
   display: flex;
   flex-direction: column;
-  row-gap: $negative-space;
+  row-gap: dimensions.$negative-space;
 }

@@ -1,9 +1,9 @@
-@import "../../../styles/dimensions.scss";
+@use "../../../styles/dimensions.scss";
 
 .protectedPage {
   display: flex;
   flex-direction: column;
-  row-gap: $negative-space;
+  row-gap: dimensions.$negative-space;
 }
 
 .header {
@@ -17,5 +17,5 @@
 }
 
 .errorDisplay {
-  margin-bottom: $negative-space;
+  margin-bottom: dimensions.$negative-space;
 }

@@ -1,5 +1,6 @@
-@import "../../../../styles/mixins.scss";
-@import "../../../../styles/dimensions.scss";
+@use "../../../../styles/mixins.scss";
+@use "../../../../styles/dimensions.scss";
+@use "../../../../styles/colors.module.scss";
 
 .taskItem {
   display: flex;
@@ -16,7 +17,7 @@
   display: flex;
   flex-direction: column;
 
-  @include medium-screen {
+  @include mixins.medium-screen {
     flex-direction: row;
     column-gap: 2rem;
   }
@@ -24,19 +25,19 @@
 
 .input {
   margin: 0;
-  color: $color-primary-dark;
+  color: colors.$color-primary-dark;
   font-size: large;
   font-weight: 600;
 }
 
 .inputDisabled {
-  @include transparent;
+  @include mixins.transparent;
   pointer-events: none;
 }
 
 .crudButtonPanel {
   align-items: start;
-  @include medium-screen {
+  @include mixins.medium-screen {
     align-items: center;
   }
 }
@@ -47,7 +48,7 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
 
-  @include medium-screen {
+  @include mixins.medium-screen {
     width: 2rem;
     margin: 0;
   }
@@ -55,7 +56,7 @@
 
 .timeSeparator {
   @extend .separator;
-  border-bottom: 1px solid $color-text;
+  border-bottom: 1px solid colors.$color-text;
 }
 
 .duration {
@@ -64,5 +65,5 @@
 }
 
 .durationTitle {
-  margin-bottom: $label-input-space;
+  margin-bottom: dimensions.$label-input-space;
 }

@@ -1,7 +1,7 @@
-@import "../../../styles/dimensions.scss";
+@use "../../../styles/dimensions.scss";
 
 .collapseIcon {
   display: flex;
   flex-direction: row;
-  margin-bottom: $negative-space;
+  margin-bottom: dimensions.$negative-space;
 }

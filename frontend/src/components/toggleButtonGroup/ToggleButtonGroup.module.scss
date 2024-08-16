@@ -1,7 +1,7 @@
-@import "../../styles/dimensions.scss";
+@use "../../styles/dimensions.scss";
 
 .toggleButtonGroup {
   display: flex;
   flex-direction: row;
-  column-gap: $negative-space;
+  column-gap: dimensions.$negative-space;
 }
