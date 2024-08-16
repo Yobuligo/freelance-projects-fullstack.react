@@ -15,12 +15,12 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
 
   return (
     <div className={styles.projectDetails}>
-      <button
-        className={style(styles.button)}
-        onClick={props.onBack}
-      >
+      <button className={style(styles.button)} onClick={props.onBack}>
         <ArrowBackIcon className={componentStyles.iconClickable} />
       </button>
+
+      <h3 className={styles.title}>{props.project.title}</h3>
+
       <TaskSection
         onChange={onChangeTask}
         onDelete={onDeleteTask}
