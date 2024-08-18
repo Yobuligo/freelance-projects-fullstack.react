@@ -94,8 +94,16 @@ export class DateTime {
    * Creates a new Date instance from the given {@link date} and {@link time} string.
    * Considers {@link date} and {@link time} as local time.
    */
-  static create(date: String, time: string): Date {
-    const dateString = `${date}T${time}.000`;
+  static create(date: string, time: string = "00:00:00.000"): Date {
+    // if a time has no seconds, we have to add them
+    let dateString = "";
+    if (time.length === 5) {
+      dateString = `${date}T${time}:00.000`;
+    } else if (time.length === 12) {
+      dateString = `${date}T${time}`;
+    } else {
+      dateString = `${date}T${time}.000`;
+    }
     return new Date(dateString);
   }
 
@@ -246,6 +254,28 @@ export class DateTime {
   }
 
   /**
+   * Returns true if the {@link outer} span contains the {@link inner} span otherwise false.
+   *
+   * @example
+   * const outer: IDateTimeSpan = {
+   *   from: new Date(2024, 8, 1),
+   *   to: new Date(2024, 8, 31),
+   * };
+   * const inner: IDateTimeSpan = {
+   *   from: new Date(2024, 8, 10),
+   *   to: new Date(2024, 8, 15),
+   * };
+   *
+   * // returns true
+   * const contains = DateTime.spanContains(outer, inner);
+   */
+  static spanContains(outer: IDateTimeSpan, inner: IDateTimeSpan): boolean {
+    const compareResultFrom = DateTime.compare(outer.from, inner.from);
+    const compareResultTo = DateTime.compare(outer.to, inner.to);
+    return compareResultFrom <= 0 && compareResultTo >= 0;
+  }
+
+  /**
    * Calculates the difference between the given {@link later} and {@link earlier} dates and returns the result as duration.
    */
   static subtract(later: Date, earlier: Date): Duration {
@@ -352,6 +382,13 @@ export class DateTime {
    */
   static toTime(date: Date): string {
     return this.format(date, "hh:mm");
+  }
+
+  /**
+   * Extracts and returns the weekday of the given {@link date}.
+   */
+  static toWeekday(date: Date): number {
+    return this.toDateInstance(date).getDay();
   }
 
   /**

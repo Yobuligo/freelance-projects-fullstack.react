@@ -112,6 +112,7 @@ export class OpportunityCollector implements IOpportunityCollector {
     );
 
     const now = new Date();
-    return now.getTime() > createdAt.getTime();
+    // return now.getTime() > createdAt.getTime();
+    return true;
   }
 }
