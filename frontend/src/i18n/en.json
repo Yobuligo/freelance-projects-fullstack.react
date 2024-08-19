@@ -17,7 +17,8 @@
         "to": "To",
         "unknownError": "An unknown error occurred",
         "week": "Week",
-        "year": "Year"
+        "year": "Year",
+        "yesterday": "Yesterday"
     },
     "login": {
         "errorLogin": "Unknown error while login",
