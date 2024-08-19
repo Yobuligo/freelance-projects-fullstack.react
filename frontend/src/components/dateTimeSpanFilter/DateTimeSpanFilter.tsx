@@ -15,20 +15,40 @@ export const DateTimeSpanFilter: React.FC<IDateTimeSpanFilterProps> = (
 
   return (
     <div className={styles.dateTimeSpanFilter}>
-      <Toolbar>
-        <Button onClick={viewModel.onClickYesterday} isOutlined>
+      <Toolbar className={styles.toolbar}>
+        <Button
+          onClick={viewModel.onClickYesterday}
+          className={styles.button}
+          isOutlined
+        >
           {t(texts.general.yesterday)}
         </Button>
-        <Button onClick={viewModel.onClickDay} isOutlined>
+        <Button
+          onClick={viewModel.onClickDay}
+          className={styles.button}
+          isOutlined
+        >
           {t(texts.general.day)}
         </Button>
-        <Button onClick={viewModel.onClickWeek} isOutlined>
+        <Button
+          onClick={viewModel.onClickWeek}
+          className={styles.button}
+          isOutlined
+        >
           {t(texts.general.week)}
         </Button>
-        <Button onClick={viewModel.onClickMonth} isOutlined>
+        <Button
+          onClick={viewModel.onClickMonth}
+          className={styles.button}
+          isOutlined
+        >
           {t(texts.general.month)}
         </Button>
-        <Button onClick={viewModel.onClickYear} isOutlined>
+        <Button
+          onClick={viewModel.onClickYear}
+          isOutlined
+          className={styles.button}
+        >
           {t(texts.general.year)}
         </Button>
       </Toolbar>

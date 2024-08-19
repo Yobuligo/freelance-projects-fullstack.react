@@ -9,7 +9,12 @@
 .leftChildren {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   column-gap: dimensions.$negative-space;
   flex-wrap: wrap;
   row-gap: 0.5rem;
+}
+
+.leftIfRightEmpty {
+  width: 100%;
 }

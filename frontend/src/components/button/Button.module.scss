@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: row;
   column-gap: dimensions.$negative-space;
+  align-items: center;
   margin: 0;
   font-size: medium;
   font-weight: 600;
@@ -13,12 +14,12 @@
   color: colors.$color-button-text;
   background-color: colors.$color-button-background;
   outline: none;
-  border:none;
+  border: none;
   border-radius: 8px;
-  padding: 0.5rem 1rem;
+  padding: dimensions.$button-padding;
 }
 
-.buttonOutlined{
+.buttonOutlined {
   outline: 2px solid colors.$color-button-outline;
   background-color: colors.$color-button-background-outlined;
 }

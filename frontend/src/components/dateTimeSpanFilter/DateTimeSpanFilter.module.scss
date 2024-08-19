@@ -20,3 +20,11 @@
     justify-content: space-between;
   }
 }
+
+.button {
+  padding: 0.5rem;
+
+  @include mixins.medium-screen {
+    padding: dimensions.$button-padding;
+  }
+}
