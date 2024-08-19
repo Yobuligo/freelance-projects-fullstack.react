@@ -115,7 +115,7 @@ export const useProjectSectionViewModel = () => {
       id: uuid(),
       startedAt: new Date(),
       projectId: project.id,
-      title: "Development",
+      title: project.defaultTaskTitle ?? "Development",
       createdAt: new Date(),
       updatedAt: new Date(),
     };
