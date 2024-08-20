@@ -105,5 +105,6 @@ export const useProjectItemViewModel = (props: IProjectItemProps) => {
     onStart,
     onStop,
     projectTitle,
+    projectDescription: props.project.description,
   };
 };

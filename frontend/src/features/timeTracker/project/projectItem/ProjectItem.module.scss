@@ -49,6 +49,12 @@
   pointer-events: none;
 }
 
+.projectDescription {
+  display: block;
+  font-style: italic;
+  padding: 0 dimensions.$input-padding-sides;
+}
+
 .durationContainer {
   display: flex;
   flex-direction: column;

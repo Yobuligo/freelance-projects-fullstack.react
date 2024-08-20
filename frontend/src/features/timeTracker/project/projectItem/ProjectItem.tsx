@@ -23,18 +23,23 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
             className={styles.headerTitleContainer}
             onClick={viewModel.onClick}
           >
-            <Input
-              className={style(
-                styles.input,
-                viewModel.displayMode ? styles.inputDisabled : ""
-              )}
-              disabled={false}
-              onChange={viewModel.onChangeProjectTitle}
-              onEnter={viewModel.onConfirm}
-              onEscape={viewModel.onCancel}
-              type="text"
-              value={viewModel.projectTitle}
-            />
+            <div>
+              <Input
+                className={style(
+                  styles.input,
+                  viewModel.displayMode ? styles.inputDisabled : ""
+                )}
+                disabled={false}
+                onChange={viewModel.onChangeProjectTitle}
+                onEnter={viewModel.onConfirm}
+                onEscape={viewModel.onCancel}
+                type="text"
+                value={viewModel.projectTitle}
+              />
+              <span className={styles.projectDescription}>
+                {viewModel.projectDescription}
+              </span>
+            </div>
           </div>
           <div className={styles.headerButtons}>
             <CrudButtonPanel
