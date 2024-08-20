@@ -27,6 +27,7 @@ export class DasAuge implements IProvider {
         const parser = new DOMParser();
         const document = parser.parseFromString(html, "text/html");
         const rootElement = document.getElementById("eliste");
+        const countPages = this.getCountPages(document);
 
         const opportunities = this.extractOpportunities(rootElement);
         resolve(opportunities);
@@ -35,6 +36,35 @@ export class DasAuge implements IProvider {
       }
     });
   }
+  private getCountPages(document: Document) {
+
+  }
+
+  private async fetchOffsetPages(
+    url: string,
+    countPages: number
+  ): Promise<IOpportunity[]> {
+    if (countPages < 2) {
+      return [];
+    }
+
+    return new Promise(async (resolve, reject) => {
+      const opportunities: IOpportunity[] = [];
+      // for (let i = 1; i < countPages; i++) {
+      //   const offset = i * 20;
+      //   const offsetUrl = `${url}&_offset=${offset}`;
+      //   const response = await fetch(offsetUrl);
+      //   const html = await response.text();
+
+      //   const document = this.createDocument(html);
+      //   const rootElement = this.getRootElement(document);
+      //   const extractedOpportunities = this.extractOpportunities(rootElement);
+      //   opportunities.push(...extractedOpportunities);
+      // }
+      resolve(opportunities);
+    });
+  }
+
   private extractOpportunities(
     rootElement: HTMLElement | null
   ): IOpportunity[] {
