@@ -13,8 +13,11 @@ import { uuid } from "../utils/uuid";
 import { IProvider } from "./core/IProvider";
 
 // https://dasauge.de/jobs/stellenangebote/freelancer/s2?begriff=web+entwicklung
+// https://dasauge.de/jobs/stellenangebote/freelancer/?begriff=typescript+react+javascript+express+ABAP
 @Provider(ProviderType.DasAuge, "dasAuge.de")
 export class DasAuge implements IProvider {
+  private host = "https://dasauge.de/jobs/stellenangebote/freelancer/";
+
   request(url: string): Promise<IOpportunity[]> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -26,10 +29,15 @@ export class DasAuge implements IProvider {
 
         const parser = new DOMParser();
         const document = parser.parseFromString(html, "text/html");
-        const rootElement = document.getElementById("eliste");
+        const rootElement = this.getRootElement(document);
         const countPages = this.getCountPages(document);
 
         const opportunities = this.extractOpportunities(rootElement);
+        const opportunitiesOffsetPage = await this.fetchOffsetPages(
+          url,
+          countPages
+        );
+        opportunities.push(...opportunitiesOffsetPage);
         resolve(opportunities);
       } catch (error) {
         reject(error);
@@ -37,7 +45,16 @@ export class DasAuge implements IProvider {
     });
   }
   private getCountPages(document: Document) {
+    return document.getElementsByClassName("zlinks").length;
+  }
 
+  private getRootElement(document: Document): Element {
+    return document.getElementById("eliste") ?? this.throwParsingError();
+  }
+
+  private createDocument(html: string): Document {
+    const parser = new DOMParser();
+    return parser.parseFromString(html, "text/html");
   }
 
   private async fetchOffsetPages(
@@ -48,26 +65,26 @@ export class DasAuge implements IProvider {
       return [];
     }
 
+
     return new Promise(async (resolve, reject) => {
       const opportunities: IOpportunity[] = [];
-      // for (let i = 1; i < countPages; i++) {
-      //   const offset = i * 20;
-      //   const offsetUrl = `${url}&_offset=${offset}`;
-      //   const response = await fetch(offsetUrl);
-      //   const html = await response.text();
+      for (let i = 2; i <= countPages; i++) {
+        const offset = i;
+        const splitUrl = url.split(this.host);
+        const offsetUrl = `${this.host}s${offset}?${splitUrl[1]}`;
+        const response = await fetch(offsetUrl);
+        const html = await response.text();
 
-      //   const document = this.createDocument(html);
-      //   const rootElement = this.getRootElement(document);
-      //   const extractedOpportunities = this.extractOpportunities(rootElement);
-      //   opportunities.push(...extractedOpportunities);
-      // }
+        const document = this.createDocument(html);
+        const rootElement = document.getElementById("eliste");
+        const extractedOpportunities = this.extractOpportunities(rootElement);
+        opportunities.push(...extractedOpportunities);
+      }
       resolve(opportunities);
     });
   }
 
-  private extractOpportunities(
-    rootElement: HTMLElement | null
-  ): IOpportunity[] {
+  private extractOpportunities(rootElement: Element | null): IOpportunity[] {
     const opportunities: IOpportunity[] = [];
     if (isNull(rootElement)) return [];
     const htmlSearch = new HTMLSearch(rootElement!);
@@ -159,8 +176,8 @@ export class DasAuge implements IProvider {
     return title.replace("\r\n\t\t\t\t\t\t\t\t\t", " ");
   }
 
-  private throwParsingError() {
-    error(
+  private throwParsingError(): never {
+    return error(
       "Error in provider 'dasAuge.de' during parsing. The site structure might have changed."
     );
   }
