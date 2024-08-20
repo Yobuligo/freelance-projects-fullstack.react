@@ -8,9 +8,9 @@ import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
-import { Settings } from "../../settings/settings/Settings";
 import { OpportunityIFrame } from "../opportunityIFrame/OpportunityIFrame";
 import { OpportunityList } from "../opportunityList/OpportunityList";
+import { OpportunitySettings } from "../opportunitySettings/opportunitySettings/OpportunitySettings";
 import { OpportunitySubList } from "../opportunitySubList/OpportunitySubList";
 import styles from "./OpportunitySection.module.scss";
 import { useOpportunitySectionViewModel } from "./useOpportunitySectionViewModel";
@@ -48,7 +48,7 @@ export const OpportunitySection: React.FC = () => {
 
       {viewModel.displaySettings && (
         <div className={styles.settingsSection}>
-          <Settings />
+          <OpportunitySettings />
         </div>
       )}
       <div

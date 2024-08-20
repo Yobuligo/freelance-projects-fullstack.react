@@ -51,6 +51,15 @@
         "captionReloadButton": "Reload",
         "tickOld": "Tick old"
     },
+    "opportunitySettings":{
+        "title": "Settings",
+        "addNewSearchUrl": "New search url",
+        "savedSearches": "Saved searches",
+        "generalSettings": {
+            "caption": "General settings",
+            "openLinkInline": "Open link on click inline"
+        }
+    },
     "projectAdd": {
         "addProject": "Add project"
     },
@@ -77,15 +86,6 @@
     },
     "providerRequestList": {
         "noProviderRequests": "No provider requests available"
-    },
-    "settingsSection": {
-        "title": "Settings",
-        "addNewSearchUrl": "New search url",
-        "savedSearches": "Saved searches",
-        "generalSettings": {
-            "caption": "General settings",
-            "openLinkInline": "Open link on click inline"
-        }
     },
     "taskItem": {
         "deleteQuestion": "Would you like to delete task '{{title}}'?",

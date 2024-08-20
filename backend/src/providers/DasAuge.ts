@@ -33,11 +33,11 @@ export class DasAuge implements IProvider {
         const countPages = this.getCountPages(document);
 
         const opportunities = this.extractOpportunities(rootElement);
-        const opportunitiesOffsetPage = await this.fetchOffsetPages(
-          url,
-          countPages
-        );
-        opportunities.push(...opportunitiesOffsetPage);
+        // const opportunitiesOffsetPage = await this.fetchOffsetPages(
+        //   url,
+        //   countPages
+        // );
+        // opportunities.push(...opportunitiesOffsetPage);
         resolve(opportunities);
       } catch (error) {
         reject(error);

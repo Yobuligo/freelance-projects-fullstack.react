@@ -6,9 +6,9 @@ import { useSession } from "../../../hooks/useSession";
 import { useUserProviderRequests } from "../../../hooks/useUserProviderRequests";
 import { IUserProviderRequest } from "../../../shared/model/IUserProviderRequest";
 import { ProviderType } from "../../../shared/types/ProviderType";
-import { UserProviderRequestApi } from "./../../../api/UserProviderRequestApi";
+import { UserProviderRequestApi } from "../../../api/UserProviderRequestApi";
 
-export const useSettingsViewModel = () => {
+export const useOpportunitySettingsViewModel = () => {
   const [session] = useSession();
   const [userProviderRequests, setUserProviderRequests] =
     useUserProviderRequests();
