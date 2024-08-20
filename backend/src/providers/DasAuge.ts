@@ -50,10 +50,14 @@ export class DasAuge implements IProvider {
       const companyInfoHtmlSearch = projectHTMLSearch.className(
         "boxsubline toplinie"
       );
-      const company = this.extractCompany(companyInfoHtmlSearch) ?? "";
+      const companyInfoNode = companyInfoHtmlSearch.first();
+      if (isInitial(companyInfoNode)) this.throwParsingError();
+      const company = this.extractCompany(
+        new HTMLSearch(companyInfoNode!.origin)
+      );
       const location = this.extractLocation(
         projectHTMLSearch,
-        companyInfoHtmlSearch
+        new HTMLSearch(companyInfoNode!.origin)
       );
       const url = this.createUrl(
         projectHTMLSearch.tagName("a").firstAttrValue("href")
@@ -81,12 +85,8 @@ export class DasAuge implements IProvider {
     return `${host}${url}`;
   }
 
-  private extractCompany(companyInfoHTMLSearch: IHTMLSearch) {
-    const companyNode = companyInfoHTMLSearch.first();
-    if (isInitial(companyNode)) this.throwParsingError();
-    const companySearch = new HTMLSearch(companyNode!.origin)
-    return companySearch.findAt(2)?.value;
-    // const company = companyInfoHtmlSearch.tagName("em").firstValue();
+  private extractCompany(companySearch: IHTMLSearch) {
+    return companySearch.findAt(5)?.value ?? "";
   }
 
   private extractDate(projectHTMLSearch: IHTMLSearch): Date {
@@ -96,19 +96,38 @@ export class DasAuge implements IProvider {
 
   private extractLocation(
     projectHTMLSearch: IHTMLSearch,
-    companyInfoHTMLSearch: IHTMLSearch
+    companySearch: IHTMLSearch
   ): string {
     let location = projectHTMLSearch.className("fernarbeit").firstValue();
     if (isInitial(location)) {
-      location = companyInfoHTMLSearch.findAt(2)?.firstValue() ?? "";
+      const brNode = companySearch.findAt(7);
+      if (isInitial(brNode)) return "";
+      location = brNode!.origin!.nextSibling!.nodeValue ?? "";
     }
     return location;
   }
 
   private extractTitle(projectHTMLSearch: IHTMLSearch): string {
-    const h2 = projectHTMLSearch.className("hassub").first();
-    if (isInitial(h2)) this.throwParsingError();
-    return new HTMLSearch(h2!.origin).tagName("a").firstValue();
+    const h2Element = projectHTMLSearch.className("hassub").first();
+    if (isInitial(h2Element)) this.throwParsingError();
+    // const title = new HTMLSearch(h2!.origin).tagName("a").firstValue();
+
+    const h2HTMLSearch = new HTMLSearch(h2Element!.origin);
+    const title = h2HTMLSearch.tagName("a").firstValue();
+    if (isInitial(title)) {
+      //title is wrapped into b-element
+      const aElement = h2HTMLSearch.first();
+      if (isInitial(aElement)) this.throwParsingError();
+      const aHTMLSearch = new HTMLSearch(aElement!.origin);
+      const titleElements = aHTMLSearch.find();
+      const filtered = titleElements
+        .filter((element) => {
+          return !isInitial(element.value) && !(element.origin.tagName === "b");
+        })
+        .map((element) => element.value);
+      return filtered.join("");
+    }
+    return title.replace("\r\n\t\t\t\t\t\t\t\t\t", " ");
   }
 
   private throwParsingError() {
