@@ -55,5 +55,5 @@ export interface IHTMLSearch {
   /**
    * Restrict search result by specific {@link tagName}.
    */
-  tagName(tagName: string): IHTMLSearch;
+  applyTagName(tagName: string): IHTMLSearch;
 }

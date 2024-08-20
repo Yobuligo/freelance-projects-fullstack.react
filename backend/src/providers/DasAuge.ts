@@ -60,7 +60,7 @@ export class DasAuge implements IProvider {
         new HTMLSearch(companyInfoNode!.origin)
       );
       const url = this.createUrl(
-        projectHTMLSearch.tagName("a").firstAttrValue("href")
+        projectHTMLSearch.applyTagName("a").firstAttrValue("href")
       );
 
       const opportunity: IOpportunity = {
@@ -110,10 +110,9 @@ export class DasAuge implements IProvider {
   private extractTitle(projectHTMLSearch: IHTMLSearch): string {
     const h2Element = projectHTMLSearch.className("hassub").first();
     if (isInitial(h2Element)) this.throwParsingError();
-    // const title = new HTMLSearch(h2!.origin).tagName("a").firstValue();
-
     const h2HTMLSearch = new HTMLSearch(h2Element!.origin);
-    const title = h2HTMLSearch.tagName("a").firstValue();
+    const title = h2HTMLSearch.applyTagName("a").firstValue();
+
     if (isInitial(title)) {
       //title is wrapped into b-element
       const aElement = h2HTMLSearch.first();
@@ -122,7 +121,7 @@ export class DasAuge implements IProvider {
       const titleElements = aHTMLSearch.find();
       const filtered = titleElements
         .filter((element) => {
-          return !isInitial(element.value) && !(element.origin.tagName === "b");
+          return !isInitial(element.value) && !(element.tagName === "b");
         })
         .map((element) => element.value);
       return filtered.join("");

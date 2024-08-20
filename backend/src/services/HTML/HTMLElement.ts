@@ -50,9 +50,11 @@ export class HTMLElement implements IHTMLElement {
     return this.htmlSearch.lastValue();
   }
 
-  tagName(tagName: string): IHTMLSearch {
-    return this.htmlSearch.tagName(tagName);
+  applyTagName(tagName: string): IHTMLSearch {
+    return this.htmlSearch.applyTagName(tagName);
   }
+
+  tagName: string = this.origin.tagName;
 
   get value(): string {
     return (

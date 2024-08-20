@@ -107,7 +107,7 @@ export class Freelance implements IProvider {
     const url = htmlSearch
       .className("action-icons-overlap")
       .first()
-      ?.tagName("a")
+      ?.applyTagName("a")
       .firstAttrValue("href");
     return url
       ? this.createUrl(url)
@@ -119,7 +119,7 @@ export class Freelance implements IProvider {
       htmlSearch
         .className("action-icons-overlap")
         .first()
-        ?.tagName("a")
+        ?.applyTagName("a")
         .firstValue() ?? "";
     return this.harmonizeTitle(title);
   }
@@ -129,7 +129,7 @@ export class Freelance implements IProvider {
       htmlSearch
         .className("icon-list")
         .first()
-        ?.tagName("li")
+        ?.applyTagName("li")
         .indexFinding(1)
         .first()
         ?.lastValue() ?? "";
@@ -141,7 +141,7 @@ export class Freelance implements IProvider {
       htmlSearch
         .className("icon-list")
         .first()
-        ?.tagName("li")
+        ?.applyTagName("li")
         .last()
         ?.lastValue() ?? "";
 

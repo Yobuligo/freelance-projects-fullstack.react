@@ -63,7 +63,7 @@ export class HTMLSearch implements IHTMLSearch {
     return this.last()?.value ?? "";
   }
 
-  tagName(tagName: string): IHTMLSearch {
+  applyTagName(tagName: string): IHTMLSearch {
     this._tagName = tagName;
     return this;
   }
