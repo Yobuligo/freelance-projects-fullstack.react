@@ -14,6 +14,11 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
   const onChangeTask = (task: ITask) =>
     props.onChangeTask?.(props.project, task);
 
+  const onDelete = () => {
+    props.onDeleteProject?.(props.project);
+    props.onBack?.();
+  };
+
   return (
     <div className={styles.projectDetails}>
       <button className={style(styles.button)} onClick={props.onBack}>
@@ -21,10 +26,7 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
       </button>
 
       <h3 className={styles.title}>{props.project.title}</h3>
-      <ProjectSettings
-        project={props.project}
-        onDelete={props.onDeleteProject}
-      />
+      <ProjectSettings project={props.project} onDelete={onDelete} />
       <TaskSection
         onChange={onChangeTask}
         onDelete={onDeleteTask}

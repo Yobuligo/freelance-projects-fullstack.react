@@ -1,3 +1,5 @@
+@use '../../../../styles/colors.module.scss';
+
 .settingsContent {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -9,6 +11,10 @@
 
 .settingsTitle {
     grid-column: 1/4;
+}
+
+.dangerZoneTitle {
+    color: colors.$color-error;
 }
 
 .settingsSectionFirstElement {

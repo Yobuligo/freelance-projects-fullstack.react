@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { IProjectSettingsProps } from "./IProjectSettingsProps";
@@ -7,7 +6,6 @@ import { IProjectSettingsProps } from "./IProjectSettingsProps";
 export const useProjectSettingsViewModel = (props: IProjectSettingsProps) => {
   const { t } = useTranslation();
   useState(true);
-  const navigate = useNavigate();
 
   const onDeleteProject = () => {
     if (
@@ -16,8 +14,6 @@ export const useProjectSettingsViewModel = (props: IProjectSettingsProps) => {
       )
     ) {
       props.onDelete?.(props.project);
-      //fix this to only navigate to project overview
-      navigate(-1);
     }
   };
 

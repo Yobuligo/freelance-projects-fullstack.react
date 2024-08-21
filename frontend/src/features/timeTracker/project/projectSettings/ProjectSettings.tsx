@@ -9,6 +9,7 @@ import { IProjectSettingsProps } from "./IProjectSettingsProps";
 import styles from "./ProjectSettings.module.scss";
 import { useProjectSettingsViewModel } from "./useProjectSettingsViewModel";
 import { Button } from "../../../../components/button/Button";
+import { style } from "../../../../utils/style";
 
 export const ProjectSettings: React.FC<IProjectSettingsProps> = (props) => {
   const { t } = useTranslation();
@@ -48,9 +49,13 @@ export const ProjectSettings: React.FC<IProjectSettingsProps> = (props) => {
         </SettingsSection>
         <SettingsSection
           title={t(texts.projectSettings.dangerZone)}
-          classNameTitle={styles.settingsTitle}
+          classNameTitle={style(styles.settingsTitle, styles.dangerZoneTitle)}
         >
-          <Button className={styles.deleteButton} isOutlined>
+          <Button
+            className={styles.deleteButton}
+            isOutlined
+            onClick={viewModel.onDeleteProject}
+          >
             <DeleteIcon id={id} onClick={viewModel.onDeleteProject} />
             <label htmlFor={id}>{t(texts.projectSettings.deleteProject)}</label>
           </Button>
