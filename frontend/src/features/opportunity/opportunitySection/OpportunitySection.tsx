@@ -1,13 +1,13 @@
 import { ReactComponent as CheckAllIcon } from "../../../assets/check-all.svg";
 import { ReactComponent as CheckOldIcon } from "../../../assets/check-old.svg";
 import { ReactComponent as ReloadIcon } from "../../../assets/reload.svg";
-import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
 import { Button } from "../../../components/button/Button";
 import { Card } from "../../../components/card/Card";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { SettingsIcon } from "../../../icons/SettingsIcon";
 import { OpportunityIFrame } from "../opportunityIFrame/OpportunityIFrame";
 import { OpportunityList } from "../opportunityList/OpportunityList";
 import { OpportunitySettings } from "../opportunitySettings/opportunitySettings/OpportunitySettings";
