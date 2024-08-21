@@ -3,6 +3,7 @@ import { ITask } from "../../../../shared/model/ITask";
 import componentStyles from "../../../../styles/components.module.scss";
 import { style } from "../../../../utils/style";
 import { TaskSection } from "../../task/taskSection/TaskSection";
+import { ProjectSettings } from "../projectSettings/ProjectSettings";
 import { IProjectDetailsProps } from "./IProjectDetailsProps";
 import styles from "./ProjectDetails.module.scss";
 
@@ -20,7 +21,10 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
       </button>
 
       <h3 className={styles.title}>{props.project.title}</h3>
-
+      <ProjectSettings
+        project={props.project}
+        onDelete={props.onDeleteProject}
+      />
       <TaskSection
         onChange={onChangeTask}
         onDelete={onDeleteTask}

@@ -1,6 +1,5 @@
 @use "../../../../styles/colors.module.scss";
 @use "../../../../styles/dimensions.scss";
-@use "../../../../styles/mixins.scss";
 @use "../../../../styles/components.module.scss";
 
 .projectItem {
@@ -29,24 +28,14 @@
 
 .headerTitleContainer {
   display: flex;
-  flex-direction: row;
-  column-gap: dimensions.$negative-space;
-  align-items: start;
+  flex-direction: column;
   cursor: pointer;
 }
 
-.input {
-  margin: 0;
-  color: colors.$color-primary-dark;
+.projectTitle {
   font-size: large;
   font-weight: 600;
-  width: 90%;
   @extend .heading;
-}
-
-.inputDisabled {
-  @include mixins.transparent;
-  pointer-events: none;
 }
 
 .projectDescription {
@@ -85,9 +74,7 @@
   text-align: right;
 }
 
-.toolbar {
-  display: flex;
-  flex-direction: row;
+.toolbarChildren {
   justify-content: right;
 }
 

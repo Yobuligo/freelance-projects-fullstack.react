@@ -1,4 +1,6 @@
+import { style } from "../../utils/style";
 import { IInputProps } from "./IInputProps";
+import styles from "./Input.module.scss";
 
 export const Input: React.FC<IInputProps> = (props) => {
   const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -13,5 +15,11 @@ export const Input: React.FC<IInputProps> = (props) => {
 
   const { onEnter, onEscape, ...inputProps } = props;
 
-  return <input {...inputProps} onKeyDown={onKeyDown} />;
+  return (
+    <input
+      {...inputProps}
+      onKeyDown={onKeyDown}
+      className={style(props.className, props.disabled ? styles.disabled : "")}
+    />
+  );
 };

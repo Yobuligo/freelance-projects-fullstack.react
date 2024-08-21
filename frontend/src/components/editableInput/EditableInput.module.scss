@@ -1,0 +1,13 @@
+@use '../../styles/colors.module.scss';
+@use '../../styles/mixins.scss';
+@use '../../styles/components.module.scss';
+
+.input {
+    margin: 0;
+    @extend .heading;
+}
+
+.inputDisabled {
+    @include mixins.transparent;
+    pointer-events: none;
+}

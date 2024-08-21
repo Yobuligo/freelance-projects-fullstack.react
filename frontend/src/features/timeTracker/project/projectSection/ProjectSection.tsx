@@ -20,6 +20,7 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
           onBack={viewModel.onProjectUnselected}
           onChangeTask={viewModel.onChangeTask}
           onDeleteTask={viewModel.onDeleteTask}
+          onDeleteProject={viewModel.onDeleteProject}
         />
       ) : (
         <>
@@ -42,7 +43,6 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
                   <ProjectList
                     onChange={viewModel.onChange}
                     onClick={viewModel.onProjectSelected}
-                    onDelete={viewModel.onDelete}
                     onStart={viewModel.onStart}
                     onStop={viewModel.onStop}
                     projects={viewModel.findRecentlyUsedProjects()}
@@ -54,7 +54,6 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
                 <ProjectList
                   onChange={viewModel.onChange}
                   onClick={viewModel.onProjectSelected}
-                  onDelete={viewModel.onDelete}
                   onStart={viewModel.onStart}
                   onStop={viewModel.onStop}
                   projects={viewModel.projects}

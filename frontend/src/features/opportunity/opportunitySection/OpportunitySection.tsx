@@ -27,7 +27,7 @@ export const OpportunitySection: React.FC = () => {
   return (
     <div className={styles.opportunitySection}>
       <Toolbar
-        className={styles.toolbar}
+        classNameToolbar={styles.toolbar}
         rightChildren={
           <Button onClick={viewModel.onToggleDisplaySettings}>
             <SettingsIcon className={styles.icon} />

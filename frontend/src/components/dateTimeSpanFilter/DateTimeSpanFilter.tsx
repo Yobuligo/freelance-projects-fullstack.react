@@ -15,7 +15,7 @@ export const DateTimeSpanFilter: React.FC<IDateTimeSpanFilterProps> = (
 
   return (
     <div className={styles.dateTimeSpanFilter}>
-      <Toolbar className={styles.toolbar}>
+      <Toolbar>
         <Button
           onClick={viewModel.onClickYesterday}
           className={styles.button}

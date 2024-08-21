@@ -1,7 +1,11 @@
 import { ReactNode } from "react";
 
 export interface IToolbarProps {
-  className?: string;
+  classNameToolbar?: string;
+  /**
+   * Defines the className for the left side children.
+   */
+  classNameChildren?: string;
   /**
    * Defines the toolbar elements at the left side. This is the default.
    */

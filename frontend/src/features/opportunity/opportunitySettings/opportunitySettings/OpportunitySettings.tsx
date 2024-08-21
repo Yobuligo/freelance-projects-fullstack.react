@@ -12,7 +12,7 @@ export const OpportunitySettings: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <Settings title={t(texts.opportunitySettings.title)}>
+    <Settings>
       <SettingsSection title={t(texts.opportunitySettings.addNewSearchUrl)}>
         <ProviderRequestInput onAdd={viewModel.onAddUserProviderRequest} />
       </SettingsSection>
@@ -25,9 +25,7 @@ export const OpportunitySettings: React.FC = () => {
           userProviderRequests={viewModel.userProviderRequests}
         />
       </SettingsSection>
-      <SettingsSection
-        title={t(texts.opportunitySettings.generalSettings.caption)}
-      >
+      <SettingsSection title={t(texts.general.generalSettings)}>
         <OpportunitySettingsConfigList />
       </SettingsSection>
     </Settings>

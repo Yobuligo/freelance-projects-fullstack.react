@@ -10,9 +10,13 @@
         "apply": "Apply",
         "backToStart": "Back to Start",
         "day": "Day",
+        "description": "Description",
         "from": "From",
+        "generalSettings": "General settings",
         "logoutInvalidSession": "Your were logged out due an invalid or expired session",
         "month": "Month",
+        "name": "Name",
+        "settings": "Settings",
         "title": "New project",
         "to": "To",
         "unknownError": "An unknown error occurred",
@@ -51,12 +55,10 @@
         "captionReloadButton": "Reload",
         "tickOld": "Tick old"
     },
-    "opportunitySettings":{
-        "title": "Settings",
+    "opportunitySettings": {
         "addNewSearchUrl": "New search url",
         "savedSearches": "Saved searches",
         "generalSettings": {
-            "caption": "General settings",
             "openLinkInline": "Open link on click inline"
         }
     },
@@ -77,6 +79,12 @@
         "all": "All",
         "errorLoadingProjects": "Unknown error while loading projects",
         "recentlyUsedProjects": "Recently"
+    },
+    "projectSettings": {
+        "deleteProject": "Delete project",
+        "details": "Project details",
+        "name": "Name",
+        "prefillValue": "Prefill task name"
     },
     "providerRequestInput": {
         "providerType": "Provider Type",
