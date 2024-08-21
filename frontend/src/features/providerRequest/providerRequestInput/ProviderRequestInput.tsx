@@ -4,6 +4,7 @@ import { LabeledInput } from "../../../components/labeledInput/LabeledInput";
 import { LabeledSelect } from "../../../components/labeledSelect/LabeledSelect";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { style } from "../../../utils/style";
 import { IProviderRequestInputProps } from "./IProviderRequestInputProps";
 import styles from "./ProviderRequestInput.module.scss";
 import { useProviderRequestInputViewModel } from "./useProviderRequestInputViewModel";
@@ -16,7 +17,7 @@ export const ProviderRequestInput: React.FC<IProviderRequestInputProps> = (
 
   return (
     <form
-      className={styles.providerRequestInput}
+      className={style(styles.providerRequestInput, props.className)}
       onChange={viewModel.onChangeForm}
     >
       <LabeledSelect
