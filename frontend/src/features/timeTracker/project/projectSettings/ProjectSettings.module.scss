@@ -1,8 +1,21 @@
-.settingsSection {
+.settingsContent {
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-auto-rows: 1fr;
     column-gap: 1rem;
     align-items: center;
+    width: fit-content;
+}
+
+.settingsTitle {
+    grid-column: 1/4;
+}
+
+.settingsSectionFirstElement {
+    margin-left: 1rem;
+}
+
+.deleteButton {
+    @extend .settingsSectionFirstElement;
     width: fit-content;
 }

@@ -30,7 +30,9 @@ export const EditableInput: React.FC<IEditableInputProps> = (props) => {
 
   return (
     <>
-      <label htmlFor={id}>{props.label}</label>
+      <label htmlFor={id} className={props.classNameLabel}>
+        {props.label}
+      </label>
       <Input
         id={id}
         className={style(styles.input, displayMode ? styles.inputDisabled : "")}

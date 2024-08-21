@@ -81,10 +81,11 @@
         "recentlyUsedProjects": "Recently"
     },
     "projectSettings": {
+        "dangerZone": "Danger zone",
         "deleteProject": "Delete project",
         "details": "Project details",
         "name": "Name",
-        "prefillValue": "Prefill task name"
+        "prefillValue": "Prefilled task name"
     },
     "providerRequestInput": {
         "providerType": "Provider Type",

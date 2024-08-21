@@ -8,6 +8,7 @@ import { SettingsSection } from "../../../settings/settingsSection/SettingsSecti
 import { IProjectSettingsProps } from "./IProjectSettingsProps";
 import styles from "./ProjectSettings.module.scss";
 import { useProjectSettingsViewModel } from "./useProjectSettingsViewModel";
+import { Button } from "../../../../components/button/Button";
 
 export const ProjectSettings: React.FC<IProjectSettingsProps> = (props) => {
   const { t } = useTranslation();
@@ -16,31 +17,45 @@ export const ProjectSettings: React.FC<IProjectSettingsProps> = (props) => {
 
   return (
     <Settings>
-      <SettingsSection title={t(texts.projectSettings.details)}>
-        <div className={styles.settingsSection}>
+      <div className={styles.settingsContent}>
+        <SettingsSection
+          title={t(texts.projectSettings.details)}
+          classNameTitle={styles.settingsTitle}
+        >
           <EditableInput
+            classNameLabel={styles.settingsSectionFirstElement}
             label={t(texts.general.name)}
             value={viewModel.projectTitle}
             onChange={viewModel.onChangeProjectTitle}
           />
           <EditableInput
+            classNameLabel={styles.settingsSectionFirstElement}
             label={t(texts.general.description)}
             value={viewModel.projectDescription}
             onChange={viewModel.onChangeProjectDescription}
           />
-          <label htmlFor={id}>{t(texts.projectSettings.deleteProject)}</label>
-          <DeleteIcon id={id} onClick={viewModel.onDeleteProject} />
-        </div>
-      </SettingsSection>
-      <SettingsSection title={t(texts.general.generalSettings)}>
-      <div className={styles.settingsSection}>
-        <EditableInput 
-          label={t(texts.projectSettings.prefillValue)}
-          value={viewModel.taskPrefillValue}
-          onChange={viewModel.onChangeDefaultTaskTitle}
-        />
+        </SettingsSection>
+        <SettingsSection
+          title={t(texts.general.generalSettings)}
+          classNameTitle={styles.settingsTitle}
+        >
+          <EditableInput
+            classNameLabel={styles.settingsSectionFirstElement}
+            label={t(texts.projectSettings.prefillValue)}
+            value={viewModel.taskPrefillValue}
+            onChange={viewModel.onChangeDefaultTaskTitle}
+          />
+        </SettingsSection>
+        <SettingsSection
+          title={t(texts.projectSettings.dangerZone)}
+          classNameTitle={styles.settingsTitle}
+        >
+          <Button className={styles.deleteButton} isOutlined>
+            <DeleteIcon id={id} onClick={viewModel.onDeleteProject} />
+            <label htmlFor={id}>{t(texts.projectSettings.deleteProject)}</label>
+          </Button>
+        </SettingsSection>
       </div>
-      </SettingsSection>
     </Settings>
   );
 };

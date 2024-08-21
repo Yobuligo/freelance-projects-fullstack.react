@@ -13,21 +13,27 @@ export const OpportunitySettings: React.FC = () => {
 
   return (
     <Settings>
-      <SettingsSection title={t(texts.opportunitySettings.addNewSearchUrl)}>
-        <ProviderRequestInput onAdd={viewModel.onAddUserProviderRequest} />
-      </SettingsSection>
-      <SettingsSection title={t(texts.opportunitySettings.savedSearches)}>
-        <ProviderRequestList
-          isLoading={viewModel.loadUserProviderRequestRequest.isProcessing}
-          onDelete={viewModel.onDeleteUserProviderRequest}
-          onDisable={viewModel.onUpdateUserProviderRequest}
-          onEnable={viewModel.onEnableUserProviderRequest}
-          userProviderRequests={viewModel.userProviderRequests}
-        />
-      </SettingsSection>
-      <SettingsSection title={t(texts.general.generalSettings)}>
-        <OpportunitySettingsConfigList />
-      </SettingsSection>
+      <div>
+        <SettingsSection title={t(texts.opportunitySettings.addNewSearchUrl)}>
+          <ProviderRequestInput onAdd={viewModel.onAddUserProviderRequest} />
+        </SettingsSection>
+      </div>
+      <div>
+        <SettingsSection title={t(texts.opportunitySettings.savedSearches)}>
+          <ProviderRequestList
+            isLoading={viewModel.loadUserProviderRequestRequest.isProcessing}
+            onDelete={viewModel.onDeleteUserProviderRequest}
+            onDisable={viewModel.onUpdateUserProviderRequest}
+            onEnable={viewModel.onEnableUserProviderRequest}
+            userProviderRequests={viewModel.userProviderRequests}
+          />
+        </SettingsSection>
+      </div>
+      <div>
+        <SettingsSection title={t(texts.general.generalSettings)}>
+          <OpportunitySettingsConfigList />
+        </SettingsSection>
+      </div>
     </Settings>
   );
 };
