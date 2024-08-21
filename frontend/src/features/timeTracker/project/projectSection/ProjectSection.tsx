@@ -21,6 +21,7 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
           onChangeTask={viewModel.onChangeTask}
           onDeleteTask={viewModel.onDeleteTask}
           onDeleteProject={viewModel.onDeleteProject}
+          onChangeProject={viewModel.onChange}
         />
       ) : (
         <>

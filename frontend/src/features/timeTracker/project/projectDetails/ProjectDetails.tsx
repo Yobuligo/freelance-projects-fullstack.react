@@ -26,7 +26,11 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
       </button>
 
       <h3 className={styles.title}>{props.project.title}</h3>
-      <ProjectSettings project={props.project} onDelete={onDelete} />
+      <ProjectSettings
+        project={props.project}
+        onDelete={onDelete}
+        onChange={props.onChangeProject}
+      />
       <TaskSection
         onChange={onChangeTask}
         onDelete={onDeleteTask}
