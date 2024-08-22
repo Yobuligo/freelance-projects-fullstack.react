@@ -8,10 +8,23 @@ import { ExcludeRefs } from "../types/ExcludeRefs";
 import { Repository } from "./core/Repository";
 import { Op } from "sequelize";
 import { Note } from "../model/sequelize/Note";
+import { INote } from "../shared/model/INote";
 
 export class UserOpportunityRepo extends Repository<IUserOpportunity> {
   constructor() {
     super(UserOpportunity);
+  }
+
+  async attachNote(userOpportunityId: string, note: INote): Promise<boolean> {
+    const result = await this.model.update(
+      {
+        noteId: note.id,
+      },
+      {
+        where: { id: userOpportunityId },
+      }
+    );
+    return result[0] === 1;
   }
 
   /**

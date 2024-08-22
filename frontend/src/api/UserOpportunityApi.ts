@@ -19,7 +19,7 @@ export class UserOpportunityApi extends EntityRepository<IUserOpportunity> {
   }
 
   async addNote(userOpportunity: IUserOpportunity, note: INote) {
-    return await this.put(
+    return await this.post(
       `${this.host}${UserOpportunitiesRouteMeta.path}/${userOpportunity.id}/${NoteRouteMeta.path}`,
       note
     );

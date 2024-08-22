@@ -1,3 +1,4 @@
+import { NoteRepo } from "../repository/NoteRepo";
 import { OpportunityRepo } from "../repository/OpportunityRepo";
 import { UserOpportunityRepo } from "../repository/UserOpportunityRepo";
 import { UserProviderRequestRepo } from "../repository/UserProviderRequestRepo";
@@ -29,22 +30,19 @@ export class UserOpportunityController extends EntityController<
   }
 
   private addNote() {
-    this.router.put(
+    this.router.post(
       `${UserOpportunitiesRouteMeta.path}/:id/${NoteRouteMeta.path}`,
       NetworkCheckInterceptor(),
       SessionInterceptor(async (req, res) => {
         try {
-          const userOpportunity: IUserOpportunity = req.body.userOpportunity;
-          const note: INote = req.body.note;
-          userOpportunity.note = note;
-          userOpportunity.noteId = note.id;
-          const userOpportunities: IUserOpportunity[] = [userOpportunity];
-          await this.repo.updateAll(userOpportunities);
-          res.status(200).send(true);
+          const note: INote = req.body;
+          const newNote = await new NoteRepo().insert(note);
+          await this.repo.attachNote(req.params.id, newNote);
+          res.status(201).send(newNote);
         } catch (error) {
           res
             .status(500)
-            .send(createError("Error while setting note for opportunity"));
+            .send(createError("Error while adding note to opportunity"));
         }
       })
     );
