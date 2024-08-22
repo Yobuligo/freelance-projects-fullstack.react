@@ -63,11 +63,13 @@
 .currentDurationTitle {
   font-size: large;
   text-align: right;
+  color: colors.$color-text-on-light;
 }
 
 .currentDuration {
   font-size: x-large;
   text-align: right;
+  color: colors.$color-text-on-light;
 }
 
 .toolbarChildren {
