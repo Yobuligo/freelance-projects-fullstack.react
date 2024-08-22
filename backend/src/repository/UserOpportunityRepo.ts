@@ -7,6 +7,7 @@ import { IEntityDetails } from "../shared/types/IEntityDetails";
 import { ExcludeRefs } from "../types/ExcludeRefs";
 import { Repository } from "./core/Repository";
 import { Op } from "sequelize";
+import { Note } from "../model/sequelize/Note";
 
 export class UserOpportunityRepo extends Repository<IUserOpportunity> {
   constructor() {
@@ -19,7 +20,7 @@ export class UserOpportunityRepo extends Repository<IUserOpportunity> {
   async findByUserId(userId: string): Promise<IUserOpportunity[]> {
     const data = await this.model.findAll({
       where: { userId },
-      include: [Opportunity],
+      include: [Opportunity, Note],
     });
     return data.map((model) => model.toJSON());
   }
@@ -34,7 +35,7 @@ export class UserOpportunityRepo extends Repository<IUserOpportunity> {
           { [Op.or]: [{ applied: true }, { completed: true }] },
         ],
       },
-      include: [Opportunity],
+      include: [Opportunity, Note],
     });
     return data.map((model) => model.toJSON());
   }
@@ -55,7 +56,7 @@ export class UserOpportunityRepo extends Repository<IUserOpportunity> {
         userId: userId,
         opportunityId: [opportunityIds],
       } as WhereOptions,
-      include: [Opportunity],
+      include: [Opportunity, Note],
     });
 
     // find opportunities which are currently not saved as user opportunity

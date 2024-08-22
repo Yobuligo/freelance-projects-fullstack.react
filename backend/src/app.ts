@@ -13,6 +13,8 @@ import { Task } from "./model/sequelize/Task";
 import { User } from "./model/sequelize/User";
 import { UserOpportunity } from "./model/sequelize/UserOpportunity";
 import { UserProviderRequest } from "./model/sequelize/UserProviderRequest";
+import { Note } from "./model/sequelize/Note";
+import { NoteController } from "./controller/NoteController";
 
 UserProviderRequest.sync({ alter: true });
 User.sync({ alter: true });
@@ -21,6 +23,7 @@ Opportunity.sync({ alter: true });
 UserOpportunity.sync({ alter: true });
 Project.sync({ alter: true });
 Task.sync({ alter: true });
+Note.sync({ alter: true });
 
 const server = express();
 server.use(express.json({ limit: "2mb" }));
@@ -40,4 +43,5 @@ server.use("/api", new UserProviderRequestController().router);
 server.use("/api", new ProjectController().router);
 server.use("/api", new TaskController().router);
 server.use("/api", new ReportController().router);
+server.use("/api", new NoteController().router);
 server.listen(5000);

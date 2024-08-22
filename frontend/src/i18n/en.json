@@ -39,6 +39,9 @@
         "errorLogout": "Unknown error while logout",
         "title": "Logout"
     },
+    "note": {
+        "title": "Note"
+    },
     "opportunityDetails": {
         "applied": "Applied",
         "applicationType": "Application type",

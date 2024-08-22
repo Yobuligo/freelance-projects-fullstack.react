@@ -1,19 +1,21 @@
 import { useMemo, useState } from "react";
 import { Switch } from "../../../components/switch/Switch";
 import { ToggleButtonGroup } from "../../../components/toggleButtonGroup/ToggleButtonGroup";
+import { uuid } from "../../../core/utils/uuid";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
+import { INote } from "../../../shared/model/INote";
 import { ApplicationType } from "../../../shared/types/ApplicationType";
 import { formatDate } from "../../../utils/formatDate";
 import { IApplicationTypeOption } from "./IApplicationTypeOption";
 import { IOpportunityDetailsProps } from "./IOpportunityDetailsProps";
 import styles from "./OpportunityDetails.module.scss";
+import { TextArea } from "../../../components/textarea/TextArea";
 
 export const OpportunityDetails: React.FC<IOpportunityDetailsProps> = (
   props
 ) => {
   const { t } = useTranslation();
-
   const [debounceTimeout, setDebounceTimeout] = useState<
     NodeJS.Timeout | undefined
   >(undefined);
@@ -77,7 +79,19 @@ export const OpportunityDetails: React.FC<IOpportunityDetailsProps> = (
   const onContactChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.userOpportunity.contact = event.target.value;
     debounceInputValue();
-    // triggerChange();
+  };
+
+  const onNoteChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    let note: INote = props.userOpportunity.note ?? {
+      id: uuid(),
+      text: "",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    note.text = event.target.value;
+    props.userOpportunity.note = note;
+    props.userOpportunity.noteId = note.id;
+    debounceInputValue();
   };
 
   const applicationTypeItems: IApplicationTypeOption[] = useMemo(
@@ -114,52 +128,59 @@ export const OpportunityDetails: React.FC<IOpportunityDetailsProps> = (
 
   return (
     <div className={styles.opportunityDetails}>
-      <div className={styles.item}>
-        <div className={styles.title}>
-          {t(texts.opportunityDetails.applied)}
+      <TextArea
+        label={t(texts.note.title)}
+        value={props.userOpportunity.note?.text}
+        onChange={onNoteChange}
+      />
+      <div>
+        <div className={styles.item}>
+          <div className={styles.title}>
+            {t(texts.opportunityDetails.applied)}
+          </div>
+          <Switch
+            checked={props.userOpportunity.applied}
+            onChange={onApplyChanged}
+          />
+          <>
+            {props.userOpportunity.appliedAt &&
+              formatDate(props.userOpportunity.appliedAt)}
+          </>
         </div>
-        <Switch
-          checked={props.userOpportunity.applied}
-          onChange={onApplyChanged}
-        />
-        <>
-          {props.userOpportunity.appliedAt &&
-            formatDate(props.userOpportunity.appliedAt)}
-        </>
-      </div>
-      <div className={styles.item}>
-        <div className={styles.title}>
-          {t(texts.opportunityDetails.rejected)}
+        <div className={styles.item}>
+          <div className={styles.title}>
+            {t(texts.opportunityDetails.rejected)}
+          </div>
+          <Switch
+            checked={props.userOpportunity.rejected}
+            onChange={onRejectChanged}
+          />
+          <>
+            {props.userOpportunity.rejectedAt &&
+              formatDate(props.userOpportunity.rejectedAt)}
+          </>
         </div>
-        <Switch
-          checked={props.userOpportunity.rejected}
-          onChange={onRejectChanged}
-        />
-        <>
-          {props.userOpportunity.rejectedAt &&
-            formatDate(props.userOpportunity.rejectedAt)}
-        </>
-      </div>
-      <div className={styles.item}>
-        <div className={styles.title}>
-          {t(texts.opportunityDetails.applicationType)}
+        <div className={styles.item}>
+          <div className={styles.title}>
+            {t(texts.opportunityDetails.applicationType)}
+          </div>
+          <ToggleButtonGroup
+            items={applicationTypeItems}
+            onSelect={onApplicationTypeSelected}
+            selected={findSelected()}
+          />
         </div>
-        <ToggleButtonGroup
-          items={applicationTypeItems}
-          onSelect={onApplicationTypeSelected}
-          selected={findSelected()}
-        />
-      </div>
-      <div className={styles.item}>
-        <div className={styles.title}>
-          {t(texts.opportunityDetails.contact)}
+        <div className={styles.item}>
+          <div className={styles.title}>
+            {t(texts.opportunityDetails.contact)}
+          </div>
+          <input
+            className={styles.contact}
+            value={props.userOpportunity.contact}
+            onChange={onContactChange}
+            type="text"
+          />
         </div>
-        <input
-          className={styles.contact}
-          type="text"
-          value={props.userOpportunity.contact}
-          onChange={onContactChange}
-        />
       </div>
     </div>
   );
