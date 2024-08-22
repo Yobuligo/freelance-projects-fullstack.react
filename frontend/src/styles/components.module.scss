@@ -17,6 +17,14 @@
   }
 }
 
+.buttonDark{
+  background-color: colors.$color-button-dark-background;
+  color: colors.$color-button-dark-text;
+  &:hover{
+    background-color: colors.$color-button-hover-dark;
+  }
+}
+
 .heading {
   font-family: "MerriweatherSans";
 }

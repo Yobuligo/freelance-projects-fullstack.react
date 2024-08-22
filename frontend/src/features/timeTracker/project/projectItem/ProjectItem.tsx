@@ -4,6 +4,7 @@ import { DurationDisplay } from "../../../../components/duration/DurationDisplay
 import { Toolbar } from "../../../../components/toolbar/Toolbar";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
+import { style } from "../../../../utils/style";
 import { IProjectItemProps } from "./IProjectItemProps";
 import styles from "./ProjectItem.module.scss";
 import { useProjectItemViewModel } from "./useProjectItemViewModel";
@@ -48,7 +49,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
       </div>
       <Toolbar classNameChildren={styles.toolbarChildren}>
         {viewModel.isRunning ? (
-          <Button className={styles.button} onClick={viewModel.onStop}>
+          <Button className={style(styles.button, styles.buttonActiveTimer)} onClick={viewModel.onStop}>
             {t(texts.projectItem.stop)}
           </Button>
         ) : (

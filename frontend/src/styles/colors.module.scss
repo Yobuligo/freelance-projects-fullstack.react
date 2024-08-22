@@ -48,6 +48,10 @@ $color-button-hover-outline: $color-primary-lighter;
 $color-button-disabled-outline: $color-primary-lightest;
 $color-button-text-disabled: $color-primary-light;
 
+$color-button-dark-background: $color-primary;
+$color-button-dark-text: $color-primary-lightest;
+$color-button-hover-dark: $color-primary-light;
+
 :export {
   colorDisabled: $color-disabled;
   colorPrimary: $color-primary;
