@@ -12,34 +12,18 @@ $color-secondary-light: #7798b1;
 $color-secondary-lighter: #c1d3e1;
 $color-secondary-lightest: #d8e4ee;
 $color-secondary-lightestest: #f5f8f9;
-// colors.$color-primary-darker: #B76B1F;
-// colors.$color-primary-dark: #DB8529;
-// $color-primary: #E4A562;
-// $color-primary-light: #F2D5B5;
-// $color-primary-lighter: #F5EBE0;
-// $color-accent: #146733;
-// $color-secondary-darker: #153d66;
-// $color-secondary-dark: #2a547f;
-// $color-secondary: #205a99;
-// $color-secondary-light: #518fd2;
-// $color-secondary-lighter: #96bee8;
-// $color-secondary-lightest: #e6edf4;
-// $color-secondary-lightestest: #e6edf4;
 
 $color-text: $color-primary-dark;
 $color-error: rgba(255, 0, 0, 0.493);
 $color-success: rgba(63, 150, 13, 0.493);
-$color-hover: lighten($color-primary, 0.5);
-$color-enabled: black;
-$color-disabled: rgba(211, 211, 211, 0.63);
 
-$color-tab-selected: $color-secondary-darker;
-$color-tab-unselected: $color-secondary-lighter;
+$color-primary-lighten-50: lighten($color-primary, 0.5);
 
+/* Components */
 $color-button-background: $color-primary-lighter;
 $color-button-text: $color-text;
 $color-button-text-hover: $color-secondary-darker;
-$color-button-hover: $color-hover;
+$color-button-hover: $color-primary-lighten-50;
 $color-button-disabled: $color-secondary-lightest;
 
 $color-button-background-outlined: $color-secondary-lightestest;
@@ -52,8 +36,22 @@ $color-button-dark-background: $color-primary;
 $color-button-dark-text: $color-primary-lightest;
 $color-button-hover-dark: $color-primary-light;
 
+$color-card: $color-secondary;
+
+$color-switch-on-state: $color-primary;
+$color-switch-off-state: rgba(211, 211, 211, 0.63);
+$color-switch-slider: $color-primary-dark;
+
+$color-tab-selected: $color-secondary-darker;
+$color-tab-unselected: $color-secondary-lighter;
+$color-tabstrip-background: $color-primary;
+
+/* Features */
+$color-opportunity-section-trash-background: $color-secondary-dark;
+$color-opportunity-item-background: $color-primary-lighten-50;
+
 :export {
-  colorDisabled: $color-disabled;
   colorPrimary: $color-primary;
   colorPrimaryDark: $color-primary-dark;
+  colorSwitchOffState: $color-switch-off-state;
 }

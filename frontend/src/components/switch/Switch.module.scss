@@ -2,9 +2,9 @@
 
 label {
   --switchWidth: 2rem;
-  --colorOffState: $color-disabled;
-  --colorOnState: $color-primary;
-  --sliderColor: colors.$color-primary-dark;
+  --colorOffState: colors.$color-switch-off-state;
+  --colorOnState: colors.$color-switch-on-state;
+  --sliderColor: colors.$color-switch-slider;
 }
 
 .switch {

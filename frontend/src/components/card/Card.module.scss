@@ -4,5 +4,5 @@
 .card {
   border-radius: 8px;
   padding: 0.5rem;
-  @include mixins.glassy(colors.$color-secondary);
+  @include mixins.glassy(colors.$color-card);
 }

@@ -6,11 +6,11 @@
 .opportunityItem {
   display: flex;
   flex-direction: row;
-  @include mixins.glassy(colors.$color-hover, 0.8);
+  @include mixins.glassy(colors.$color-opportunity-item-background, 0.8);
 }
 
 .opportunityItemSelected {
-  background-color: colors.$color-hover;
+  background-color: colors.$color-opportunity-item-background;
 }
 
 .opportunityItemDetails {
@@ -40,7 +40,7 @@
 
 .title {
   margin: 0;
-  color: colors.$color-primary-dark;
+  color: colors.$color-text;
   @extend .heading;
   font-size: medium;
   font-weight: 800;

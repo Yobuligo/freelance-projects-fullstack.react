@@ -49,5 +49,5 @@
 }
 
 .itemTrash {
-  @include mixins.glassy(colors.$color-secondary-dark, 0.8);
+  @include mixins.glassy(colors.$color-opportunity-section-trash-background, 0.8);
 }
