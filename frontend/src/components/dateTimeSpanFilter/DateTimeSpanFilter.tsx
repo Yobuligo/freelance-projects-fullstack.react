@@ -16,12 +16,41 @@ export const DateTimeSpanFilter: React.FC<IDateTimeSpanFilterProps> = (
   return (
     <div className={styles.dateTimeSpanFilter}>
       <Toolbar>
-        <Button onClick={viewModel.onClickDay}>{t(texts.general.day)}</Button>
-        <Button onClick={viewModel.onClickWeek}>{t(texts.general.week)}</Button>
-        <Button onClick={viewModel.onClickMonth}>
+        <Button
+          onClick={viewModel.onClickYesterday}
+          className={styles.button}
+          isOutlined
+        >
+          {t(texts.general.yesterday)}
+        </Button>
+        <Button
+          onClick={viewModel.onClickDay}
+          className={styles.button}
+          isOutlined
+        >
+          {t(texts.general.day)}
+        </Button>
+        <Button
+          onClick={viewModel.onClickWeek}
+          className={styles.button}
+          isOutlined
+        >
+          {t(texts.general.week)}
+        </Button>
+        <Button
+          onClick={viewModel.onClickMonth}
+          className={styles.button}
+          isOutlined
+        >
           {t(texts.general.month)}
         </Button>
-        <Button onClick={viewModel.onClickYear}>{t(texts.general.year)}</Button>
+        <Button
+          onClick={viewModel.onClickYear}
+          isOutlined
+          className={styles.button}
+        >
+          {t(texts.general.year)}
+        </Button>
       </Toolbar>
       <div className={styles.inputGroup}>
         <LabeledInput
@@ -36,6 +65,7 @@ export const DateTimeSpanFilter: React.FC<IDateTimeSpanFilterProps> = (
           type="date"
           value={viewModel.toDate}
         />
+        <Button onClick={props.onApply}>{t(texts.general.apply)}</Button>
       </div>
     </div>
   );

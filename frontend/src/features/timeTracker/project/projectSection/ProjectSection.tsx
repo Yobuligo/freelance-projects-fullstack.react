@@ -20,6 +20,8 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
           onBack={viewModel.onProjectUnselected}
           onChangeTask={viewModel.onChangeTask}
           onDeleteTask={viewModel.onDeleteTask}
+          onDeleteProject={viewModel.onDeleteProject}
+          onChangeProject={viewModel.onChange}
         />
       ) : (
         <>
@@ -28,6 +30,7 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
             label={t(texts.general.title)}
             isAdding={viewModel.addProjectRequest.isProcessing}
             onAdd={viewModel.onAdd}
+            classNameLabelInput={styles.title}
           />
           {viewModel.loadProjectRequest.isProcessing ? (
             <Spinner />
@@ -35,11 +38,11 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
             <>
               {viewModel.findRecentlyUsedProjects().length > 0 && (
                 <div className={styles.projectList}>
-                  {t(texts.projectSection.recentlyUsedProjects)}
+                  <h4 className={styles.title}>
+                    {t(texts.projectSection.recentlyUsedProjects)}
+                  </h4>
                   <ProjectList
-                    onChange={viewModel.onChange}
                     onClick={viewModel.onProjectSelected}
-                    onDelete={viewModel.onDelete}
                     onStart={viewModel.onStart}
                     onStop={viewModel.onStop}
                     projects={viewModel.findRecentlyUsedProjects()}
@@ -47,11 +50,9 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
                 </div>
               )}
               <div className={styles.projectList}>
-                {t(texts.projectSection.all)}
+                <h4 className={styles.title}>{t(texts.projectSection.all)}</h4>
                 <ProjectList
-                  onChange={viewModel.onChange}
                   onClick={viewModel.onProjectSelected}
-                  onDelete={viewModel.onDelete}
                   onStart={viewModel.onStart}
                   onStop={viewModel.onStop}
                   projects={viewModel.projects}

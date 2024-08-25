@@ -1,9 +1,10 @@
-@import "../../styles/global.scss";
+@use "../../styles/colors.module.scss";
+@use "../../styles/components.module.scss";
 
 .selected {
   @extend .buttonActive;
 }
 
 .unSelected {
-  background-color: $color-button-background;
+  background-color: colors.$color-button-background;
 }

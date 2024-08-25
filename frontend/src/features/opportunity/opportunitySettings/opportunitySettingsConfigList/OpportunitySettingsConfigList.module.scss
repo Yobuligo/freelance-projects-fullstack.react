@@ -1,0 +1,7 @@
+@use "../../../../styles/dimensions.scss";
+
+.settingsList {
+  display: flex;
+  flex-direction: column;
+  row-gap: dimensions.$negative-space;
+}

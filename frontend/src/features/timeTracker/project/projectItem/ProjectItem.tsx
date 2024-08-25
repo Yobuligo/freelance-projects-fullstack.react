@@ -1,8 +1,6 @@
 import { Button } from "../../../../components/button/Button";
 import { Card } from "../../../../components/card/Card";
-import { CrudButtonPanel } from "../../../../components/crudButtonPanel/CrudButtonPanel";
 import { DurationDisplay } from "../../../../components/duration/DurationDisplay";
-import { Input } from "../../../../components/input/Input";
 import { Toolbar } from "../../../../components/toolbar/Toolbar";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
@@ -23,27 +21,12 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
             className={styles.headerTitleContainer}
             onClick={viewModel.onClick}
           >
-            <Input
-              className={style(
-                styles.input,
-                viewModel.displayMode ? styles.inputDisabled : ""
-              )}
-              disabled={false}
-              onChange={viewModel.onChangeProjectTitle}
-              onEnter={viewModel.onConfirm}
-              onEscape={viewModel.onCancel}
-              type="text"
-              value={viewModel.projectTitle}
-            />
-          </div>
-          <div className={styles.headerButtons}>
-            <CrudButtonPanel
-              displayMode={viewModel.displayMode}
-              onCancel={viewModel.onCancel}
-              onConfirm={viewModel.onConfirm}
-              onDelete={viewModel.onDelete}
-              onEditMode={viewModel.onEditMode}
-            />
+            <span className={styles.projectTitle}>
+              {viewModel.projectTitle}
+            </span>
+            <span className={styles.projectDescription}>
+              {viewModel.projectDescription}
+            </span>
           </div>
         </div>
 
@@ -64,9 +47,9 @@ export const ProjectItem: React.FC<IProjectItemProps> = (props) => {
           )}
         </div>
       </div>
-      <Toolbar className={styles.toolbar}>
+      <Toolbar classNameChildren={styles.toolbarChildren}>
         {viewModel.isRunning ? (
-          <Button className={styles.button} onClick={viewModel.onStop}>
+          <Button className={style(styles.button, styles.buttonActiveTimer)} onClick={viewModel.onStop}>
             {t(texts.projectItem.stop)}
           </Button>
         ) : (

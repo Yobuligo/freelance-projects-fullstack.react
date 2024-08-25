@@ -3,6 +3,6 @@
 .confirmIcon {
   display: flex;
   flex-direction: row;
-  column-gap: $negative-space;
+  column-gap: dimensions.$negative-space;
   align-items: center;
 }

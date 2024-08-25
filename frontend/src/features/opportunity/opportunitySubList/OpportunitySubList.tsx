@@ -17,7 +17,7 @@ export const OpportunitySubList: React.FC<IOpportunitySubListProps> = (
           collapsed={props.collapsed}
           setCollapsed={props.setCollapsed}
         />
-        {props.title}
+        <div className={styles.title}>{props.title}</div>
       </Card>
       {!props.collapsed && (
         <OpportunityList

@@ -82,7 +82,7 @@ export abstract class RESTApi {
         if (isError(error)) {
           reject(error);
         } else {
-          reject(this.createFetchError(url));
+          // reject(this.createFetchError(url));
         }
       }
     });

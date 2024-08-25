@@ -1,13 +1,13 @@
-@import "../../../styles/global.scss";
+@use "../../../styles/colors.module.scss";
+@use "../../../styles/dimensions.scss";
 
 .title {
   margin: 0;
   font-size: 1rem;
   font-weight: 500;
-  color: $color-primary-dark;
 }
 
 .children {
   margin-left: 1rem;
-  margin-top: $negative-space;
+  margin-top: dimensions.$negative-space;
 }

@@ -1,5 +1,5 @@
-@import "../../../styles/global.scss";
+@use "../../../styles/dimensions.scss";
 
 .errorDisplay {
-  margin-bottom: $negative-space;
+  margin-bottom: dimensions.$negative-space;
 }

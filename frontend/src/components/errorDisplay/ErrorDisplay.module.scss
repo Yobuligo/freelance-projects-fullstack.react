@@ -1,7 +1,7 @@
-@import "../../styles/global.scss";
+@use "../../styles/colors.module.scss";
 
 .errorDisplay {
-  background-color: $color-error;
+  background-color: colors.$color-error;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

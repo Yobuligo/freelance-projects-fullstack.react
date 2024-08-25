@@ -1,17 +1,24 @@
-@import "../../../styles/dimensions.scss";
+@use "../../../styles/dimensions.scss";
 
 .opportunityDetails {
   height: 100%;
+  display: flex;
+  flex-direction: row;
+  column-gap: 1rem;
 }
 
 .item {
   display: flex;
   flex-direction: row;
-  column-gap: $negative-space;
+  column-gap: dimensions.$negative-space;
   align-items: center;
 }
 
 .contact {
+  width: 15rem;
+}
+
+.note{
   width: 15rem;
 }
 

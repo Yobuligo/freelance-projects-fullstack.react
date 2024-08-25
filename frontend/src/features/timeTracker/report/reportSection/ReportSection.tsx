@@ -1,11 +1,8 @@
 import { useState } from "react";
 import { ReportApi } from "../../../../api/ReportApi";
-import { Button } from "../../../../components/button/Button";
 import { DateTimeSpanFilter } from "../../../../components/dateTimeSpanFilter/DateTimeSpanFilter";
 import { Spinner } from "../../../../components/spinner/Spinner";
 import { useRequest } from "../../../../hooks/useRequest";
-import { texts } from "../../../../hooks/useTranslation/texts";
-import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { ITimeSheet } from "../../../../shared/model/ITimeSheet";
 import { TimeSheetList } from "../timeSheetList/TimeSheetList";
 import { IReportSectionProps } from "./IReportSectionProps";
@@ -16,7 +13,6 @@ export const ReportSection: React.FC<IReportSectionProps> = (props) => {
   const [toDate, setToDate] = useState<Date | undefined>(undefined);
   const [timeSheets, setTimeSheets] = useState<ITimeSheet[]>([]);
   const timeSheetRequest = useRequest();
-  const { t } = useTranslation();
 
   const onFetchTimeSheets = async () => {
     if (fromDate && toDate) {
@@ -39,10 +35,10 @@ export const ReportSection: React.FC<IReportSectionProps> = (props) => {
   return (
     <div className={styles.reportSection}>
       <div className={styles.timePeriodFilter}>
-        <DateTimeSpanFilter onChange={onDateTimeSpanChanged} />
-        <Button className={styles.button} onClick={onFetchTimeSheets}>
-          {t(texts.general.apply)}
-        </Button>
+        <DateTimeSpanFilter
+          onChange={onDateTimeSpanChanged}
+          onApply={onFetchTimeSheets}
+        />
       </div>
       {timeSheetRequest.isProcessing ? (
         <Spinner />

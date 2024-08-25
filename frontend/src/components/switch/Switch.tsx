@@ -23,7 +23,7 @@ export const Switch: React.FC<ISwitchProps> = (props) => {
     : addCSSProperty({ "--sliderColor": colors.colorPrimaryDark });
   props.colorOffState
     ? addCSSProperty({ "--colorOffState": props.colorOffState })
-    : addCSSProperty({ "--colorOffState": colors.colorDisabled });
+    : addCSSProperty({ "--colorOffState": colors.colorSwitchOffState });
   props.colorOnState
     ? addCSSProperty({ "--colorOnState": props.colorOnState })
     : addCSSProperty({ "--colorOnState": colors.colorPrimary });

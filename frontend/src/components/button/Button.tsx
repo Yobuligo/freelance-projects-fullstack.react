@@ -13,6 +13,7 @@ export const Button: React.FC<IButtonProps> = (props) => {
     <button
       className={style(
         styles.button,
+        props.isOutlined ? styles.buttonOutlined : "",
         props.disabled === true ? styles.buttonDisabled : styles.buttonEnabled,
         props.className
       )}

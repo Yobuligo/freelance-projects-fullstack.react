@@ -1,8 +1,8 @@
-@import "../../styles/global.scss";
+@use "../../styles/dimensions.scss";
 
 .addInput {
   display: flex;
   flex-direction: row;
-  column-gap: $negative-space;
+  column-gap: dimensions.$negative-space;
   align-items: end;
 }

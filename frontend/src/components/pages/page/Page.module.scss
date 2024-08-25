@@ -1,12 +1,14 @@
-@import "../../../styles/global.scss";
+@use "../../../styles/dimensions.scss";
+@use "../../../styles/mixins.scss";
+
 
 .page {
-  margin: 1.5rem;
+  margin: 1rem;
   display: flex;
   flex-direction: column;
-  row-gap: $negative-space;
+  row-gap: dimensions.$negative-space;
 
-  @include medium-screen {
+  @include mixins.medium-screen {
     margin: 3rem 5rem;
   }
 }

@@ -45,7 +45,9 @@ export const OpportunityItem: React.FC<IOpportunityItemProps> = (props) => {
       </div>
       <div className={styles.opportunityItemDetails} onClick={onSelect}>
         <div>
-          {providerDetails.findByType(props.userOpportunity.opportunity.provider)}
+          {providerDetails.findByType(
+            props.userOpportunity.opportunity.provider
+          )}
         </div>
         <div className={styles.company}>
           {props.userOpportunity.opportunity.company.length > 0
@@ -58,7 +60,9 @@ export const OpportunityItem: React.FC<IOpportunityItemProps> = (props) => {
           href={props.userOpportunity.opportunity.url}
           className={styles.titleLink}
         >
-          <h3 className={styles.title}>{props.userOpportunity.opportunity.title}</h3>
+          <h3 className={styles.title}>
+            {props.userOpportunity.opportunity.title}
+          </h3>
         </a>
         <div className={styles.location}>
           {props.userOpportunity.opportunity.location}

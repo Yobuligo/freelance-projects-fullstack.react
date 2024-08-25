@@ -11,6 +11,7 @@ import { IEntityDetails } from "../../shared/types/IEntityDetails";
 import { Opportunity } from "./Opportunity";
 import { User } from "./User";
 import { createIdType } from "../createIdType";
+import { Note } from "./Note";
 
 const userOpportunity: ModelStatic<
   Model<IUserOpportunity, IEntityDetails<IUserOpportunity>>
@@ -53,3 +54,5 @@ UserOpportunity.belongsTo(Opportunity);
 
 User.hasMany(UserOpportunity);
 UserOpportunity.belongsTo(User);
+
+UserOpportunity.belongsTo(Note, { onDelete: "CASCADE" });

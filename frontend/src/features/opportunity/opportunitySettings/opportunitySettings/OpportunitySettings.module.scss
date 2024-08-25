@@ -1,0 +1,6 @@
+@use '../../../../styles/dimensions.scss';
+
+.settingsSectionFirstElement {
+    margin-top: 0.5rem;
+    margin-left: dimensions.$settings-first-element-margin-left;
+}

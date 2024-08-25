@@ -9,6 +9,8 @@ const project: ModelStatic<Model<IProject, IEntityDetails<IProject>>> =
   db.define("projects", {
     id: createIdType(),
     title: DataTypes.STRING,
+    description: DataTypes.STRING,
+    defaultTaskTitle: DataTypes.STRING,
   });
 
 export class Project extends project {}

@@ -1,13 +1,15 @@
+import { NoteRepo } from "../repository/NoteRepo";
 import { OpportunityRepo } from "../repository/OpportunityRepo";
 import { UserOpportunityRepo } from "../repository/UserOpportunityRepo";
 import { UserProviderRequestRepo } from "../repository/UserProviderRequestRepo";
 import { OpportunityCollector } from "../services/opportunityCollector/OpportunityCollector";
+import { INote, NoteRouteMeta } from "../shared/model/INote";
 import { IOpportunity } from "../shared/model/IOpportunity";
 import { IProviderRequests } from "../shared/model/IProviderRequests";
 import { ISession } from "../shared/model/ISession";
 import {
   IUserOpportunity,
-  UserOpportunityRouteMeta,
+  UserOpportunitiesRouteMeta,
 } from "../shared/model/IUserOpportunity";
 import { ProviderType } from "../shared/types/ProviderType";
 import { createError } from "../shared/utils/createError";
@@ -21,14 +23,34 @@ export class UserOpportunityController extends EntityController<
   UserOpportunityRepo
 > {
   constructor() {
-    super(UserOpportunityRouteMeta, new UserOpportunityRepo());
+    super(UserOpportunitiesRouteMeta, new UserOpportunityRepo());
     this.findAll();
     this.updateAll();
+    this.addNote();
+  }
+
+  private addNote() {
+    this.router.post(
+      `${UserOpportunitiesRouteMeta.path}/:id/${NoteRouteMeta.path}`,
+      NetworkCheckInterceptor(),
+      SessionInterceptor(async (req, res) => {
+        try {
+          const note: INote = req.body;
+          const newNote = await new NoteRepo().insert(note);
+          await this.repo.attachNote(req.params.id, newNote);
+          res.status(201).send(newNote);
+        } catch (error) {
+          res
+            .status(500)
+            .send(createError("Error while adding note to opportunity"));
+        }
+      })
+    );
   }
 
   private findAll() {
     this.router.get(
-      UserOpportunityRouteMeta.path,
+      UserOpportunitiesRouteMeta.path,
       NetworkCheckInterceptor(),
       SessionInterceptor(async (req, res) => {
         const force: boolean | undefined = req.query.force
@@ -55,7 +77,7 @@ export class UserOpportunityController extends EntityController<
 
   private updateAll() {
     this.router.put(
-      UserOpportunityRouteMeta.path,
+      UserOpportunitiesRouteMeta.path,
       SessionInterceptor(async (req, res) => {
         const userOpportunities: IUserOpportunity[] = req.body;
         await this.repo.updateAll(userOpportunities);

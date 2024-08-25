@@ -10,14 +10,19 @@
         "apply": "Apply",
         "backToStart": "Back to Start",
         "day": "Day",
+        "description": "Description",
         "from": "From",
+        "generalSettings": "General settings",
         "logoutInvalidSession": "Your were logged out due an invalid or expired session",
         "month": "Month",
+        "name": "Name",
+        "settings": "Settings",
         "title": "New project",
         "to": "To",
         "unknownError": "An unknown error occurred",
         "week": "Week",
-        "year": "Year"
+        "year": "Year",
+        "yesterday": "Yesterday"
     },
     "login": {
         "errorLogin": "Unknown error while login",
@@ -34,6 +39,9 @@
         "errorLogout": "Unknown error while logout",
         "title": "Logout"
     },
+    "note": {
+        "title": "Note"
+    },
     "opportunityDetails": {
         "applied": "Applied",
         "applicationType": "Application type",
@@ -49,6 +57,13 @@
     "opportunitySection": {
         "captionReloadButton": "Reload",
         "tickOld": "Tick old"
+    },
+    "opportunitySettings": {
+        "addNewSearchUrl": "New search url",
+        "savedSearches": "Saved searches",
+        "generalSettings": {
+            "openLinkInline": "Open link on click inline"
+        }
     },
     "projectAdd": {
         "addProject": "Add project"
@@ -68,6 +83,13 @@
         "errorLoadingProjects": "Unknown error while loading projects",
         "recentlyUsedProjects": "Recently"
     },
+    "projectSettings": {
+        "dangerZone": "Danger zone",
+        "deleteProject": "Delete project",
+        "details": "Project details",
+        "name": "Name",
+        "prefillValue": "Prefilled task name"
+    },
     "providerRequestInput": {
         "providerType": "Provider Type",
         "providerUrl": "Provider Url",
@@ -76,15 +98,6 @@
     },
     "providerRequestList": {
         "noProviderRequests": "No provider requests available"
-    },
-    "settingsSection": {
-        "title": "Settings",
-        "addNewSearchUrl": "New search url",
-        "savedSearches": "Saved searches",
-        "generalSettings": {
-            "caption": "General settings",
-            "openLinkInline": "Open link on click inline"
-        }
     },
     "taskItem": {
         "deleteQuestion": "Would you like to delete task '{{title}}'?",

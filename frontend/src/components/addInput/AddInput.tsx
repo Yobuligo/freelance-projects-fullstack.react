@@ -26,6 +26,7 @@ export const AddInput: React.FC<IAddInputProps> = (props) => {
         onChange={onChange}
         onEnter={onAdd}
         value={title}
+        classNameLabelInput={props.classNameLabelInput}
       />
 
       <div>

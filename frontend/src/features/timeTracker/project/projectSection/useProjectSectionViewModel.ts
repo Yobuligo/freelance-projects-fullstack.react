@@ -71,7 +71,7 @@ export const useProjectSectionViewModel = () => {
     });
   };
 
-  const onDelete = (project: IProject) => {
+  const onDeleteProject = (project: IProject) => {
     setProjects((previous) => {
       const index = previous.findIndex((item) => item.id === project.id);
       if (index !== -1) {
@@ -115,7 +115,7 @@ export const useProjectSectionViewModel = () => {
       id: uuid(),
       startedAt: new Date(),
       projectId: project.id,
-      title: "Development",
+      title: project.defaultTaskTitle ?? "Development",
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -191,7 +191,7 @@ export const useProjectSectionViewModel = () => {
     onAdd,
     onChange,
     onChangeTask,
-    onDelete,
+    onDeleteProject,
     onDeleteTask,
     onProjectSelected,
     onProjectUnselected,

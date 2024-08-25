@@ -1,7 +1,7 @@
-@import "../../styles/global.scss";
+@use "../../styles/dimensions.scss";
 
 .labeledElement {
   display: flex;
   flex-direction: column;
-  row-gap: $label-input-space;
+  row-gap: dimensions.$label-input-space;
 }

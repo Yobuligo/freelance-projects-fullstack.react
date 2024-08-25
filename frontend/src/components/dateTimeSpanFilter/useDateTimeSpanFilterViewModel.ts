@@ -45,6 +45,15 @@ export const useDateTimeSpanFilterViewModel = (
     triggerOnChange(yearStartDate, yearEndDate);
   };
 
+  const onClickYesterday = () => {
+    // set inputs from and to to yesterday's dates
+    const yesterdaysDate = DateTime.subtractDays(now, 1);
+    const yesterday = DateTime.toDate(yesterdaysDate);
+    setFromDate(yesterday);
+    setToDate(yesterday);
+    triggerOnChange(yesterdaysDate, yesterdaysDate);
+  };
+
   const onChangeFromDate = (newDate: string) => {
     setFromDate(newDate);
     triggerOnChange(new Date(newDate), new Date(toDate));
@@ -61,6 +70,7 @@ export const useDateTimeSpanFilterViewModel = (
     onClickMonth,
     onClickWeek,
     onClickYear,
+    onClickYesterday,
     onChangeFromDate,
     onChangeToDate,
     toDate,

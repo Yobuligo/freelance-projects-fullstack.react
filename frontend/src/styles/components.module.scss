@@ -1,18 +1,53 @@
-@import "./colors.module.scss";
+@use "./colors.module.scss";
+@use "./dimensions.scss";
 
-@mixin hoverIcon {
+@mixin buttonHover {
   &:hover {
-    fill: $color-button-hover;
+    @extend .buttonActive;
+    @content;
+  }
+}
+
+.buttonActive {
+  background-color: colors.$color-button-hover;
+  color: colors.$color-button-text-hover;
+
+  &.buttonOutlined {
+    background-color: colors.$color-button-hover-outline;
+  }
+}
+
+.buttonDark{
+  background-color: colors.$color-button-dark-background;
+  color: colors.$color-button-dark-text;
+  &:hover{
+    background-color: colors.$color-button-hover-dark;
+  }
+}
+
+.heading {
+  font-family: "MerriweatherSans";
+}
+
+.headingPageContent {
+  @extend .heading;
+  font-size: medium;
+  font-weight: 500;
+}
+
+@mixin iconHover {
+  &:hover {
+    fill: colors.$color-button-hover;
   }
 }
 
 .icon {
-  fill: $color-primary-dark;
+  fill: colors.$color-primary-dark;
 }
 
 .iconHoverable {
   @extend .icon;
-  @include hoverIcon;
+  @include iconHover;
 }
 
 
@@ -21,25 +56,13 @@
   cursor: pointer;
 }
 
-.disabledIcon {
-  fill: $color-button-text-disabled;
+.iconDisabled {
+  fill: colors.$color-button-text-disabled;
 }
 
 .input {
   font-size: large;
-  padding: 0.4rem 0.25rem;
+  padding: 0.4rem dimensions.$input-padding-sides;
   outline: none;
-  color: $color-primary-dark;
-}
-
-@mixin hoverButton {
-  &:hover {
-    @extend .buttonActive;
-    @content;
-  }
-}
-
-.buttonActive {
-  background-color: $color-button-hover;
-  color: $color-button-text-hover;
+  color: colors.$color-primary-dark;
 }

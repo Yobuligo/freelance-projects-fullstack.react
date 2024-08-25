@@ -1,13 +1,13 @@
-@import "../../../styles/dimensions.scss";
+@use "../../../styles/dimensions.scss";
 
 .opportunityList {
   display: grid;
   flex-direction: column;
-  row-gap: $negative-space;
+  row-gap: dimensions.$negative-space;
 }
 
 .message {
-  padding: $list-no-entries-message;
+  padding: dimensions.$list-no-entries-message;
 }
 
 .message h3 {

@@ -1,31 +1,40 @@
-@import "../../styles/global.scss";
+@use "../../styles/colors.module.scss";
+@use "../../styles/components.module.scss";
+@use "../../styles/dimensions.scss";
 
 .button {
   display: flex;
   flex-direction: row;
-  column-gap: $negative-space;
+  column-gap: dimensions.$negative-space;
+  align-items: center;
+  justify-content: center;
   margin: 0;
   font-size: medium;
   font-weight: 600;
   font-family: "SourceSans3";
-  color: $color-button-text;
-  background-color: $color-button-background;
+  color: colors.$color-button-text;
+  background-color: colors.$color-button-background;
   outline: none;
-  border:none;
+  border: none;
   border-radius: 8px;
-  padding: 0.5rem 1rem;
+  padding: dimensions.$button-padding;
+}
+
+.buttonOutlined {
+  outline: 2px solid colors.$color-button-outline;
+  background-color: colors.$color-button-background-outlined;
 }
 
 .buttonEnabled {
-  @include hoverButton {
+  @include components.buttonHover {
     cursor: pointer;
   }
 }
 
 .buttonDisabled {
-  background-color: $color-button-disabled;
+  background-color: colors.$color-button-disabled;
 }
 
 .buttonDisabled {
-  color: $color-button-text-disabled;
+  color: colors.$color-button-text-disabled;
 }

@@ -1,7 +1,7 @@
-@import "../../../styles/dimensions.scss";
-@import "../../../styles/colors.module.scss";
-@import "../../../styles/mixins.scss";
-@import "../../../styles/components.module.scss";
+@use "../../../styles/dimensions.scss";
+@use "../../../styles/colors.module.scss";
+@use "../../../styles/mixins.scss";
+@use "../../../styles/components.module.scss";
 
 .opportunitySection {
   display: flex;
@@ -11,7 +11,7 @@
 .listsSection {
   display: grid;
   grid-template-columns: auto 1fr;
-  column-gap: $negative-space;
+  column-gap: dimensions.$negative-space;
 }
 
 .readingSection {
@@ -20,34 +20,34 @@
 }
 
 .opportunitySubSection {
-  margin-top: $negative-space;
+  margin-top: dimensions.$negative-space;
 }
 
 .reloadButton {
   display: flex;
   flex-direction: row;
-  margin-bottom: $negative-space;
+  margin-bottom: dimensions.$negative-space;
   justify-content: space-between;
 }
 
 .settingsSection {
-  margin-bottom: $negative-space;
+  margin-bottom: dimensions.$negative-space;
 }
 
 .toolbar {
-  margin-bottom: $negative-space;
+  margin-bottom: dimensions.$negative-space;
 }
 
 .leftButtons {
   display: flex;
   flex-direction: row;
-  column-gap: $negative-space;
+  column-gap: dimensions.$negative-space;
 }
 
 .itemApplied {
-  @include glassy();
+  @include mixins.glassy();
 }
 
 .itemTrash {
-  @include glassy($color-secondary-dark, 0.8);
+  @include mixins.glassy(colors.$color-opportunity-section-trash-background, 0.8);
 }

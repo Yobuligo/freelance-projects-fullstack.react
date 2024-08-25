@@ -1,4 +1,6 @@
-@import "../../../../styles/global.scss";
+@use "../../../../styles/colors.module.scss";
+@use "../../../../styles/dimensions.scss";
+@use "../../../../styles/components.module.scss";
 
 .projectItem {
   display: flex;
@@ -26,28 +28,20 @@
 
 .headerTitleContainer {
   display: flex;
-  flex-direction: row;
-  column-gap: $negative-space;
-  align-items: start;
+  flex-direction: column;
+  row-gap: 0.25rem;
   cursor: pointer;
 }
 
-.title {
-  margin: 0;
-  text-transform: uppercase;
-}
-
-.input {
-  margin: 0;
-  color: $color-primary-dark;
+.projectTitle {
   font-size: large;
   font-weight: 600;
-  width: 90%;
+  @extend .heading;
 }
 
-.inputDisabled {
-  @include transparent;
-  pointer-events: none;
+.projectDescription {
+  display: block;
+  font-style: italic;
 }
 
 .durationContainer {
@@ -58,31 +52,27 @@
 }
 
 .totalDurationTitle {
-  color: $color-primary-dark;
   font-size: large;
 }
 
 .totalDuration {
-  color: $color-primary-dark;
   font-size: large;
   font-weight: 600;
 }
 
 .currentDurationTitle {
-  color: $color-text;
   font-size: large;
   text-align: right;
+  color: colors.$color-text-on-light;
 }
 
 .currentDuration {
-  color: $color-text;
   font-size: x-large;
   text-align: right;
+  color: colors.$color-text-on-light;
 }
 
-.toolbar {
-  display: flex;
-  flex-direction: row;
+.toolbarChildren {
   justify-content: right;
 }
 
@@ -92,4 +82,8 @@
   justify-content: center;
   padding-left: 5rem;
   padding-right: 5rem;
+}
+
+.buttonActiveTimer {
+  @extend .buttonDark;
 }

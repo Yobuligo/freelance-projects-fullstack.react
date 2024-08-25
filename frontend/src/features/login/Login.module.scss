@@ -1,4 +1,6 @@
-@import "../../styles/global.scss";
+@use "../../styles/dimensions.scss";
+@use "../../styles/colors.module.scss";
+@use "../../styles/mixins.scss";
 
 .login {
   margin-top: 10rem;
@@ -6,11 +8,11 @@
   margin-right: auto;
   width: 20rem;
 
-  @include medium-screen {
+  @include mixins.medium-screen {
     width: 25rem;
   }
 
-  @include large-screen {
+  @include mixins.large-screen {
     width: 30rem;
   }
 }
@@ -18,7 +20,7 @@
 .loginCard {
   display: flex;
   flex-direction: column;
-  row-gap: $negative-space;
+  row-gap: dimensions.$negative-space;
   padding: 1rem;
 }
 
@@ -29,7 +31,7 @@
 .register {
   display: flex;
   flex-direction: row;
-  @include transparent;
+  @include mixins.transparent;
   color: white;
   justify-content: right;
   &:hover {
@@ -38,18 +40,18 @@
 }
 
 .errorMessage {
-  background-color: $color-error;
+  background-color: colors.$color-error;
   color: white;
 }
 
 .successMessage {
-  background-color: $color-success;
+  background-color: colors.$color-success;
   color: white;
 }
 
 .footer {
   display: flex;
   flex-direction: row;
-  column-gap: $negative-space;
+  column-gap: dimensions.$negative-space;
   justify-content: right;
 }

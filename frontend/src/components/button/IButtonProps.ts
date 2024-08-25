@@ -5,4 +5,5 @@ export interface IButtonProps {
   disabled?: boolean;
   onClick?: () => void;
   className?: string;
+  isOutlined?: boolean;
 }

@@ -1,16 +1,16 @@
 import { ReactComponent as CheckAllIcon } from "../../../assets/check-all.svg";
 import { ReactComponent as CheckOldIcon } from "../../../assets/check-old.svg";
 import { ReactComponent as ReloadIcon } from "../../../assets/reload.svg";
-import { ReactComponent as SettingsIcon } from "../../../assets/settings.svg";
 import { Button } from "../../../components/button/Button";
 import { Card } from "../../../components/card/Card";
 import { Toolbar } from "../../../components/toolbar/Toolbar";
 import { useInitialize } from "../../../hooks/useInitialize";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
-import { Settings } from "../../settings/settings/Settings";
+import { SettingsIcon } from "../../../icons/SettingsIcon";
 import { OpportunityIFrame } from "../opportunityIFrame/OpportunityIFrame";
 import { OpportunityList } from "../opportunityList/OpportunityList";
+import { OpportunitySettings } from "../opportunitySettings/opportunitySettings/OpportunitySettings";
 import { OpportunitySubList } from "../opportunitySubList/OpportunitySubList";
 import styles from "./OpportunitySection.module.scss";
 import { useOpportunitySectionViewModel } from "./useOpportunitySectionViewModel";
@@ -27,7 +27,7 @@ export const OpportunitySection: React.FC = () => {
   return (
     <div className={styles.opportunitySection}>
       <Toolbar
-        className={styles.toolbar}
+        classNameToolbar={styles.toolbar}
         rightChildren={
           <Button onClick={viewModel.onToggleDisplaySettings}>
             <SettingsIcon className={styles.icon} />
@@ -48,7 +48,7 @@ export const OpportunitySection: React.FC = () => {
 
       {viewModel.displaySettings && (
         <div className={styles.settingsSection}>
-          <Settings />
+          <OpportunitySettings />
         </div>
       )}
       <div

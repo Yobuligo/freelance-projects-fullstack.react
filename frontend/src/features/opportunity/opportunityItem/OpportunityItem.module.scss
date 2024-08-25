@@ -1,15 +1,16 @@
-@import "../../../styles/colors.module.scss";
-@import "../../../styles/dimensions.scss";
-@import "../../../styles/mixins.scss";
+@use "../../../styles/colors.module.scss";
+@use "../../../styles/dimensions.scss";
+@use "../../../styles/mixins.scss";
+@use "../../../styles/components.module.scss";
 
 .opportunityItem {
   display: flex;
   flex-direction: row;
-  @include glassy($color-hover, 0.8);
+  @include mixins.glassy(colors.$color-opportunity-item-background, 0.8);
 }
 
 .opportunityItemSelected {
-  background-color: $color-hover;
+  background-color: colors.$color-opportunity-item-background;
 }
 
 .opportunityItemDetails {
@@ -30,7 +31,7 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
-  margin-right: $negative-space;
+  margin-right: dimensions.$negative-space;
 }
 
 .company {
@@ -39,7 +40,10 @@
 
 .title {
   margin: 0;
-  color: $color-primary-dark;
+  color: colors.$color-text;
+  @extend .heading;
+  font-size: medium;
+  font-weight: 800;
 }
 
 .titleLink {

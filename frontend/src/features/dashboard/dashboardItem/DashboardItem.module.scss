@@ -1,4 +1,6 @@
-@import '../../../styles/global.scss';
+@use '../../../styles/colors.module.scss';
+@use '../../../styles/mixins.scss';
+@use '../../../styles/components.module.scss';
 
 .dashboardItem {
   cursor: pointer;
@@ -7,16 +9,16 @@
   justify-content: center;
   align-items: center;
   height: 7rem;
-  @include glassy();
+  @include mixins.glassy();
 
   &:hover {
-    @include glassy($color-button-hover, 0.5);
+    @include mixins.glassy(colors.$color-button-hover, 0.5);
   }
 
 }
 
 .title {
   margin: 0;
-  font-family: "MerriweatherSans";
   font-weight: 800;
+  @extend .heading;
 }
