@@ -1,8 +1,8 @@
-import { IRepository } from "../repository/types/IRepository";
-import { IRouteMeta } from "../shared/types/IRouteMeta";
-import { IEntity } from "./../shared/types/IEntity";
+import { IRepository } from "../../repository/types/IRepository";
+import { IRouteMeta } from "../../shared/types/IRouteMeta";
+import { IEntity } from "../../shared/types/IEntity";
 import { Controller } from "./Controller";
-import { SessionInterceptor } from "./core/SessionInterceptor";
+import { SessionInterceptor } from "./SessionInterceptor";
 
 export abstract class EntityController<
   TEntity extends IEntity,

@@ -1,7 +1,7 @@
 import { ProjectRepo } from "../repository/ProjectRepo";
 import { IProject, ProjectRouteMeta } from "../shared/model/IProject";
 import { SessionInterceptor } from "./core/SessionInterceptor";
-import { EntityController } from "./EntityController";
+import { EntityController } from "./core/EntityController";
 
 export class ProjectController extends EntityController<IProject, ProjectRepo> {
   constructor() {

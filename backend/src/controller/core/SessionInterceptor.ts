@@ -4,6 +4,9 @@ import { SessionRepo } from "../../repository/SessionRepo";
 import { createError } from "../../shared/utils/createError";
 import { ISessionRequest } from "./types/ISessionRequest";
 
+/**
+ * This interceptor is responsible for validating the users session before calling the *{@link requestHandler}*.
+ */
 export const SessionInterceptor = (
   requestHandler: (
     req: ISessionRequest,

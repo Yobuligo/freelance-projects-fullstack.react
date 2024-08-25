@@ -4,7 +4,7 @@ import { IAuthentication } from "../shared/model/IAuthentication";
 import { ICredentials } from "../shared/model/ICredentials";
 import { ISession } from "../shared/model/ISession";
 import { createError } from "../shared/utils/createError";
-import { Controller } from "./Controller";
+import { Controller } from "./core/Controller";
 
 export class UserController extends Controller {
   constructor() {

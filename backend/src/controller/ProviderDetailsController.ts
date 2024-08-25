@@ -3,7 +3,7 @@ import {
   IProviderDetails,
   ProviderDetailsRouteMeta,
 } from "../shared/model/IProviderDetails";
-import { Controller } from "./Controller";
+import { Controller } from "./core/Controller";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 
 export class ProviderDetailsController extends Controller {

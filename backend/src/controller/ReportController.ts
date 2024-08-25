@@ -1,7 +1,7 @@
 import { ReportRepo } from "../repository/ReportRepo";
 import { TimeSheetRouteMeta } from "../shared/model/ITimeSheet";
 import { createError } from "../shared/utils/createError";
-import { Controller } from "./Controller";
+import { Controller } from "./core/Controller";
 import { SessionInterceptor } from "./core/SessionInterceptor";
 
 export class ReportController extends Controller {
