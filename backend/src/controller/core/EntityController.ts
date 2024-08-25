@@ -1,6 +1,6 @@
 import { IRepository } from "../../repository/types/IRepository";
-import { IRouteMeta } from "../../shared/types/IRouteMeta";
 import { IEntity } from "../../shared/types/IEntity";
+import { IRouteMeta } from "../../shared/types/IRouteMeta";
 import { Controller } from "./Controller";
 import { SessionInterceptor } from "./SessionInterceptor";
 

@@ -1,7 +1,8 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import { DateTime } from "../../core/date/DateTime";
 import { SessionRepo } from "../../repository/SessionRepo";
 import { createError } from "../../shared/utils/createError";
+import { ErrorInterceptor } from "./ErrorInterceptor";
 import { ISessionRequest } from "./types/ISessionRequest";
 
 /**
@@ -12,9 +13,9 @@ export const SessionInterceptor = (
     req: ISessionRequest,
     res: Response,
     next: NextFunction
-  ) => void
+  ) => any
 ) => {
-  return async (req: Request, res: Response, next: NextFunction) => {
+  return ErrorInterceptor(async (req, res, next) => {
     const sessionId = req.query.token?.toString();
     if (!sessionId) {
       return res
@@ -38,6 +39,6 @@ export const SessionInterceptor = (
 
     const sessionRequest = req as ISessionRequest;
     sessionRequest.session = session;
-    requestHandler(sessionRequest, res, next);
-  };
+    await requestHandler(sessionRequest, res, next);
+  });
 };
