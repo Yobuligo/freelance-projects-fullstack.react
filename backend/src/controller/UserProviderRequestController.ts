@@ -5,7 +5,7 @@ import {
   UserProviderRequestRouteMeta,
 } from "../shared/model/IUserProviderRequest";
 import { SessionInterceptor } from "./core/SessionInterceptor";
-import { EntityController } from "./EntityController";
+import { EntityController } from "./core/EntityController";
 
 export class UserProviderRequestController extends EntityController<
   IUserProviderRequest,

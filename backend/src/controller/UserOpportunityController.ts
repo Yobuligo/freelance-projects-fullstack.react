@@ -16,7 +16,7 @@ import { createError } from "../shared/utils/createError";
 import { isError } from "../shared/utils/isError";
 import { NetworkCheckInterceptor } from "./core/NetworkCheckInterceptor";
 import { SessionInterceptor } from "./core/SessionInterceptor";
-import { EntityController } from "./EntityController";
+import { EntityController } from "./core/EntityController";
 
 export class UserOpportunityController extends EntityController<
   IUserOpportunity,
