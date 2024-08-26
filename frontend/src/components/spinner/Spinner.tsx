@@ -2,6 +2,7 @@ import { CSSProperties } from "react";
 import { ISpinnerProps } from "./ISpinnerProps";
 import styles from "./Spinner.module.scss";
 import { SpinnerSize } from "./SpinnerSize";
+import colors from '../../styles/colors.module.scss';
 
 /**
  * This component is responsible for displaying a loading spinner.
@@ -30,7 +31,7 @@ export const Spinner: React.FC<ISpinnerProps> = (props) => {
   };
 
   const style = {
-    "--spinnerColor": `${props.color ?? "#fff"}`,
+    "--spinnerColor": `${props.color ?? colors.colorSpinner}`,
     "--spinnerSize": `${getSpinnerSize()}`,
     "--spinnerBorderSize": `${getSpinnerBorderSize()}`,
   } as CSSProperties;

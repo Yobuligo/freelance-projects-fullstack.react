@@ -39,6 +39,8 @@ $color-button-hover-dark: $color-primary-light;
 
 $color-card: $color-secondary;
 
+$color-spinner: $color-primary;
+
 $color-switch-on-state: $color-primary;
 $color-switch-off-state: rgba(211, 211, 211, 0.63);
 $color-switch-slider: $color-primary-dark;
@@ -52,7 +54,8 @@ $color-opportunity-section-trash-background: $color-secondary-dark;
 $color-opportunity-item-background: $color-primary-lighten-50;
 
 :export {
-  colorPrimary: $color-primary;
-  colorPrimaryDark: $color-primary-dark;
+  colorSpinner: $color-spinner;
+  colorSwitchOnState: $color-switch-on-state;
   colorSwitchOffState: $color-switch-off-state;
+  colorSwitchSlider: $color-switch-slider;
 }
