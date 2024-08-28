@@ -6,7 +6,7 @@ import { LabeledInput } from "../../../../components/labeledInput/LabeledInput";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { TaskInfo } from "../../../../shared/services/TaskInfo";
-import { style } from "../../../../utils/style";
+import { style } from "../../../../core/ui/style";
 import { ITaskItemProps } from "./ITaskItemProps";
 import styles from "./TaskItem.module.scss";
 import { useTaskItemViewModel } from "./useTaskItemViewModel";

@@ -1,4 +1,4 @@
-import { style } from "../../../utils/style";
+import { style } from "../../../core/ui/style";
 import { ISettingsSectionProps } from "./ISettingsSectionProps";
 import styles from "./SettingsSection.module.scss";
 

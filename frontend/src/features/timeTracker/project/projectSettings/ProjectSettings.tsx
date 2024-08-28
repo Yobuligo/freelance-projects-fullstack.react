@@ -9,7 +9,7 @@ import { IProjectSettingsProps } from "./IProjectSettingsProps";
 import styles from "./ProjectSettings.module.scss";
 import { useProjectSettingsViewModel } from "./useProjectSettingsViewModel";
 import { Button } from "../../../../components/button/Button";
-import { style } from "../../../../utils/style";
+import { style } from "../../../../core/ui/style";
 
 export const ProjectSettings: React.FC<IProjectSettingsProps> = (props) => {
   const { t } = useTranslation();

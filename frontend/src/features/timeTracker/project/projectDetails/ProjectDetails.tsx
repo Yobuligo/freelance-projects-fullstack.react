@@ -5,7 +5,7 @@ import { ArrowBackIcon } from "../../../../icons/ArrowBackIcon";
 import { SettingsIcon } from "../../../../icons/SettingsIcon";
 import { ITask } from "../../../../shared/model/ITask";
 import componentStyles from "../../../../styles/components.module.scss";
-import { style } from "../../../../utils/style";
+import { style } from "../../../../core/ui/style";
 import { TaskSection } from "../../task/taskSection/TaskSection";
 import { ProjectSettings } from "../projectSettings/ProjectSettings";
 import { IProjectDetailsProps } from "./IProjectDetailsProps";

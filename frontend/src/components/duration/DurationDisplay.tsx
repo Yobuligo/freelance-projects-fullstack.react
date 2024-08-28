@@ -1,5 +1,5 @@
 import { Duration } from "../../core/services/date/Duration";
-import { style } from "../../utils/style";
+import { style } from "../../core/ui/style";
 import styles from "./DurationDisplay.module.scss";
 import { IDurationDisplayProps } from "./IDurationDisplayProps";
 

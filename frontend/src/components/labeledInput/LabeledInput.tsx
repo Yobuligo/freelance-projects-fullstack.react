@@ -1,6 +1,6 @@
 import { useId } from "react";
 import componentStyles from "../../styles/components.module.scss";
-import { style } from "../../utils/style";
+import { style } from "../../core/ui/style";
 import { Input } from "../input/Input";
 import { LabeledElement } from "../labeledElement/LabeledElement";
 import { ILabeledInputProps } from "./ILabeledInputProps";

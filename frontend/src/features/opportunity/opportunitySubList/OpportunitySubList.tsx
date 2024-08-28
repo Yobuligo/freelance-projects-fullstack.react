@@ -1,6 +1,6 @@
 import { Card } from "../../../components/card/Card";
 import { Collapse } from "../../../components/collapse/Collapse";
-import { style } from "../../../utils/style";
+import { style } from "../../../core/ui/style";
 import { OpportunityList } from "../opportunityList/OpportunityList";
 import { IOpportunitySubListProps } from "./IOpportunitySubListProps";
 import styles from "./OpportunitySubList.module.scss";

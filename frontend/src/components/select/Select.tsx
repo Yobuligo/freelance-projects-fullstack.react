@@ -1,6 +1,6 @@
 import { useState } from "react";
 import componentStyles from "../../styles/components.module.scss";
-import { style } from "../../utils/style";
+import { style } from "../../core/ui/style";
 import { ISelectOption } from "./ISelectOption";
 import { ISelectProps } from "./ISelectProps";
 import { findByText } from "./utils/findByText";

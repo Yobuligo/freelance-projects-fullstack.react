@@ -5,7 +5,7 @@ import { useProviderDetails } from "../../../hooks/useProviderDetails";
 import { CheckedIcon } from "../../../icons/CheckedIcon";
 import { UncheckedIcon } from "../../../icons/UncheckedIcon";
 import { renderDate } from "../../../shared/utils/renderDate";
-import { style } from "../../../utils/style";
+import { style } from "../../../core/ui/style";
 import { OpportunityDetails } from "../opportunityDetails/OpportunityDetails";
 import { IOpportunityItemProps } from "./IOpportunityItemProps";
 import styles from "./OpportunityItem.module.scss";

@@ -3,7 +3,7 @@ import { CloseIcon } from "../../icons/CloseIcon";
 import { DeleteIcon } from "../../icons/DeleteIcon";
 import { EditIcon } from "../../icons/EditIcon";
 import componentStyles from "../../styles/components.module.scss";
-import { style } from "../../utils/style";
+import { style } from "../../core/ui/style";
 import styles from "./CrudButtonPanel.module.scss";
 import { ICrudButtonPanelProps } from "./ICrudButtonPanelProps";
 

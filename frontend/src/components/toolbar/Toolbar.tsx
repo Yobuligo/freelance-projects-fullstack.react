@@ -1,5 +1,5 @@
 import { isInitial } from "../../core/utils/isInitial";
-import { style } from "../../utils/style";
+import { style } from "../../core/ui/style";
 import { IToolbarProps } from "./IToolbarProps";
 import styles from "./Toolbar.module.scss";
 

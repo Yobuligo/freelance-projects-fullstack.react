@@ -1,6 +1,6 @@
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
-import { style } from "../../../../utils/style";
+import { style } from "../../../../core/ui/style";
 import { OpportunitySettingsConfigItem } from "../opportunitySettingsConfigItem/OpportunitySettingsConfigItem";
 import { IOpportunitySettingsConfigListProps } from "./IOpportunitySettingsConfigListProps";
 import styles from "./OpportunitySettingsConfigList.module.scss";

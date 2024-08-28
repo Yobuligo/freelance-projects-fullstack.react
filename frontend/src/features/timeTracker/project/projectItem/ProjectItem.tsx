@@ -4,7 +4,7 @@ import { DurationDisplay } from "../../../../components/duration/DurationDisplay
 import { Toolbar } from "../../../../components/toolbar/Toolbar";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
-import { style } from "../../../../utils/style";
+import { style } from "../../../../core/ui/style";
 import { IProjectItemProps } from "./IProjectItemProps";
 import styles from "./ProjectItem.module.scss";
 import { useProjectItemViewModel } from "./useProjectItemViewModel";

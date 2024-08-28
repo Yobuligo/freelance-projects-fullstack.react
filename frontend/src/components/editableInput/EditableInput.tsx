@@ -2,7 +2,7 @@ import { IEditableInputProps } from "./IEditableInputProps";
 import styles from "./EditableInput.module.scss";
 import { Input } from "../input/Input";
 import { useEffect, useId, useState } from "react";
-import { style } from "../../utils/style";
+import { style } from "../../core/ui/style";
 import { CrudButtonPanel } from "../crudButtonPanel/CrudButtonPanel";
 
 export const EditableInput: React.FC<IEditableInputProps> = (props) => {
