@@ -10,14 +10,8 @@
 }
 
 .header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-}
-
-.headerButtons {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-direction: column;
 }
 
 .content {
