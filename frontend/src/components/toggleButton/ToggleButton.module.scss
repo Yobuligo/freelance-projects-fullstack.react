@@ -1,10 +1,16 @@
-@use "../../styles/colors.module.scss";
-@use "../../styles/components.module.scss";
+@import "../../styles/colors.module.scss";
 
 .selected {
-  @extend .buttonActive;
+  border: none;
+  background-color: $color-toggle-button-background-selected;
 }
 
-.unSelected {
-  background-color: colors.$color-button-background;
+.unselected {
+  border: none;
+  background-color: $color-toggle-button-background-unselected;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $color-toggle-button-background-unselected;
+  }
 }

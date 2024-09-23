@@ -3,16 +3,16 @@ import { IToggleButtonOption } from "../toggleButtonGroup/IToggleButtonOption";
 import { IToggleButtonProps } from "./IToggleButtonProps";
 import styles from "./ToggleButton.module.scss";
 
-export function ToggleButton<T extends IToggleButtonOption>(
+export function ToggleButton<T extends IToggleButtonOption<any>>(
   props: IToggleButtonProps<T>
 ) {
   return (
     <Button
-      className={props.selected ? styles.selected : styles.unSelected}
       disabled={props.disabled}
-      onClick={props.onSelect}
+      className={props.selected ? styles.selected : styles.unselected}
+      onClick={props.onClick}
     >
-      {props.item.title}
+      {props.item.text}
     </Button>
   );
 }
