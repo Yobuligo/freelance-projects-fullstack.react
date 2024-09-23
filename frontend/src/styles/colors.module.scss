@@ -49,6 +49,9 @@ $color-tab-selected: $color-secondary-darker;
 $color-tab-unselected: $color-secondary-lighter;
 $color-tabstrip-background: $color-primary;
 
+$color-toggle-button-background-selected: $color-secondary;
+$color-toggle-button-background-unselected: lighten($color: $color-secondary, $amount: 30);
+
 /* Features */
 $color-opportunity-section-trash-background: $color-secondary-dark;
 $color-opportunity-item-background: $color-primary-lighten-50;

@@ -8,14 +8,16 @@ export const useProviderRequestInputViewModel = (
   props: IProviderRequestInputProps
 ) => {
   const providerDetails = useProviderDetails();
-  const [providerType, setProviderType] = useState(ProviderType.ComputerFutures);
+  const [providerType, setProviderType] = useState(
+    ProviderType.ComputerFutures
+  );
   const [providerUrl, setProviderUrl] = useState("");
   const [requestTitle, setRequestTitle] = useState("");
 
-  const selectOptions: ISelectOption[] = useMemo(() => {
-    const selectOptions: ISelectOption[] = [];
+  const selectOptions: ISelectOption<ProviderType>[] = useMemo(() => {
+    const selectOptions: ISelectOption<ProviderType>[] = [];
     for (const propName in ProviderType) {
-      const propValue: string = (ProviderType as any)[propName];
+      const propValue = (ProviderType as any)[propName];
       const title = providerDetails.findByType(propValue as ProviderType);
       selectOptions.push({
         key: propValue,
@@ -42,7 +44,7 @@ export const useProviderRequestInputViewModel = (
   const onChangeForm = (event: React.FormEvent<HTMLFormElement>) =>
     event.preventDefault();
 
-  const onChangeProviderType = (selectOption: ISelectOption) =>
+  const onChangeProviderType = (selectOption: ISelectOption<ProviderType>) =>
     setProviderType(selectOption.key as ProviderType);
 
   const onChangeProviderUrl = (providerUrl: string) =>

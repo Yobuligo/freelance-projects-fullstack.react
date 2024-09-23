@@ -4,7 +4,7 @@ import { ISelectOption } from "../select/ISelectOption";
 import { Select } from "../select/Select";
 import { ILabeledSelectProps } from "./ILabeledSelectProps";
 
-export function LabeledSelect<T extends ISelectOption>(
+export function LabeledSelect<T extends ISelectOption<any>>(
   props: ILabeledSelectProps<T>
 ) {
   const id = useId();

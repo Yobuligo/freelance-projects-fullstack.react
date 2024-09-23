@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
 import { NoteApi } from "../../../api/NoteApi";
 import { UserOpportunityApi } from "../../../api/UserOpportunityApi";
+import { IToggleButtonOption } from "../../../components/toggleButtonGroup/IToggleButtonOption";
 import { uuid } from "../../../core/utils/uuid";
 import { useRequest } from "../../../hooks/useRequest";
 import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { INote } from "../../../shared/model/INote";
 import { ApplicationType } from "../../../shared/types/ApplicationType";
-import { IApplicationTypeOption } from "./IApplicationTypeOption";
 import { IOpportunityDetailsProps } from "./IOpportunityDetailsProps";
 
 export const useOpportunityDetailsViewModel = (
@@ -112,15 +112,15 @@ export const useOpportunityDetailsViewModel = (
     setChangeNoteTimeout(timeout);
   };
 
-  const applicationTypeItems: IApplicationTypeOption[] = useMemo(
+  const applicationTypeItems: IToggleButtonOption<ApplicationType>[] = useMemo(
     () => [
       {
-        type: ApplicationType.Portal,
-        title: t(texts.opportunityDetails.portal),
+        key: ApplicationType.Portal,
+        text: t(texts.opportunityDetails.portal),
       },
       {
-        type: ApplicationType.Email,
-        title: t(texts.opportunityDetails.email),
+        key: ApplicationType.Email,
+        text: t(texts.opportunityDetails.email),
       },
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -128,19 +128,19 @@ export const useOpportunityDetailsViewModel = (
   );
 
   const onApplicationTypeSelected = (
-    selected: IApplicationTypeOption
+    selected: IToggleButtonOption<ApplicationType>
   ): void => {
-    if (selected.type === ApplicationType.Email) {
+    if (selected.key === ApplicationType.Email) {
       onSelectEmail();
     } else {
       onSelectPortal();
     }
   };
 
-  const findSelected = (): IApplicationTypeOption | undefined => {
+  const findSelected = (): IToggleButtonOption<ApplicationType> | undefined => {
     return applicationTypeItems.find(
       (applicationTypeOption) =>
-        applicationTypeOption.type === props.userOpportunity.applicationType
+        applicationTypeOption.key === props.userOpportunity.applicationType
     );
   };
 
