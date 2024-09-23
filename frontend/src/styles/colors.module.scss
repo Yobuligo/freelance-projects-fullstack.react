@@ -49,8 +49,19 @@ $color-tab-selected: $color-secondary-darker;
 $color-tab-unselected: $color-secondary-lighter;
 $color-tabstrip-background: $color-primary;
 
-$color-toggle-button-background-selected: $color-secondary;
-$color-toggle-button-background-unselected: lighten($color: $color-secondary, $amount: 30);
+
+
+
+
+
+$color-toggle-button-selected: $color-button-text-hover;
+$color-toggle-button-background-selected: $color-button-hover;
+$color-toggle-button-unselected: $color-text;
+$color-toggle-button-background-unselected: $color-primary-lighter;
+
+
+
+
 
 /* Features */
 $color-opportunity-section-trash-background: $color-secondary-dark;

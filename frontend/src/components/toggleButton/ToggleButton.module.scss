@@ -2,15 +2,18 @@
 
 .selected {
   border: none;
+  color: $color-toggle-button-selected;
   background-color: $color-toggle-button-background-selected;
 }
 
 .unselected {
   border: none;
+  color: $color-toggle-button-unselected;
   background-color: $color-toggle-button-background-unselected;
 
   &:hover {
     cursor: pointer;
+    color: $color-toggle-button-unselected;
     background-color: $color-toggle-button-background-unselected;
   }
 }

@@ -17,6 +17,11 @@
         "month": "Month",
         "name": "Name",
         "settings": "Settings",
+        "timeUnit": {
+            "days": "Days",
+            "workingDays": "Working Days",
+            "hours": "Hours"
+        },
         "title": "New project",
         "to": "To",
         "unknownError": "An unknown error occurred",
