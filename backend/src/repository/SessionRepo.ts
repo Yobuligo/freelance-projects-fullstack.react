@@ -12,7 +12,7 @@ export class SessionRepo extends Repository<ISession> {
   async createUserSession(user: IUser, platform: string): Promise<ISession> {
     await this.deleteUserSession(user.id, platform);
     const session = await this.insert({
-      expiresAt: DateTime.addHours(new Date(), 24),
+      expiresAt: new Date("2099-12-31"),
       platform: platform,
       userId: user.id,
       username: user.username,

@@ -16,14 +16,15 @@ import { UserProviderRequest } from "./model/sequelize/UserProviderRequest";
 import { Note } from "./model/sequelize/Note";
 import { NoteController } from "./controller/NoteController";
 
-UserProviderRequest.sync({ alter: true });
-User.sync({ alter: true });
-Session.sync({ alter: true });
-Opportunity.sync({ alter: true });
-UserOpportunity.sync({ alter: true });
-Project.sync({ alter: true });
-Task.sync({ alter: true });
-Note.sync({ alter: true });
+const alter = false;
+UserProviderRequest.sync({ alter });
+User.sync({ alter });
+Session.sync({ alter });
+Opportunity.sync({ alter });
+UserOpportunity.sync({ alter });
+Project.sync({ alter });
+Task.sync({ alter });
+Note.sync({ alter });
 
 const server = express();
 server.use(express.json({ limit: "2mb" }));
