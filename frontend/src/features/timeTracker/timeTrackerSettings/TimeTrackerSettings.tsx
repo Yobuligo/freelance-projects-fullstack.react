@@ -19,8 +19,8 @@ export const TimeTrackerSettings: React.FC<ITimeTrackerSettingsProps> = (
         <SettingsSection title={t(texts.timeTrackerSettings.general)}>
           <ToggleButtonGroup
             items={viewModel.timeUnitOptions}
-            onSelect={props.onSelectTimeUnit}
-            selected={props.selected}
+            onSelect={viewModel.onSelectTimeUnit}
+            selected={viewModel.selectedTimeUnit}
           />
         </SettingsSection>
       </Settings>
