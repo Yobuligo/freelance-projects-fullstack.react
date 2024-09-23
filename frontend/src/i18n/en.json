@@ -123,6 +123,9 @@
         "projects": "Projects",
         "reporting": "Reporting"
     },
+    "timeTrackerSettings": {
+        "general": "General"
+    },
     "trashCard": {
         "trash": "Trash ({{numberOpportunities}})"
     }
