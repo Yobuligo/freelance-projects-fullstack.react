@@ -13,10 +13,8 @@ const formatDays = (duration: Duration): string => {
 };
 
 const formatWorkingDays = (duration: Duration): string => {
-  const workingDays = duration.workingDays();
-  return `${workingDays ? `${workingDays}d ` : ``}${
-    duration.hours ? `${duration.hours}h` : ``
-  } ${duration.minutes ? `${duration.minutes}m` : ``} ${duration.seconds}s`;
+  duration.hoursInDay = 8;
+  return formatDays(duration);
 };
 
 const formatHours = (duration: Duration): string => {
