@@ -4,6 +4,7 @@ import { ReactComponent as BackgroundShapes } from "./assets/backgroundShapes.sv
 import { AppContext } from "./context/AppContext";
 import { useRecentlyProjectsStorage } from "./hooks/useRecentlyUsedProjectsStorage";
 import { useSessionStorage } from "./hooks/useSessionStorage";
+import { useTimeTrackerSettingsStorage } from "./hooks/useTimeTrackerSettingsStorage";
 import { useUserConfigStorage } from "./hooks/useUserConfigStorage";
 import "./index.scss";
 import { AppRouter } from "./routes/AppRouter";
@@ -21,6 +22,7 @@ export const App: React.FC = () => {
           errorMessage: useState(""),
           recentlyUsedProjects: useRecentlyProjectsStorage(),
           session: useSessionStorage(),
+          timeTrackerSettings: useTimeTrackerSettingsStorage(),
           userConfig: useUserConfigStorage(),
           userOpportunities: useState<IUserOpportunity[]>([]),
           userProviderRequests: useState<IUserProviderRequest[]>([]),

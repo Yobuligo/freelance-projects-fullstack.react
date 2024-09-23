@@ -1,3 +1,4 @@
+import { ITimeTrackerSettings } from "../model/ITimeTrackerSettings";
 import { IUserConfig } from "../model/IUserConfig";
 import { ISession } from "../shared/model/ISession";
 import { IUserOpportunity } from "../shared/model/IUserOpportunity";
@@ -8,6 +9,7 @@ export interface IAppContext {
   errorMessage: Value<string>;
   recentlyUsedProjects: Value<string[]>;
   session: Value<ISession | undefined>;
+  timeTrackerSettings: Value<ITimeTrackerSettings>;
   userConfig: Value<IUserConfig>;
   userOpportunities: Value<IUserOpportunity[]>;
   userProviderRequests: Value<IUserProviderRequest[]>;
