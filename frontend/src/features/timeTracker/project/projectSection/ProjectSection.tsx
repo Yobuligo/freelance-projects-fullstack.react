@@ -2,12 +2,14 @@ import { AddInput } from "../../../../components/addInput/AddInput";
 import { Spinner } from "../../../../components/spinner/Spinner";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
+import { TimeTrackerSettings } from "../../timeTrackerSettings/TimeTrackerSettings";
 import { ProjectDetails } from "../projectDetails/ProjectDetails";
 import { ProjectList } from "../projectList/ProjectList";
+import { IProjectSectionProps } from "./IProjectSectionProps";
 import styles from "./ProjectSection.module.scss";
 import { useProjectSectionViewModel } from "./useProjectSectionViewModel";
 
-export const ProjectSection: React.FC = () => {
+export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
   const { t } = useTranslation();
   const viewModel = useProjectSectionViewModel();
 
@@ -24,6 +26,7 @@ export const ProjectSection: React.FC = () => {
         />
       ) : (
         <>
+          {props.displaySettings && <TimeTrackerSettings />}
           <AddInput
             buttonCaption={t(texts.projectAdd.addProject)}
             label={t(texts.general.title)}

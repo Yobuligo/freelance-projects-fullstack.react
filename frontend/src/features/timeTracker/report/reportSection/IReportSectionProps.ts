@@ -1,1 +1,3 @@
-export interface IReportSectionProps{  }
+export interface IReportSectionProps {
+  displaySettings: boolean;
+}

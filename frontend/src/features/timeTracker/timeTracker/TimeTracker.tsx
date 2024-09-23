@@ -9,14 +9,22 @@ import { SettingsIcon } from "../../../icons/SettingsIcon";
 import { ProjectSection } from "../project/projectSection/ProjectSection";
 import { ReportSection } from "../report/reportSection/ReportSection";
 import styles from "./TimeTracker.module.scss";
+import { useTimeTrackerViewModel } from "./useTimeTrackerViewModel";
 
 export const TimeTracker: React.FC = () => {
+  const viewModel = useTimeTrackerViewModel();
   const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
 
   const tabItems: ITabItem[] = [
-    { title: t(texts.timeTracker.projects), content: <ProjectSection /> },
-    { title: t(texts.timeTracker.reporting), content: <ReportSection /> },
+    {
+      title: t(texts.timeTracker.projects),
+      content: <ProjectSection displaySettings={viewModel.displaySettings} />,
+    },
+    {
+      title: t(texts.timeTracker.reporting),
+      content: <ReportSection displaySettings={viewModel.displaySettings} />,
+    },
   ];
 
   const onSelectTabItem = (_: ITabItem, index: number) => setTabIndex(index);
@@ -30,7 +38,7 @@ export const TimeTracker: React.FC = () => {
           selected={tabIndex}
         />
         <div className={styles.buttons}>
-          <Button>
+          <Button onClick={viewModel.onToggleDisplaySettings}>
             <SettingsIcon />
           </Button>
         </div>

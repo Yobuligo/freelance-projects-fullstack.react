@@ -4,6 +4,7 @@ import { DateTimeSpanFilter } from "../../../../components/dateTimeSpanFilter/Da
 import { Spinner } from "../../../../components/spinner/Spinner";
 import { useRequest } from "../../../../hooks/useRequest";
 import { ITimeSheet } from "../../../../shared/model/ITimeSheet";
+import { TimeTrackerSettings } from "../../timeTrackerSettings/TimeTrackerSettings";
 import { TimeSheetList } from "../timeSheetList/TimeSheetList";
 import { IReportSectionProps } from "./IReportSectionProps";
 import styles from "./ReportSection.module.scss";
@@ -34,6 +35,7 @@ export const ReportSection: React.FC<IReportSectionProps> = (props) => {
 
   return (
     <div className={styles.reportSection}>
+      {props.displaySettings && <TimeTrackerSettings />}
       <div className={styles.timePeriodFilter}>
         <DateTimeSpanFilter
           onChange={onDateTimeSpanChanged}
