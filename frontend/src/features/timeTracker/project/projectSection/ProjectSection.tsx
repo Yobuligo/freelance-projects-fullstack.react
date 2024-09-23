@@ -4,11 +4,10 @@ import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { ProjectDetails } from "../projectDetails/ProjectDetails";
 import { ProjectList } from "../projectList/ProjectList";
-import { IProjectSectionProps } from "./IProjectSectionProps";
 import styles from "./ProjectSection.module.scss";
 import { useProjectSectionViewModel } from "./useProjectSectionViewModel";
 
-export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
+export const ProjectSection: React.FC = () => {
   const { t } = useTranslation();
   const viewModel = useProjectSectionViewModel();
 

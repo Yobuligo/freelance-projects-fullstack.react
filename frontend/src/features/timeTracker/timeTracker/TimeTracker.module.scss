@@ -1,0 +1,14 @@
+@use "../../../styles/colors.module.scss";
+@use "../../../styles/dimensions.scss";
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  background-color: colors.$color-tabstrip-background;  
+}
+
+.buttons {
+  margin-right: dimensions.$negative-space;
+}
