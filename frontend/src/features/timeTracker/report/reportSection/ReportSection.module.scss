@@ -19,3 +19,14 @@
     align-items: end;
   }
 }
+
+.timeSheetList {
+  display: flex;
+  flex-direction: column;
+}
+
+.total {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}

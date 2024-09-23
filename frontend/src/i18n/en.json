@@ -104,6 +104,9 @@
     "providerRequestList": {
         "noProviderRequests": "No provider requests available"
     },
+    "reportSection": {
+        "totalDuration": "Total duration"
+    },
     "taskItem": {
         "deleteQuestion": "Would you like to delete task '{{title}}'?",
         "running": "running",

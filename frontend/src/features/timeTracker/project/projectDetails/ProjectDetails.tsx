@@ -1,16 +1,15 @@
-import { useState } from "react";
 import { Button } from "../../../../components/button/Button";
 import { Toolbar } from "../../../../components/toolbar/Toolbar";
+import { style } from "../../../../core/ui/style";
+import { useToggle } from "../../../../hooks/useToggle";
 import { ArrowBackIcon } from "../../../../icons/ArrowBackIcon";
 import { SettingsIcon } from "../../../../icons/SettingsIcon";
 import { ITask } from "../../../../shared/model/ITask";
 import componentStyles from "../../../../styles/components.module.scss";
-import { style } from "../../../../core/ui/style";
 import { TaskSection } from "../../task/taskSection/TaskSection";
 import { ProjectSettings } from "../projectSettings/ProjectSettings";
 import { IProjectDetailsProps } from "./IProjectDetailsProps";
 import styles from "./ProjectDetails.module.scss";
-import { useToggle } from "../../../../hooks/useToggle";
 
 export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
   const [displaySettings, toggleDisplaySettings] = useToggle(false);
