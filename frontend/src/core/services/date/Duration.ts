@@ -5,6 +5,7 @@ export class Duration {
   private msecInDays = 86400000;
   private _days: number | undefined;
   private _hours: number | undefined;
+  private _totalHours: number | undefined;
   private _minutes: number | undefined;
   private _seconds: number | undefined;
   private _milliseconds: number | undefined;
@@ -44,6 +45,19 @@ export class Duration {
       this.calculate();
     }
     return this._milliseconds!;
+  }
+
+  get totalHours(): number {
+    if (!this._totalHours) {
+      this._totalHours = Math.floor(this.totalMilliseconds / this.msecInHours);
+    }
+    return this._totalHours;
+  }
+
+  workingDays(hoursPerWorkingDay: number = 8): number {
+    const msecInWorkingDays = this.msecInHours * hoursPerWorkingDay;
+    const workingDays = Math.floor(this.totalMilliseconds / msecInWorkingDays);
+    return workingDays;
   }
 
   /**

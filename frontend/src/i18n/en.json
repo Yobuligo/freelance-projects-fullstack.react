@@ -19,7 +19,7 @@
         "settings": "Settings",
         "timeUnit": {
             "days": "Days",
-            "workingDays": "Working Days",
+            "workingDays": "8h Working Days",
             "hours": "Hours"
         },
         "title": "New project",
@@ -129,7 +129,7 @@
         "reporting": "Reporting"
     },
     "timeTrackerSettings": {
-        "general": "General"
+        "timeUnit": "Time unit"
     },
     "trashCard": {
         "trash": "Trash ({{numberOpportunities}})"

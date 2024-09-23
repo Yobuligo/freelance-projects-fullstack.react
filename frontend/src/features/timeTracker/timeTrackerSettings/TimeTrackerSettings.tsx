@@ -16,7 +16,7 @@ export const TimeTrackerSettings: React.FC<ITimeTrackerSettingsProps> = (
   return (
     <div className={styles.timeTrackerSettings}>
       <Settings>
-        <SettingsSection title={t(texts.timeTrackerSettings.general)}>
+        <SettingsSection title={t(texts.timeTrackerSettings.timeUnit)}>
           <ToggleButtonGroup
             items={viewModel.timeUnitOptions}
             onSelect={viewModel.onSelectTimeUnit}
