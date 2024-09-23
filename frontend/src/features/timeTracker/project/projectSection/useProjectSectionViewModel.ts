@@ -6,9 +6,9 @@ import { useInitialize } from "../../../../hooks/useInitialize";
 import { useRecentlyUsedProjects } from "../../../../hooks/useRecentlyUsedProjects";
 import { useRequest } from "../../../../hooks/useRequest";
 import { useSession } from "../../../../hooks/useSession";
-import { ProjectInfo } from "../../../../shared/services/ProjectInfo";
 import { IProject } from "../../../../shared/model/IProject";
 import { ITask } from "../../../../shared/model/ITask";
+import { ProjectInfo } from "../../../../shared/services/ProjectInfo";
 import { TaskApi } from "./../../../../api/TaskApi";
 
 export const useProjectSectionViewModel = () => {

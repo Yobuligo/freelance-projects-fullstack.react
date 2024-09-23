@@ -6,10 +6,9 @@ import { texts } from "../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../hooks/useTranslation/useTranslation";
 import { ProjectSection } from "../project/projectSection/ProjectSection";
 import { ReportSection } from "../report/reportSection/ReportSection";
-import { ITimeTrackerProps } from "./ITimeTrackerProps";
 import styles from "./TimeTracker.module.scss";
 
-export const TimeTracker: React.FC<ITimeTrackerProps> = (props) => {
+export const TimeTracker: React.FC = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { t } = useTranslation();
 
