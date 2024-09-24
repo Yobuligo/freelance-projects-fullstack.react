@@ -1,15 +1,16 @@
 import { useId } from "react";
+import { Button } from "../../../../components/button/Button";
 import { EditableInput } from "../../../../components/editableInput/EditableInput";
+import { style } from "../../../../core/ui/style";
 import { texts } from "../../../../hooks/useTranslation/texts";
 import { useTranslation } from "../../../../hooks/useTranslation/useTranslation";
 import { DeleteIcon } from "../../../../icons/DeleteIcon";
 import { Settings } from "../../../settings/settings/Settings";
 import { SettingsSection } from "../../../settings/settingsSection/SettingsSection";
+import { TimeUnitSettings } from "../../timeUnitSettings/TimeUnitSettings";
 import { IProjectSettingsProps } from "./IProjectSettingsProps";
 import styles from "./ProjectSettings.module.scss";
 import { useProjectSettingsViewModel } from "./useProjectSettingsViewModel";
-import { Button } from "../../../../components/button/Button";
-import { style } from "../../../../core/ui/style";
 
 export const ProjectSettings: React.FC<IProjectSettingsProps> = (props) => {
   const { t } = useTranslation();
@@ -47,6 +48,7 @@ export const ProjectSettings: React.FC<IProjectSettingsProps> = (props) => {
             onChange={viewModel.onChangeDefaultTaskTitle}
           />
         </SettingsSection>
+        <TimeUnitSettings />
         <SettingsSection
           title={t(texts.projectSettings.dangerZone)}
           classNameTitle={style(styles.settingsTitle, styles.dangerZoneTitle)}

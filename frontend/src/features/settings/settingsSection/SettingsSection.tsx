@@ -8,8 +8,7 @@ export const SettingsSection: React.FC<ISettingsSectionProps> = (props) => {
       <h2 className={style(styles.title, props.classNameTitle)}>
         {props.title}
       </h2>
-      {props.children}
-      {/* <div className={styles.children}>{props.children}</div> */}
+      <>{props.children}</>
     </>
   );
 };
