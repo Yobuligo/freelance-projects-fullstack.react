@@ -17,6 +17,7 @@ export const ProjectSection: React.FC<IProjectSectionProps> = (props) => {
     <div className={styles.projectSection}>
       {viewModel.selectedProject ? (
         <ProjectDetails
+          displaySettings={props.displaySettings}
           project={viewModel.selectedProject}
           onBack={viewModel.onProjectUnselected}
           onChangeTask={viewModel.onChangeTask}

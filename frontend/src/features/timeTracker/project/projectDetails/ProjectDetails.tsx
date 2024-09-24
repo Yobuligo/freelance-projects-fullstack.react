@@ -1,9 +1,5 @@
-import { Button } from "../../../../components/button/Button";
-import { Toolbar } from "../../../../components/toolbar/Toolbar";
 import { style } from "../../../../core/ui/style";
-import { useToggle } from "../../../../hooks/useToggle";
 import { ArrowBackIcon } from "../../../../icons/ArrowBackIcon";
-import { SettingsIcon } from "../../../../icons/SettingsIcon";
 import { ITask } from "../../../../shared/model/ITask";
 import componentStyles from "../../../../styles/components.module.scss";
 import { TaskSection } from "../../task/taskSection/TaskSection";
@@ -12,7 +8,6 @@ import { IProjectDetailsProps } from "./IProjectDetailsProps";
 import styles from "./ProjectDetails.module.scss";
 
 export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
-  const [displaySettings, toggleDisplaySettings] = useToggle(false);
   const onDeleteTask = (task: ITask) =>
     props.onDeleteTask?.(props.project, task);
 
@@ -29,22 +24,14 @@ export const ProjectDetails: React.FC<IProjectDetailsProps> = (props) => {
       <button className={style(styles.button)} onClick={props.onBack}>
         <ArrowBackIcon className={componentStyles.iconClickable} />
       </button>
-      <Toolbar
-        rightChildren={
-          <Button onClick={toggleDisplaySettings}>
-            <SettingsIcon className={styles.icon} />
-          </Button>
-        }
-      >
-        <h3 className={styles.title}>{props.project.title}</h3>
-      </Toolbar>
-      {displaySettings && (
+      {props.displaySettings && (
         <ProjectSettings
           project={props.project}
           onDelete={onDelete}
           onChange={props.onChangeProject}
         />
       )}
+      <h3 className={styles.title}>{props.project.title}</h3>
       <TaskSection
         onChange={onChangeTask}
         onDelete={onDeleteTask}
