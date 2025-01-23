@@ -1,0 +1,17 @@
+@import '../../styles/core/colors.module.scss';
+
+.inputField {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5rem;
+}
+
+.label {
+    align-self: center;
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+.labelDisabled {
+    color: $gray;
+}

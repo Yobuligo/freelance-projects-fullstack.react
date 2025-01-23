@@ -1,0 +1,10 @@
+@import '../../../styles/core/colors.module.scss';
+
+.actionButton {
+    background-color: $accent;
+    color: $white;
+
+    &:hover {
+        background-color: lighten($accent, 5%);
+    }
+}

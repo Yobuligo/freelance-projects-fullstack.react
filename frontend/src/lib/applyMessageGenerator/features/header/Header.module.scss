@@ -1,0 +1,30 @@
+@import '../../styles/core/colors.module.scss';
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: $primary;
+    padding: 0.5rem;
+}
+
+.headerLeft {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 0.5rem;
+}
+
+.headerTitle {
+    color: $white;
+    font-weight: 600;
+}
+
+.websiteIcon {
+    width: 2rem;
+    stroke: $white;
+}
+
+.settingsIcon {
+    fill: $white;
+}

@@ -1,0 +1,11 @@
+@import '../../styles/core/colors.module.scss';
+
+.content {
+    padding: 1rem;
+}
+
+.generatedMessageSection {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    column-gap: 2rem;
+}

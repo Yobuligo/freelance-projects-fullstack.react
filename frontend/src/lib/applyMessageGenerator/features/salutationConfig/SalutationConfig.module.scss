@@ -1,0 +1,13 @@
+.salutation {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+}
+
+@media (min-width: 40rem) {
+    .salutation {
+        display: flex;
+        flex-direction: row;
+        column-gap: 1.5rem;
+    }
+}

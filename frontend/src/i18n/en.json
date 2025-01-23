@@ -2,11 +2,78 @@
     "appliedCard": {
         "applied": "Applied ({{numberOpportunities}})"
     },
+    "applyMessageGenerator": {
+        "appTitle": "Bewerbungsschreiben-Konfigurator",
+        "applicantNumberConfigTitle": "Anzahl Bewerber",
+        "applicationMediumConfigTitle": "Bewerbung über",
+        "applicationOrigin": {
+            "title": "Herkunft (angeboten auf)",
+            "linkToProject": "Link",
+            "projectId": "Projekt ID",
+            "projectTitle": "Projekttitel"
+        },
+        "applicationText": {
+            "title": "Bewerbungstext",
+            "newApplicationTextLabel": "Bewerbungstext"
+        },
+        "applicationTexts": {
+            "applicationTextsLabel": "Bewerbungstexte",
+            "applicationTextLabel": "Bewerbungstext",
+            "toggleButtonTypeLabel": "Titel"
+        },
+        "availabilityConfigTitle": "Verfügbar ab",
+        "configSectionTitle": "Konfiguration",
+        "farewellConfig": {
+            "title": "Verabschiedung"
+        },
+        "general": {
+            "nameInputFieldLabel": "Dein Name",
+            "telephoneNumber": "Deine Telefonnummer"
+        },
+        "hourlyRateConfigTitle": "Stundensatz",
+        "languageConfigTitle": "Sprache",
+        "messageSection": {
+            "availabilityInfo": "Ich bin ab {{availableFrom}} verfügbar. ",
+            "bestRegardsInformal": "Viele Grüße aus Heidelberg",
+            "bestRegardsPolite": "Mit freundlichen Grüßen aus Heidelberg",
+            "codingBuddyProfileInfo": "Dies ist das Profil meines Kollegen: {{profileLink}}",
+            "getInContactWithoutPlatformInfoWithoutLink": "Gerne {{wouldWho}} mit Ihnen über das Projekt austauschen.",
+            "getInContactWithoutPlatformInfoWithLink": "Gerne {{wouldWho}} mit Ihnen über folgendes Projekt austauschen:",
+            "getInContactWithPlatformInfo": "Gerne {{wouldWho}} mit Ihnen über folgendes Projekt auf {{projectInfo}} austauschen:",
+            "hourlyRateInfo": "Mein Stundensatz beträgt {{hourlyRate}}€.",
+            "messageTitle": "Nachricht",
+            "subject": "Bewerbung für {{website}}-Projekt {{projectInfo}}",
+            "subjectTitle": "Betreff",
+            "telephoneNumber": "Bei Rückfragen erreichen Sie mich unter folgender Nummer:",
+            "wouldI": "würde ich mich",
+            "wouldWe": "würden wir uns"
+        },
+        "projectId": "Projekt ID",
+        "salutation": {
+            "mr": "Herr",
+            "ms": "Frau",
+            "salutationAnonymous": "Sehr geehrte Damen und Herren,",
+            "salutationMr": "Sehr geehrter Herr {{lastName}},",
+            "salutationMs": "Sehr geehrte Frau {{lastName}},",
+            "title": "Anrede"
+        },
+        "settings": {
+            "codingBuddyLinkFreelancerMap": "Coding Buddy Link (freelancermap.de)",
+            "codingBuddyLinkFreelance": "Coding Buddy Link (freelance.de)",
+            "codingBuddyLinkLinkedIn": "Coding Buddy Link (linkedIn)",
+            "general": "Allgemein",
+            "newApplicationTextLabel": "Neuer Bewerbungstext",
+            "title": "Einstellungen"
+        }
+    },
     "dashboard": {
+        "generateApplyMessage": "Generate apply message",
         "findOpportunities": "Find opportunities",
         "trackTimes": "Track your times"
     },
     "general": {
+        "no": "nein",
+        "yes": "ja",
         "apply": "Apply",
         "backToStart": "Back to Start",
         "day": "Day",

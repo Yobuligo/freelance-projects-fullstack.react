@@ -1,0 +1,10 @@
+.applicationText{
+    display: grid;
+    grid-template-columns: 8rem auto;
+    column-gap: 2rem;
+}
+
+.applicationText>p{
+    font-size: medium;
+    font-weight: 500;
+}

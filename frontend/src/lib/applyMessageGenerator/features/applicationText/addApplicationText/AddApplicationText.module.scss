@@ -1,0 +1,13 @@
+@import '../../../styles/core/colors.module.scss';
+
+.addApplicationText {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    column-gap: 1rem;
+}
+
+.wysiwyg {
+    padding: 1rem;
+    border: 1px solid $primary;
+}

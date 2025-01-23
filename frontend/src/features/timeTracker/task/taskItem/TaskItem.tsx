@@ -12,9 +12,10 @@ import styles from "./TaskItem.module.scss";
 import { useTaskItemViewModel } from "./useTaskItemViewModel";
 
 export const TaskItem: React.FC<ITaskItemProps> = (props) => {
-  const [duration, setDuration] = useState(TaskInfo.toDuration(props.task));
   const viewModel = useTaskItemViewModel(props);
+  const [duration, setDuration] = useState(TaskInfo.toDuration(viewModel.task));
   const { t } = useTranslation();
+  const [timer, setTimer] = useState<NodeJS.Timeout | undefined>(undefined);
 
   const inputClassNames = style(
     styles.input,
@@ -22,13 +23,18 @@ export const TaskItem: React.FC<ITaskItemProps> = (props) => {
   );
 
   const startTimer = useCallback(() => {
-    setTimeout(() => {
-      setDuration(TaskInfo.toDuration(props.task));
-      if (TaskInfo.isRunning(props.task)) {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    const newTimer = setTimeout(() => {
+      setDuration(TaskInfo.toDuration(viewModel.task));
+      if (TaskInfo.isRunning(viewModel.task) && timer === undefined) {
         startTimer();
       }
+      return {};
     }, 1000);
-  }, [props.task]);
+    setTimer(newTimer);
+  }, [viewModel.task]);
 
   useEffect(() => {
     if (TaskInfo.isRunning(props.task)) {

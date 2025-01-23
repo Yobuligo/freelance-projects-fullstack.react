@@ -20,6 +20,10 @@ export const Dashboard: React.FC<IDashboardProps> = (props) => {
         onClick={() => navigate(AppRoutes.opportunities.toPath())}
         title={t(texts.dashboard.findOpportunities)}
       />
+      <DashboardItem
+        onClick={() => navigate(AppRoutes.applyMessageGenerator.toPath())}
+        title={t(texts.dashboard.generateApplyMessage)}
+      />
     </div>
   );
 };

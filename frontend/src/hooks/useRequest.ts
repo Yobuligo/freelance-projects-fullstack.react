@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { IError } from "../shared/model/IError";
 import { isError } from "../shared/utils/isError";
+import { isHaveMessage } from "../utils/isHaveMessage";
 import { useErrorMessage } from "./useErrorMessage";
 import { useLogout } from "./useLogout";
 import { texts } from "./useTranslation/texts";
@@ -45,7 +46,11 @@ export const useRequest = () => {
           if (isError(error)) {
             handleError(error);
           } else {
-            setErrorMessage("Unknown error while sending REST request.");
+            let errorMessage = `Unknown error while sending REST request.`;
+            if (isHaveMessage(error)) {
+              errorMessage += ` ${error.message}`;
+            }
+            setErrorMessage(errorMessage);
           }
         }
       }

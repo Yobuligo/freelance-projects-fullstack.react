@@ -1,0 +1,14 @@
+$primary: #0066A1;
+$secondary: #80B3D0;
+$primaryDark: #004C78;
+$accent: #642472;
+$white: white;
+$gray: #9E9E9E;
+$lightgray: #EFEFEF;
+$disabled: rgba(211, 211, 211, 0.63);
+
+:export {
+    colorDisabled: $disabled;
+    colorPrimary: $primary;
+    colorPrimaryDark: $primaryDark;
+}

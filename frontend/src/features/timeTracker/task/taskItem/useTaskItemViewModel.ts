@@ -20,6 +20,7 @@ export const useTaskItemViewModel = (props: ITaskItemProps) => {
     props.task.stoppedAt && DateTime.format(props.task.stoppedAt, "hh:mm:ss")
   );
   const [displayMode, setDisplayMode] = useState(true);
+  const [task, setTask] = useState(props.task);
 
   const onCancel = () => {
     setDisplayMode(true);
@@ -62,13 +63,37 @@ export const useTaskItemViewModel = (props: ITaskItemProps) => {
 
   const onEditMode = () => setDisplayMode(false);
 
-  const onChangeStartedAtDate = (date: string) => setStartedAtDate(date);
+  const onChangeStartedAtDate = (date: string) => {
+    setStartedAtDate(date);
+    setTask((previous) => ({
+      ...previous,
+      startedAt: DateTime.create(date, startedAtTime),
+    }));
+  };
 
-  const onChangeStartedAtTime = (time: string) => setStartedAtTime(time);
+  const onChangeStartedAtTime = (time: string) => {
+    setStartedAtTime(time);
+    setTask((previous) => ({
+      ...previous,
+      startedAt: DateTime.create(startedAtDate, time),
+    }));
+  };
 
-  const onChangeStoppedAtDate = (date: string) => setStoppedAtDate(date);
+  const onChangeStoppedAtDate = (date: string) => {
+    setStoppedAtDate(date);
+    setTask((previous) => ({
+      ...previous,
+      stoppedAt: DateTime.create(date, stoppedAtTime ?? "0"),
+    }));
+  };
 
-  const onChangeStoppedAtTime = (time: string) => setStoppedAtTime(time);
+  const onChangeStoppedAtTime = (time: string) => {
+    setStoppedAtTime(time);
+    setTask((previous) => ({
+      ...previous,
+      stoppedAt: DateTime.create(stoppedAtDate ?? startedAtDate, time),
+    }));
+  };
 
   const onChangeTitle = (title: string) => setTitle(title);
 
@@ -87,6 +112,7 @@ export const useTaskItemViewModel = (props: ITaskItemProps) => {
     stoppedAtDate,
     startedAtTime,
     stoppedAtTime,
+    task,
     title,
   };
 };

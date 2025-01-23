@@ -1,0 +1,15 @@
+.applicationTextEntry {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1.5rem;
+    align-items: center;
+}
+
+.switch {
+    //is necessary so that the switch keeps its width
+    flex-shrink: 0;
+}
+
+.title {
+    font-weight: 600;
+}

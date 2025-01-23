@@ -1,0 +1,26 @@
+@import '../../../styles/core/colors.module.scss';
+
+.multiSelectButton {
+    display: flex;
+    flex-direction: row;
+}
+
+.button {
+    padding: 0.5rem;
+    background-color: $primaryDark;
+    color: $gray;
+    cursor: pointer;
+    border: 1px solid $primary;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+.button:hover {
+    background-color: lighten($primaryDark, 5%);
+    color: $white;
+}
+
+.selectedButton {
+    background-color: $primary;
+    color: $white;
+}

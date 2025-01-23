@@ -1,0 +1,16 @@
+.applicationTextListSettingsSection{
+  margin-top: 2rem;
+}
+
+.applicationTextEntry {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 2rem;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
